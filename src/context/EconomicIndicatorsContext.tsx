@@ -33,41 +33,13 @@ interface BcbPoint {
   valor: string
 }
 
-interface CoinGeckoResponse {
-  bitcoin: {
-    brl: number
-    brl_24h_change: number
-  }
-}
 
-interface HGBrasilResponse {
-  results: {
-    stocks: {
-      IBOVESPA: {
-        points: number
-        variation: number
-      }
-    }
-  }
-}
 
 const EconomicIndicatorsContext = createContext<EconomicIndicatorsContextValue | null>(null)
 const REFRESH_INTERVAL_MS = 10 * 60 * 1000
 
 function parseBcbValue(value: string) {
   return Number.parseFloat(value.replace(',', '.'))
-}
-
-async function fetchBcbSeries(series: number) {
-  const response = await fetch(
-    `https://api.bcb.gov.br/dados/serie/bcdata.sgs.${series}/dados/ultimos/2?formato=json`,
-  )
-
-  if (!response.ok) {
-    throw new Error(`Falha ao carregar a série ${series}.`)
-  }
-
-  return (await response.json()) as BcbPoint[]
 }
 
 function buildIndicatorFromSeries(options: {
@@ -102,32 +74,21 @@ function buildIndicatorFromSeries(options: {
 }
 
 async function loadIndicators() {
-  const [selicSeries, cdiSeries, ipcaSeries, igpmSeries, bitcoinResponse, ibovespaResponse] =
-    await Promise.all([
-      fetchBcbSeries(1178),
-      fetchBcbSeries(4389),
-      fetchBcbSeries(433),
-      fetchBcbSeries(189),
-      fetch(
-        'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl&include_24hr_change=true',
-      ).then(async (response) => {
-        if (!response.ok) {
-          throw new Error('Falha ao carregar o Bitcoin.')
-        }
+  console.log('Iniciando loadIndicators...')
 
-        return (await response.json()) as CoinGeckoResponse
-      }),
-      fetch('https://api.hgbrasil.com/finance?format=json-cors&key=demo').then(async (response) => {
-        if (!response.ok) {
-          throw new Error('Falha ao carregar o Ibovespa.')
-        }
+  const response = await fetch('/api/indicators')
+  console.log('Status da resposta:', response.status)
 
-        return (await response.json()) as HGBrasilResponse
-      }),
-    ])
+  if (!response.ok) {
+    throw new Error('Falha ao carregar os indicadores.')
+  }
 
-  const ibovespaPoints = ibovespaResponse.results.stocks.IBOVESPA.points
-  const ibovespaVariation = ibovespaResponse.results.stocks.IBOVESPA.variation
+  const data = await response.json()
+  console.log('DATA DA API:', JSON.stringify(data, null, 2))
+
+  if (!data.selic || !data.cdi || !data.ipca || !data.igpm) {
+    throw new Error('Dados incompletos retornados pela API.')
+  }
 
   return [
     buildIndicatorFromSeries({
@@ -136,7 +97,7 @@ async function loadIndicators() {
       description: 'Taxa básica de juros em base anual.',
       icon: Landmark,
       source: 'Banco Central do Brasil',
-      series: selicSeries,
+      series: data.selic,
       valueFormatter: (value) => formatPercent(value, '% a.a.'),
     }),
     buildIndicatorFromSeries({
@@ -145,7 +106,7 @@ async function loadIndicators() {
       description: 'Referência diária do mercado interbancário em base anual.',
       icon: PiggyBank,
       source: 'Banco Central do Brasil',
-      series: cdiSeries,
+      series: data.cdi,
       valueFormatter: (value) => formatPercent(value, '% a.a.'),
     }),
     buildIndicatorFromSeries({
@@ -154,7 +115,7 @@ async function loadIndicators() {
       description: 'Índice oficial de inflação do país.',
       icon: BadgePercent,
       source: 'Banco Central do Brasil',
-      series: ipcaSeries,
+      series: data.ipca,
       valueFormatter: (value) => formatPercent(value, '% no mês'),
       variationFormatter: (value) =>
         value === 0 ? 'Sem mudança ante o período anterior' : formatSignedPoints(value),
@@ -165,35 +126,35 @@ async function loadIndicators() {
       description: 'Índice amplamente usado em contratos e reajustes.',
       icon: Activity,
       source: 'Banco Central do Brasil',
-      series: igpmSeries,
+      series: data.igpm,
       valueFormatter: (value) => formatPercent(value, '% no mês'),
       variationFormatter: (value) =>
         value === 0 ? 'Sem mudança ante o período anterior' : formatSignedPoints(value),
     }),
     {
-      id: 'bitcoin',
+      id: 'bitcoin' as const,
       label: 'Bitcoin',
       description: 'Preço à vista da principal criptomoeda em BRL.',
-      value: bitcoinResponse.bitcoin.brl,
-      valueLabel: formatCurrency(bitcoinResponse.bitcoin.brl),
-      variation: bitcoinResponse.bitcoin.brl_24h_change,
-      variationLabel: formatSignedPercent(bitcoinResponse.bitcoin.brl_24h_change),
+      value: data.bitcoin?.bitcoin?.brl ?? 0,
+      valueLabel: formatCurrency(data.bitcoin?.bitcoin?.brl ?? 0),
+      variation: data.bitcoin?.bitcoin?.brl_24h_change ?? 0,
+      variationLabel: formatSignedPercent(data.bitcoin?.bitcoin?.brl_24h_change ?? 0),
       icon: Bitcoin,
       source: 'CoinGecko',
     },
     {
-      id: 'ibovespa',
+      id: 'ibovespa' as const,
       label: 'Ibovespa',
       description: 'Principal índice de ações da B3.',
-      value: ibovespaPoints,
-      valueLabel: `${Math.round(ibovespaPoints).toLocaleString('pt-BR')} pts`,
-      variation: ibovespaVariation,
-      variationLabel: formatSignedPercent(ibovespaVariation),
+      value: data.ibovespa?.results?.stocks?.IBOVESPA?.points ?? 0,
+      valueLabel: `${Math.round(data.ibovespa?.results?.stocks?.IBOVESPA?.points ?? 0).toLocaleString('pt-BR')} pts`,
+      variation: data.ibovespa?.results?.stocks?.IBOVESPA?.variation ?? 0,
+      variationLabel: formatSignedPercent(data.ibovespa?.results?.stocks?.IBOVESPA?.variation ?? 0),
       icon: LineChart,
       source: 'HG Brasil',
     },
     {
-      id: 'cub',
+      id: 'cub' as const,
       label: 'CUB R16N',
       description: 'Indicador configurado manualmente até a definição do fluxo oficial.',
       value: SITE_CONFIG.manualIndicators.cubR16n.value,
@@ -224,6 +185,8 @@ export function EconomicIndicatorsProvider({ children }: { children: ReactNode }
       setIndicators(nextIndicators)
       setLastUpdated(new Date().toLocaleString('pt-BR'))
     } catch (caughtError) {
+      console.error('ERRO COMPLETO:', caughtError)
+      console.error('STACK:', caughtError instanceof Error ? caughtError.stack : 'sem stack')
       const message =
         caughtError instanceof Error
           ? caughtError.message
