@@ -1,4 +1,7 @@
+# Contador de horas
 HORAS.md
+sync-horas.js
+
 node_modules
 # Build
 dist
@@ -27,3 +30,6 @@ npm-debug.log*
 
 # Playwright
 .playwright-mcp/
+
+.vercel
+.env*.local

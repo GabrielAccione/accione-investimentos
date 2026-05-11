@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync-horas": "node sync-horas.js"
   },
   "dependencies": {
     "animejs": "^4.3.6",
