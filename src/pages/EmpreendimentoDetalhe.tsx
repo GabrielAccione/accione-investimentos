@@ -1,0 +1,643 @@
+import { useState, useEffect, useCallback } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  MapPin,
+  Wallet,
+  Shield,
+  TrendingUp,
+  Zap,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Building2,
+  HelpCircle,
+  CheckCircle,
+  ArrowRight,
+} from 'lucide-react'
+import { EMPREENDIMENTOS, type EmpreendimentoData } from '@/data/empreendimentos'
+
+/* ─── Sub-components ─────────────────────────────────────────── */
+
+function StatusBadge({ status, label }: { status: EmpreendimentoData['status']; label: string }) {
+  const color = status === 'em-captacao' ? 'bg-[var(--accent)]' : 'bg-[#69727D]'
+  return (
+    <span className={`${color} text-white text-xs font-semibold px-4 py-1.5 rounded-full`}>
+      {label}
+    </span>
+  )
+}
+
+const HIGHLIGHTS = [
+  {
+    icon: Wallet,
+    title: 'Acessível',
+    description: 'Invista com menor capital do que a compra direta de um imóvel, via SPE fracionada.',
+  },
+  {
+    icon: Shield,
+    title: 'Seguro',
+    description: 'Patrimônio segregado em SPE própria, com contrato registrado e gestão auditada.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Rentável',
+    description: 'Retorno acima da poupança e da renda fixa tradicional, atrelado à valorização real.',
+  },
+  {
+    icon: Zap,
+    title: 'Ágil',
+    description: 'Processo digital simplificado: assine o contrato, faça o aporte e acompanhe online.',
+  },
+]
+
+const SPE_CARDS = [
+  {
+    icon: HelpCircle,
+    title: 'O que é SPE',
+    description:
+      'Sociedade de Propósito Específico é uma empresa criada exclusivamente para este empreendimento. Cada investidor recebe cotas proporcionais ao valor aportado, com direitos registrados em cartório.',
+  },
+  {
+    icon: Shield,
+    title: 'Por que é seguro',
+    description:
+      'O patrimônio da SPE é separado do patrimônio da construtora e da gestora. Em caso de problemas em outras operações, seus recursos permanecem protegidos e vinculados apenas a este projeto.',
+  },
+  {
+    icon: CheckCircle,
+    title: 'Como participar',
+    description:
+      'Preencha o formulário de interesse, nossa equipe entra em contato, você assina o contrato digitalmente e realiza o aporte. O acompanhamento da obra e dos resultados é feito pelo nosso portal.',
+  },
+]
+
+/* ─── Lightbox ───────────────────────────────────────────────── */
+
+function Lightbox({
+  images,
+  initial,
+  onClose,
+}: {
+  images: string[]
+  initial: number
+  onClose: () => void
+}) {
+  const [current, setCurrent] = useState(initial)
+
+  const prev = useCallback(
+    () => setCurrent((c) => (c - 1 + images.length) % images.length),
+    [images.length],
+  )
+  const next = useCallback(
+    () => setCurrent((c) => (c + 1) % images.length),
+    [images.length],
+  )
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') next()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose, prev, next])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="relative max-w-4xl w-full"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          src={images[current]}
+          alt={`Imagem ${current + 1}`}
+          className="w-full rounded-xl"
+        />
+
+        {/* Controls */}
+        <button
+          onClick={onClose}
+          className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+          aria-label="Fechar"
+        >
+          <X size={28} />
+        </button>
+        <button
+          onClick={prev}
+          className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors"
+          aria-label="Anterior"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button
+          onClick={next}
+          className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors"
+          aria-label="Próxima"
+        >
+          <ChevronRight size={24} />
+        </button>
+
+        <p className="text-center text-[var(--text-muted)] text-sm mt-3">
+          {current + 1} / {images.length}
+        </p>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+/* ─── Contact Form ───────────────────────────────────────────── */
+
+function ContatoEmpreendimento({ name }: { name: string }) {
+  const [form, setForm] = useState({ nome: '', email: '', telefone: '', mensagem: '' })
+  const [submitted, setSubmitted] = useState(false)
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setSubmitted(true)
+  }
+
+  const inputClass =
+    'w-full bg-[var(--bg-secondary)] border border-[#484949]/30 focus:border-[var(--accent)] text-white placeholder-[var(--text-muted)] rounded-lg px-4 py-3 text-sm outline-none transition-colors duration-200'
+
+  return (
+    <section
+      id="contato-empreendimento"
+      className="py-20 bg-[var(--bg-secondary)]"
+    >
+      <div className="section-container max-w-2xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10"
+        >
+          <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
+            Próximo passo
+          </span>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+            Quero investir em {name}
+          </h2>
+          <p className="text-[var(--text-secondary)] mt-3 text-sm leading-relaxed">
+            Preencha o formulário e nossa equipe entrará em contato em até 24 horas.
+          </p>
+        </motion.div>
+
+        {submitted ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center py-10"
+          >
+            <CheckCircle size={48} className="text-[var(--accent)] mx-auto mb-4" />
+            <h3 className="font-display text-2xl font-bold text-white mb-2">
+              Mensagem enviada!
+            </h3>
+            <p className="text-[var(--text-secondary)] text-sm">
+              Nossa equipe entrará em contato em breve.
+            </p>
+          </motion.div>
+        ) : (
+          <motion.form
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4"
+          >
+            <input
+              type="text"
+              name="nome"
+              placeholder="Nome completo"
+              required
+              value={form.nome}
+              onChange={handleChange}
+              className={inputClass}
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                required
+                value={form.email}
+                onChange={handleChange}
+                className={inputClass}
+              />
+              <input
+                type="tel"
+                name="telefone"
+                placeholder="Telefone / WhatsApp"
+                value={form.telefone}
+                onChange={handleChange}
+                className={inputClass}
+              />
+            </div>
+            <textarea
+              name="mensagem"
+              placeholder="Mensagem (opcional)"
+              rows={4}
+              value={form.mensagem}
+              onChange={handleChange}
+              className={`${inputClass} resize-none`}
+            />
+            <button type="submit" className="btn-accent py-3 text-base flex items-center justify-center gap-2 group">
+              Enviar interesse
+              <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
+            </button>
+          </motion.form>
+        )}
+      </div>
+    </section>
+  )
+}
+
+/* ─── Main Page ──────────────────────────────────────────────── */
+
+export default function EmpreendimentoDetalhe() {
+  const { slug } = useParams<{ slug: string }>()
+  const empreendimento = EMPREENDIMENTOS.find((e) => e.slug === slug)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+
+  if (!empreendimento) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--bg-primary)] pt-16 text-center px-4">
+        <h1 className="font-display text-4xl font-bold text-white mb-4">Empreendimento não encontrado</h1>
+        <p className="text-[var(--text-secondary)] mb-8">O empreendimento que você procura não existe ou foi removido.</p>
+        <Link to="/empreendimentos" className="btn-accent">
+          Ver todos os empreendimentos
+        </Link>
+      </div>
+    )
+  }
+
+  const { name, status, statusLabel, location, fullDescription, parceria, coverImage, gallery, fichaTecnica, pontosDeInteresse } = empreendimento
+
+  return (
+    <>
+      {/* ── 1. Hero ───────────────────────────────────────────── */}
+      <section className="relative h-[80vh] min-h-[480px] flex items-end overflow-hidden">
+        <img
+          src={coverImage}
+          alt={name}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+
+        <div className="section-container relative z-10 pb-14 pt-20">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="mb-4">
+              <StatusBadge status={status} label={statusLabel} />
+            </div>
+            <h1 className="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
+              {name}
+            </h1>
+            <div className="flex items-center gap-2 text-white/70 text-sm mb-8">
+              <MapPin size={15} className="text-[var(--accent)]" />
+              <span>{location}</span>
+            </div>
+            <a href="#contato-empreendimento" className="btn-accent text-base px-8 py-4">
+              Quero investir
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 2. Sobre ─────────────────────────────────────────── */}
+      <section className="py-20 bg-[var(--bg-primary)]">
+        <div className="section-container">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-2"
+            >
+              <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
+                Sobre o empreendimento
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3 mb-5">
+                {name}
+              </h2>
+              <p className="text-[var(--text-secondary)] leading-relaxed text-base">
+                {fullDescription}
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="rounded-xl border border-[#484949]/20 bg-[var(--bg-secondary)] p-6"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <Building2 size={18} className="text-[var(--accent)]" />
+                <span className="text-sm font-semibold text-white uppercase tracking-wider">Parceria</span>
+              </div>
+              <p className="text-[var(--text-secondary)] text-sm leading-relaxed">{parceria}</p>
+              <div className="mt-4 pt-4 border-t border-[#484949]/20">
+                <p className="text-[var(--text-muted)] text-xs">
+                  Desenvolvido em parceria estratégica para garantir segurança jurídica e excelência na execução.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ── 3. Destaques ─────────────────────────────────────── */}
+      <section className="py-20 bg-[var(--bg-primary)]">
+        <div className="section-container">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
+          >
+            <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
+              Por que investir
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+              Diferenciais do investimento
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {HIGHLIGHTS.map((h, i) => {
+              const Icon = h.icon
+              return (
+                <motion.div
+                  key={h.title}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="rounded-xl border border-[#484949]/20 hover:border-[#A26547]/40 bg-[var(--bg-secondary)] p-6 transition-colors duration-300 hover:shadow-[0_8px_32px_rgba(162,101,71,0.08)]"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-[#A26547]/10 flex items-center justify-center mb-4">
+                    <Icon size={22} className="text-[var(--accent)]" />
+                  </div>
+                  <h3 className="font-semibold text-white text-base mb-2">{h.title}</h3>
+                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">{h.description}</p>
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ── 4. Galeria ───────────────────────────────────────── */}
+      <section className="py-20 bg-[var(--bg-primary)]">
+        <div className="section-container">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
+              Imagens
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">Galeria</h2>
+            <p className="text-[var(--text-muted)] text-sm mt-2">
+              Clique em uma imagem para ampliar
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {gallery.map((src, i) => (
+              <motion.button
+                key={i}
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                onClick={() => setLightboxIndex(i)}
+                className="rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-[var(--accent)] group"
+              >
+                <img
+                  src={src}
+                  alt={`${name} — foto ${i + 1}`}
+                  className="w-full h-44 md:h-56 object-cover transition-transform duration-400 group-hover:scale-105"
+                />
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <Lightbox
+            images={gallery}
+            initial={lightboxIndex}
+            onClose={() => setLightboxIndex(null)}
+          />
+        )}
+      </AnimatePresence>
+
+      <div className="section-divider" />
+
+      {/* ── 5. Ficha Técnica ─────────────────────────────────── */}
+      <section className="py-20 bg-[var(--bg-secondary)]">
+        <div className="section-container max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
+              Dados do projeto
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+              Ficha Técnica
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="rounded-xl border border-[#A26547]/20 overflow-hidden"
+          >
+            {[
+              { label: 'Construtora', value: fichaTecnica.construtora },
+              { label: 'Gestora', value: fichaTecnica.gestora },
+              { label: 'Modelo de investimento', value: fichaTecnica.modelo },
+              { label: 'Localização', value: fichaTecnica.localizacao },
+              { label: 'Tipologias disponíveis', value: fichaTecnica.tipologias },
+              ...(fichaTecnica.extras ?? []),
+            ].map((row, i) => (
+              <div
+                key={row.label}
+                className={`flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 px-6 py-4 ${
+                  i % 2 === 0 ? 'bg-[var(--bg-primary)]/60' : 'bg-transparent'
+                } border-b border-[#484949]/20 last:border-b-0`}
+              >
+                <span className="text-[var(--text-muted)] text-xs font-medium uppercase tracking-wider sm:w-48 shrink-0">
+                  {row.label}
+                </span>
+                <span className="text-white text-sm">{row.value}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ── 6. Modelo SPE ────────────────────────────────────── */}
+      <section className="py-20 bg-[var(--bg-primary)]">
+        <div className="section-container">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
+          >
+            <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
+              Como funciona
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+              Modelo de Investimento — SPE
+            </h2>
+            <p className="text-[var(--text-secondary)] mt-4 max-w-2xl mx-auto text-sm leading-relaxed">
+              A Sociedade de Propósito Específico é o modelo mais seguro e transparente para
+              investimentos imobiliários coletivos no Brasil.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {SPE_CARDS.map((card, i) => {
+              const Icon = card.icon
+              return (
+                <motion.div
+                  key={card.title}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.12 }}
+                  className="rounded-xl border border-[#484949]/20 bg-[var(--bg-secondary)] p-6"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-[#A26547]/10 flex items-center justify-center mb-4">
+                    <Icon size={22} className="text-[var(--accent)]" />
+                  </div>
+                  <h3 className="font-semibold text-white text-base mb-3">{card.title}</h3>
+                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">{card.description}</p>
+                </motion.div>
+              )
+            })}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center"
+          >
+            <a href="#contato-empreendimento" className="btn-accent text-base px-10 py-4">
+              Quero investir neste empreendimento
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ── 7. Localização ───────────────────────────────────── */}
+      <section className="py-20 bg-[var(--bg-secondary)]">
+        <div className="section-container">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
+              Onde fica
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+              Localização
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            {/* Map placeholder */}
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-2 rounded-xl overflow-hidden border border-[#484949]/20 bg-[var(--bg-primary)] h-72 flex items-center justify-center"
+            >
+              <div className="text-center text-[var(--text-muted)]">
+                <MapPin size={40} className="mx-auto mb-3 text-[var(--accent)]/40" />
+                <p className="text-sm">Mapa interativo em breve</p>
+                <p className="text-xs mt-1">{location}</p>
+              </div>
+            </motion.div>
+
+            {/* Points of interest */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="rounded-xl border border-[#484949]/20 bg-[var(--bg-primary)]/60 p-6"
+            >
+              <h3 className="font-semibold text-white text-sm uppercase tracking-wider mb-5">
+                Pontos de interesse
+              </h3>
+              <ul className="flex flex-col gap-3">
+                {pontosDeInteresse.map((poi) => (
+                  <li key={poi} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
+                    <MapPin size={14} className="mt-0.5 shrink-0 text-[var(--accent)]" />
+                    {poi}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. Formulário de contato ─────────────────────────── */}
+      <ContatoEmpreendimento name={name} />
+    </>
+  )
+}
