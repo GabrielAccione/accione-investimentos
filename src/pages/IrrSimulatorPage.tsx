@@ -58,14 +58,19 @@ export default function IrrSimulatorPage() {
   const parsedInitialInvestment = Number(initialInvestment)
   const parsedCashFlows = cashFlows.map((value) => Number(value) || 0)
   const entries = parsedCashFlows.map((amount, index) => ({ year: index + 1, amount }))
-  const irr = parsedInitialInvestment > 0 ? calculateIrr([-parsedInitialInvestment, ...parsedCashFlows]) : null
+
+  const validationError = (() => {
+    if (parsedInitialInvestment < 1000) return 'O investimento inicial mínimo é de R$ 1.000,00.'
+    if (!parsedCashFlows.some(f => f > 0)) return 'Informe pelo menos um retorno positivo nos fluxos de caixa.'
+    return null
+  })()
+
+  const irr = !validationError ? calculateIrr([-parsedInitialInvestment, ...parsedCashFlows]) : null
   const cdiIndicator = indicators.find((indicator) => indicator.id === 'cdi')
   const selicIndicator = indicators.find((indicator) => indicator.id === 'selic')
   const referenceRate = cdiIndicator?.value ?? 12
-  const npv =
-    parsedInitialInvestment > 0 ? calculateNpv(referenceRate, parsedInitialInvestment, entries) : null
-  const payback =
-    parsedInitialInvestment > 0 ? calculatePayback(parsedInitialInvestment, entries) : null
+  const npv = !validationError ? calculateNpv(referenceRate, parsedInitialInvestment, entries) : null
+  const payback = !validationError ? calculatePayback(parsedInitialInvestment, entries) : null
   const comparisonMax = Math.max(irr ?? 0, cdiIndicator?.value ?? 0, selicIndicator?.value ?? 0, 1)
 
   return (
@@ -84,8 +89,11 @@ export default function IrrSimulatorPage() {
       <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
         <div className="section-container grid gap-8 xl:grid-cols-[420px_minmax(0,1fr)]">
           <aside className="surface-card p-6 sm:p-8">
-            <span className="section-tag">Entradas</span>
-            <div className="mt-6 space-y-5">
+            <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-amber-200">
+              <strong>Aviso importante:</strong> Os resultados apresentados são estimativas baseadas nos dados informados e em projeções matemáticas. Não constituem garantia de rentabilidade nem recomendação de investimento. Rentabilidade passada não garante resultados futuros.
+            </div>
+            <span className="mt-6 block section-tag">Entradas</span>
+            <div className="mt-4 space-y-5">
               <label className="block">
                 <span className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
                   Investimento inicial (R$)
@@ -162,6 +170,11 @@ export default function IrrSimulatorPage() {
           </aside>
 
           <div className="space-y-6">
+            {validationError && (
+              <div className="surface-card p-6 text-sm text-[var(--text-secondary)]">
+                {validationError}
+              </div>
+            )}
             <div className="grid gap-5 md:grid-cols-3">
               <article className="surface-card p-6">
                 <p className="text-xs font-normal uppercase tracking-[0.1em] text-[var(--text-muted)]">TIR</p>

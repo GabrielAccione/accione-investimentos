@@ -4,6 +4,14 @@ import { ArrowRight } from 'lucide-react'
 import { useCountUp } from '@/hooks/useCountUp'
 import { useInView } from '@/hooks/useInView'
 
+// Dados provisórios — aguardar confirmação do Gabriel
+const METRICAS = [
+  { valor: 'R$ 50M+', label: 'Em operações estruturadas' },
+  { valor: '200+',    label: 'Investidores ativos' },
+  { valor: '3',       label: 'Empreendimentos em captação' },
+  { valor: '5 anos',  label: 'De mercado em Santa Maria' },
+]
+
 interface CounterCardProps {
   target: number
   prefix?: string
@@ -110,6 +118,35 @@ export default function Hero() {
           </p>
         </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.35 }}
+        className="relative z-10 border-t border-white/10 bg-[#0C2030]"
+      >
+        <div className="section-container py-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
+            {METRICAS.map((m, i) => (
+              <div
+                key={m.label}
+                className={[
+                  'px-6 py-2',
+                  i % 2 !== 0 ? 'border-l border-[var(--accent)]/35' : '',
+                  i === 2 ? 'lg:border-l lg:border-[var(--accent)]/35' : '',
+                ].join(' ')}
+              >
+                <p className="font-['Cormorant_Garamond'] text-4xl font-semibold text-white sm:text-5xl">
+                  {m.valor}
+                </p>
+                <p className="mt-1 text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                  {m.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </section>
   )
 }
