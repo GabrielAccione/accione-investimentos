@@ -1,10 +1,9 @@
 export const SITE_CONFIG = {
   companyName: "Accione Investimentos",
-  whatsappDisplay: "",
-  whatsappHref:
-    "https://api.whatsapp.com/send/?phone=5555996431020&text&type=phone_number&app_absent=0&utm_source=ig",
+  whatsappDisplay: "(55) 99643-1020",
+  whatsappHref: `https://wa.me/5555996431020?text=${encodeURIComponent("Olá! Vim pelo site da Accione Investimentos e gostaria de saber mais sobre as oportunidades disponíveis.")}`,
   email: "contato@accioneinvestimentos.com.br",
-  phone: "(55) 3025-0000",
+  phone: "(55) 99643-1020",
   address: "Atendimento consultivo em Santa Maria/RS",
   mapQuery: "Santa Maria RS",
   founder: {

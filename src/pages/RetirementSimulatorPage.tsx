@@ -33,11 +33,17 @@ export default function RetirementSimulatorPage() {
   const parsedMonthlyContribution = Number(monthlyContribution)
   const parsedAnnualRate = Number(annualRate)
 
-  const isValidScenario =
-    parsedCurrentAge > 0 &&
-    parsedRetirementAge > parsedCurrentAge &&
-    parsedMonthlyContribution >= 0 &&
-    parsedAnnualRate > 0
+  const validationError = (() => {
+    if (parsedRetirementAge <= parsedCurrentAge)
+      return 'A idade de aposentadoria deve ser maior que a idade atual.'
+    if (parsedMonthlyContribution < 100)
+      return 'O aporte mínimo é de R$ 100,00.'
+    if (parsedAnnualRate < 1 || parsedAnnualRate > 50)
+      return 'Informe uma taxa entre 1% e 50% ao ano.'
+    return null
+  })()
+
+  const isValidScenario = parsedCurrentAge > 0 && !validationError
 
   const projection = isValidScenario
     ? calculateRetirementProjection(
@@ -64,8 +70,11 @@ export default function RetirementSimulatorPage() {
       <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
         <div className="section-container grid gap-8 xl:grid-cols-[380px_minmax(0,1fr)]">
           <aside className="surface-card p-6 sm:p-8">
-            <span className="section-tag">Entradas</span>
-            <div className="mt-6 space-y-5">
+            <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-amber-200">
+              <strong>Aviso importante:</strong> Os resultados apresentados são estimativas baseadas nos dados informados e em projeções matemáticas. Não constituem garantia de rentabilidade nem recomendação de investimento. Rentabilidade passada não garante resultados futuros.
+            </div>
+            <span className="mt-6 block section-tag">Entradas</span>
+            <div className="mt-4 space-y-5">
               <label className="block">
                 <span className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
                   Idade atual
@@ -129,7 +138,7 @@ export default function RetirementSimulatorPage() {
           <div className="space-y-6">
             {!isValidScenario || !projection ? (
               <div className="surface-card p-8 text-sm leading-relaxed text-[var(--text-secondary)]">
-                Ajuste as entradas para que a idade de aposentadoria seja maior que a idade atual e os valores permaneçam positivos.
+                {validationError ?? 'Preencha os campos para visualizar a projeção.'}
               </div>
             ) : (
               <>

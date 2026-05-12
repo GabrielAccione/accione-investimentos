@@ -1,6 +1,7 @@
 # Contador de horas
 HORAS.md
 sync-horas.js
+toggl-export.csv
 
 node_modules
 # Build
