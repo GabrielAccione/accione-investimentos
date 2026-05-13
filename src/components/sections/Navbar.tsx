@@ -66,8 +66,8 @@ export default function Navbar() {
             <img
               src={logo}
               alt="Accione Investimentos"
-              className="h-8 w-auto object-contain"
-              style={{ mixBlendMode: 'luminosity' }}
+              className="h-12 w-auto object-contain"
+              style={{ mixBlendMode: 'screen' }}
             />
           </Link>
 
