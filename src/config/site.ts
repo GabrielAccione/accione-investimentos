@@ -2,14 +2,14 @@ export const SITE_CONFIG = {
   companyName: "Accione Investimentos",
   whatsappDisplay: "(55) 99643-1020",
   whatsappHref: `https://wa.me/5555996431020?text=${encodeURIComponent("Olá! Vim pelo site da Accione Investimentos e gostaria de saber mais sobre as oportunidades disponíveis.")}`,
-  email: "contato@accioneinvestimentos.com.br",
+  email: "gabriel@accioneinvestimentos.com.br",
   phone: "(55) 99643-1020",
   address: "Atendimento consultivo em Santa Maria/RS",
   mapQuery: "Santa Maria RS",
   founder: {
-    name: "Gabriel",
-    role: "Fundador e estrategista de investimentos",
-    bio: "Especialista em estruturação de investimentos alternativos, com foco em operações reais, diligência profunda e relacionamento de longo prazo com investidores.",
+    name: "Gabriel Rodrigues",
+    role: "Fundador — Accione Investimentos",
+    bio: "Especialista em investimentos multiestratégia, dedicado a identificar as melhores oportunidades do mercado com foco no perfil de cada cliente, transparência total e relacionamento de longo prazo.",
   },
   partner: {
     name: "Zacon Zanini",

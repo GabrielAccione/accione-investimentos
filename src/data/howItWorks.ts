@@ -1,29 +1,29 @@
-import { BarChart3, FileSignature, Presentation, UserCheck } from 'lucide-react'
+import { CalendarCheck, LineChart, MessageCircle, Target } from 'lucide-react'
 import type { Step } from '@/types'
 
 export const STEPS: Step[] = [
   {
     number: '01',
-    title: 'Cadastro e perfil',
-    description: 'Você nos conta objetivos, liquidez esperada e momento patrimonial para calibrarmos a leitura inicial.',
-    icon: UserCheck,
+    title: 'Planejamento financeiro estratégico',
+    description: 'Seu consultor monta junto com você um plano de investimentos, sempre com foco em resultados acima da média.',
+    icon: Target,
   },
   {
     number: '02',
-    title: 'Seleção de teses',
-    description: 'Apresentamos as oportunidades mais aderentes ao seu perfil, com riscos, garantias e dinâmica de retorno.',
-    icon: Presentation,
+    title: 'Fale direto com o seu consultor',
+    description: 'Seu consultor está à sua disposição para facilitar o processo, com acompanhamento personalizado.',
+    icon: MessageCircle,
   },
   {
     number: '03',
-    title: 'Estruturação e adesão',
-    description: 'Após validação, seguimos para documentação, entendimento da operação e formalização do aporte.',
-    icon: FileSignature,
+    title: 'Acompanhamento ativo dos seus investimentos',
+    description: 'Conte com a ajuda do seu consultor para acompanhar seus resultados, sugerir mudanças e adaptações na sua carteira.',
+    icon: LineChart,
   },
   {
     number: '04',
-    title: 'Acompanhamento',
-    description: 'Você acompanha a evolução da operação com comunicação recorrente e acesso próximo à equipe.',
-    icon: BarChart3,
+    title: 'Reuniões periódicas com seu Consultor Exclusivo',
+    description: 'Agende reuniões sempre que desejar para se manter informado sobre seus investimentos e resultados.',
+    icon: CalendarCheck,
   },
 ]

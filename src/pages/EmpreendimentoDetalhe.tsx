@@ -15,7 +15,7 @@ import {
   CheckCircle,
   ArrowRight,
 } from 'lucide-react'
-import { EMPREENDIMENTOS, type EmpreendimentoData } from '@/data/empreendimentos'
+import { EMPREENDIMENTOS, type EmpreendimentoData, type GalleryItem, type Destaque } from '@/data/empreendimentos'
 
 /* ─── Sub-components ─────────────────────────────────────────── */
 
@@ -79,7 +79,7 @@ function Lightbox({
   initial,
   onClose,
 }: {
-  images: string[]
+  images: GalleryItem[]
   initial: number
   onClose: () => void
 }) {
@@ -121,8 +121,8 @@ function Lightbox({
         onClick={(e) => e.stopPropagation()}
       >
         <img
-          src={images[current]}
-          alt={`Imagem ${current + 1}`}
+          src={images[current].src}
+          alt={images[current].alt}
           className="w-full rounded-xl"
         />
 
@@ -288,7 +288,7 @@ export default function EmpreendimentoDetalhe() {
     )
   }
 
-  const { name, status, statusLabel, location, fullDescription, parceria, coverImage, gallery, fichaTecnica, pontosDeInteresse } = empreendimento
+  const { name, status, statusLabel, location, fullDescription, parceria, coverImage, fachadaImage, gallery, destaques, fichaTecnica, pontosDeInteresse } = empreendimento
 
   return (
     <>
@@ -324,47 +324,57 @@ export default function EmpreendimentoDetalhe() {
         </div>
       </section>
 
-      {/* ── 2. Sobre ─────────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-primary)]">
-        <div className="section-container">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-2"
-            >
-              <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
-                Sobre o empreendimento
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3 mb-5">
-                {name}
-              </h2>
-              <p className="text-[var(--text-secondary)] leading-relaxed text-base">
-                {fullDescription}
-              </p>
-            </motion.div>
+      {/* ── 2. Fachada + Descrição ───────────────────────────── */}
+      <section className="overflow-hidden py-20 bg-[var(--bg-primary)]">
+        <div className="section-container grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
 
+          {/* Coluna esquerda — descrição + destaques */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
+              O Projeto
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3 mb-5">
+              {name}
+            </h2>
+            <p className="text-[var(--text-secondary)] leading-relaxed text-base">
+              {fullDescription}
+            </p>
+            <p className="mt-4 text-xs text-[var(--text-muted)]">
+              Em parceria com <span className="text-white/70">{parceria}</span>
+            </p>
+
+            <div className="mt-8 grid grid-cols-2 gap-4">
+              {destaques.map((d: Destaque) => (
+                <div key={d.label} className="rounded-xl border border-white/10 p-4">
+                  <span className="text-[var(--accent)] font-bold text-lg leading-none">{d.valor}</span>
+                  <p className="mt-1 text-sm text-white/60">{d.label}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Coluna direita — imagem de fachada */}
+          {fachadaImage && (
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 32 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="rounded-xl border border-[#484949]/20 bg-[var(--bg-secondary)] p-6"
+              transition={{ duration: 0.65, delay: 0.1 }}
+              className="relative"
             >
-              <div className="flex items-center gap-2 mb-4">
-                <Building2 size={18} className="text-[var(--accent)]" />
-                <span className="text-sm font-semibold text-white uppercase tracking-wider">Parceria</span>
-              </div>
-              <p className="text-[var(--text-secondary)] text-sm leading-relaxed">{parceria}</p>
-              <div className="mt-4 pt-4 border-t border-[#484949]/20">
-                <p className="text-[var(--text-muted)] text-xs">
-                  Desenvolvido em parceria estratégica para garantir segurança jurídica e excelência na execução.
-                </p>
-              </div>
+              <img
+                src={fachadaImage.src}
+                alt={fachadaImage.alt}
+                className="w-full h-[600px] rounded-2xl object-cover object-center shadow-2xl shadow-black/50"
+              />
+              <div className="absolute -bottom-3 -right-3 h-full w-full rounded-2xl border border-[var(--accent)]/30 -z-10" />
             </motion.div>
-          </div>
+          )}
         </div>
       </section>
 
@@ -433,8 +443,8 @@ export default function EmpreendimentoDetalhe() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {gallery.map((src, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {gallery.map((item, i) => (
               <motion.button
                 key={i}
                 initial={{ opacity: 0, scale: 0.96 }}
@@ -445,13 +455,19 @@ export default function EmpreendimentoDetalhe() {
                 className="rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-[var(--accent)] group"
               >
                 <img
-                  src={src}
-                  alt={`${name} — foto ${i + 1}`}
-                  className="w-full h-44 md:h-56 object-cover transition-transform duration-400 group-hover:scale-105"
+                  src={item.src}
+                  alt={item.alt}
+                  className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </motion.button>
             ))}
           </div>
+
+          {status === 'em-breve' && (
+            <p className="mt-6 text-center text-sm text-[var(--text-muted)]">
+              Mais detalhes e imagens em breve. Cadastre seu interesse abaixo.
+            </p>
+          )}
         </div>
       </section>
 

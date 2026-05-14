@@ -1,35 +1,30 @@
-import { Banknote, Globe, Lock, ShieldCheck, TrendingUp, Users } from 'lucide-react'
+import { Clock, Eye, ShieldCheck, Target, TrendingUp } from 'lucide-react'
 import type { Benefit } from '@/types'
 
 export const BENEFITS: Benefit[] = [
   {
-    icon: Globe,
-    title: 'Diversificação real',
-    description: 'Acesso a teses pouco disponíveis no varejo e menos expostas ao comportamento das carteiras padrão.',
-  },
-  {
     icon: TrendingUp,
-    title: 'Retorno orientado a tese',
-    description: 'Estruturas pensadas para gerar prêmio acima de benchmarks tradicionais, sempre com análise de risco.',
+    title: 'Rentabilidade acima da média de mercado',
+    description: 'Identificamos oportunidades com retornos mais competitivos do que os investimentos convencionais, adequadas ao seu perfil.',
   },
   {
-    icon: Users,
-    title: 'Consultoria próxima',
-    description: 'Atendimento direto, leitura de perfil e recomendação mais aderente ao momento patrimonial do investidor.',
+    icon: Clock,
+    title: 'Dedique mais tempo para o que você gosta',
+    description: 'Seu consultor cuida do acompanhamento dos seus investimentos enquanto você foca no que realmente importa.',
+  },
+  {
+    icon: Target,
+    title: 'Planejamento financeiro com informações precisas',
+    description: 'Construímos junto com você um plano claro e estruturado, com dados reais e projeções alinhadas aos seus objetivos.',
+  },
+  {
+    icon: Eye,
+    title: 'Relação de transparência com seu consultor',
+    description: 'Comunicação direta e honesta em cada etapa — sem letras miúdas, sem ruído, só o que você precisa saber.',
   },
   {
     icon: ShieldCheck,
-    title: 'Proteção patrimonial',
-    description: 'Estratégias pensadas para preservar capital, equilibrar liquidez e expandir patrimônio com disciplina.',
-  },
-  {
-    icon: Banknote,
-    title: 'Oportunidades exclusivas',
-    description: 'Operações fora da prateleira padrão, selecionadas a partir de relacionamento, originação e diligência.',
-  },
-  {
-    icon: Lock,
-    title: 'Segurança jurídica',
-    description: 'Estruturas avaliadas com suporte jurídico e documentação adequada à natureza de cada investimento.',
+    title: 'Estratégia segura sem mudar a carteira com frequência',
+    description: 'Investimentos pensados para o longo prazo, com consistência e sem movimentos desnecessários que comprometem o resultado.',
   },
 ]
