@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { useEconomicIndicators } from '@/context/EconomicIndicatorsContext'
 import IndicatorCard from '@/components/indicators/IndicatorCard'
 import SectionHeading from '@/components/ui/SectionHeading'
@@ -56,7 +57,17 @@ export default function EconomicIndicatorsSection({
         <div className="mt-10 grid grid-cols-1 gap-5 xl:grid-cols-2">
           {isLoading
             ? Array.from({ length: 6 }).map((_, index) => <SkeletonCard key={index} />)
-            : indicators.map((indicator) => <IndicatorCard key={indicator.id} indicator={indicator} />)}
+            : indicators.map((indicator, index) => (
+                <motion.div
+                  key={indicator.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.07 }}
+                >
+                  <IndicatorCard indicator={indicator} />
+                </motion.div>
+              ))}
         </div>
 
         {lastUpdated ? (

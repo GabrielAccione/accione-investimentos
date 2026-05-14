@@ -62,13 +62,20 @@ export default function Navbar() {
           }`}
         >
           {/* Logo */}
-          <Link to="/" className="shrink-0">
-            <img
-              src={logo}
-              alt="Accione Investimentos"
-              className="h-20 w-auto object-contain"
-            />
-          </Link>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="shrink-0"
+          >
+            <Link to="/">
+              <img
+                src={logo}
+                alt="Accione Investimentos"
+                className="h-20 w-auto object-contain"
+              />
+            </Link>
+          </motion.div>
 
           {/* Desktop links */}
           <div className="hidden lg:flex lg:items-center lg:gap-5 xl:gap-7">

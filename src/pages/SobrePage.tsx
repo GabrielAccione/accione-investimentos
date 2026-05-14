@@ -1,5 +1,7 @@
 import { Building2, Compass, Eye, Gem, Mail, MessageCircle } from 'lucide-react'
+import { motion } from 'framer-motion'
 import PageHero from '@/components/ui/PageHero'
+import ScrollReveal from '@/components/ui/ScrollReveal'
 import { SITE_CONFIG } from '@/config/site'
 import gabrielImg from '@/assets/gabriel.jpg'
 
@@ -43,16 +45,16 @@ export default function SobrePage() {
         <div className="section-container grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
 
           {/* Left — photo */}
-          <div className="flex justify-center lg:justify-start">
+          <ScrollReveal direction="right" className="flex justify-center lg:justify-start">
             <img
               src={gabrielImg}
               alt="Gabriel Rodrigues"
               className="h-[480px] w-full max-w-sm rounded-2xl object-cover object-top shadow-2xl shadow-black/40"
             />
-          </div>
+          </ScrollReveal>
 
           {/* Right — content */}
-          <div>
+          <ScrollReveal direction="left" delay={0.1}>
             <span className="section-tag">Fundador</span>
             <h2 className="mt-5 text-4xl font-semibold text-white">{SITE_CONFIG.founder.name}</h2>
             <p className="mt-1 text-sm font-medium text-[var(--accent)]">{SITE_CONFIG.founder.role}</p>
@@ -105,34 +107,43 @@ export default function SobrePage() {
                 </p>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Partner */}
       <section className="bg-[var(--bg-primary)] pb-12 sm:pb-16">
         <div className="section-container">
-          <article className="surface-card p-6 sm:p-8">
-            <div className="flex items-center gap-3 text-[var(--accent)]">
-              <Building2 size={20} />
-              <span className="text-sm font-semibold uppercase tracking-[0.16em]">Parceiro estratégico</span>
-            </div>
-            <h2 className="mt-5 text-3xl font-semibold text-white">{SITE_CONFIG.partner.name}</h2>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)]">
-              {SITE_CONFIG.partner.description}
-            </p>
-          </article>
+          <ScrollReveal direction="up">
+            <article className="surface-card p-6 sm:p-8">
+              <div className="flex items-center gap-3 text-[var(--accent)]">
+                <Building2 size={20} />
+                <span className="text-sm font-semibold uppercase tracking-[0.16em]">Parceiro estratégico</span>
+              </div>
+              <h2 className="mt-5 text-3xl font-semibold text-white">{SITE_CONFIG.partner.name}</h2>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)]">
+                {SITE_CONFIG.partner.description}
+              </p>
+            </article>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Values */}
       <section className="bg-[var(--bg-secondary)] py-20 sm:py-24">
         <div className="section-container grid gap-5 md:grid-cols-3">
-          {VALUE_CARDS.map((card) => {
+          {VALUE_CARDS.map((card, index) => {
             const Icon = card.icon
 
             return (
-              <article key={card.title} className="surface-card p-6">
+              <motion.article
+                key={card.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.1 }}
+                className="surface-card p-6"
+              >
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent)]/12 text-[var(--accent)]">
                   <Icon size={22} />
                 </div>
@@ -140,7 +151,7 @@ export default function SobrePage() {
                 <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
                   {card.description}
                 </p>
-              </article>
+              </motion.article>
             )
           })}
         </div>
