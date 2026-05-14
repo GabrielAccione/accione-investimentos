@@ -4,12 +4,11 @@ import { ArrowRight } from 'lucide-react'
 import { useCountUp } from '@/hooks/useCountUp'
 import { useInView } from '@/hooks/useInView'
 
-// Dados provisórios — aguardar confirmação do Gabriel
 const METRICAS = [
-  { valor: 'R$ 50M+', label: 'Em operações estruturadas' },
-  { valor: '200+',    label: 'Investidores ativos' },
-  { valor: '3',       label: 'Empreendimentos em captação' },
-  { valor: '5 anos',  label: 'De mercado em Santa Maria' },
+  { valor: '3x',     label: 'Acima da média de mercado' },
+  { valor: 'R$10K+', label: 'Investimento mínimo acessível' },
+  { valor: '3',      label: 'Empreendimentos em captação' },
+  { valor: '100%',   label: 'Transparência nas operações' },
 ]
 
 interface CounterCardProps {
@@ -60,7 +59,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.05 }}
             className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.96] text-white sm:text-6xl lg:text-7xl"
           >
-            Patrimônio bem orientado para quem quer ir além do básico.
+            Viabilizamos projetos de vida através da alocação inteligente dos seus recursos financeiros.
           </motion.h1>
 
           <motion.p
@@ -69,7 +68,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.12 }}
             className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg"
           >
-            A Accione Investimentos conecta investidores a teses estruturadas em crédito, ativos judiciais e empreendimentos com diligência, proximidade e clareza na tomada de decisão.
+            Somos uma empresa de investimentos multiestratégia. Nossa equipe identifica as melhores oportunidades considerando seu perfil e buscando os retornos mais competitivos do mercado.
           </motion.p>
 
           <motion.div
