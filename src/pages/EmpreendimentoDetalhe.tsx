@@ -10,7 +10,6 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
-  Building2,
   HelpCircle,
   CheckCircle,
   ArrowRight,
