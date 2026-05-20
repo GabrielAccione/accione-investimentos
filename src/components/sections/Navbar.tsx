@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Instagram, Linkedin, Menu, MessageCircle, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { useScrolled } from "@/hooks/useScrolled";
+import { SITE_CONFIG } from "@/config/site";
+
+const SOCIAL_LINKS = [
+  { label: "Instagram", href: SITE_CONFIG.socialLinks.instagram, icon: Instagram },
+  { label: "LinkedIn",  href: SITE_CONFIG.socialLinks.linkedin,  icon: Linkedin },
+];
 
 const PRIMARY_LINKS = [
   { label: "Início", to: "/" },
@@ -120,14 +126,29 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* CTA desktop */}
-          <div className="hidden lg:block">
-            <Link
-              to="/contato"
-              className="inline-block rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:scale-105 hover:bg-[#8B5537] hover:shadow-lg hover:shadow-[#A26547]/25 active:scale-95"
+          {/* Social icons + CTA desktop */}
+          <div className="hidden lg:flex lg:items-center lg:gap-3">
+            {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="p-1 text-white/50 transition-colors duration-200 hover:text-[var(--accent)]"
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
+            <a
+              href={SITE_CONFIG.whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-[#20BD5C] hover:shadow-lg hover:shadow-[#25D366]/25 active:scale-95"
             >
-              Fale com um consultor
-            </Link>
+              <MessageCircle className="h-4 w-4" />
+              WhatsApp
+            </a>
           </div>
 
           {/* Hamburger */}
@@ -204,14 +225,32 @@ export default function Navbar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: ALL_MOBILE_LINKS.length * 0.04 + 0.05 }}
+                className="mt-4 space-y-3"
               >
-                <Link
-                  to="/contato"
+                <a
+                  href={SITE_CONFIG.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setMobileOpen(false)}
-                  className="mt-4 block rounded-full bg-[var(--accent)] px-5 py-3 text-center text-sm font-medium text-white transition-all hover:bg-[#8B5537]"
+                  className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-medium text-white transition-all hover:bg-[#20BD5C]"
                 >
-                  Fale com um consultor
-                </Link>
+                  <MessageCircle className="h-4 w-4" />
+                  WhatsApp
+                </a>
+                <div className="flex justify-center gap-5">
+                  {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="text-white/50 transition-colors hover:text-[var(--accent)]"
+                    >
+                      <Icon className="h-5 w-5" />
+                    </a>
+                  ))}
+                </div>
               </motion.div>
             </motion.div>
           )}

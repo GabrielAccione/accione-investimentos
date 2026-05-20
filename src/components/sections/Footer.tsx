@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Instagram, Linkedin, MessageCircleMore } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { SITE_CONFIG } from "@/config/site";
 
@@ -31,31 +30,9 @@ export default function Footer() {
               alternativas com diligência, clareza e conversa patrimonial mais
               profunda.
             </p>
-            <div className="mt-6 flex items-center gap-4">
-              <a
-                href={SITE_CONFIG.socialLinks.instagram}
-                aria-label="Instagram da Accione Investimentos"
-                className="text-[var(--text-muted)] transition-colors hover:text-white"
-              >
-                <Instagram size={18} />
-              </a>
-              <a
-                href={SITE_CONFIG.socialLinks.linkedin}
-                aria-label="LinkedIn da Accione Investimentos"
-                className="text-[var(--text-muted)] transition-colors hover:text-white"
-              >
-                <Linkedin size={18} />
-              </a>
-              <a
-                href={SITE_CONFIG.whatsappHref}
-                aria-label="WhatsApp da Accione Investimentos"
-                target="_blank"
-                rel="noreferrer"
-                className="text-[var(--text-muted)] transition-colors hover:text-white"
-              >
-                <MessageCircleMore size={18} />
-              </a>
-            </div>
+            <p className="mt-4 text-xs text-[var(--text-muted)]">
+              CNPJ 53.404.254/0001-31
+            </p>
           </div>
 
           <div>
@@ -81,9 +58,15 @@ export default function Footer() {
             </h2>
             <div className="mt-4 space-y-3 text-sm text-[var(--text-muted)]">
               <p>{SITE_CONFIG.email}</p>
-              <p>{SITE_CONFIG.phone}</p>
               <p>{SITE_CONFIG.address}</p>
-              <p>WhatsApp: {SITE_CONFIG.whatsappDisplay}</p>
+              <a
+                href={SITE_CONFIG.whatsappHref}
+                target="_blank"
+                rel="noreferrer"
+                className="block transition-colors hover:text-white"
+              >
+                WhatsApp: {SITE_CONFIG.whatsappDisplay}
+              </a>
             </div>
           </div>
         </div>
