@@ -20,8 +20,9 @@ export default {
         'text-dark':      'var(--text-dark)',
       },
       fontFamily: {
-        display: ['"Cormorant Garamond"', 'serif'],
-        body:    ['"DM Sans"', 'sans-serif'],
+        sans:    ['Outfit', 'Arial', 'Helvetica', 'sans-serif'],
+        display: ['Oswald', 'sans-serif'],
+        body:    ['Outfit', 'Arial', 'Helvetica', 'sans-serif'],
       },
       container: {
         center: true,

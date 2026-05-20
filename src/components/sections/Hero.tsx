@@ -135,7 +135,7 @@ export default function Hero() {
                   i === 2 ? 'lg:border-l lg:border-[var(--accent)]/35' : '',
                 ].join(' ')}
               >
-                <p className="font-['Cormorant_Garamond'] text-4xl font-semibold text-white sm:text-5xl">
+                <p className="font-display text-4xl font-semibold text-white sm:text-5xl">
                   {m.valor}
                 </p>
                 <p className="mt-1 text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
