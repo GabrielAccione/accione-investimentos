@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { CheckCircle2 } from 'lucide-react'
 import SectionHeading from '@/components/ui/SectionHeading'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import { PRODUCTS } from '@/data/products'
 
 interface ProductsProps {
@@ -107,22 +108,16 @@ export default function Products({ variant = 'home' }: ProductsProps) {
                 </ul>
 
                 <div className="mt-8 flex flex-wrap gap-4">
-                  {product.ctaHref ? (
-                    <a
-                      href={product.ctaHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-accent inline-flex items-center gap-2"
-                    >
-                      {product.ctaLabel ?? 'Falar com um consultor'}
-                      <ArrowRight size={18} />
-                    </a>
-                  ) : (
-                    <Link to="/contato" className="btn-accent inline-flex items-center gap-2">
-                      {product.ctaLabel ?? 'Falar com um consultor'}
-                      <ArrowRight size={18} />
-                    </Link>
-                  )}
+                  <WhatsAppButton
+                    mensagem={`Olá! Tenho interesse em saber mais sobre ${product.title}.`}
+                    label="Saber mais pelo WhatsApp"
+                  />
+                  <WhatsAppButton
+                    mensagem={`Olá! Gostaria de receber o material completo sobre ${product.title}.`}
+                    label="Receber material completo"
+                    size="sm"
+                    className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
+                  />
                   {variant === 'home' ? (
                     <Link to="/investimentos" className="btn-ghost">
                       Ver detalhes da página

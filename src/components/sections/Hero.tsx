@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { useCountUp } from '@/hooks/useCountUp'
 import { useInView } from '@/hooks/useInView'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 
 const METRICAS = [
   { valor: '3x',     label: 'Acima da média de mercado' },
@@ -77,10 +78,11 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-10 flex flex-wrap gap-4"
           >
-            <Link to="/contato" className="btn-accent inline-flex items-center gap-2">
-              Falar com um consultor
-              <ArrowRight size={18} />
-            </Link>
+            <WhatsAppButton
+              mensagem="Olá! Vim pelo site da Accione e gostaria de conhecer as oportunidades disponíveis."
+              label="Falar pelo WhatsApp"
+              size="md"
+            />
             <Link to="/investimentos" className="btn-ghost">
               Conhecer oportunidades
             </Link>

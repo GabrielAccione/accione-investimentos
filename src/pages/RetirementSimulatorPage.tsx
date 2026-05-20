@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import {
   Area,
   AreaChart,
@@ -10,6 +9,7 @@ import {
   YAxis,
 } from 'recharts'
 import PageHero from '@/components/ui/PageHero'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import { calculateRetirementProjection } from '@/lib/financial'
 import { formatCompactCurrency, formatCurrency, formatPercent } from '@/lib/formatters'
 
@@ -234,9 +234,10 @@ export default function RetirementSimulatorPage() {
                         Transforme a simulação em um plano de alocação.
                       </h2>
                     </div>
-                    <Link to="/contato" className="btn-accent">
-                      Fale com um consultor
-                    </Link>
+                    <WhatsAppButton
+                      mensagem="Olá! Fiz uma simulação de aposentadoria no site e gostaria de conversar sobre investimentos."
+                      label="Falar pelo WhatsApp"
+                    />
                   </div>
                 </div>
               </>

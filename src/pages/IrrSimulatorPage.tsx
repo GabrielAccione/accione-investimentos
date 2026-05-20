@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import PageHero from '@/components/ui/PageHero'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import { useEconomicIndicators } from '@/context/EconomicIndicatorsContext'
 import { calculateIrr, calculateNpv, calculatePayback } from '@/lib/financial'
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/formatters'
@@ -230,9 +230,11 @@ export default function IrrSimulatorPage() {
               <p className="mt-4 text-base leading-relaxed text-[var(--text-secondary)]">
                 A TIR mostra a taxa interna de retorno implícita nos fluxos informados. O VPL usa o CDI atual como taxa de desconto para comparar se a operação agrega valor acima do benchmark. O payback indica em quanto tempo o capital investido é recuperado sem desconto.
               </p>
-              <Link to="/contato" className="btn-accent mt-6 inline-flex">
-                Fale com um consultor
-              </Link>
+              <WhatsAppButton
+                mensagem="Olá! Fiz uma simulação de TIR no site e gostaria de conversar sobre investimentos."
+                label="Falar pelo WhatsApp"
+                className="mt-6"
+              />
             </div>
           </div>
         </div>

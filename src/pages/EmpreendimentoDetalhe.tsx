@@ -12,8 +12,8 @@ import {
   X,
   HelpCircle,
   CheckCircle,
-  ArrowRight,
 } from 'lucide-react'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import { EMPREENDIMENTOS, type EmpreendimentoData, type GalleryItem, type Destaque } from '@/data/empreendimentos'
 
 /* ─── Sub-components ─────────────────────────────────────────── */
@@ -316,9 +316,11 @@ export default function EmpreendimentoDetalhe() {
               <MapPin size={15} className="text-[var(--accent)]" />
               <span>{location}</span>
             </div>
-            <a href="#contato-empreendimento" className="btn-accent text-base px-8 py-4">
-              Quero investir
-            </a>
+            <WhatsAppButton
+              mensagem={`Olá! Tenho interesse no empreendimento ${name}. Pode me enviar o material completo?`}
+              label="Quero investir"
+              size="lg"
+            />
           </motion.div>
         </div>
       </section>
@@ -584,9 +586,19 @@ export default function EmpreendimentoDetalhe() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-center"
           >
-            <a href="#contato-empreendimento" className="btn-accent text-base px-10 py-4">
-              Quero investir neste empreendimento
-            </a>
+            <div className="flex flex-wrap justify-center gap-4">
+              <WhatsAppButton
+                mensagem={`Olá! Tenho interesse no empreendimento ${name}. Pode me enviar o material completo?`}
+                label="Quero investir"
+                size="lg"
+              />
+              <WhatsAppButton
+                mensagem={`Olá! Gostaria de receber o material completo sobre o ${name}.`}
+                label="Receber material completo"
+                size="lg"
+                className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
+              />
+            </div>
           </motion.div>
         </div>
       </section>
