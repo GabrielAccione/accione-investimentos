@@ -9,14 +9,13 @@ interface FormState {
   name: string
   email: string
   phone: string
-  subject: string
   message: string
 }
 
 type FormField = keyof FormState
 
-const INITIAL_FORM: FormState = { name: '', email: '', phone: '', subject: '', message: '' }
-const INITIAL_TOUCH = { name: false, email: false, phone: false, subject: false, message: false }
+const INITIAL_FORM: FormState = { name: '', email: '', phone: '', message: '' }
+const INITIAL_TOUCH = { name: false, email: false, phone: false, message: false }
 
 function applyPhoneMask(raw: string) {
   const d = raw.replace(/\D/g, '').slice(0, 11)
@@ -34,8 +33,6 @@ function validate(form: FormState): Partial<Record<FormField, string>> {
     errors.email = 'Informe um e-mail válido.'
   if (form.phone.replace(/\D/g, '').length < 10)
     errors.phone = 'Informe o telefone com DDD (mínimo 10 dígitos).'
-  if (!form.subject)
-    errors.subject = 'Selecione um assunto.'
   if (form.message.trim().length < 10)
     errors.message = 'A mensagem deve ter pelo menos 10 caracteres.'
   return errors
@@ -64,7 +61,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setTouched({ name: true, email: true, phone: true, subject: true, message: true })
+    setTouched({ name: true, email: true, phone: true, message: true })
     if (!isValid) return
     setIsSubmitting(true)
     // Substituir por integração real quando disponível (Formspree, EmailJS, etc.)
@@ -139,24 +136,6 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
             className={fieldClass('phone')}
           />
           <FieldError field="phone" />
-        </div>
-
-        <div className="sm:col-span-2">
-          <label htmlFor="subject" className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
-            Assunto
-          </label>
-          <select
-            id="subject" name="subject"
-            value={form.subject} onChange={handleChange} onBlur={() => handleBlur('subject')}
-            className={fieldClass('subject')}
-          >
-            <option value="" disabled>Selecione o tema do contato</option>
-            <option value="investimentos">Quero conhecer oportunidades</option>
-            <option value="empreendimentos">Tenho interesse em empreendimentos</option>
-            <option value="simuladores">Quero ajuda para planejar um aporte</option>
-            <option value="parcerias">Parcerias e relacionamento</option>
-          </select>
-          <FieldError field="subject" />
         </div>
 
         <div className="sm:col-span-2">

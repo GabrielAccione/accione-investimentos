@@ -1,30 +1,9 @@
-import { CreditCard, Scale, Wheat } from 'lucide-react'
+import { CreditCard, Wheat } from 'lucide-react'
 import type { Product } from '@/types'
 
 export const PRODUCTS: Product[] = [
   {
     id: 0,
-    slug: 'ativos-judiciais',
-    title: 'Ativos Judiciais',
-    summary: 'Créditos com previsibilidade de fluxo, proteção jurídica e retorno pactuado.',
-    description:
-      'Operações estruturadas em precatórios e créditos judiciais com análise documental, deságio de entrada e horizonte de liquidação definido. Uma alternativa para investidores que buscam previsibilidade, lastro e exposição descorrelacionada do varejo tradicional.',
-    features: [
-      'Rentabilidade acima do CDI',
-      'Garantia do poder público',
-      'Prazo e retorno previsíveis',
-      'Estrutura documental analisada caso a caso',
-    ],
-    icon: Scale,
-    tag: 'Destaque',
-    stats: [
-      { label: 'Perfil', value: 'Conservador a moderado' },
-      { label: 'Prazo', value: 'Médio a longo' },
-      { label: 'Base', value: 'Direitos creditórios' },
-    ],
-  },
-  {
-    id: 1,
     slug: 'cpr-f',
     title: 'CPR-F',
     subtitle: 'Cédula de Produto Rural Financeira',
@@ -46,7 +25,7 @@ export const PRODUCTS: Product[] = [
       'https://wa.me/5555000000000?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CPR-F.',
   },
   {
-    id: 2,
+    id: 1,
     slug: 'credito-privado',
     title: 'Crédito Privado',
     summary: 'Estruturas com garantia e remuneração acima do crédito bancário tradicional.',

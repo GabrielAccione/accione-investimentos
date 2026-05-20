@@ -45,7 +45,11 @@ export default function IndicatorCard({ indicator }: IndicatorCardProps) {
               <p className="text-3xl font-semibold leading-none text-white">{indicator.valueLabel}</p>
               {indicator.sourceDate ? (
                 <p className="mt-2 text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
-                  {indicator.sourceDate}
+                  {indicator.isManual
+                    ? `Atualizado manualmente em ${indicator.sourceDate}`
+                    : indicator.value === null
+                      ? `Dado desatualizado — última leitura: ${indicator.sourceDate}`
+                      : indicator.sourceDate}
                 </p>
               ) : null}
             </div>

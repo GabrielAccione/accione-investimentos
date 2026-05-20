@@ -56,7 +56,7 @@ export interface Destaque {
 export interface EmpreendimentoData {
   slug: string;
   name: string;
-  status: "em-captacao" | "em-breve";
+  status: "em-captacao" | "em-breve" | "captacao-encerrada";
   statusLabel: string;
   location: string;
   shortDescription: string;
@@ -74,8 +74,8 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
   {
     slug: "avenue-residence",
     name: "Avenue Residence",
-    status: "em-captacao",
-    statusLabel: "Em captação",
+    status: "captacao-encerrada",
+    statusLabel: "Captação Encerrada",
     location: "Rua Demétrio Ribeiro, 404 — Santa Maria/RS",
     shortDescription:
       "Apartamentos de 2 e 3 dormitórios com suíte, sacada, espaço gourmet e rooftop. Modelo SPE a preço de custo.",
@@ -85,14 +85,14 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     coverImage: avenueFachadaImg,
     fachadaImage: { src: avenueFachadaImg, alt: "Fachada Avenue Residence" },
     gallery: [
-      { src: avenueSalaImg,       alt: "Sala de estar" },
-      { src: avenueSala2Img,      alt: "Sala integrada" },
+      { src: avenueSalaImg,       alt: "Sala de estar integrada" },
+      { src: avenueSala2Img,      alt: "Sala com varanda" },
       { src: avenueSalaTvImg,     alt: "Sala TV" },
       { src: avenueSala3Img,      alt: "Sala" },
-      { src: avenueCozinhaImg,    alt: "Cozinha" },
+      { src: avenueCozinhaImg,    alt: "Cozinha planejada" },
       { src: avenueCozinha2Img,   alt: "Cozinha gourmet" },
       { src: avenueDormitorioImg, alt: "Dormitório" },
-      { src: avenueGourmetImg,    alt: "Espaço Gourmet" },
+      { src: avenueGourmetImg,    alt: "Espaço gourmet" },
       { src: avenueRooftopImg,    alt: "Rooftop" },
     ],
     destaques: [
@@ -120,7 +120,7 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     slug: "sync-conde",
     name: "Sync Viva On (Conde)",
     status: "em-captacao",
-    statusLabel: "Em captação",
+    statusLabel: "Aberto para Captação",
     location: "Rua Conde de Porto Alegre, 646 — Centro, Santa Maria/RS",
     shortDescription:
       "21 pavimentos, 187 apartamentos (estúdios, 1 e 2 dorms). Rooftop com piscina, academia, coworking e bar. Retrofit programado a cada 10 anos.",
@@ -168,8 +168,8 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
   {
     slug: "sync-floriano",
     name: "Sync Floriano",
-    status: "em-breve",
-    statusLabel: "Em breve",
+    status: "em-captacao",
+    statusLabel: "Aberto para Captação",
     location: "Santa Maria/RS",
     shortDescription: "Novo empreendimento da linha Sync. Detalhes em breve.",
     fullDescription:

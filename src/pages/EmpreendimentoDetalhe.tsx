@@ -20,7 +20,10 @@ import { EMPREENDIMENTOS, type EmpreendimentoData, type GalleryItem, type Destaq
 /* ─── Sub-components ─────────────────────────────────────────── */
 
 function StatusBadge({ status, label }: { status: EmpreendimentoData['status']; label: string }) {
-  const color = status === 'em-captacao' ? 'bg-[var(--accent)]' : 'bg-[#69727D]'
+  const color =
+    status === 'em-captacao'
+      ? 'bg-[#25D366]'
+      : 'bg-[#69727D]'
   return (
     <span className={`${color} text-white text-xs font-semibold px-4 py-1.5 rounded-full`}>
       {label}
@@ -120,11 +123,18 @@ function Lightbox({
         className="relative max-w-4xl w-full"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
-          src={images[current].src}
-          alt={images[current].alt}
-          className="w-full rounded-xl"
-        />
+        <div className="relative">
+          <img
+            src={images[current].src}
+            alt={images[current].alt}
+            className="w-full rounded-xl"
+          />
+          {images[current].alt && (
+            <div className="absolute bottom-0 inset-x-0 rounded-b-xl bg-black/60 px-4 py-2.5">
+              <p className="text-center text-sm text-white/90">{images[current].alt}</p>
+            </div>
+          )}
+        </div>
 
         {/* Controls */}
         <button
@@ -307,8 +317,11 @@ export default function EmpreendimentoDetalhe() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <div className="mb-4">
+            <div className="mb-4 flex flex-wrap items-center gap-3">
               <StatusBadge status={status} label={statusLabel} />
+              {status === 'captacao-encerrada' && (
+                <span className="text-xs text-white/60">Grupo 100% fechado</span>
+              )}
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
               {name}
@@ -317,11 +330,19 @@ export default function EmpreendimentoDetalhe() {
               <MapPin size={15} className="text-[var(--accent)]" />
               <span>{location}</span>
             </div>
-            <WhatsAppButton
-              mensagem={`Olá! Tenho interesse no empreendimento ${name}. Pode me enviar o material completo?`}
-              label="Quero investir"
-              size="lg"
-            />
+            {status === 'captacao-encerrada' ? (
+              <WhatsAppButton
+                mensagem="Olá! Tenho interesse em entrar na lista de espera do Avenue Residence."
+                label="Lista de espera"
+                size="lg"
+              />
+            ) : (
+              <WhatsAppButton
+                mensagem={`Olá! Tenho interesse no empreendimento ${name}. Pode me enviar o material completo?`}
+                label="Quero investir"
+                size="lg"
+              />
+            )}
           </motion.div>
         </div>
       </section>
@@ -447,21 +468,28 @@ export default function EmpreendimentoDetalhe() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {gallery.map((item, i) => (
-              <motion.button
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.96 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.07 }}
-                onClick={() => setLightboxIndex(i)}
-                className="rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-[var(--accent)] group"
               >
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </motion.button>
+                <button
+                  type="button"
+                  onClick={() => setLightboxIndex(i)}
+                  className="w-full rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-[var(--accent)] group"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </button>
+                {item.alt && (
+                  <p className="mt-1.5 text-center text-xs text-[var(--text-muted)]">{item.alt}</p>
+                )}
+              </motion.div>
             ))}
           </div>
 
@@ -588,17 +616,27 @@ export default function EmpreendimentoDetalhe() {
             className="text-center"
           >
             <div className="flex flex-wrap justify-center gap-4">
-              <WhatsAppButton
-                mensagem={`Olá! Tenho interesse no empreendimento ${name}. Pode me enviar o material completo?`}
-                label="Quero investir"
-                size="lg"
-              />
-              <WhatsAppButton
-                mensagem={`Olá! Gostaria de receber o material completo sobre o ${name}.`}
-                label="Receber material completo"
-                size="lg"
-                className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
-              />
+              {status === 'captacao-encerrada' ? (
+                <WhatsAppButton
+                  mensagem="Olá! Tenho interesse em entrar na lista de espera do Avenue Residence."
+                  label="Entrar na lista de espera"
+                  size="lg"
+                />
+              ) : (
+                <>
+                  <WhatsAppButton
+                    mensagem={`Olá! Tenho interesse no empreendimento ${name}. Pode me enviar o material completo?`}
+                    label="Quero investir"
+                    size="lg"
+                  />
+                  <WhatsAppButton
+                    mensagem={`Olá! Gostaria de receber o material completo sobre o ${name}.`}
+                    label="Receber material completo"
+                    size="lg"
+                    className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
+                  />
+                </>
+              )}
             </div>
           </motion.div>
         </div>

@@ -6,7 +6,10 @@ import { MapPin, ArrowRight } from 'lucide-react'
 import { EMPREENDIMENTOS, type EmpreendimentoData } from '@/data/empreendimentos'
 
 function StatusBadge({ status, label }: { status: EmpreendimentoData['status']; label: string }) {
-  const color = status === 'em-captacao' ? 'bg-[var(--accent)]' : 'bg-[#69727D]'
+  const color =
+    status === 'em-captacao'
+      ? 'bg-[#25D366]'
+      : 'bg-[#69727D]'
   return (
     <span className={`${color} text-white text-xs font-medium px-3 py-1 rounded-full`}>
       {label}

@@ -53,7 +53,20 @@ export default function ContatoPage() {
             </article>
           </aside>
 
-          <InquiryForm submitLabel="Enviar mensagem" />
+          <div className="space-y-5">
+            <div
+              className="rounded-xl border-l-4 py-4 pl-5 pr-4"
+              style={{
+                borderLeftColor: '#A26547',
+                background: 'rgba(162, 101, 71, 0.08)',
+              }}
+            >
+              <p className="text-sm leading-relaxed text-white/70">
+                ⚠️ Nosso atendimento é realizado exclusivamente com horário marcado.
+              </p>
+            </div>
+            <InquiryForm submitLabel="Enviar mensagem" />
+          </div>
         </div>
       </section>
     </>
