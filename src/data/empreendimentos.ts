@@ -179,9 +179,10 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     status: "em-captacao",
     statusLabel: "Aberto para Captação",
     location: "Rua Marechal Floriano Peixoto, 1355 — Centro, Santa Maria/RS",
-    shortDescription: "Novo empreendimento da linha Sync. Detalhes em breve.",
+    shortDescription:
+      "14 pavimentos, 172 unidades residenciais entre studios e apartamentos de 1 e 2 dormitórios. Coworking, academia, lavanderia, gourmet, pub, áreas verdes e espaços de convivência",
     fullDescription:
-      "O Sync Floriano é o mais novo empreendimento da linha Sync by Accione. Em fase de estruturação, o projeto promete manter o padrão de excelência da marca com inovações arquitetônicas e diferenciais de mercado. Cadastre seu interesse e seja um dos primeiros a receber todas as informações quando o projeto for lançado.",
+      "O Sync Viva On – Floriano é um empreendimento de compactos de luxo localizado no coração de Santa Maria, na tradicional Rua Floriano Peixoto. Desenvolvido pela parceria entre Zacon Zanini e Accione, o projeto une arquitetura contemporânea, infraestrutura inteligente e alto potencial de valorização em uma das regiões mais desejadas da cidade. Com studios, apartamentos de 1 e 2 dormitórios, áreas comuns premium, coworking, academia, gourmet, lavanderia compartilhada e espaços de convivência modernos, o Sync Viva On foi pensado para atender o novo perfil urbano — combinando praticidade, sofisticação e flexibilidade para moradia ou locação premium. Estruturado para atender a crescente demanda por locações executivas e short stay, o empreendimento oferece ao investidor um ativo imobiliário com forte liquidez, elevada rentabilidade por m² e localização estratégica próxima a universidades, hospitais, comércio e serviços..",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
     coverImage: florianoCoverImg,
     fachadaImage: { src: florianoFachadaImg, alt: "Fachada Sync Floriano" },
@@ -209,6 +210,15 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
       localizacao: "Santa Maria/RS — endereço a divulgar",
       tipologias: "A definir",
     },
-    pontosDeInteresse: ["Detalhes serão divulgados em breve"],
+    pontosDeInteresse: [
+      "UFSM - 1 min",
+      "UFN - 4 min.",
+      "Colégio Santa Maria - 2 min. - Colégio Santana - 4 min. ",
+      " Saúde: Hospital de Caridade - 3 min. - Hospital da Unimed - 2 min. ",
+      "Outros: Calçadão - 2 min. - Praça Sald. Marinho - 3 min.",
+      "Shoping Santa Maria - 2 min.",
+      "+ de 5 mercados - 5 min.",
+      "18 Farmácias - 3 min. - Estacionamentos - Pontos de Ônibus - Petshop",
+    ],
   },
 ];
