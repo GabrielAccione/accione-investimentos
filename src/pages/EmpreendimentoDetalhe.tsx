@@ -7,6 +7,7 @@ import {
   Shield,
   TrendingUp,
   Zap,
+  ArrowRight,
   ChevronLeft,
   ChevronRight,
   X,
