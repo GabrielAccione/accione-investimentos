@@ -1,5 +1,6 @@
 // Avenue
-import avenueFachadaImg from "@/assets/avenue/avenue-fachada.png";
+import avenueFachadaCoverImg from "@/assets/avenue/avenue-fachada.png";
+import avenueFachadaPrincipalImg from "@/assets/avenue/avenue-fachada-principal.png";
 import avenueSalaImg from "@/assets/avenue/avenue-sala.png";
 import avenueSala2Img from "@/assets/avenue/avenue-sala2.png";
 import avenueSalaTvImg from "@/assets/avenue/avenue-sala-tv.png";
@@ -12,7 +13,8 @@ import avenueRooftopImg from "@/assets/avenue/avenue-rooftop.png";
 
 // Sync Conde
 import syncResidenceImg from "@/assets/syncConde/sync-residence.jpg";
-import syncFachadaImg from "@/assets/syncConde/sync-fachada.jpg";
+import syncCondeCoverImg from "@/assets/syncConde/sync-fachada.jpg";
+import syncCondeFachadaImg from "@/assets/syncConde/sync-fachada.jpg";
 import syncPiscinaImg from "@/assets/syncConde/sync-piscina.jpg";
 import syncRooftopImg from "@/assets/syncConde/sync-rooftop.jpg";
 import syncCoworkingImg from "@/assets/syncConde/sync-coworking.jpg";
@@ -23,6 +25,7 @@ import syncHallImg from "@/assets/syncConde/sync-hall.jpg";
 import syncSalaJogosImg from "@/assets/syncConde/sync-sala-jogos.jpg";
 
 // Sync Floriano
+import florianoCoverImg from "@/assets/syncFloriano/sync-floriano-fachada.jpg";
 import florianoFachadaImg from "@/assets/syncFloriano/sync-floriano-fachada.jpg";
 import florianoPubImg from "@/assets/syncFloriano/sync-floriano-pub.jpg";
 import florianoAptoImg from "@/assets/syncFloriano/sync-floriano-apto.jpg";
@@ -46,6 +49,7 @@ export interface FichaTecnica {
 export interface GalleryItem {
   src: string;
   alt: string;
+  objectPosition?: string;
 }
 
 export interface Destaque {
@@ -82,23 +86,27 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     fullDescription:
       "O Avenue Residence é um empreendimento exclusivo que une sofisticação e praticidade no coração de Santa Maria. Com unidades de 2 e 3 dormitórios — sendo as de 3 com suíte — o projeto entrega acabamento de alto padrão, sacada privativa, espaço gourmet e um rooftop com vista privilegiada. Desenvolvido no modelo SPE (Sociedade de Propósito Específico), o Avenue Residence oferece ao investidor a oportunidade de adquirir frações de um ativo imobiliário real, com gestão profissional e rentabilidade acima da média do mercado tradicional.",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
-    coverImage: avenueFachadaImg,
-    fachadaImage: { src: avenueFachadaImg, alt: "Fachada Avenue Residence" },
+    coverImage: avenueFachadaCoverImg,
+    fachadaImage: {
+      src: avenueFachadaPrincipalImg,
+      alt: "Fachada Avenue Residence",
+      objectPosition: "center bottom",
+    },
     gallery: [
-      { src: avenueSalaImg,       alt: "Sala de estar integrada" },
-      { src: avenueSala2Img,      alt: "Sala com varanda" },
-      { src: avenueSalaTvImg,     alt: "Sala TV" },
-      { src: avenueSala3Img,      alt: "Sala" },
-      { src: avenueCozinhaImg,    alt: "Cozinha planejada" },
-      { src: avenueCozinha2Img,   alt: "Cozinha gourmet" },
+      { src: avenueSalaImg, alt: "Sala de estar integrada" },
+      { src: avenueSala2Img, alt: "Sala com varanda" },
+      { src: avenueSalaTvImg, alt: "Sala TV" },
+      { src: avenueSala3Img, alt: "Sala" },
+      { src: avenueCozinhaImg, alt: "Cozinha planejada" },
+      { src: avenueCozinha2Img, alt: "Cozinha gourmet" },
       { src: avenueDormitorioImg, alt: "Dormitório" },
-      { src: avenueGourmetImg,    alt: "Espaço gourmet" },
-      { src: avenueRooftopImg,    alt: "Rooftop" },
+      { src: avenueGourmetImg, alt: "Espaço gourmet" },
+      { src: avenueRooftopImg, alt: "Rooftop" },
     ],
     destaques: [
-      { valor: "2 e 3",          label: "Dormitórios" },
-      { valor: "SPE",            label: "Modelo de investimento" },
-      { valor: "Rooftop",        label: "Espaço gourmet" },
+      { valor: "2 e 3", label: "Dormitórios" },
+      { valor: "SPE", label: "Modelo de investimento" },
+      { valor: "Rooftop", label: "Espaço gourmet" },
       { valor: "Preço de custo", label: "Aquisição" },
     ],
     fichaTecnica: {
@@ -118,7 +126,7 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
   },
   {
     slug: "sync-conde",
-    name: "Sync Viva On (Conde)",
+    name: "Sync Conde",
     status: "em-captacao",
     statusLabel: "Aberto para Captação",
     location: "Rua Conde de Porto Alegre, 646 — Centro, Santa Maria/RS",
@@ -127,22 +135,22 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     fullDescription:
       "O Sync Viva On é um empreendimento de alto impacto urbanístico no Centro de Santa Maria. Com 21 pavimentos e 187 apartamentos distribuídos em estúdios, 1 e 2 dormitórios, o projeto foi concebido para o investidor moderno que busca rentabilidade com liquidez. O rooftop oferece piscina, academia completa, espaço de coworking e bar panorâmico. Um diferencial exclusivo é o retrofit programado a cada 10 anos, garantindo que o ativo se mantenha sempre valorizado e atualizado. Modelo SPE, gestão profissional Accione.",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
-    coverImage: syncFachadaImg,
-    fachadaImage: { src: syncFachadaImg, alt: "Fachada Sync Viva On" },
+    coverImage: syncCondeCoverImg,
+    fachadaImage: { src: syncCondeFachadaImg, alt: "Fachada Sync Viva On" },
     gallery: [
-      { src: syncPiscinaImg,   alt: "Piscina" },
-      { src: syncRooftopImg,   alt: "Rooftop" },
+      { src: syncPiscinaImg, alt: "Piscina" },
+      { src: syncRooftopImg, alt: "Rooftop" },
       { src: syncCoworkingImg, alt: "Coworking" },
-      { src: syncAcademiaImg,  alt: "Academia" },
+      { src: syncAcademiaImg, alt: "Academia" },
       { src: syncAreaVerdeImg, alt: "Área verde" },
-      { src: syncElevadorImg,  alt: "Elevador" },
-      { src: syncHallImg,      alt: "Hall de entrada" },
+      { src: syncElevadorImg, alt: "Elevador" },
+      { src: syncHallImg, alt: "Hall de entrada" },
       { src: syncSalaJogosImg, alt: "Sala de jogos" },
       { src: syncResidenceImg, alt: "Vista geral" },
     ],
     destaques: [
-      { valor: "187",     label: "Apartamentos" },
-      { valor: "21",      label: "Pavimentos" },
+      { valor: "187", label: "Apartamentos" },
+      { valor: "21", label: "Pavimentos" },
       { valor: "Rooftop", label: "Com piscina e bar" },
       { valor: "10 anos", label: "Retrofit programado" },
     ],
@@ -170,29 +178,29 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     name: "Sync Floriano",
     status: "em-captacao",
     statusLabel: "Aberto para Captação",
-    location: "Santa Maria/RS",
+    location: "Rua Marechal Floriano Peixoto, 1355 — Centro, Santa Maria/RS",
     shortDescription: "Novo empreendimento da linha Sync. Detalhes em breve.",
     fullDescription:
       "O Sync Floriano é o mais novo empreendimento da linha Sync by Accione. Em fase de estruturação, o projeto promete manter o padrão de excelência da marca com inovações arquitetônicas e diferenciais de mercado. Cadastre seu interesse e seja um dos primeiros a receber todas as informações quando o projeto for lançado.",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
-    coverImage: florianoFachadaImg,
+    coverImage: florianoCoverImg,
     fachadaImage: { src: florianoFachadaImg, alt: "Fachada Sync Floriano" },
     gallery: [
-      { src: florianoPubImg,        alt: "Pub / Bar" },
-      { src: florianoAptoImg,       alt: "Apartamento" },
-      { src: florianoQuartoImg,     alt: "Quarto" },
-      { src: florianoQuarto2Img,    alt: "Suíte" },
-      { src: florianoGourmetImg,    alt: "Espaço Gourmet" },
-      { src: florianoCoberturaImg,  alt: "Cobertura" },
-      { src: florianoCoworkingImg,  alt: "Coworking" },
-      { src: florianoAcademiaImg,   alt: "Academia" },
+      { src: florianoPubImg, alt: "Pub / Bar" },
+      { src: florianoAptoImg, alt: "Apartamento" },
+      { src: florianoQuartoImg, alt: "Quarto" },
+      { src: florianoQuarto2Img, alt: "Suíte" },
+      { src: florianoGourmetImg, alt: "Espaço Gourmet" },
+      { src: florianoCoberturaImg, alt: "Cobertura" },
+      { src: florianoCoworkingImg, alt: "Coworking" },
+      { src: florianoAcademiaImg, alt: "Academia" },
       { src: florianoMinimarketImg, alt: "Minimarket" },
     ],
     destaques: [
-      { valor: "SPE",      label: "Modelo de investimento" },
+      { valor: "SPE", label: "Modelo de investimento" },
       { valor: "Em breve", label: "Lançamento" },
-      { valor: "Centro",   label: "Localização" },
-      { valor: "Accione",  label: "Gestão" },
+      { valor: "Centro", label: "Localização" },
+      { valor: "Accione", label: "Gestão" },
     ],
     fichaTecnica: {
       construtora: "Zacon Zanini Construções",

@@ -394,6 +394,7 @@ export default function EmpreendimentoDetalhe() {
                 src={fachadaImage.src}
                 alt={fachadaImage.alt}
                 className="w-full h-[600px] rounded-2xl object-cover object-center shadow-2xl shadow-black/50"
+                style={fachadaImage.objectPosition ? { objectPosition: fachadaImage.objectPosition } : undefined}
               />
               <div className="absolute -bottom-3 -right-3 h-full w-full rounded-2xl border border-[var(--accent)]/30 -z-10" />
             </motion.div>
