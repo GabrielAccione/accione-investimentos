@@ -22,7 +22,7 @@ export default function PageHero({ eyebrow, title, description, actions }: PageH
           className="max-w-4xl"
         >
           <span className="section-tag">{eyebrow}</span>
-          <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight text-[var(--text-primary)] sm:text-5xl lg:text-6xl">
             {title}
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">

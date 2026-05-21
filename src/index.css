@@ -3,25 +3,39 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Light mode (default) ── */
   :root {
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F5F5F5;
+    --bg-header: #FFFFFF;
+    --bg-footer: #F0F0F0;
+    --accent: #A26547;
+    --accent-alt: #8C5139;
+    --text-primary: #041A2A;
+    --text-secondary: #484949;
+    --text-muted: #6B7280;
+    --text-body: #484949;
+    --text-dark: var(--text-body);
+    --surface-bg: rgba(255, 255, 255, 0.95);
+    --surface-border: rgba(0, 0, 0, 0.08);
+    --hero-gradient: linear-gradient(135deg, #F8F4F1 0%, #F0EBE6 38%, #EEF2F6 68%, #F5F5F5 100%);
+    --bg-gradient: linear-gradient(135deg, #F8F4F1 0%, #F0EBE6 40%, #EEF2F6 70%, #F5F5F5 100%);
+  }
+
+  /* ── Dark mode ── */
+  .dark {
     --bg-primary: #041A2A;
     --bg-secondary: #0C2030;
     --bg-header: #000000;
     --bg-footer: #1D1D1D;
-    --accent: #A26547;
-    --accent-alt: #8C5139;
     --text-primary: #FFFFFF;
     --text-secondary: #D5DCE3;
     --text-muted: #69727D;
     --text-body: #484949;
-    --text-dark: var(--text-body);
-    --bg-gradient: linear-gradient(
-      135deg,
-      #041A2A 0%,
-      #0C2030 40%,
-      #1a1208 70%,
-      #1f0e05 100%
-    );
+    --surface-bg: rgba(255, 255, 255, 0.03);
+    --surface-border: rgba(162, 101, 71, 0.15);
+    --hero-gradient: linear-gradient(135deg, #041A2A 0%, #082236 38%, #0a1f2e 68%, #0C2030 100%);
+    --bg-gradient: linear-gradient(135deg, #041A2A 0%, #0C2030 40%, #1a1208 70%, #1f0e05 100%);
   }
 
   html {
@@ -31,7 +45,7 @@
   body {
     background: var(--bg-gradient);
     background-attachment: fixed;
-    @apply text-white;
+    color: var(--text-primary);
     font-family: 'Outfit', Arial, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -48,7 +62,7 @@
 
   ::-webkit-scrollbar        { width: 6px; }
   ::-webkit-scrollbar-track  { background: var(--bg-primary); }
-  ::-webkit-scrollbar-thumb  { background: var(--text-dark); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb  { background: var(--text-muted); border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 }
 
@@ -61,13 +75,7 @@
   }
 
   .hero-gradient {
-    background: linear-gradient(
-      135deg,
-      #041A2A 0%,
-      #082236 38%,
-      #0a1f2e 68%,
-      #0C2030 100%
-    );
+    background: var(--hero-gradient);
     background-size: 200% 200%;
     animation: gradient-shift 8s ease infinite;
   }
@@ -80,10 +88,13 @@
   }
 
   .btn-ghost {
-    @apply border border-white/20 text-white
-           hover:bg-white hover:text-[#041A2A]
-           px-6 py-3 rounded-full font-medium transition-all duration-300
-           inline-block;
+    @apply px-6 py-3 rounded-full font-medium transition-all duration-300 inline-block;
+    border: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
+    color: var(--text-primary);
+  }
+  .btn-ghost:hover {
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
   }
 
   .section-container {
@@ -91,7 +102,8 @@
   }
 
   .section-divider {
-    @apply w-full h-px bg-gradient-to-r from-transparent via-[var(--text-dark)] to-transparent;
+    @apply w-full h-px;
+    background: linear-gradient(to right, transparent, var(--text-muted), transparent);
   }
 
   .section-tag {
@@ -103,18 +115,21 @@
 
   .surface-card {
     @apply rounded-[28px] border backdrop-blur-sm;
-    border-color: rgba(162, 101, 71, 0.15);
-    background-color: rgba(255, 255, 255, 0.03);
+    border-color: var(--surface-border);
+    background-color: var(--surface-bg);
   }
 
   .input-base {
-    @apply w-full rounded-2xl border px-4 py-3 text-sm text-white outline-none transition-colors duration-200 placeholder:text-[var(--text-muted)];
-    border-color: rgba(255, 255, 255, 0.1);
-    background-color: rgba(255, 255, 255, 0.03);
+    @apply w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors duration-200;
+    color: var(--text-primary);
+    border-color: color-mix(in srgb, var(--text-primary) 12%, transparent);
+    background-color: color-mix(in srgb, var(--text-primary) 3%, transparent);
   }
-
+  .input-base::placeholder {
+    color: var(--text-muted);
+  }
   .input-base:focus {
     border-color: var(--accent);
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: color-mix(in srgb, var(--text-primary) 5%, transparent);
   }
 }

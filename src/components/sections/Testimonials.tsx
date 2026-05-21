@@ -23,7 +23,7 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
           {t.name[0]}
         </div>
         <div>
-          <p className="text-sm font-semibold text-white">{t.name}</p>
+          <p className="text-sm font-semibold text-[var(--text-primary)]">{t.name}</p>
           <p className="text-xs text-[var(--text-muted)]">{t.role}</p>
         </div>
       </div>

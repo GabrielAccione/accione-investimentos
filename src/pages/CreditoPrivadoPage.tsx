@@ -84,7 +84,7 @@ export default function CreditoPrivadoPage() {
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="section-tag">Renda Fixa Corporativa</span>
             </div>
-            <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight text-[var(--text-primary)] sm:text-5xl lg:text-6xl">
               Crédito Privado
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">
@@ -98,14 +98,14 @@ export default function CreditoPrivadoPage() {
       <section className="bg-[var(--bg-secondary)] py-20 sm:py-24">
         <div className="section-container">
           <ScrollReveal>
-            <h2 className="text-3xl font-semibold text-white">Como funciona</h2>
+            <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Como funciona</h2>
           </ScrollReveal>
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {STEPS.map(({ num, title, desc }, i) => (
               <ScrollReveal key={num} delay={i * 0.1}>
                 <div className="surface-card h-full p-6">
                   <p className="text-4xl font-semibold text-[var(--accent)]/30">{num}</p>
-                  <h3 className="mt-3 text-base font-semibold text-white">{title}</h3>
+                  <h3 className="mt-3 text-base font-semibold text-[var(--text-primary)]">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{desc}</p>
                 </div>
               </ScrollReveal>
@@ -118,7 +118,7 @@ export default function CreditoPrivadoPage() {
       <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
         <div className="section-container">
           <ScrollReveal>
-            <h2 className="text-3xl font-semibold text-white">Características</h2>
+            <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Características</h2>
           </ScrollReveal>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {CARACTERISTICAS.map(({ label, value }, i) => (
@@ -127,7 +127,7 @@ export default function CreditoPrivadoPage() {
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
                     {label}
                   </p>
-                  <p className="mt-2 text-lg font-semibold text-white">{value}</p>
+                  <p className="mt-2 text-lg font-semibold text-[var(--text-primary)]">{value}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -141,7 +141,7 @@ export default function CreditoPrivadoPage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-center">
             <div>
               <ScrollReveal>
-                <h2 className="text-3xl font-semibold text-white">Por que Crédito Privado?</h2>
+                <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Por que Crédito Privado?</h2>
               </ScrollReveal>
               <ul className="mt-8 space-y-4">
                 {DIFERENCIAIS.map((d, i) => (
@@ -167,7 +167,7 @@ export default function CreditoPrivadoPage() {
       <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
         <div className="section-container">
           <ScrollReveal>
-            <h2 className="text-3xl font-semibold text-white">Perguntas frequentes</h2>
+            <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Perguntas frequentes</h2>
           </ScrollReveal>
           <div className="mt-10 max-w-3xl space-y-3">
             {FAQ.map(({ q, a }, i) => (
@@ -178,7 +178,7 @@ export default function CreditoPrivadoPage() {
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     className="flex w-full items-center justify-between gap-4 p-5 text-left"
                   >
-                    <span className="text-sm font-medium text-white">{q}</span>
+                    <span className="text-sm font-medium text-[var(--text-primary)]">{q}</span>
                     <ChevronDown
                       size={18}
                       className={`shrink-0 text-[var(--accent)] transition-transform duration-300 ${
@@ -187,7 +187,7 @@ export default function CreditoPrivadoPage() {
                     />
                   </button>
                   {openFaq === i && (
-                    <p className="border-t border-white/5 px-5 pb-5 pt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+                    <p className="border-t border-black/5 dark:border-white/5 px-5 pb-5 pt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
                       {a}
                     </p>
                   )}
@@ -202,7 +202,7 @@ export default function CreditoPrivadoPage() {
       <section className="hero-gradient py-20 sm:py-24">
         <div className="section-container text-center">
           <ScrollReveal>
-            <h2 className="text-3xl font-semibold text-white sm:text-4xl">
+            <h2 className="text-3xl font-semibold text-[var(--text-primary)] sm:text-4xl">
               Pronto para investir em Crédito Privado?
             </h2>
             <p className="mt-4 text-[var(--text-secondary)]">

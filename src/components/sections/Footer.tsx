@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import logo from "@/assets/logo.png";
+import logoDark from "@/assets/logo.png";
+import logoLight from "@/assets/logo-accione-dark.jpg";
 import { SITE_CONFIG } from "@/config/site";
+import { useTheme } from "@/context/ThemeContext";
 
 const FOOTER_LINKS = [
   { label: "Início", to: "/" },
@@ -15,13 +17,15 @@ const FOOTER_LINKS = [
 ];
 
 export default function Footer() {
+  const { theme } = useTheme()
+
   return (
     <footer className="bg-[var(--bg-footer)] pt-16 pb-8">
       <div className="section-container">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.9fr)_minmax(0,0.9fr)]">
           <div>
             <img
-              src={logo}
+              src={theme === 'dark' ? logoDark : logoLight}
               alt="Accione Investimentos"
               className="h-10 w-auto object-contain"
             />
@@ -44,7 +48,7 @@ export default function Footer() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="text-sm text-[var(--text-muted)] transition-colors hover:text-white"
+                  className="text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
                 >
                   {link.label}
                 </Link>
@@ -63,7 +67,7 @@ export default function Footer() {
                 href={SITE_CONFIG.whatsappHref}
                 target="_blank"
                 rel="noreferrer"
-                className="block transition-colors hover:text-white"
+                className="block transition-colors hover:text-[var(--text-primary)]"
               >
                 WhatsApp: {SITE_CONFIG.whatsappDisplay}
               </a>

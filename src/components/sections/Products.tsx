@@ -54,7 +54,7 @@ export default function Products({ variant = 'home' }: ProductsProps) {
                       <ProductIcon size={22} />
                     </div>
                     <div>
-                      <p className="text-2xl font-semibold text-white">{item.title}</p>
+                      <p className="text-2xl font-semibold text-[var(--text-primary)]">{item.title}</p>
                       <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
                         {item.summary}
                       </p>
@@ -86,7 +86,7 @@ export default function Products({ variant = 'home' }: ProductsProps) {
                   ))}
                 </div>
 
-                <h3 className="mt-5 text-4xl font-semibold text-white">
+                <h3 className="mt-5 text-4xl font-semibold text-[var(--text-primary)]">
                   {product.title}
                   {product.subtitle ? (
                     <span className="block text-lg font-normal text-[var(--text-muted)] mt-1">

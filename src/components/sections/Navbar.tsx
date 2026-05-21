@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Instagram, Linkedin, Menu, MessageCircle, X } from "lucide-react";
+import { ChevronDown, Instagram, Linkedin, Menu, MessageCircle, Moon, Sun, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import logo from "@/assets/logo.png";
+import logoDark from "@/assets/logo.png";
+import logoLight from "@/assets/logo-accione-dark.jpg";
 import { useScrolled } from "@/hooks/useScrolled";
 import { SITE_CONFIG } from "@/config/site";
+import { useTheme } from "@/context/ThemeContext";
 
 const SOCIAL_LINKS = [
   { label: "Instagram", href: SITE_CONFIG.socialLinks.instagram, icon: Instagram },
@@ -37,8 +39,8 @@ function DesktopNavLink({ to, label }: { to: string; label: string }) {
           "relative text-sm font-medium transition-colors duration-200",
           "after:absolute after:bottom-[-4px] after:left-0 after:h-px after:bg-[var(--accent)] after:transition-all after:duration-300",
           isActive
-            ? "text-white after:w-full"
-            : "text-white/70 hover:text-white after:w-0 hover:after:w-full",
+            ? "text-[#041A2A] dark:text-white after:w-full"
+            : "text-[#041A2A]/70 hover:text-[#041A2A] dark:text-white/70 dark:hover:text-white after:w-0 hover:after:w-full",
         ].join(" ")
       }
     >
@@ -52,13 +54,14 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
   const simulatorsActive = pathname.startsWith("/simuladores/");
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out ${
           scrolled
-            ? "border-b border-white/10 bg-black/95 shadow-lg shadow-black/20 backdrop-blur-md"
+            ? "border-b border-black/10 dark:border-white/10 bg-white/95 dark:bg-black/95 shadow-lg shadow-black/10 dark:shadow-black/20 backdrop-blur-md"
             : "bg-transparent"
         }`}
       >
@@ -76,9 +79,9 @@ export default function Navbar() {
           >
             <Link to="/">
               <img
-                src={logo}
+                src={theme === 'dark' ? logoDark : logoLight}
                 alt="Accione Investimentos"
-                className="h-20 w-auto object-contain"
+                className="h-14 w-auto object-contain"
               />
             </Link>
           </motion.div>
@@ -95,8 +98,8 @@ export default function Navbar() {
                 type="button"
                 className={`inline-flex items-center gap-1 text-sm font-medium transition-colors duration-200 ${
                   simulatorsActive
-                    ? "text-white"
-                    : "text-white/70 hover:text-white"
+                    ? "text-[#041A2A] dark:text-white"
+                    : "text-[#041A2A]/70 hover:text-[#041A2A] dark:text-white/70 dark:hover:text-white"
                 }`}
               >
                 Simuladores
@@ -106,7 +109,7 @@ export default function Navbar() {
                 />
               </button>
 
-              <div className="invisible absolute right-0 top-full mt-3 w-56 -translate-y-2 rounded-2xl border border-white/10 bg-[#0C2030] p-2 opacity-0 shadow-xl shadow-black/40 backdrop-blur-md transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              <div className="invisible absolute right-0 top-full mt-3 w-56 -translate-y-2 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-[#0C2030] p-2 opacity-0 shadow-xl shadow-black/10 dark:shadow-black/40 backdrop-blur-md transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
                 {SIMULATOR_LINKS.map((link) => (
                   <NavLink
                     key={link.to}
@@ -114,8 +117,8 @@ export default function Navbar() {
                     className={({ isActive }) =>
                       `block rounded-xl px-4 py-3 text-sm transition-colors duration-200 ${
                         isActive
-                          ? "bg-[var(--accent)]/12 text-white"
-                          : "text-white/70 hover:bg-white/5 hover:text-white"
+                          ? "bg-[var(--accent)]/12 text-[#041A2A] dark:text-white"
+                          : "text-[#041A2A]/70 hover:bg-black/5 hover:text-[#041A2A] dark:text-white/70 dark:hover:bg-white/5 dark:hover:text-white"
                       }`
                     }
                   >
@@ -126,7 +129,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Social icons + CTA desktop */}
+          {/* Social icons + theme toggle + CTA desktop */}
           <div className="hidden lg:flex lg:items-center lg:gap-3">
             {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
               <a
@@ -135,11 +138,19 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="p-1 text-white/50 transition-colors duration-200 hover:text-[var(--accent)]"
+                className="p-1 text-[#041A2A]/50 dark:text-white/50 transition-colors duration-200 hover:text-[var(--accent)]"
               >
                 <Icon className="h-4 w-4" />
               </a>
             ))}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
+              className="p-2 text-[#041A2A]/50 dark:text-white/50 transition-colors duration-200 hover:text-[var(--accent)]"
+            >
+              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             <a
               href={SITE_CONFIG.whatsappHref}
               target="_blank"
@@ -154,7 +165,7 @@ export default function Navbar() {
           {/* Hamburger */}
           <button
             type="button"
-            className="rounded-full border border-white/10 p-2 text-white transition-colors hover:border-white/25 lg:hidden"
+            className="rounded-full border border-black/10 dark:border-white/10 p-2 text-[#041A2A] dark:text-white transition-colors hover:border-black/25 dark:hover:border-white/25 lg:hidden"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           >
@@ -194,7 +205,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="border-t border-white/10 bg-black/95 px-4 py-5 backdrop-blur-md lg:hidden"
+              className="border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-black/95 px-4 py-5 backdrop-blur-md lg:hidden"
             >
               <div className="space-y-1">
                 {ALL_MOBILE_LINKS.map((link, index) => (
@@ -210,8 +221,8 @@ export default function Navbar() {
                       className={({ isActive }) =>
                         `block rounded-2xl px-4 py-3 text-sm transition-colors duration-200 ${
                           isActive
-                            ? "bg-[var(--accent)]/12 text-white"
-                            : "text-white/70 hover:bg-white/5 hover:text-white"
+                            ? "bg-[var(--accent)]/12 text-[#041A2A] dark:text-white"
+                            : "text-[#041A2A]/70 hover:bg-black/5 hover:text-[#041A2A] dark:text-white/70 dark:hover:bg-white/5 dark:hover:text-white"
                         }`
                       }
                     >
@@ -237,7 +248,7 @@ export default function Navbar() {
                   <MessageCircle className="h-4 w-4" />
                   WhatsApp
                 </a>
-                <div className="flex justify-center gap-5">
+                <div className="flex items-center justify-center gap-5">
                   {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
                     <a
                       key={label}
@@ -245,11 +256,19 @@ export default function Navbar() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="text-white/50 transition-colors hover:text-[var(--accent)]"
+                      className="text-[#041A2A]/50 dark:text-white/50 transition-colors hover:text-[var(--accent)]"
                     >
                       <Icon className="h-5 w-5" />
                     </a>
                   ))}
+                  <button
+                    type="button"
+                    onClick={toggleTheme}
+                    aria-label={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
+                    className="text-[#041A2A]/50 dark:text-white/50 transition-colors hover:text-[var(--accent)]"
+                  >
+                    {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                  </button>
                 </div>
               </motion.div>
             </motion.div>
