@@ -9,6 +9,8 @@ import { EconomicIndicatorsProvider } from '@/context/EconomicIndicatorsContext'
 const BlogPage = lazy(() => import('@/pages/BlogPage'))
 const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'))
 const ContatoPage = lazy(() => import('@/pages/ContatoPage'))
+const CprFPage = lazy(() => import('@/pages/CprFPage'))
+const CreditoPrivadoPage = lazy(() => import('@/pages/CreditoPrivadoPage'))
 const EmpreendimentoDetalhe = lazy(() => import('@/pages/EmpreendimentoDetalhe'))
 const Empreendimentos = lazy(() => import('@/pages/Empreendimentos'))
 const HomePage = lazy(() => import('@/pages/HomePage'))
@@ -46,6 +48,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/investimentos" element={<InvestimentosPage />} />
+            <Route path="/investimentos/cpr-f" element={<CprFPage />} />
+            <Route path="/investimentos/credito-privado" element={<CreditoPrivadoPage />} />
             <Route path="/empreendimentos" element={<Empreendimentos />} />
             <Route path="/empreendimentos/:slug" element={<EmpreendimentoDetalhe />} />
             <Route path="/indicadores" element={<IndicadoresPage />} />
