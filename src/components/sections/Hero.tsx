@@ -24,8 +24,8 @@ function CounterCard({ target, prefix = '', suffix = '', label, inView }: Counte
   const count = useCountUp(target, 1800, inView)
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-left">
-      <p className="text-2xl font-semibold text-white sm:text-3xl">
+    <div className="rounded-2xl border border-[#E5E5E5] bg-white p-4 text-left dark:border-white/10 dark:bg-white/[0.04]">
+      <p className="text-2xl font-semibold text-[#041A2A] dark:text-white sm:text-3xl">
         {prefix}
         {count}
         <span className="text-[var(--accent)]">{suffix}</span>
@@ -49,7 +49,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.96] text-white sm:text-6xl lg:text-7xl"
+            className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.96] text-[#041A2A] dark:text-white sm:text-6xl lg:text-7xl"
           >
             Viabilizamos projetos de vida através da alocação inteligente dos seus recursos financeiros.
           </motion.h1>
@@ -87,12 +87,12 @@ export default function Hero() {
           transition={{ duration: 0.65, delay: 0.2 }}
           className="surface-card p-6 sm:p-8"
         >
-          <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-5">
+          <div className="flex items-center justify-between gap-4 border-b border-[#E5E5E5] pb-5 dark:border-white/10">
             <div>
               <p className="text-sm uppercase tracking-[0.22em] text-[var(--text-muted)]">
                 Leitura de cenário
               </p>
-              <h2 className="mt-2 text-3xl font-semibold text-white">Acesso guiado a teses reais</h2>
+              <h2 className="mt-2 text-3xl font-semibold text-[#041A2A] dark:text-white">Acesso guiado a teses reais</h2>
             </div>
             <div className="hidden h-16 w-16 items-center justify-center rounded-full bg-[var(--accent)]/10 text-[var(--accent)] sm:flex">
               <ArrowRight size={24} />
@@ -115,7 +115,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.35 }}
-        className="relative z-10 border-t border-white/10 bg-[#0C2030]"
+        className="relative z-10 border-t border-[#E5E5E5] bg-white dark:border-white/10 dark:bg-[#0C2030]"
       >
         <div className="section-container py-8">
           <div className="grid grid-cols-2 lg:grid-cols-4">
@@ -128,7 +128,7 @@ export default function Hero() {
                   i === 2 ? 'lg:border-l lg:border-[var(--accent)]/35' : '',
                 ].join(' ')}
               >
-                <p className="font-display text-4xl font-semibold text-white sm:text-5xl">
+                <p className="font-display text-4xl font-semibold text-[#041A2A] dark:text-white sm:text-5xl">
                   {m.valor}
                 </p>
                 <p className="mt-1 text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">

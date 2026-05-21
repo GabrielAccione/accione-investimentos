@@ -39,7 +39,7 @@ export default function BlogPostPage() {
             {post.content.map((section, index) => (
               <section key={`${post.slug}-${index}`}>
                 {section.heading ? (
-                  <h2 className="text-4xl font-semibold text-white">{section.heading}</h2>
+                  <h2 className="text-4xl font-semibold text-[#041A2A] dark:text-white">{section.heading}</h2>
                 ) : null}
                 <div className="mt-4 space-y-4 text-base leading-relaxed text-[var(--text-secondary)]">
                   {section.paragraphs.map((paragraph) => (

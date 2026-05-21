@@ -18,13 +18,13 @@ export default function IndicatorCard({ indicator }: IndicatorCardProps) {
       ? 'text-emerald-300 bg-emerald-400/10 border-emerald-400/20'
       : tone === 'negative'
         ? 'text-rose-300 bg-rose-400/10 border-rose-400/20'
-        : 'text-slate-300 bg-white/5 border-white/10'
+        : 'text-[#484949] bg-[#F7F7F7] border-[#E5E5E5] dark:text-slate-300 dark:bg-white/5 dark:border-white/10'
 
   const VariationIcon =
     tone === 'positive' ? ArrowUpRight : tone === 'negative' ? ArrowDownRight : ArrowRight
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm transition-colors duration-300 hover:border-[var(--accent)]/45">
+    <div className="rounded-2xl border border-[#E5E5E5] bg-white p-5 backdrop-blur-sm transition-colors duration-300 hover:border-[var(--accent)]/45 dark:border-white/10 dark:bg-[#0C2030]">
       <div className="flex items-start gap-4">
         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[var(--accent)]/12 text-[var(--accent)]">
           <Icon size={24} />

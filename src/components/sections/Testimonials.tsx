@@ -97,7 +97,7 @@ export default function Testimonials() {
                   aria-label={`Ir para depoimento ${i + 1}`}
                   onClick={() => setStart(i)}
                   className={`h-2 rounded-full transition-all duration-300 ${
-                    i === start ? 'w-8 bg-[var(--accent)]' : 'w-2 bg-white/20'
+                    i === start ? 'w-8 bg-[var(--accent)]' : 'w-2 bg-[#D0D0D0] dark:bg-white/20'
                   }`}
                 />
               ))}
@@ -107,7 +107,7 @@ export default function Testimonials() {
                 type="button"
                 onClick={prev}
                 aria-label="Anterior"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition-colors hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D0D0D0] text-[#484949] transition-colors hover:border-[var(--accent)]/40 hover:text-[var(--accent)] dark:border-white/15 dark:text-white/60"
               >
                 <ChevronLeft size={18} />
               </button>
@@ -115,7 +115,7 @@ export default function Testimonials() {
                 type="button"
                 onClick={next}
                 aria-label="Próximo"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/60 transition-colors hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D0D0D0] text-[#484949] transition-colors hover:border-[var(--accent)]/40 hover:text-[var(--accent)] dark:border-white/15 dark:text-white/60"
               >
                 <ChevronRight size={18} />
               </button>

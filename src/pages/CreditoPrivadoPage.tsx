@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
+import creditoPrivadoImage from '@/assets/Investimentos/credito-privado.png'
 
 const STEPS = [
   {
@@ -65,9 +66,13 @@ export default function CreditoPrivadoPage() {
   return (
     <>
       {/* Hero */}
-      <section className="hero-gradient relative overflow-hidden pt-24">
-        <div className="pointer-events-none absolute left-[12%] top-24 h-48 w-48 rounded-full bg-[var(--accent)]/10 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-10 right-[10%] h-56 w-56 rounded-full bg-white/5 blur-3xl" />
+      <section className="relative overflow-hidden pt-24">
+        <img
+          src={creditoPrivadoImage}
+          alt="CrÃ©dito Privado"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#041A2A] via-[#041A2A]/75 to-[#041A2A]/20" />
         <div className="section-container relative z-10 py-16 sm:py-20">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -76,7 +81,7 @@ export default function CreditoPrivadoPage() {
           >
             <Link
               to="/investimentos"
-              className="inline-flex items-center gap-1 text-sm text-[var(--text-muted)] transition-colors hover:text-white"
+              className="inline-flex items-center gap-1 text-sm text-white/70 transition-colors hover:text-white"
             >
               <ChevronLeft size={15} />
               Investimentos
@@ -84,10 +89,10 @@ export default function CreditoPrivadoPage() {
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="section-tag">Renda Fixa Corporativa</span>
             </div>
-            <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight text-[var(--text-primary)] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
               Crédito Privado
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
               Diversifique com renda fixa corporativa de alta qualidade.
             </p>
           </motion.div>

@@ -29,7 +29,7 @@ function RouteFallback() {
           <p className="text-sm uppercase tracking-[0.16em] text-[var(--text-muted)]">
             Carregando conteúdo
           </p>
-          <h1 className="mt-4 text-4xl font-semibold text-white">
+          <h1 className="mt-4 text-4xl font-semibold text-[#041A2A] dark:text-white">
             Preparando a próxima página.
           </h1>
         </div>

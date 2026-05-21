@@ -1,4 +1,3 @@
-import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import PageHero from "@/components/ui/PageHero";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -51,34 +50,33 @@ export default function InvestimentosPage() {
             {CARDS.map(
               ({ image, title, subtitle, description, badge, href }, i) => (
                 <ScrollReveal key={href} delay={i * 0.1}>
-                  <div className="surface-card flex h-full flex-col p-7 sm:p-8">
-                    <div className="flex items-center justify-between">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--accent)]/12">
+                  <Link to={href} className="group block h-full">
+                    <article className="surface-card flex h-full flex-col overflow-hidden transition-transform duration-300 group-hover:-translate-y-1">
+                      <div className="relative h-48 overflow-hidden">
                         <img
                           src={image}
                           alt={title}
-                          className="h-8 w-8 object-contain"
+                          className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#041A2A] via-[#041A2A]/60 to-transparent" />
+                        <div className="absolute bottom-0 p-6">
+                          <span className="mb-3 inline-flex rounded-full bg-[#A26547]/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white">
+                            {badge}
+                          </span>
+                          <h2 className="text-xl font-bold text-white">{title}</h2>
+                          <p className="mt-1 text-sm text-white/70">{subtitle}</p>
+                        </div>
                       </div>
-                      <span className="section-tag">{badge}</span>
-                    </div>
-                    <h2 className="mt-5 text-2xl font-semibold text-white">
-                      {title}
-                    </h2>
-                    <p className="mt-0.5 text-sm text-[var(--text-muted)]">
-                      {subtitle}
-                    </p>
-                    <p className="mt-4 flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">
-                      {description}
-                    </p>
-                    <Link
-                      to={href}
-                      className="mt-7 inline-flex items-center gap-2 self-start rounded-full border border-[var(--accent)]/45 px-6 py-2.5 text-sm font-medium text-[var(--accent)] transition-all duration-300 hover:bg-[var(--accent)]/10 hover:scale-105 active:scale-95"
-                    >
-                      Conhecer produto
-                      <ChevronRight size={16} />
-                    </Link>
-                  </div>
+                      <div className="flex flex-1 flex-col p-6 sm:p-7">
+                        <p className="flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">
+                          {description}
+                        </p>
+                        <span className="mt-7 inline-flex self-start rounded-full border border-[#041A2A] px-6 py-2.5 text-sm font-medium text-[#041A2A] transition-colors group-hover:border-[#A26547] group-hover:text-[#A26547] dark:border-white dark:text-white">
+                          Conhecer produto
+                        </span>
+                      </div>
+                    </article>
+                  </Link>
                 </ScrollReveal>
               ),
             )}

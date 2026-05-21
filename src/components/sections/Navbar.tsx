@@ -39,8 +39,8 @@ function DesktopNavLink({ to, label }: { to: string; label: string }) {
           "relative text-sm font-medium transition-colors duration-200",
           "after:absolute after:bottom-[-4px] after:left-0 after:h-px after:bg-[var(--accent)] after:transition-all after:duration-300",
           isActive
-            ? "text-[#041A2A] dark:text-white after:w-full"
-            : "text-[#041A2A]/70 hover:text-[#041A2A] dark:text-white/70 dark:hover:text-white after:w-0 hover:after:w-full",
+            ? "text-[#E0E0E0] dark:text-white after:w-full"
+            : "text-[#E0E0E0] hover:text-white dark:text-white/70 dark:hover:text-white after:w-0 hover:after:w-full",
         ].join(" ")
       }
     >
@@ -61,8 +61,8 @@ export default function Navbar() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out ${
           scrolled
-            ? "border-b border-black/10 dark:border-white/10 bg-white/95 dark:bg-black/95 shadow-lg shadow-black/10 dark:shadow-black/20 backdrop-blur-md"
-            : "bg-transparent"
+            ? "border-b border-black/10 dark:border-white/10 bg-[#2C2C2C]/95 dark:bg-black/95 shadow-lg shadow-black/10 dark:shadow-black/20 backdrop-blur-md"
+            : "bg-[#2C2C2C]/80 backdrop-blur-md dark:bg-transparent dark:backdrop-blur-none"
         }`}
       >
         <nav
@@ -82,6 +82,7 @@ export default function Navbar() {
                 src={theme === 'dark' ? logoDark : logoLight}
                 alt="Accione Investimentos"
                 className="h-14 w-auto object-contain"
+                style={theme === 'light' ? { mixBlendMode: 'multiply' } : undefined}
               />
             </Link>
           </motion.div>
@@ -98,8 +99,8 @@ export default function Navbar() {
                 type="button"
                 className={`inline-flex items-center gap-1 text-sm font-medium transition-colors duration-200 ${
                   simulatorsActive
-                    ? "text-[#041A2A] dark:text-white"
-                    : "text-[#041A2A]/70 hover:text-[#041A2A] dark:text-white/70 dark:hover:text-white"
+                    ? "text-[#E0E0E0] dark:text-white"
+                    : "text-[#E0E0E0] hover:text-white dark:text-white/70 dark:hover:text-white"
                 }`}
               >
                 Simuladores
@@ -109,7 +110,7 @@ export default function Navbar() {
                 />
               </button>
 
-              <div className="invisible absolute right-0 top-full mt-3 w-56 -translate-y-2 rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-[#0C2030] p-2 opacity-0 shadow-xl shadow-black/10 dark:shadow-black/40 backdrop-blur-md transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              <div className="invisible absolute right-0 top-full mt-3 w-56 -translate-y-2 rounded-2xl border border-[#E5E5E5] bg-white p-2 opacity-0 shadow-xl shadow-black/10 backdrop-blur-md transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 dark:border-white/10 dark:bg-[#0C2030] dark:shadow-black/40">
                 {SIMULATOR_LINKS.map((link) => (
                   <NavLink
                     key={link.to}
@@ -118,7 +119,7 @@ export default function Navbar() {
                       `block rounded-xl px-4 py-3 text-sm transition-colors duration-200 ${
                         isActive
                           ? "bg-[var(--accent)]/12 text-[#041A2A] dark:text-white"
-                          : "text-[#041A2A]/70 hover:bg-black/5 hover:text-[#041A2A] dark:text-white/70 dark:hover:bg-white/5 dark:hover:text-white"
+                          : "text-[#484949] hover:bg-black/5 hover:text-[#041A2A] dark:text-white/70 dark:hover:bg-white/5 dark:hover:text-white"
                       }`
                     }
                   >
@@ -138,7 +139,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="p-1 text-[#041A2A]/50 dark:text-white/50 transition-colors duration-200 hover:text-[var(--accent)]"
+                className="p-1 text-[#9E9E9E] transition-colors duration-200 hover:text-[#A26547] dark:text-white/50"
               >
                 <Icon className="h-4 w-4" />
               </a>
@@ -147,7 +148,7 @@ export default function Navbar() {
               type="button"
               onClick={toggleTheme}
               aria-label={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
-              className="p-2 text-[#041A2A]/50 dark:text-white/50 transition-colors duration-200 hover:text-[var(--accent)]"
+              className="p-2 text-[#9E9E9E] transition-colors duration-200 hover:text-[#A26547] dark:text-white/50"
             >
               {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
@@ -165,7 +166,7 @@ export default function Navbar() {
           {/* Hamburger */}
           <button
             type="button"
-            className="rounded-full border border-black/10 dark:border-white/10 p-2 text-[#041A2A] dark:text-white transition-colors hover:border-black/25 dark:hover:border-white/25 lg:hidden"
+            className="rounded-full border border-white/20 p-2 text-[#E0E0E0] transition-colors hover:border-white/35 dark:border-white/10 dark:text-white dark:hover:border-white/25 lg:hidden"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           >
@@ -205,7 +206,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-black/95 px-4 py-5 backdrop-blur-md lg:hidden"
+              className="border-t border-black/10 bg-[#2C2C2C]/95 px-4 py-5 backdrop-blur-md dark:border-white/10 dark:bg-black/95 lg:hidden"
             >
               <div className="space-y-1">
                 {ALL_MOBILE_LINKS.map((link, index) => (
@@ -221,8 +222,8 @@ export default function Navbar() {
                       className={({ isActive }) =>
                         `block rounded-2xl px-4 py-3 text-sm transition-colors duration-200 ${
                           isActive
-                            ? "bg-[var(--accent)]/12 text-[#041A2A] dark:text-white"
-                            : "text-[#041A2A]/70 hover:bg-black/5 hover:text-[#041A2A] dark:text-white/70 dark:hover:bg-white/5 dark:hover:text-white"
+                            ? "bg-[var(--accent)]/12 text-[#E0E0E0] dark:text-white"
+                            : "text-[#E0E0E0] hover:bg-white/5 hover:text-white dark:text-white/70 dark:hover:text-white"
                         }`
                       }
                     >
@@ -256,7 +257,7 @@ export default function Navbar() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="text-[#041A2A]/50 dark:text-white/50 transition-colors hover:text-[var(--accent)]"
+                      className="text-[#9E9E9E] transition-colors hover:text-[#A26547] dark:text-white/50"
                     >
                       <Icon className="h-5 w-5" />
                     </a>
@@ -265,7 +266,7 @@ export default function Navbar() {
                     type="button"
                     onClick={toggleTheme}
                     aria-label={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
-                    className="text-[#041A2A]/50 dark:text-white/50 transition-colors hover:text-[var(--accent)]"
+                    className="text-[#9E9E9E] transition-colors hover:text-[#A26547] dark:text-white/50"
                   >
                     {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                   </button>

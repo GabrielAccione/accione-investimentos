@@ -6,7 +6,7 @@
   /* ── Light mode (default) ── */
   :root {
     --bg-primary: #FFFFFF;
-    --bg-secondary: #F5F5F5;
+    --bg-secondary: #F7F7F7;
     --bg-header: #FFFFFF;
     --bg-footer: #F0F0F0;
     --accent: #A26547;
@@ -89,12 +89,20 @@
 
   .btn-ghost {
     @apply px-6 py-3 rounded-full font-medium transition-all duration-300 inline-block;
-    border: 1px solid color-mix(in srgb, var(--text-primary) 20%, transparent);
-    color: var(--text-primary);
+    border: 1px solid #041A2A;
+    color: #041A2A;
+  }
+  .dark .btn-ghost {
+    border-color: #FFFFFF;
+    color: #FFFFFF;
   }
   .btn-ghost:hover {
-    background-color: var(--text-primary);
-    color: var(--bg-primary);
+    background-color: #041A2A;
+    color: #FFFFFF;
+  }
+  .dark .btn-ghost:hover {
+    background-color: #FFFFFF;
+    color: #041A2A;
   }
 
   .section-container {
@@ -114,22 +122,19 @@
   }
 
   .surface-card {
-    @apply rounded-[28px] border backdrop-blur-sm;
-    border-color: var(--surface-border);
-    background-color: var(--surface-bg);
+    @apply rounded-[28px] border border-[#E5E5E5] bg-white backdrop-blur-sm dark:border-white/10 dark:bg-[#0C2030];
   }
 
   .input-base {
-    @apply w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors duration-200;
-    color: var(--text-primary);
-    border-color: color-mix(in srgb, var(--text-primary) 12%, transparent);
-    background-color: color-mix(in srgb, var(--text-primary) 3%, transparent);
+    @apply w-full rounded-2xl border border-[#D0D0D0] bg-white px-4 py-3 text-sm text-[#041A2A] outline-none transition-colors duration-200 dark:border-white/10 dark:bg-[#0C2030] dark:text-white;
   }
   .input-base::placeholder {
-    color: var(--text-muted);
+    color: #9E9E9E;
+  }
+  .dark .input-base::placeholder {
+    color: #69727D;
   }
   .input-base:focus {
     border-color: var(--accent);
-    background-color: color-mix(in srgb, var(--text-primary) 5%, transparent);
   }
 }

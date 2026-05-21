@@ -5,7 +5,7 @@ export default function NotFoundPage() {
     <section className="hero-gradient flex min-h-screen items-center pt-16">
       <div className="section-container text-center">
         <span className="section-tag">404</span>
-        <h1 className="mt-6 text-5xl font-semibold text-white sm:text-6xl">
+        <h1 className="mt-6 text-5xl font-semibold text-[#041A2A] dark:text-white sm:text-6xl">
           Página não encontrada.
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-[var(--text-secondary)]">

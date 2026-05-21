@@ -9,7 +9,7 @@ interface EconomicIndicatorsSectionProps {
 }
 
 function SkeletonCard() {
-  return <div className="h-44 animate-pulse rounded-2xl border border-white/10 bg-white/[0.03]" />
+  return <div className="h-44 animate-pulse rounded-2xl border border-[#E5E5E5] bg-white dark:border-white/10 dark:bg-white/[0.03]" />
 }
 
 export default function EconomicIndicatorsSection({

@@ -41,7 +41,7 @@ export default function SobrePage() {
       />
 
       {/* Founder — two-column: photo | content */}
-      <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
+      <section className="bg-[#F7F7F7] py-20 dark:bg-[#041A2A] sm:py-24">
         <div className="section-container grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
 
           {/* Left — photo */}
@@ -56,7 +56,7 @@ export default function SobrePage() {
           {/* Right — content */}
           <ScrollReveal direction="left" delay={0.1}>
             <span className="section-tag">Fundador</span>
-            <h2 className="mt-5 text-4xl font-semibold text-white">{SITE_CONFIG.founder.name}</h2>
+            <h2 className="mt-5 text-4xl font-semibold text-[#041A2A] dark:text-white">{SITE_CONFIG.founder.name}</h2>
             <p className="mt-1 text-sm font-medium text-[var(--accent)]">{SITE_CONFIG.founder.role}</p>
 
             <div className="mt-6 space-y-4 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
@@ -71,7 +71,7 @@ export default function SobrePage() {
             <div className="mt-8 flex flex-col gap-3">
               <a
                 href={`mailto:${SITE_CONFIG.email}`}
-                className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-white"
+                className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-[#A26547]"
               >
                 <Mail size={15} />
                 {SITE_CONFIG.email}
@@ -80,7 +80,7 @@ export default function SobrePage() {
                 href={SITE_CONFIG.whatsappHref}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-white"
+                className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-[#A26547]"
               >
                 <MessageCircle size={15} />
                 {SITE_CONFIG.whatsappDisplay}
@@ -88,18 +88,18 @@ export default function SobrePage() {
             </div>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <div className="rounded-2xl border border-[#E5E5E5] bg-white p-5 dark:border-white/10 dark:bg-[#0C2030]">
                 <Building2 size={20} className="text-[var(--accent)]" />
-                <h3 className="mt-3 text-base font-semibold text-white">
+                <h3 className="mt-3 text-base font-semibold text-[#041A2A] dark:text-white">
                   Gestão Financeira de Empreendimentos Imobiliários
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-[var(--text-muted)]">
                   Investimentos em parceria com construtoras renomadas no modelo SPE, a preço de custo, com transparência e rentabilidade.
                 </p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <div className="rounded-2xl border border-[#E5E5E5] bg-white p-5 dark:border-white/10 dark:bg-[#0C2030]">
                 <Gem size={20} className="text-[var(--accent)]" />
-                <h3 className="mt-3 text-base font-semibold text-white">
+                <h3 className="mt-3 text-base font-semibold text-[#041A2A] dark:text-white">
                   Investimentos Alternativos de Qualidade
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-[var(--text-muted)]">
@@ -112,7 +112,7 @@ export default function SobrePage() {
       </section>
 
       {/* Partner */}
-      <section className="bg-[var(--bg-primary)] pb-12 sm:pb-16">
+      <section className="bg-[#F7F7F7] pb-12 dark:bg-[#041A2A] sm:pb-16">
         <div className="section-container">
           <ScrollReveal direction="up">
             <article className="surface-card p-6 sm:p-8">
@@ -120,7 +120,7 @@ export default function SobrePage() {
                 <Building2 size={20} />
                 <span className="text-sm font-semibold uppercase tracking-[0.16em]">Parceiro estratégico</span>
               </div>
-              <h2 className="mt-5 text-3xl font-semibold text-white">{SITE_CONFIG.partner.name}</h2>
+              <h2 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">{SITE_CONFIG.partner.name}</h2>
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)]">
                 {SITE_CONFIG.partner.description}
               </p>
@@ -130,7 +130,7 @@ export default function SobrePage() {
       </section>
 
       {/* Values */}
-      <section className="bg-[var(--bg-secondary)] py-20 sm:py-24">
+      <section className="bg-white py-20 dark:bg-[#0C2030] sm:py-24">
         <div className="section-container grid gap-5 md:grid-cols-3">
           {VALUE_CARDS.map((card, index) => {
             const Icon = card.icon
@@ -147,7 +147,7 @@ export default function SobrePage() {
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent)]/12 text-[var(--accent)]">
                   <Icon size={22} />
                 </div>
-                <h2 className="mt-5 text-3xl font-semibold text-white">{card.title}</h2>
+                <h2 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">{card.title}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
                   {card.description}
                 </p>

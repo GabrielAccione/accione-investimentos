@@ -46,11 +46,11 @@ export default function Products({ variant = 'home' }: ProductsProps) {
                   className={`w-full rounded-[24px] border p-5 text-left transition-colors duration-300 ${
                     isActive
                       ? 'border-[var(--accent)]/45 bg-[var(--accent)]/12'
-                      : 'border-white/10 bg-white/[0.03] hover:border-white/20'
+                      : 'border-[#E5E5E5] bg-white hover:border-[var(--accent)]/25 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20'
                   }`}
                 >
                   <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/5 text-[var(--accent)]">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--accent)]/12 text-[var(--accent)] dark:bg-white/5">
                       <ProductIcon size={22} />
                     </div>
                     <div>
@@ -79,7 +79,7 @@ export default function Products({ variant = 'home' }: ProductsProps) {
                   {product.stats?.map((stat) => (
                     <span
                       key={stat.label}
-                      className="rounded-full border border-white/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]"
+                      className="rounded-full border border-[#E5E5E5] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--text-muted)] dark:border-white/10"
                     >
                       {stat.label}: {stat.value}
                     </span>

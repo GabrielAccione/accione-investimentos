@@ -65,7 +65,7 @@ function EmpreendimentoCard({ item, index }: { item: EmpreendimentoData; index: 
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-1">
-          <h3 className="font-display text-xl font-bold text-white mb-2">{item.name}</h3>
+          <h3 className="font-display text-xl font-bold text-[#041A2A] dark:text-white mb-2">{item.name}</h3>
 
           <div className="flex items-start gap-1.5 text-[var(--text-muted)] text-sm mb-3">
             <MapPin size={14} className="mt-0.5 shrink-0 text-[var(--accent)]" />
@@ -111,7 +111,7 @@ export default function Empreendimentos() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display text-4xl md:text-6xl font-bold text-white leading-tight max-w-3xl mx-auto"
+            className="font-display text-4xl md:text-6xl font-bold text-[#041A2A] dark:text-white leading-tight max-w-3xl mx-auto"
           >
             Nossos{' '}
             <span className="text-gradient">Empreendimentos</span>

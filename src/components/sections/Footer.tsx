@@ -20,7 +20,7 @@ export default function Footer() {
   const { theme } = useTheme()
 
   return (
-    <footer className="bg-[var(--bg-footer)] pt-16 pb-8">
+    <footer className="bg-[#F0F0F0] pt-16 pb-8 dark:bg-[#1D1D1D]">
       <div className="section-container">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.9fr)_minmax(0,0.9fr)]">
           <div>
@@ -28,19 +28,20 @@ export default function Footer() {
               src={theme === 'dark' ? logoDark : logoLight}
               alt="Accione Investimentos"
               className="h-10 w-auto object-contain"
+              style={theme === 'light' ? { mixBlendMode: 'multiply' } : undefined}
             />
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-[#484949] dark:text-[#69727D]">
               A Accione Investimentos aproxima investidores de oportunidades
               alternativas com diligência, clareza e conversa patrimonial mais
               profunda.
             </p>
-            <p className="mt-4 text-xs text-[var(--text-muted)]">
+            <p className="mt-4 text-xs text-[#484949] dark:text-[#69727D]">
               CNPJ 53.404.254/0001-31
             </p>
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-[#041A2A] dark:text-white">
               Navegação
             </h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -48,7 +49,7 @@ export default function Footer() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
+                  className="text-sm text-[#041A2A] transition-colors hover:text-[#A26547] dark:text-white"
                 >
                   {link.label}
                 </Link>
@@ -57,17 +58,17 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-[#041A2A] dark:text-white">
               Contato
             </h2>
-            <div className="mt-4 space-y-3 text-sm text-[var(--text-muted)]">
+            <div className="mt-4 space-y-3 text-sm text-[#484949] dark:text-[#69727D]">
               <p>{SITE_CONFIG.email}</p>
               <p>{SITE_CONFIG.address}</p>
               <a
                 href={SITE_CONFIG.whatsappHref}
                 target="_blank"
                 rel="noreferrer"
-                className="block transition-colors hover:text-[var(--text-primary)]"
+                className="block transition-colors hover:text-[#A26547]"
               >
                 WhatsApp: {SITE_CONFIG.whatsappDisplay}
               </a>
@@ -77,7 +78,7 @@ export default function Footer() {
 
         <div className="section-divider mt-10" />
 
-        <div className="mt-6 flex flex-col gap-2 text-xs text-[var(--text-muted)] md:flex-row md:items-center md:justify-between">
+        <div className="mt-6 flex flex-col gap-2 text-xs text-[#484949] dark:text-[#69727D] md:flex-row md:items-center md:justify-between">
           <span>
             © {new Date().getFullYear()} Accione Investimentos. Todos os
             direitos reservados.

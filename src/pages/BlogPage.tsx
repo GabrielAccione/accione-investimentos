@@ -43,8 +43,8 @@ export default function BlogPage() {
                 onClick={() => setActiveCategory(category)}
                 className={`rounded-full border px-4 py-2 text-sm transition-colors duration-300 ${
                   activeCategory === category
-                    ? 'border-[var(--accent)]/40 bg-[var(--accent)]/12 text-white'
-                    : 'border-white/10 text-[var(--text-secondary)] hover:border-white/20'
+                    ? 'border-[var(--accent)]/40 bg-[var(--accent)]/12 text-[#041A2A] dark:text-white'
+                    : 'border-[#E5E5E5] text-[var(--text-secondary)] hover:border-[var(--accent)]/30 dark:border-white/10 dark:hover:border-white/20'
                 }`}
               >
                 {category}
@@ -62,7 +62,7 @@ export default function BlogPage() {
                     <span>{post.category}</span>
                     <span>{post.readTime}</span>
                   </div>
-                  <h2 className="mt-4 text-4xl font-semibold text-white">{post.title}</h2>
+                  <h2 className="mt-4 text-4xl font-semibold text-[#041A2A] dark:text-white">{post.title}</h2>
                   <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
                     {post.excerpt}
                   </p>

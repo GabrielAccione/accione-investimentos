@@ -48,14 +48,14 @@ export default function About() {
               <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--accent)]/15 text-3xl font-semibold text-[var(--accent)]">
                 G
               </div>
-              <h3 className="mt-5 text-3xl font-semibold text-white">{SITE_CONFIG.founder.name}</h3>
+              <h3 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">{SITE_CONFIG.founder.name}</h3>
               <p className="mt-1 text-sm text-[var(--accent)]">{SITE_CONFIG.founder.role}</p>
               <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
                 {SITE_CONFIG.founder.bio}
               </p>
               <a
                 href={SITE_CONFIG.socialLinks.linkedin}
-                className="mt-5 inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] transition-colors hover:text-white"
+                className="mt-5 inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] transition-colors hover:text-[#A26547]"
               >
                 <Linkedin size={18} />
                 LinkedIn
@@ -69,7 +69,7 @@ export default function About() {
                   Parceiro
                 </span>
               </div>
-              <h4 className="mt-4 text-2xl font-semibold text-white">{SITE_CONFIG.partner.name}</h4>
+              <h4 className="mt-4 text-2xl font-semibold text-[#041A2A] dark:text-white">{SITE_CONFIG.partner.name}</h4>
               <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
                 {SITE_CONFIG.partner.description}
               </p>

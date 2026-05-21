@@ -183,7 +183,7 @@ function ContatoEmpreendimento({ name }: { name: string }) {
   }
 
   const inputClass =
-    'w-full bg-[var(--bg-secondary)] border border-[#484949]/30 focus:border-[var(--accent)] text-white placeholder-[var(--text-muted)] rounded-lg px-4 py-3 text-sm outline-none transition-colors duration-200'
+    'w-full rounded-lg border border-[#D0D0D0] bg-white px-4 py-3 text-sm text-[#041A2A] placeholder-[#9E9E9E] outline-none transition-colors duration-200 focus:border-[var(--accent)] dark:border-white/10 dark:bg-[#0C2030] dark:text-white dark:placeholder-[#69727D]'
 
   return (
     <section
@@ -201,7 +201,7 @@ function ContatoEmpreendimento({ name }: { name: string }) {
           <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
             Próximo passo
           </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
             Quero investir em {name}
           </h2>
           <p className="text-[var(--text-secondary)] mt-3 text-sm leading-relaxed">
@@ -216,7 +216,7 @@ function ContatoEmpreendimento({ name }: { name: string }) {
             className="text-center py-10"
           >
             <CheckCircle size={48} className="text-[var(--accent)] mx-auto mb-4" />
-            <h3 className="font-display text-2xl font-bold text-white mb-2">
+            <h3 className="font-display text-2xl font-bold text-[#041A2A] dark:text-white mb-2">
               Mensagem enviada!
             </h3>
             <p className="text-[var(--text-secondary)] text-sm">
@@ -289,7 +289,7 @@ export default function EmpreendimentoDetalhe() {
   if (!empreendimento) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--bg-primary)] pt-16 text-center px-4">
-        <h1 className="font-display text-4xl font-bold text-white mb-4">Empreendimento não encontrado</h1>
+        <h1 className="font-display text-4xl font-bold text-[#041A2A] dark:text-white mb-4">Empreendimento não encontrado</h1>
         <p className="text-[var(--text-secondary)] mb-8">O empreendimento que você procura não existe ou foi removido.</p>
         <Link to="/empreendimentos" className="btn-accent">
           Ver todos os empreendimentos
@@ -361,21 +361,21 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               O Projeto
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3 mb-5">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3 mb-5">
               {name}
             </h2>
             <p className="text-[var(--text-secondary)] leading-relaxed text-base">
               {fullDescription}
             </p>
             <p className="mt-4 text-xs text-[var(--text-muted)]">
-              Em parceria com <span className="text-white/70">{parceria}</span>
+              Em parceria com <span className="text-[#041A2A] dark:text-white/70">{parceria}</span>
             </p>
 
             <div className="mt-8 grid grid-cols-2 gap-4">
               {destaques.map((d: Destaque) => (
-                <div key={d.label} className="rounded-xl border border-white/10 p-4">
+                <div key={d.label} className="rounded-xl border border-[#E5E5E5] bg-white p-4 dark:border-white/10 dark:bg-transparent">
                   <span className="text-[var(--accent)] font-bold text-lg leading-none">{d.valor}</span>
-                  <p className="mt-1 text-sm text-white/60">{d.label}</p>
+                  <p className="mt-1 text-sm text-[#484949] dark:text-white/60">{d.label}</p>
                 </div>
               ))}
             </div>
@@ -417,7 +417,7 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Por que investir
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
               Diferenciais do investimento
             </h2>
           </motion.div>
@@ -437,7 +437,7 @@ export default function EmpreendimentoDetalhe() {
                   <div className="w-12 h-12 rounded-lg bg-[#A26547]/10 flex items-center justify-center mb-4">
                     <Icon size={22} className="text-[var(--accent)]" />
                   </div>
-                  <h3 className="font-semibold text-white text-base mb-2">{h.title}</h3>
+                  <h3 className="font-semibold text-[#041A2A] dark:text-white text-base mb-2">{h.title}</h3>
                   <p className="text-[var(--text-muted)] text-sm leading-relaxed">{h.description}</p>
                 </motion.div>
               )
@@ -461,7 +461,7 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Imagens
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">Galeria</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">Galeria</h2>
             <p className="text-[var(--text-muted)] text-sm mt-2">
               Clique em uma imagem para ampliar
             </p>
@@ -527,7 +527,7 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Dados do projeto
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
               Ficha Técnica
             </h2>
           </motion.div>
@@ -556,7 +556,7 @@ export default function EmpreendimentoDetalhe() {
                 <span className="text-[var(--text-muted)] text-xs font-medium uppercase tracking-wider sm:w-48 shrink-0">
                   {row.label}
                 </span>
-                <span className="text-white text-sm">{row.value}</span>
+                <span className="text-[#041A2A] dark:text-white text-sm">{row.value}</span>
               </div>
             ))}
           </motion.div>
@@ -578,7 +578,7 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Como funciona
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
               Modelo de Investimento — SPE
             </h2>
             <p className="text-[var(--text-secondary)] mt-4 max-w-2xl mx-auto text-sm leading-relaxed">
@@ -602,7 +602,7 @@ export default function EmpreendimentoDetalhe() {
                   <div className="w-12 h-12 rounded-lg bg-[#A26547]/10 flex items-center justify-center mb-4">
                     <Icon size={22} className="text-[var(--accent)]" />
                   </div>
-                  <h3 className="font-semibold text-white text-base mb-3">{card.title}</h3>
+                  <h3 className="font-semibold text-[#041A2A] dark:text-white text-base mb-3">{card.title}</h3>
                   <p className="text-[var(--text-muted)] text-sm leading-relaxed">{card.description}</p>
                 </motion.div>
               )
@@ -658,7 +658,7 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Onde fica
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
               Localização
             </h2>
           </motion.div>
@@ -687,7 +687,7 @@ export default function EmpreendimentoDetalhe() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="rounded-xl border border-[#484949]/20 bg-[var(--bg-primary)]/60 p-6"
             >
-              <h3 className="font-semibold text-white text-sm uppercase tracking-wider mb-5">
+              <h3 className="font-semibold text-[#041A2A] dark:text-white text-sm uppercase tracking-wider mb-5">
                 Pontos de interesse
               </h3>
               <ul className="flex flex-col gap-3">

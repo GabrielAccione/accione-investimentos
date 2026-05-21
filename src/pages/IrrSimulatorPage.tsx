@@ -23,13 +23,13 @@ function ComparisonBar({
     <div>
       <div className="mb-2 flex items-center justify-between text-sm text-[var(--text-secondary)]">
         <span>{label}</span>
-        <span className={accent ? 'text-white' : ''}>
+        <span className={accent ? 'text-[#A26547]' : ''}>
           {value === null ? 'N/D' : formatPercent(value, '% a.a.')}
         </span>
       </div>
-      <div className="h-3 rounded-full bg-white/5">
+      <div className="h-3 rounded-full bg-[#E5E5E5] dark:bg-white/5">
         <div
-          className={`h-3 rounded-full ${accent ? 'bg-[var(--accent)]' : 'bg-white/25'}`}
+          className={`h-3 rounded-full ${accent ? 'bg-[var(--accent)]' : 'bg-[#9E9E9E] dark:bg-white/25'}`}
           style={{ width: `${width}%` }}
         />
       </div>
@@ -89,13 +89,13 @@ export default function IrrSimulatorPage() {
       <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
         <div className="section-container grid gap-8 xl:grid-cols-[420px_minmax(0,1fr)]">
           <aside className="surface-card p-6 sm:p-8">
-            <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-amber-200">
+            <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-[#484949] dark:text-amber-200">
               <strong>Aviso importante:</strong> Os resultados apresentados são estimativas baseadas nos dados informados e em projeções matemáticas. Não constituem garantia de rentabilidade nem recomendação de investimento. Rentabilidade passada não garante resultados futuros.
             </div>
             <span className="mt-6 block section-tag">Entradas</span>
             <div className="mt-4 space-y-5">
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+                <span className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
                   Investimento inicial (R$)
                 </span>
                 <input
@@ -109,7 +109,7 @@ export default function IrrSimulatorPage() {
               </label>
 
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+                <span className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
                   Prazo (anos)
                 </span>
                 <input
@@ -124,21 +124,21 @@ export default function IrrSimulatorPage() {
 
               <div>
                 <div className="mb-3 flex items-center justify-between">
-                  <span className="text-sm font-medium text-[var(--text-secondary)]">
+                  <span className="text-sm font-medium text-[#041A2A] dark:text-white">
                     Fluxos anuais
                   </span>
                   <div className="flex gap-2">
                     <button
                       type="button"
                       onClick={() => setHorizon(String(parsedHorizon + 1))}
-                      className="rounded-full border border-white/10 px-3 py-1 text-xs text-[var(--text-secondary)] transition-colors hover:border-white/20 hover:text-white"
+                      className="rounded-full border border-[#041A2A] px-3 py-1 text-xs text-[#041A2A] transition-colors hover:border-[#A26547] hover:text-[#A26547] dark:border-white/10 dark:text-[var(--text-secondary)] dark:hover:border-white/20 dark:hover:text-white"
                     >
                       Adicionar ano
                     </button>
                     <button
                       type="button"
                       onClick={() => setHorizon(String(Math.max(parsedHorizon - 1, 1)))}
-                      className="rounded-full border border-white/10 px-3 py-1 text-xs text-[var(--text-secondary)] transition-colors hover:border-white/20 hover:text-white"
+                      className="rounded-full border border-[#041A2A] px-3 py-1 text-xs text-[#041A2A] transition-colors hover:border-[#A26547] hover:text-[#A26547] dark:border-white/10 dark:text-[var(--text-secondary)] dark:hover:border-white/20 dark:hover:text-white"
                     >
                       Remover ano
                     </button>
@@ -178,7 +178,7 @@ export default function IrrSimulatorPage() {
             <div className="grid gap-5 md:grid-cols-3">
               <article className="surface-card p-6">
                 <p className="text-xs font-normal uppercase tracking-[0.1em] text-[var(--text-muted)]">TIR</p>
-                <h2 className="mt-4 font-body text-[2.5rem] font-semibold tracking-normal tabular-nums text-white">
+                <h2 className="mt-4 font-body text-[2.5rem] font-semibold tracking-normal tabular-nums text-[#A26547]">
                   {irr === null ? 'N/D' : formatPercent(irr, '% a.a.')}
                 </h2>
               </article>
@@ -187,7 +187,7 @@ export default function IrrSimulatorPage() {
                 <p className="text-xs font-normal uppercase tracking-[0.1em] text-[var(--text-muted)]">
                   VPL
                 </p>
-                <h2 className="mt-4 font-body text-[2.5rem] font-semibold tracking-normal tabular-nums text-white">
+                <h2 className="mt-4 font-body text-[2.5rem] font-semibold tracking-normal tabular-nums text-[#A26547]">
                   {npv === null ? 'N/D' : formatCurrency(npv)}
                 </h2>
                 <p className="mt-3 text-[0.8rem] text-[var(--text-muted)]">
@@ -199,7 +199,7 @@ export default function IrrSimulatorPage() {
                 <p className="text-xs font-normal uppercase tracking-[0.1em] text-[var(--text-muted)]">
                   Payback
                 </p>
-                <h2 className="mt-4 font-body text-[2.5rem] font-semibold tracking-normal tabular-nums text-white">
+                <h2 className="mt-4 font-body text-[2.5rem] font-semibold tracking-normal tabular-nums text-[#A26547]">
                   {payback === null ? 'Não recupera' : `${formatNumber(payback)} anos`}
                 </h2>
               </article>
@@ -207,7 +207,7 @@ export default function IrrSimulatorPage() {
 
             <div className="surface-card p-6 sm:p-8">
               <span className="section-tag">Comparativo visual</span>
-              <h2 className="mt-4 text-4xl font-semibold text-white">
+              <h2 className="mt-4 text-4xl font-semibold text-[#041A2A] dark:text-white">
                 TIR da operação versus benchmarks atuais
               </h2>
               <div className="mt-8 space-y-5">

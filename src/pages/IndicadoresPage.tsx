@@ -43,7 +43,7 @@ export default function IndicadoresPage() {
         <div className="section-container grid gap-4 md:grid-cols-3">
           {CONTEXT_CARDS.map((card) => (
             <article key={card.title} className="surface-card p-6">
-              <h2 className="text-3xl font-semibold text-white">{card.title}</h2>
+              <h2 className="text-3xl font-semibold text-[#041A2A] dark:text-white">{card.title}</h2>
               <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
                 {card.description}
               </p>

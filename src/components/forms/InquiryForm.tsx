@@ -78,7 +78,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-300">
           <CheckCircle2 size={30} />
         </div>
-        <h3 className="mt-5 text-3xl font-semibold text-white">Obrigado!</h3>
+        <h3 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">Obrigado!</h3>
         <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
           Em breve entraremos em contato. Um consultor da Accione retornará para entender seu momento e apresentar as alternativas mais aderentes ao seu perfil.
         </p>
@@ -100,7 +100,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
     <form onSubmit={handleSubmit} noValidate className="surface-card p-6 sm:p-8">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
-          <label htmlFor="name" className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+          <label htmlFor="name" className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
             Nome
           </label>
           <input
@@ -113,7 +113,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
         </div>
 
         <div>
-          <label htmlFor="email" className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
             E-mail
           </label>
           <input
@@ -126,7 +126,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
         </div>
 
         <div>
-          <label htmlFor="phone" className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+          <label htmlFor="phone" className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
             Telefone
           </label>
           <input
@@ -139,7 +139,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor="message" className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+          <label htmlFor="message" className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
             Mensagem
           </label>
           <textarea

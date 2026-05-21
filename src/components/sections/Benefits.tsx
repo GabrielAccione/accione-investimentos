@@ -28,7 +28,7 @@ export default function Benefits() {
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent)]/12 text-[var(--accent)]">
                   <Icon size={24} />
                 </div>
-                <h3 className="mt-5 text-3xl font-semibold text-white">{benefit.title}</h3>
+                <h3 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">{benefit.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
                   {benefit.description}
                 </p>

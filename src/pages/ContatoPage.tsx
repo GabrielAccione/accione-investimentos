@@ -14,7 +14,7 @@ const INFO_ITEMS = [
 
 export default function ContatoPage() {
   return (
-    <section className="hero-gradient relative min-h-screen overflow-hidden pt-24">
+    <section className="relative min-h-screen overflow-hidden bg-[#F7F7F7] pt-24 dark:bg-[#041A2A]">
       {/* Background blobs */}
       <div className="pointer-events-none absolute left-[12%] top-32 h-64 w-64 rounded-full bg-[var(--accent)]/10 blur-3xl" />
       <div className="pointer-events-none absolute bottom-24 right-[10%] h-56 w-56 rounded-full bg-white/5 blur-3xl" />
@@ -49,7 +49,7 @@ export default function ContatoPage() {
           className="mt-8 w-full max-w-xl rounded-xl border-l-4 py-4 pl-5 pr-4 text-left"
           style={{ borderLeftColor: '#A26547', background: 'rgba(162, 101, 71, 0.08)' }}
         >
-          <p className="text-sm leading-relaxed text-white/70">
+          <p className="text-sm leading-relaxed text-[#484949] dark:text-[#69727D]">
             ⚠️ Nosso atendimento é realizado exclusivamente com horário marcado.
           </p>
         </motion.div>
@@ -73,7 +73,7 @@ export default function ContatoPage() {
 
           <a
             href={`mailto:${SITE_CONFIG.email}`}
-            className="inline-flex items-center gap-2.5 rounded-full border border-[#A26547] px-7 py-3.5 text-base font-medium text-[#A26547] transition-all duration-300 hover:bg-[#A26547]/10 hover:scale-105 active:scale-95"
+            className="inline-flex items-center gap-2.5 rounded-full border border-[#041A2A] px-7 py-3.5 text-base font-medium text-[#041A2A] transition-all duration-300 hover:border-[#A26547] hover:text-[#A26547] hover:scale-105 active:scale-95 dark:border-white dark:text-white"
           >
             <Mail className="h-5 w-5" />
             {SITE_CONFIG.email}
