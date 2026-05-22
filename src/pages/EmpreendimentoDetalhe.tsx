@@ -7,7 +7,6 @@ import {
   Shield,
   TrendingUp,
   Zap,
-  ArrowRight,
   ChevronLeft,
   ChevronRight,
   X,
@@ -185,132 +184,132 @@ function Lightbox({
 
 /* ─── Contact Form ───────────────────────────────────────────── */
 
-function ContatoEmpreendimento({ name }: { name: string }) {
-  const [form, setForm] = useState({
-    nome: "",
-    email: "",
-    telefone: "",
-    mensagem: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
+// function ContatoEmpreendimento({ name }: { name: string }) {
+//   const [form, setForm] = useState({
+//     nome: "",
+//     email: "",
+//     telefone: "",
+//     mensagem: "",
+//   });
+//   const [submitted, setSubmitted] = useState(false);
 
-  function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
-  }
+//   function handleChange(
+//     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+//   ) {
+//     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+//   }
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
+//   function handleSubmit(e: React.FormEvent) {
+//     e.preventDefault();
+//     setSubmitted(true);
+//   }
 
-  const inputClass =
-    "w-full rounded-lg border border-[#D0D0D0] bg-white px-4 py-3 text-sm text-[#041A2A] placeholder-[#9E9E9E] outline-none transition-colors duration-200 focus:border-[var(--accent)] dark:border-white/10 dark:bg-[#0C2030] dark:text-white dark:placeholder-[#69727D]";
+//   const inputClass =
+//     "w-full rounded-lg border border-[#D0D0D0] bg-white px-4 py-3 text-sm text-[#041A2A] placeholder-[#9E9E9E] outline-none transition-colors duration-200 focus:border-[var(--accent)] dark:border-white/10 dark:bg-[#0C2030] dark:text-white dark:placeholder-[#69727D]";
 
-  return (
-    <section
-      id="contato-empreendimento"
-      className="py-20 bg-[var(--bg-secondary)]"
-    >
-      <div className="section-container max-w-2xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
-            Próximo passo
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
-            Quero investir em {name}
-          </h2>
-          <p className="text-[var(--text-secondary)] mt-3 text-sm leading-relaxed">
-            Preencha o formulário e nossa equipe entrará em contato em até 24
-            horas.
-          </p>
-        </motion.div>
+//   return (
+//     <section
+//       id="contato-empreendimento"
+//       className="py-20 bg-[var(--bg-secondary)]"
+//     >
+//       <div className="section-container max-w-2xl mx-auto">
+//         <motion.div
+//           initial={{ opacity: 0, y: 24 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 0.6 }}
+//           className="text-center mb-10"
+//         >
+//           <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
+//             Próximo passo
+//           </span>
+//           <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
+//             Quero investir em {name}
+//           </h2>
+//           <p className="text-[var(--text-secondary)] mt-3 text-sm leading-relaxed">
+//             Preencha o formulário e nossa equipe entrará em contato em até 24
+//             horas.
+//           </p>
+//         </motion.div>
 
-        {submitted ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-10"
-          >
-            <CheckCircle
-              size={48}
-              className="text-[var(--accent)] mx-auto mb-4"
-            />
-            <h3 className="font-display text-2xl font-bold text-[#041A2A] dark:text-white mb-2">
-              Mensagem enviada!
-            </h3>
-            <p className="text-[var(--text-secondary)] text-sm">
-              Nossa equipe entrará em contato em breve.
-            </p>
-          </motion.div>
-        ) : (
-          <motion.form
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-4"
-          >
-            <input
-              type="text"
-              name="nome"
-              placeholder="Nome completo"
-              required
-              value={form.nome}
-              onChange={handleChange}
-              className={inputClass}
-            />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <input
-                type="email"
-                name="email"
-                placeholder="E-mail"
-                required
-                value={form.email}
-                onChange={handleChange}
-                className={inputClass}
-              />
-              <input
-                type="tel"
-                name="telefone"
-                placeholder="Telefone / WhatsApp"
-                value={form.telefone}
-                onChange={handleChange}
-                className={inputClass}
-              />
-            </div>
-            <textarea
-              name="mensagem"
-              placeholder="Mensagem (opcional)"
-              rows={4}
-              value={form.mensagem}
-              onChange={handleChange}
-              className={`${inputClass} resize-none`}
-            />
-            <button
-              type="submit"
-              className="btn-accent py-3 text-base flex items-center justify-center gap-2 group"
-            >
-              Enviar interesse
-              <ArrowRight
-                size={18}
-                className="transition-transform duration-200 group-hover:translate-x-1"
-              />
-            </button>
-          </motion.form>
-        )}
-      </div>
-    </section>
-  );
-}
+//         {submitted ? (
+//           <motion.div
+//             initial={{ opacity: 0, scale: 0.9 }}
+//             animate={{ opacity: 1, scale: 1 }}
+//             className="text-center py-10"
+//           >
+//             <CheckCircle
+//               size={48}
+//               className="text-[var(--accent)] mx-auto mb-4"
+//             />
+//             <h3 className="font-display text-2xl font-bold text-[#041A2A] dark:text-white mb-2">
+//               Mensagem enviada!
+//             </h3>
+//             <p className="text-[var(--text-secondary)] text-sm">
+//               Nossa equipe entrará em contato em breve.
+//             </p>
+//           </motion.div>
+//         ) : (
+//           <motion.form
+//             initial={{ opacity: 0, y: 24 }}
+//             whileInView={{ opacity: 1, y: 0 }}
+//             viewport={{ once: true }}
+//             transition={{ duration: 0.6, delay: 0.1 }}
+//             onSubmit={handleSubmit}
+//             className="flex flex-col gap-4"
+//           >
+//             <input
+//               type="text"
+//               name="nome"
+//               placeholder="Nome completo"
+//               required
+//               value={form.nome}
+//               onChange={handleChange}
+//               className={inputClass}
+//             />
+//             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+//               <input
+//                 type="email"
+//                 name="email"
+//                 placeholder="E-mail"
+//                 required
+//                 value={form.email}
+//                 onChange={handleChange}
+//                 className={inputClass}
+//               />
+//               <input
+//                 type="tel"
+//                 name="telefone"
+//                 placeholder="Telefone / WhatsApp"
+//                 value={form.telefone}
+//                 onChange={handleChange}
+//                 className={inputClass}
+//               />
+//             </div>
+//             <textarea
+//               name="mensagem"
+//               placeholder="Mensagem (opcional)"
+//               rows={4}
+//               value={form.mensagem}
+//               onChange={handleChange}
+//               className={`${inputClass} resize-none`}
+//             />
+//             <button
+//               type="submit"
+//               className="btn-accent py-3 text-base flex items-center justify-center gap-2 group"
+//             >
+//               Enviar interesse
+//               <ArrowRight
+//                 size={18}
+//                 className="transition-transform duration-200 group-hover:translate-x-1"
+//               />
+//             </button>
+//           </motion.form>
+//         )}
+//       </div>
+//     </section>
+//   );
+// }
 
 /* ─── Main Page ──────────────────────────────────────────────── */
 
