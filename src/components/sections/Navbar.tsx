@@ -1,16 +1,29 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Instagram, Linkedin, Menu, MessageCircle, Moon, Sun, X } from "lucide-react";
+import {
+  ChevronDown,
+  Instagram,
+  Linkedin,
+  Menu,
+  MessageCircle,
+  Moon,
+  Sun,
+  X,
+} from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import logoDark from "@/assets/logo.png";
-import logoLight from "@/assets/logo-accione-dark.jpg";
+import logoLight from "@/assets/logo-accione-dark.png";
 import { useScrolled } from "@/hooks/useScrolled";
 import { SITE_CONFIG } from "@/config/site";
 import { useTheme } from "@/context/ThemeContext";
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: SITE_CONFIG.socialLinks.instagram, icon: Instagram },
-  { label: "LinkedIn",  href: SITE_CONFIG.socialLinks.linkedin,  icon: Linkedin },
+  {
+    label: "Instagram",
+    href: SITE_CONFIG.socialLinks.instagram,
+    icon: Instagram,
+  },
+  { label: "LinkedIn", href: SITE_CONFIG.socialLinks.linkedin, icon: Linkedin },
 ];
 
 const PRIMARY_LINKS = [
@@ -66,7 +79,7 @@ export default function Navbar() {
         }`}
       >
         <nav
-          className={`section-container flex items-center justify-between gap-4 transition-all duration-500 ${
+          className={`section-container flex items-center justify-between gap-4 transition-all duration-500 h-12 w-auto object-contain ${
             scrolled ? "h-16" : "h-20"
           }`}
         >
@@ -79,10 +92,12 @@ export default function Navbar() {
           >
             <Link to="/">
               <img
-                src={theme === 'dark' ? logoDark : logoLight}
+                src={theme === "dark" ? logoDark : logoLight}
                 alt="Accione Investimentos"
                 className="h-14 w-auto object-contain"
-                style={theme === 'light' ? { mixBlendMode: 'multiply' } : undefined}
+                style={
+                  theme === "light" ? { mixBlendMode: "multiply" } : undefined
+                }
               />
             </Link>
           </motion.div>
@@ -147,10 +162,16 @@ export default function Navbar() {
             <button
               type="button"
               onClick={toggleTheme}
-              aria-label={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
+              aria-label={
+                theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
+              }
               className="p-2 text-[#9E9E9E] transition-colors duration-200 hover:text-[#A26547] dark:text-white/50"
             >
-              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              {theme === "dark" ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
             </button>
             <a
               href={SITE_CONFIG.whatsappHref}
@@ -265,10 +286,18 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={toggleTheme}
-                    aria-label={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
+                    aria-label={
+                      theme === "dark"
+                        ? "Ativar tema claro"
+                        : "Ativar tema escuro"
+                    }
                     className="text-[#9E9E9E] transition-colors hover:text-[#A26547] dark:text-white/50"
                   >
-                    {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                    {theme === "dark" ? (
+                      <Sun className="h-5 w-5" />
+                    ) : (
+                      <Moon className="h-5 w-5" />
+                    )}
                   </button>
                 </div>
               </motion.div>

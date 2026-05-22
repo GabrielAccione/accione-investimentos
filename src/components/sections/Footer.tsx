@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import logoDark from "@/assets/logo.png";
-import logoLight from "@/assets/logo-accione-dark.jpg";
+import logoLight from "@/assets/logo-accione-dark.png";
 import { SITE_CONFIG } from "@/config/site";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -17,7 +17,7 @@ const FOOTER_LINKS = [
 ];
 
 export default function Footer() {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
 
   return (
     <footer className="bg-[#F0F0F0] pt-16 pb-8 dark:bg-[#1D1D1D]">
@@ -25,10 +25,12 @@ export default function Footer() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.9fr)_minmax(0,0.9fr)]">
           <div>
             <img
-              src={theme === 'dark' ? logoDark : logoLight}
+              src={theme === "dark" ? logoDark : logoLight}
               alt="Accione Investimentos"
               className="h-10 w-auto object-contain"
-              style={theme === 'light' ? { mixBlendMode: 'multiply' } : undefined}
+              style={
+                theme === "light" ? { mixBlendMode: "multiply" } : undefined
+              }
             />
             <p className="mt-5 max-w-md text-sm leading-relaxed text-[#484949] dark:text-[#69727D]">
               A Accione Investimentos aproxima investidores de oportunidades
