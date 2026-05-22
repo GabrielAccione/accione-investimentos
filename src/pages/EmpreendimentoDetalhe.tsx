@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useCallback } from "react";
+import { useParams, Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin,
   Wallet,
@@ -13,67 +13,81 @@ import {
   X,
   HelpCircle,
   CheckCircle,
-} from 'lucide-react'
-import WhatsAppButton from '@/components/ui/WhatsAppButton'
-import { EMPREENDIMENTOS, type EmpreendimentoData, type GalleryItem, type Destaque } from '@/data/empreendimentos'
+} from "lucide-react";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import {
+  EMPREENDIMENTOS,
+  type EmpreendimentoData,
+  type GalleryItem,
+  type Destaque,
+} from "@/data/empreendimentos";
 
 /* ─── Sub-components ─────────────────────────────────────────── */
 
-function StatusBadge({ status, label }: { status: EmpreendimentoData['status']; label: string }) {
-  const color =
-    status === 'em-captacao'
-      ? 'bg-[#25D366]'
-      : 'bg-[#69727D]'
+function StatusBadge({
+  status,
+  label,
+}: {
+  status: EmpreendimentoData["status"];
+  label: string;
+}) {
+  const color = status === "em-captacao" ? "bg-[#25D366]" : "bg-[#69727D]";
   return (
-    <span className={`${color} text-white text-xs font-semibold px-4 py-1.5 rounded-full`}>
+    <span
+      className={`${color} text-white text-xs font-semibold px-4 py-1.5 rounded-full`}
+    >
       {label}
     </span>
-  )
+  );
 }
 
 const HIGHLIGHTS = [
   {
     icon: Wallet,
-    title: 'Acessível',
-    description: 'Invista com menor capital do que a compra direta de um imóvel, via SPE fracionada.',
+    title: "Acessível",
+    description:
+      "Invista com menor capital do que a compra direta de um imóvel, via SPE fracionada.",
   },
   {
     icon: Shield,
-    title: 'Seguro',
-    description: 'Patrimônio segregado em SPE própria, com contrato registrado e gestão auditada.',
+    title: "Seguro",
+    description:
+      "Patrimônio segregado em SPE própria, com contrato registrado e gestão auditada.",
   },
   {
     icon: TrendingUp,
-    title: 'Rentável',
-    description: 'Retorno acima da poupança e da renda fixa tradicional, atrelado à valorização real.',
+    title: "Rentável",
+    description:
+      "Retorno acima da poupança e da renda fixa tradicional, atrelado à valorização real.",
   },
   {
     icon: Zap,
-    title: 'Ágil',
-    description: 'Processo digital simplificado: assine o contrato, faça o aporte e acompanhe online.',
+    title: "Ágil",
+    description:
+      "Processo digital simplificado: assine o contrato, faça o aporte e acompanhe online.",
   },
-]
+];
 
 const SPE_CARDS = [
   {
     icon: HelpCircle,
-    title: 'O que é SPE',
+    title: "O que é SPE",
     description:
-      'Sociedade de Propósito Específico é uma empresa criada exclusivamente para este empreendimento. Cada investidor recebe cotas proporcionais ao valor aportado, com direitos registrados em cartório.',
+      "Sociedade de Propósito Específico é uma empresa criada exclusivamente para este empreendimento. Cada investidor recebe cotas proporcionais ao valor aportado, com direitos registrados em cartório.",
   },
   {
     icon: Shield,
-    title: 'Por que é seguro',
+    title: "Por que é seguro",
     description:
-      'O patrimônio da SPE é separado do patrimônio da construtora e da gestora. Em caso de problemas em outras operações, seus recursos permanecem protegidos e vinculados apenas a este projeto.',
+      "O patrimônio da SPE é separado do patrimônio da construtora e da gestora. Em caso de problemas em outras operações, seus recursos permanecem protegidos e vinculados apenas a este projeto.",
   },
   {
     icon: CheckCircle,
-    title: 'Como participar',
+    title: "Como participar",
     description:
-      'Preencha o formulário de interesse, nossa equipe entra em contato, você assina o contrato digitalmente e realiza o aporte. O acompanhamento da obra e dos resultados é feito pelo nosso portal.',
+      "Preencha o formulário de interesse, nossa equipe entra em contato, você assina o contrato digitalmente e realiza o aporte. O acompanhamento da obra e dos resultados é feito pelo nosso portal.",
   },
-]
+];
 
 /* ─── Lightbox ───────────────────────────────────────────────── */
 
@@ -82,30 +96,30 @@ function Lightbox({
   initial,
   onClose,
 }: {
-  images: GalleryItem[]
-  initial: number
-  onClose: () => void
+  images: GalleryItem[];
+  initial: number;
+  onClose: () => void;
 }) {
-  const [current, setCurrent] = useState(initial)
+  const [current, setCurrent] = useState(initial);
 
   const prev = useCallback(
     () => setCurrent((c) => (c - 1 + images.length) % images.length),
     [images.length],
-  )
+  );
   const next = useCallback(
     () => setCurrent((c) => (c + 1) % images.length),
     [images.length],
-  )
+  );
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowLeft') prev()
-      if (e.key === 'ArrowRight') next()
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
     }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onClose, prev, next])
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose, prev, next]);
 
   return (
     <motion.div
@@ -131,7 +145,9 @@ function Lightbox({
           />
           {images[current].alt && (
             <div className="absolute bottom-0 inset-x-0 rounded-b-xl bg-black/60 px-4 py-2.5">
-              <p className="text-center text-sm text-white/90">{images[current].alt}</p>
+              <p className="text-center text-sm text-white/90">
+                {images[current].alt}
+              </p>
             </div>
           )}
         </div>
@@ -164,26 +180,33 @@ function Lightbox({
         </p>
       </motion.div>
     </motion.div>
-  )
+  );
 }
 
 /* ─── Contact Form ───────────────────────────────────────────── */
 
 function ContatoEmpreendimento({ name }: { name: string }) {
-  const [form, setForm] = useState({ nome: '', email: '', telefone: '', mensagem: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [form, setForm] = useState({
+    nome: "",
+    email: "",
+    telefone: "",
+    mensagem: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   }
 
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setSubmitted(true)
+    e.preventDefault();
+    setSubmitted(true);
   }
 
   const inputClass =
-    'w-full rounded-lg border border-[#D0D0D0] bg-white px-4 py-3 text-sm text-[#041A2A] placeholder-[#9E9E9E] outline-none transition-colors duration-200 focus:border-[var(--accent)] dark:border-white/10 dark:bg-[#0C2030] dark:text-white dark:placeholder-[#69727D]'
+    "w-full rounded-lg border border-[#D0D0D0] bg-white px-4 py-3 text-sm text-[#041A2A] placeholder-[#9E9E9E] outline-none transition-colors duration-200 focus:border-[var(--accent)] dark:border-white/10 dark:bg-[#0C2030] dark:text-white dark:placeholder-[#69727D]";
 
   return (
     <section
@@ -205,7 +228,8 @@ function ContatoEmpreendimento({ name }: { name: string }) {
             Quero investir em {name}
           </h2>
           <p className="text-[var(--text-secondary)] mt-3 text-sm leading-relaxed">
-            Preencha o formulário e nossa equipe entrará em contato em até 24 horas.
+            Preencha o formulário e nossa equipe entrará em contato em até 24
+            horas.
           </p>
         </motion.div>
 
@@ -215,7 +239,10 @@ function ContatoEmpreendimento({ name }: { name: string }) {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-10"
           >
-            <CheckCircle size={48} className="text-[var(--accent)] mx-auto mb-4" />
+            <CheckCircle
+              size={48}
+              className="text-[var(--accent)] mx-auto mb-4"
+            />
             <h3 className="font-display text-2xl font-bold text-[#041A2A] dark:text-white mb-2">
               Mensagem enviada!
             </h3>
@@ -268,37 +295,60 @@ function ContatoEmpreendimento({ name }: { name: string }) {
               onChange={handleChange}
               className={`${inputClass} resize-none`}
             />
-            <button type="submit" className="btn-accent py-3 text-base flex items-center justify-center gap-2 group">
+            <button
+              type="submit"
+              className="btn-accent py-3 text-base flex items-center justify-center gap-2 group"
+            >
               Enviar interesse
-              <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
+              <ArrowRight
+                size={18}
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              />
             </button>
           </motion.form>
         )}
       </div>
     </section>
-  )
+  );
 }
 
 /* ─── Main Page ──────────────────────────────────────────────── */
 
 export default function EmpreendimentoDetalhe() {
-  const { slug } = useParams<{ slug: string }>()
-  const empreendimento = EMPREENDIMENTOS.find((e) => e.slug === slug)
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const { slug } = useParams<{ slug: string }>();
+  const empreendimento = EMPREENDIMENTOS.find((e) => e.slug === slug);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!empreendimento) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--bg-primary)] pt-16 text-center px-4">
-        <h1 className="font-display text-4xl font-bold text-[#041A2A] dark:text-white mb-4">Empreendimento não encontrado</h1>
-        <p className="text-[var(--text-secondary)] mb-8">O empreendimento que você procura não existe ou foi removido.</p>
+        <h1 className="font-display text-4xl font-bold text-[#041A2A] dark:text-white mb-4">
+          Empreendimento não encontrado
+        </h1>
+        <p className="text-[var(--text-secondary)] mb-8">
+          O empreendimento que você procura não existe ou foi removido.
+        </p>
         <Link to="/empreendimentos" className="btn-accent">
           Ver todos os empreendimentos
         </Link>
       </div>
-    )
+    );
   }
 
-  const { name, status, statusLabel, location, fullDescription, parceria, coverImage, fachadaImage, gallery, destaques, fichaTecnica, pontosDeInteresse } = empreendimento
+  const {
+    name,
+    status,
+    statusLabel,
+    location,
+    fullDescription,
+    parceria,
+    coverImage,
+    fachadaImage,
+    gallery,
+    destaques,
+    fichaTecnica,
+    pontosDeInteresse,
+  } = empreendimento;
 
   return (
     <>
@@ -319,8 +369,10 @@ export default function EmpreendimentoDetalhe() {
           >
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <StatusBadge status={status} label={statusLabel} />
-              {status === 'captacao-encerrada' && (
-                <span className="text-xs text-white/60">Grupo 100% fechado</span>
+              {status === "captacao-encerrada" && (
+                <span className="text-xs text-white/60">
+                  Grupo 100% fechado
+                </span>
               )}
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
@@ -330,7 +382,7 @@ export default function EmpreendimentoDetalhe() {
               <MapPin size={15} className="text-[var(--accent)]" />
               <span>{location}</span>
             </div>
-            {status === 'captacao-encerrada' ? (
+            {status === "captacao-encerrada" ? (
               <WhatsAppButton
                 mensagem="Olá! Tenho interesse em entrar na lista de espera do Avenue Residence."
                 label="Lista de espera"
@@ -350,7 +402,6 @@ export default function EmpreendimentoDetalhe() {
       {/* ── 2. Fachada + Descrição ───────────────────────────── */}
       <section className="overflow-hidden py-20 bg-[var(--bg-primary)]">
         <div className="section-container grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-
           {/* Coluna esquerda — descrição + destaques */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -368,14 +419,24 @@ export default function EmpreendimentoDetalhe() {
               {fullDescription}
             </p>
             <p className="mt-4 text-xs text-[var(--text-muted)]">
-              Em parceria com <span className="text-[#041A2A] dark:text-white/70">{parceria}</span>
+              Em parceria com{" "}
+              <span className="text-[#041A2A] dark:text-white/70">
+                {parceria}
+              </span>
             </p>
 
             <div className="mt-8 grid grid-cols-2 gap-4">
               {destaques.map((d: Destaque) => (
-                <div key={d.label} className="rounded-xl border border-[#E5E5E5] bg-white p-4 dark:border-white/10 dark:bg-transparent">
-                  <span className="text-[var(--accent)] font-bold text-lg leading-none">{d.valor}</span>
-                  <p className="mt-1 text-sm text-[#484949] dark:text-white/60">{d.label}</p>
+                <div
+                  key={d.label}
+                  className="rounded-xl border border-[#E5E5E5] bg-white p-4 dark:border-white/10 dark:bg-transparent"
+                >
+                  <span className="text-[var(--accent)] font-bold text-lg leading-none">
+                    {d.valor}
+                  </span>
+                  <p className="mt-1 text-sm text-[#484949] dark:text-white/60">
+                    {d.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -394,7 +455,11 @@ export default function EmpreendimentoDetalhe() {
                 src={fachadaImage.src}
                 alt={fachadaImage.alt}
                 className="w-full h-[600px] rounded-2xl object-cover object-center shadow-2xl shadow-black/50"
-                style={fachadaImage.objectPosition ? { objectPosition: fachadaImage.objectPosition } : undefined}
+                style={
+                  fachadaImage.objectPosition
+                    ? { objectPosition: fachadaImage.objectPosition }
+                    : undefined
+                }
               />
               <div className="absolute -bottom-3 -right-3 h-full w-full rounded-2xl border border-[var(--accent)]/30 -z-10" />
             </motion.div>
@@ -424,7 +489,7 @@ export default function EmpreendimentoDetalhe() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {HIGHLIGHTS.map((h, i) => {
-              const Icon = h.icon
+              const Icon = h.icon;
               return (
                 <motion.div
                   key={h.title}
@@ -437,10 +502,14 @@ export default function EmpreendimentoDetalhe() {
                   <div className="w-12 h-12 rounded-lg bg-[#A26547]/10 flex items-center justify-center mb-4">
                     <Icon size={22} className="text-[var(--accent)]" />
                   </div>
-                  <h3 className="font-semibold text-[#041A2A] dark:text-white text-base mb-2">{h.title}</h3>
-                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">{h.description}</p>
+                  <h3 className="font-semibold text-[#041A2A] dark:text-white text-base mb-2">
+                    {h.title}
+                  </h3>
+                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+                    {h.description}
+                  </p>
                 </motion.div>
-              )
+              );
             })}
           </div>
         </div>
@@ -461,7 +530,9 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Imagens
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">Galeria</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
+              Galeria
+            </h2>
             <p className="text-[var(--text-muted)] text-sm mt-2">
               Clique em uma imagem para ampliar
             </p>
@@ -488,13 +559,15 @@ export default function EmpreendimentoDetalhe() {
                   />
                 </button>
                 {item.alt && (
-                  <p className="mt-1.5 text-center text-xs text-[var(--text-muted)]">{item.alt}</p>
+                  <p className="mt-1.5 text-center text-xs text-[var(--text-muted)]">
+                    {item.alt}
+                  </p>
                 )}
               </motion.div>
             ))}
           </div>
 
-          {status === 'em-breve' && (
+          {status === "em-breve" && (
             <p className="mt-6 text-center text-sm text-[var(--text-muted)]">
               Mais detalhes e imagens em breve. Cadastre seu interesse abaixo.
             </p>
@@ -540,23 +613,28 @@ export default function EmpreendimentoDetalhe() {
             className="rounded-xl border border-[#A26547]/20 overflow-hidden"
           >
             {[
-              { label: 'Construtora', value: fichaTecnica.construtora },
-              { label: 'Gestora', value: fichaTecnica.gestora },
-              { label: 'Modelo de investimento', value: fichaTecnica.modelo },
-              { label: 'Localização', value: fichaTecnica.localizacao },
-              { label: 'Tipologias disponíveis', value: fichaTecnica.tipologias },
+              { label: "Construtora", value: fichaTecnica.construtora },
+              { label: "Gestora", value: fichaTecnica.gestora },
+              { label: "Modelo de investimento", value: fichaTecnica.modelo },
+              { label: "Localização", value: fichaTecnica.localizacao },
+              {
+                label: "Tipologias disponíveis",
+                value: fichaTecnica.tipologias,
+              },
               ...(fichaTecnica.extras ?? []),
             ].map((row, i) => (
               <div
                 key={row.label}
                 className={`flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 px-6 py-4 ${
-                  i % 2 === 0 ? 'bg-[var(--bg-primary)]/60' : 'bg-transparent'
+                  i % 2 === 0 ? "bg-[var(--bg-primary)]/60" : "bg-transparent"
                 } border-b border-[#484949]/20 last:border-b-0`}
               >
                 <span className="text-[var(--text-muted)] text-xs font-medium uppercase tracking-wider sm:w-48 shrink-0">
                   {row.label}
                 </span>
-                <span className="text-[#041A2A] dark:text-white text-sm">{row.value}</span>
+                <span className="text-[#041A2A] dark:text-white text-sm">
+                  {row.value}
+                </span>
               </div>
             ))}
           </motion.div>
@@ -582,14 +660,14 @@ export default function EmpreendimentoDetalhe() {
               Modelo de Investimento — SPE
             </h2>
             <p className="text-[var(--text-secondary)] mt-4 max-w-2xl mx-auto text-sm leading-relaxed">
-              A Sociedade de Propósito Específico é o modelo mais seguro e transparente para
-              investimentos imobiliários coletivos no Brasil.
+              A Sociedade de Propósito Específico é o modelo mais seguro e
+              transparente para investimentos imobiliários coletivos no Brasil.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {SPE_CARDS.map((card, i) => {
-              const Icon = card.icon
+              const Icon = card.icon;
               return (
                 <motion.div
                   key={card.title}
@@ -602,10 +680,14 @@ export default function EmpreendimentoDetalhe() {
                   <div className="w-12 h-12 rounded-lg bg-[#A26547]/10 flex items-center justify-center mb-4">
                     <Icon size={22} className="text-[var(--accent)]" />
                   </div>
-                  <h3 className="font-semibold text-[#041A2A] dark:text-white text-base mb-3">{card.title}</h3>
-                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">{card.description}</p>
+                  <h3 className="font-semibold text-[#041A2A] dark:text-white text-base mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+                    {card.description}
+                  </p>
                 </motion.div>
-              )
+              );
             })}
           </div>
 
@@ -617,7 +699,7 @@ export default function EmpreendimentoDetalhe() {
             className="text-center"
           >
             <div className="flex flex-wrap justify-center gap-4">
-              {status === 'captacao-encerrada' ? (
+              {status === "captacao-encerrada" ? (
                 <WhatsAppButton
                   mensagem="Olá! Tenho interesse em entrar na lista de espera do Avenue Residence."
                   label="Entrar na lista de espera"
@@ -673,7 +755,10 @@ export default function EmpreendimentoDetalhe() {
               className="lg:col-span-2 rounded-xl overflow-hidden border border-[#484949]/20 bg-[var(--bg-primary)] h-72 flex items-center justify-center"
             >
               <div className="text-center text-[var(--text-muted)]">
-                <MapPin size={40} className="mx-auto mb-3 text-[var(--accent)]/40" />
+                <MapPin
+                  size={40}
+                  className="mx-auto mb-3 text-[var(--accent)]/40"
+                />
                 <p className="text-sm">Mapa interativo em breve</p>
                 <p className="text-xs mt-1">{location}</p>
               </div>
@@ -692,8 +777,14 @@ export default function EmpreendimentoDetalhe() {
               </h3>
               <ul className="flex flex-col gap-3">
                 {pontosDeInteresse.map((poi) => (
-                  <li key={poi} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                    <MapPin size={14} className="mt-0.5 shrink-0 text-[var(--accent)]" />
+                  <li
+                    key={poi}
+                    className="flex items-start gap-2 text-sm text-[var(--text-secondary)]"
+                  >
+                    <MapPin
+                      size={14}
+                      className="mt-0.5 shrink-0 text-[var(--accent)]"
+                    />
                     {poi}
                   </li>
                 ))}
@@ -704,7 +795,6 @@ export default function EmpreendimentoDetalhe() {
       </section>
 
       {/* ── 8. Formulário de contato ─────────────────────────── */}
-      <ContatoEmpreendimento name={name} />
     </>
-  )
+  );
 }
