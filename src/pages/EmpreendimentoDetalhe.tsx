@@ -717,6 +717,14 @@ export default function EmpreendimentoDetalhe() {
                     size="lg"
                     className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
                   />
+                  {slug === 'sync-floriano' && (
+                    <Link
+                      to="/simuladores/sync-floriano"
+                      className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/40 px-8 py-4 text-lg font-medium text-[var(--accent)] transition-all duration-300 hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 hover:scale-105 active:scale-95"
+                    >
+                      Simular meus aportes
+                    </Link>
+                  )}
                 </>
               )}
             </div>
