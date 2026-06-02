@@ -1,8 +1,8 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import PageHero from '@/components/ui/PageHero'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import { unidades } from '@/data/syncFloriano'
-import { formatCurrency, formatCurrencyWithCents } from '@/lib/formatters'
+import { formatCurrency } from '@/lib/formatters'
 
 // Cronograma: mês 1 = outubro/2025, prazo total = 54 meses
 const START_YEAR = 2025
@@ -49,35 +49,33 @@ const boxes = unidades.filter((u) => u.categoria === 'box')
 export default function SimuladorSyncFloriano() {
   const [selectedAdesao, setSelectedAdesao] = useState(unidades[0]?.adesao ?? '')
   const [mode, setMode] = useState<Mode>('valor')
-  const [totalInput, setTotalInput] = useState('210000')
-  const [reforcoInput, setReforcoInput] = useState('10000')
+  const [totalInput, setTotalInput] = useState(() =>
+    String(Math.round(unidades[0]?.partSocietaria ?? 210000))
+  )
 
   const selectedUnidade = unidades.find((u) => u.adesao === selectedAdesao)
   const currentMesIndex = getCurrentMesIndex()
 
-  // No modo percentual, o total é sempre o preço contratual da unidade
-  useEffect(() => {
-    if (mode === 'percentual' && selectedUnidade) {
-      setTotalInput(String(Math.round(selectedUnidade.partSocietaria)))
-    }
-  }, [mode, selectedAdesao, selectedUnidade])
+  // In percentual mode the contract value is always the unit's partSocietaria;
+  // in valor mode the user controls the input (pre-filled on unit selection).
+  const total =
+    mode === 'percentual'
+      ? Math.max(0, Math.round(selectedUnidade?.partSocietaria ?? 0))
+      : Math.max(0, Number(totalInput) || 0)
 
-  const total = Math.max(0, Number(totalInput) || 0)
-  const reforcoValor = Math.max(0, Number(reforcoInput) || 0)
-
-  const { entrada, reforco, aporteMensal, negativo } = useMemo(() => {
+  const { entrada, reforco, aporteMensal } = useMemo(() => {
     if (mode === 'valor') {
       const e = total * 0.1428
-      const r = reforcoValor
-      const restante = total - e - REFORCO_MONTHS.size * r
-      return { entrada: e, reforco: r, aporteMensal: restante / 46, negativo: restante < 0 }
+      const r = (total * 0.0428) / 7
+      const am = (total - e - r * REFORCO_MONTHS.size) / 46
+      return { entrada: e, reforco: r, aporteMensal: am }
     } else {
       const e = total * 0.15
       const r = total * 0.05
-      const am = (total * 0.5) / 46
-      return { entrada: e, reforco: r, aporteMensal: am, negativo: false }
+      const am = (total - e - r * REFORCO_MONTHS.size) / 46
+      return { entrada: e, reforco: r, aporteMensal: am }
     }
-  }, [mode, total, reforcoValor])
+  }, [mode, total])
 
   const schedule = useMemo((): LinhaTabela[] =>
     Array.from({ length: TOTAL_MONTHS }, (_, i) => {
@@ -140,7 +138,12 @@ export default function SimuladorSyncFloriano() {
                 </span>
                 <select
                   value={selectedAdesao}
-                  onChange={(e) => setSelectedAdesao(e.target.value)}
+                  onChange={(e) => {
+                    const newAdesao = e.target.value
+                    setSelectedAdesao(newAdesao)
+                    const newUnidade = unidades.find((u) => u.adesao === newAdesao)
+                    if (newUnidade) setTotalInput(String(Math.round(newUnidade.partSocietaria)))
+                  }}
                   className="input-base"
                 >
                   {apartamentos.length > 0 && (
@@ -243,7 +246,11 @@ export default function SimuladorSyncFloriano() {
                   type="number"
                   min={0}
                   step={1000}
-                  value={totalInput}
+                  value={
+                    mode === 'percentual'
+                      ? String(Math.round(selectedUnidade?.partSocietaria ?? 0))
+                      : totalInput
+                  }
                   onChange={(e) => setTotalInput(e.target.value)}
                   readOnly={mode === 'percentual'}
                   className={`input-base ${mode === 'percentual' ? 'cursor-default opacity-70' : ''}`}
@@ -255,31 +262,6 @@ export default function SimuladorSyncFloriano() {
                 )}
               </label>
 
-              {/* Reforço — apenas modo valor */}
-              {mode === 'valor' && (
-                <label className="block">
-                  <span className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
-                    Valor dos reforços (R$)
-                  </span>
-                  <input
-                    type="number"
-                    min={0}
-                    step={1000}
-                    value={reforcoInput}
-                    onChange={(e) => setReforcoInput(e.target.value)}
-                    className="input-base"
-                  />
-                  <span className="mt-1 block text-xs text-[var(--text-muted)]">
-                    Nos meses 6, 12, 18, 24, 30, 36 e 42.
-                  </span>
-                </label>
-              )}
-
-              {negativo && (
-                <div className="rounded-xl border border-red-400/20 bg-red-400/5 p-3 text-xs text-red-400">
-                  O valor dos reforços ultrapassa o total disponível. Reduza os reforços ou aumente o valor total.
-                </div>
-              )}
             </div>
           </aside>
 
@@ -293,7 +275,7 @@ export default function SimuladorSyncFloriano() {
                   Entrada (mês 1)
                 </p>
                 <h2 className="mt-4 font-body text-[1.1rem] sm:text-[1.3rem] xl:text-[1.45rem] font-semibold tabular-nums text-[#A26547] break-words leading-tight">
-                  {total > 0 ? formatCurrencyWithCents(entrada) : '—'}
+                  {total > 0 ? formatCurrency(entrada) : '—'}
                 </h2>
                 <p className="mt-2 text-[0.75rem] text-[var(--text-muted)]">
                   {mode === 'valor' ? '14,28% do total' : '15,00% do total'}
@@ -305,10 +287,10 @@ export default function SimuladorSyncFloriano() {
                   Reforços (×7)
                 </p>
                 <h2 className="mt-4 font-body text-[1.1rem] sm:text-[1.3rem] xl:text-[1.45rem] font-semibold tabular-nums text-[#A26547] break-words leading-tight">
-                  {total > 0 ? formatCurrencyWithCents(reforco) : '—'}
+                  {total > 0 ? formatCurrency(reforco) : '—'}
                 </h2>
                 <p className="mt-2 text-[0.75rem] text-[var(--text-muted)]">
-                  {mode === 'valor' ? 'Por reforço (configurável)' : '5,00% do total cada'}
+                  {mode === 'valor' ? '4,28% do total (÷7)' : '5,00% do total cada'}
                 </p>
               </article>
 
@@ -317,7 +299,7 @@ export default function SimuladorSyncFloriano() {
                   Aporte mensal
                 </p>
                 <h2 className="mt-4 font-body text-[1.1rem] sm:text-[1.3rem] xl:text-[1.45rem] font-semibold tabular-nums text-[#A26547] break-words leading-tight">
-                  {total > 0 && !negativo ? formatCurrencyWithCents(Math.max(0, aporteMensal)) : '—'}
+                  {total > 0 ? formatCurrency(Math.max(0, aporteMensal)) : '—'}
                 </h2>
                 <p className="mt-2 text-[0.75rem] text-[var(--text-muted)]">
                   46 parcelas mensais
@@ -383,7 +365,7 @@ export default function SimuladorSyncFloriano() {
                         <td className="py-3 pl-4 pr-6 text-right tabular-nums font-medium text-[#041A2A] dark:text-white">
                           {row.isPast || row.valor <= 0
                             ? '—'
-                            : formatCurrencyWithCents(row.valor)}
+                            : formatCurrency(row.valor)}
                         </td>
                       </tr>
                     ))}
