@@ -1,33 +1,37 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { CheckCircle2 } from 'lucide-react'
-import SectionHeading from '@/components/ui/SectionHeading'
-import WhatsAppButton from '@/components/ui/WhatsAppButton'
-import { PRODUCTS } from '@/data/products'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import { PRODUCTS } from "@/data/products";
 
 interface ProductsProps {
-  variant?: 'home' | 'page'
+  variant?: "home" | "page";
 }
 
-export default function Products({ variant = 'home' }: ProductsProps) {
-  const [activeTab, setActiveTab] = useState(0)
-  const product = PRODUCTS[activeTab]
-  const Icon = product.icon
+export default function Products({ variant = "home" }: ProductsProps) {
+  const [activeTab, setActiveTab] = useState(0);
+  const product = PRODUCTS[activeTab];
+  const Icon = product.icon;
 
   return (
     <section
-      id={variant === 'home' ? 'produtos' : undefined}
+      id={variant === "home" ? "produtos" : undefined}
       className="bg-[var(--bg-secondary)] py-20 sm:py-24"
     >
       <div className="section-container">
         <SectionHeading
-          eyebrow="Investimentos"
-          title={variant === 'home' ? 'Teses selecionadas para diversificar com intenção.' : 'Ativos judiciais e crédito privado em leitura estruturada.'}
+          eyebrow="Investimentos Financeiros"
+          title={
+            variant === "home"
+              ? "Teses selecionadas para diversificar com  eficácia."
+              : "Ativos judiciais e crédito privado em leitura estruturada."
+          }
           description={
-            variant === 'home'
-              ? 'Dois blocos centrais da atuação da Accione, com racional claro de retorno, risco e acompanhamento.'
-              : 'A Accione estrutura oportunidades com originação, diligência e comunicação objetiva para investidores que buscam alternativas fora da prateleira tradicional.'
+            variant === "home"
+              ? "Dois blocos centrais da atuação da Accione, com racional claro de retorno, risco e acompanhamento."
+              : "A Accione estrutura oportunidades com originação, diligência e comunicação objetiva para investidores que buscam alternativas fora da prateleira tradicional."
           }
           align="left"
         />
@@ -35,8 +39,8 @@ export default function Products({ variant = 'home' }: ProductsProps) {
         <div className="mt-10 grid gap-4 lg:grid-cols-[320px_minmax(0,1fr)]">
           <div className="space-y-4">
             {PRODUCTS.map((item, index) => {
-              const ProductIcon = item.icon
-              const isActive = activeTab === index
+              const ProductIcon = item.icon;
+              const isActive = activeTab === index;
 
               return (
                 <button
@@ -45,8 +49,8 @@ export default function Products({ variant = 'home' }: ProductsProps) {
                   onClick={() => setActiveTab(index)}
                   className={`w-full rounded-[24px] border p-5 text-left transition-colors duration-300 ${
                     isActive
-                      ? 'border-[var(--accent)]/45 bg-[var(--accent)]/12'
-                      : 'border-[#E5E5E5] bg-white hover:border-[var(--accent)]/25 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20'
+                      ? "border-[var(--accent)]/45 bg-[var(--accent)]/12"
+                      : "border-[#E5E5E5] bg-white hover:border-[var(--accent)]/25 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20"
                   }`}
                 >
                   <div className="flex items-start gap-4">
@@ -54,14 +58,16 @@ export default function Products({ variant = 'home' }: ProductsProps) {
                       <ProductIcon size={22} />
                     </div>
                     <div>
-                      <p className="text-2xl font-semibold text-[var(--text-primary)]">{item.title}</p>
+                      <p className="text-2xl font-semibold text-[var(--text-primary)]">
+                        {item.title}
+                      </p>
                       <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
                         {item.summary}
                       </p>
                     </div>
                   </div>
                 </button>
-              )
+              );
             })}
           </div>
 
@@ -75,7 +81,9 @@ export default function Products({ variant = 'home' }: ProductsProps) {
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_220px]">
               <div>
                 <div className="flex flex-wrap items-center gap-3">
-                  {product.tag ? <span className="section-tag">{product.tag}</span> : null}
+                  {product.tag ? (
+                    <span className="section-tag">{product.tag}</span>
+                  ) : null}
                   {product.stats?.map((stat) => (
                     <span
                       key={stat.label}
@@ -100,8 +108,14 @@ export default function Products({ variant = 'home' }: ProductsProps) {
 
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                   {product.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
-                      <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[var(--accent)]" />
+                    <li
+                      key={feature}
+                      className="flex items-start gap-3 text-sm text-[var(--text-secondary)]"
+                    >
+                      <CheckCircle2
+                        size={18}
+                        className="mt-0.5 shrink-0 text-[var(--accent)]"
+                      />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -112,15 +126,9 @@ export default function Products({ variant = 'home' }: ProductsProps) {
                     mensagem={`Olá! Tenho interesse em saber mais sobre ${product.title}.`}
                     label="Saber mais pelo WhatsApp"
                   />
-                  <WhatsAppButton
-                    mensagem={`Olá! Gostaria de receber o material completo sobre ${product.title}.`}
-                    label="Receber material completo"
-                    size="sm"
-                    className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
-                  />
-                  {variant === 'home' ? (
+                  {variant === "home" ? (
                     <Link to="/investimentos" className="btn-ghost">
-                      Ver detalhes da página
+                      Ver detalhes
                     </Link>
                   ) : null}
                 </div>
@@ -136,5 +144,5 @@ export default function Products({ variant = 'home' }: ProductsProps) {
         </div>
       </div>
     </section>
-  )
+  );
 }

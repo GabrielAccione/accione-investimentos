@@ -2,10 +2,10 @@ import {
   Activity,
   BadgePercent,
   Bitcoin,
-  Building2,
   Landmark,
   LineChart,
   PiggyBank,
+  TrendingUp,
 } from 'lucide-react'
 import {
   createContext,
@@ -16,7 +16,6 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { SITE_CONFIG } from '@/config/site'
 import { formatCurrency, formatDateLabel, formatPercent, formatSignedPercent, formatSignedPoints } from '@/lib/formatters'
 import type { EconomicIndicator } from '@/types'
 
@@ -33,7 +32,10 @@ interface BcbPoint {
   valor: string
 }
 
-
+interface AccumValue {
+  value: number
+  date: string
+}
 
 const EconomicIndicatorsContext = createContext<EconomicIndicatorsContextValue | null>(null)
 const REFRESH_INTERVAL_MS = 10 * 60 * 1000
@@ -73,6 +75,28 @@ function buildIndicatorFromSeries(options: {
   } satisfies EconomicIndicator
 }
 
+function buildAccumIndicator(options: {
+  id: EconomicIndicator['id']
+  label: string
+  description: string
+  icon: EconomicIndicator['icon']
+  source: string
+  acum: AccumValue
+}) {
+  return {
+    id: options.id,
+    label: options.label,
+    description: options.description,
+    value: options.acum.value,
+    valueLabel: formatPercent(options.acum.value, '% a.a.'),
+    variation: null,
+    variationLabel: 'acumulado no ano',
+    icon: options.icon,
+    source: options.source,
+    sourceDate: options.acum.date,
+  } satisfies EconomicIndicator
+}
+
 async function loadIndicators() {
   console.log('Iniciando loadIndicators...')
 
@@ -86,7 +110,7 @@ async function loadIndicators() {
   const data = await response.json()
   console.log('DATA DA API:', JSON.stringify(data, null, 2))
 
-  if (!data.selic || !data.cdi || !data.ipca || !data.igpm) {
+  if (!data.selic || !data.cdi) {
     throw new Error('Dados incompletos retornados pela API.')
   }
 
@@ -109,28 +133,36 @@ async function loadIndicators() {
       series: data.cdi,
       valueFormatter: (value) => formatPercent(value, '% a.a.'),
     }),
-    buildIndicatorFromSeries({
-      id: 'ipca',
-      label: 'IPCA',
-      description: 'Índice oficial de inflação do país.',
-      icon: BadgePercent,
-      source: 'Banco Central do Brasil',
-      series: data.ipca,
-      valueFormatter: (value) => formatPercent(value, '% no mês'),
-      variationFormatter: (value) =>
-        value === 0 ? 'Sem mudança ante o período anterior' : formatSignedPoints(value),
-    }),
-    buildIndicatorFromSeries({
-      id: 'igpm',
-      label: 'IGP-M',
-      description: 'Índice amplamente usado em contratos e reajustes.',
-      icon: Activity,
-      source: 'Banco Central do Brasil',
-      series: data.igpm,
-      valueFormatter: (value) => formatPercent(value, '% no mês'),
-      variationFormatter: (value) =>
-        value === 0 ? 'Sem mudança ante o período anterior' : formatSignedPoints(value),
-    }),
+    ...(data.ipca_acum
+      ? [buildAccumIndicator({
+          id: 'ipca',
+          label: 'IPCA',
+          description: 'Índice oficial de inflação do país.',
+          icon: BadgePercent,
+          source: 'IBGE',
+          acum: data.ipca_acum,
+        })]
+      : []),
+    ...(data.igpm_acum
+      ? [buildAccumIndicator({
+          id: 'igpm',
+          label: 'IGP-M',
+          description: 'Índice amplamente usado em contratos e reajustes.',
+          icon: Activity,
+          source: 'Banco Central do Brasil',
+          acum: data.igpm_acum,
+        })]
+      : []),
+    ...(data.incc_acum
+      ? [buildAccumIndicator({
+          id: 'incc',
+          label: 'INCC',
+          description: 'Índice de custos da construção civil.',
+          icon: TrendingUp,
+          source: 'Banco Central do Brasil',
+          acum: data.incc_acum,
+        })]
+      : []),
     {
       id: 'bitcoin' as const,
       label: 'Bitcoin',
@@ -152,22 +184,6 @@ async function loadIndicators() {
       variationLabel: formatSignedPercent(data.ibovespa?.results?.stocks?.IBOVESPA?.variation ?? 0),
       icon: LineChart,
       source: 'HG Brasil',
-    },
-    {
-      id: 'cub' as const,
-      label: 'CUB R16N',
-      description: 'Indicador configurado manualmente até a definição do fluxo oficial.',
-      value: SITE_CONFIG.manualIndicators.cubR16n.value,
-      valueLabel: SITE_CONFIG.manualIndicators.cubR16n.valueLabel,
-      variation: SITE_CONFIG.manualIndicators.cubR16n.variation,
-      variationLabel:
-        SITE_CONFIG.manualIndicators.cubR16n.variation === null
-          ? 'Sem variação cadastrada'
-          : formatSignedPercent(SITE_CONFIG.manualIndicators.cubR16n.variation),
-      icon: Building2,
-      source: 'Configuração local',
-      sourceDate: SITE_CONFIG.manualIndicators.cubR16n.updatedAt,
-      isManual: true,
     },
   ] satisfies EconomicIndicator[]
 }

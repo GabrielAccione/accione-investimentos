@@ -1,27 +1,32 @@
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
-import { useCountUp } from '@/hooks/useCountUp'
-import { useInView } from '@/hooks/useInView'
-import WhatsAppButton from '@/components/ui/WhatsAppButton'
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { useCountUp } from "@/hooks/useCountUp";
+import { useInView } from "@/hooks/useInView";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 const METRICAS = [
-  { valor: '3x',     label: 'Acima da média de mercado' },
-  { valor: 'R$10K+', label: 'Investimento mínimo acessível' },
-  { valor: '3',      label: 'Empreendimentos em captação' },
-  { valor: '100%',   label: 'Transparência nas operações' },
-]
+  { valor: "2x", label: "Até o dobro da média de mercado" },
+  { valor: "3", label: "Empreendimentos imobilíarios" },
+  { valor: "100%", label: "Transparência nas operações" },
+];
 
 interface CounterCardProps {
-  target: number
-  prefix?: string
-  suffix?: string
-  label: string
-  inView: boolean
+  target: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+  inView: boolean;
 }
 
-function CounterCard({ target, prefix = '', suffix = '', label, inView }: CounterCardProps) {
-  const count = useCountUp(target, 1800, inView)
+function CounterCard({
+  target,
+  prefix = "",
+  suffix = "",
+  label,
+  inView,
+}: CounterCardProps) {
+  const count = useCountUp(target, 1800, inView);
 
   return (
     <div className="rounded-2xl border border-[#E5E5E5] bg-white p-4 text-left dark:border-white/10 dark:bg-white/[0.04]">
@@ -32,14 +37,17 @@ function CounterCard({ target, prefix = '', suffix = '', label, inView }: Counte
       </p>
       <p className="mt-2 text-sm text-[var(--text-muted)]">{label}</p>
     </div>
-  )
+  );
 }
 
 export default function Hero() {
-  const [countersRef, countersInView] = useInView({ threshold: 0.25 })
+  const [countersRef, countersInView] = useInView({ threshold: 0.25 });
 
   return (
-    <section id="inicio" className="hero-gradient relative overflow-hidden pt-20">
+    <section
+      id="inicio"
+      className="hero-gradient relative overflow-hidden pt-20"
+    >
       <div className="absolute left-[8%] top-28 h-56 w-56 rounded-full bg-[var(--accent)]/15 blur-3xl" />
       <div className="absolute right-[10%] top-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
 
@@ -51,7 +59,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.05 }}
             className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.96] text-[#041A2A] dark:text-white sm:text-6xl lg:text-7xl"
           >
-            Viabilizamos projetos de vida através da alocação inteligente dos seus recursos financeiros.
+            Entregamos a investidores oportunidades criteriosamente criadas.
           </motion.h1>
 
           <motion.p
@@ -60,7 +68,9 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.12 }}
             className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg"
           >
-            Somos uma empresa de investimentos multiestratégia. Nossa equipe identifica as melhores oportunidades considerando seu perfil e buscando os retornos mais competitivos do mercado.
+            Somos uma empresa de investimentos multiestratégia. Identificamos as
+            melhores oportunidades considerando seus interesses e buscando
+            retornos acima da média de mercado.
           </motion.p>
 
           <motion.div
@@ -90,9 +100,11 @@ export default function Hero() {
           <div className="flex items-center justify-between gap-4 border-b border-[#E5E5E5] pb-5 dark:border-white/10">
             <div>
               <p className="text-sm uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                Leitura de cenário
+                ACCIONE INVESTIMENTOS
               </p>
-              <h2 className="mt-2 text-3xl font-semibold text-[#041A2A] dark:text-white">Acesso guiado a teses reais</h2>
+              <h2 className="mt-2 text-3xl font-semibold text-[#041A2A] dark:text-white">
+                Nossos números
+              </h2>
             </div>
             <div className="hidden h-16 w-16 items-center justify-center rounded-full bg-[var(--accent)]/10 text-[var(--accent)] sm:flex">
               <ArrowRight size={24} />
@@ -100,13 +112,30 @@ export default function Hero() {
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            <CounterCard prefix="R$ " target={10} suffix="M+" label="em valores distribuídos" inView={countersInView} />
-            <CounterCard target={5} suffix="+" label="anos de atuação" inView={countersInView} />
-            <CounterCard target={100} suffix="+" label="operações estruturadas" inView={countersInView} />
+            <CounterCard
+              prefix="R$ "
+              target={100}
+              suffix="M+"
+              label="em negócios desenvolvidos"
+              inView={countersInView}
+            />
+            <CounterCard
+              target={5}
+              suffix="+"
+              label="anos de atuação"
+              inView={countersInView}
+            />
+            <CounterCard
+              target={100}
+              suffix="+"
+              label="investimentos financeiros alternativos"
+              inView={countersInView}
+            />
           </div>
 
           <p className="mt-6 text-sm leading-relaxed text-[var(--text-secondary)]">
-            Trabalhamos com estrutura, explicação e acompanhamento. A proposta não é ampliar ruído de mercado, e sim dar repertório para decisões melhores.
+            Trabalhamos com estrutura, explicação e acompanhamento. A proposta é
+            ampliar horizontes, andando lado a lado.
           </p>
         </motion.div>
       </div>
@@ -123,10 +152,10 @@ export default function Hero() {
               <div
                 key={m.label}
                 className={[
-                  'px-6 py-2',
-                  i % 2 !== 0 ? 'border-l border-[var(--accent)]/35' : '',
-                  i === 2 ? 'lg:border-l lg:border-[var(--accent)]/35' : '',
-                ].join(' ')}
+                  "px-6 py-2",
+                  i % 2 !== 0 ? "border-l border-[var(--accent)]/35" : "",
+                  i === 2 ? "lg:border-l lg:border-[var(--accent)]/35" : "",
+                ].join(" ")}
               >
                 <p className="font-display text-4xl font-semibold text-[#041A2A] dark:text-white sm:text-5xl">
                   {m.valor}
@@ -140,5 +169,5 @@ export default function Hero() {
         </div>
       </motion.div>
     </section>
-  )
+  );
 }

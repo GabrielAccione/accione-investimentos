@@ -40,7 +40,7 @@ export interface Testimonial {
 }
 
 export interface EconomicIndicator {
-  id: 'selic' | 'cdi' | 'ipca' | 'igpm' | 'bitcoin' | 'ibovespa' | 'cub'
+  id: 'selic' | 'cdi' | 'ipca' | 'igpm' | 'bitcoin' | 'ibovespa' | 'incc'
   label: string
   description: string
   value: number | null

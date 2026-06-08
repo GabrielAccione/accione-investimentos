@@ -39,11 +39,13 @@ export default function RetirementSimulatorPage() {
   const [annualRate, setAnnualRate] = useState(
     String(DEFAULT_VALUES.annualRate),
   );
+  const [initialInvestment, setInitialInvestment] = useState('0');
 
   const parsedCurrentAge = Number(currentAge);
   const parsedRetirementAge = Number(retirementAge);
   const parsedMonthlyContribution = Number(monthlyContribution);
   const parsedAnnualRate = Number(annualRate);
+  const parsedInitialInvestment = Number(initialInvestment);
 
   const validationError = (() => {
     if (parsedRetirementAge <= parsedCurrentAge)
@@ -66,6 +68,7 @@ export default function RetirementSimulatorPage() {
         parsedRetirementAge,
         parsedMonthlyContribution,
         parsedAnnualRate,
+        parsedInitialInvestment,
       )
     : null;
 
@@ -116,6 +119,20 @@ export default function RetirementSimulatorPage() {
                   min={19}
                   value={retirementAge}
                   onChange={(event) => setRetirementAge(event.target.value)}
+                  className="input-base"
+                />
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
+                  Investimento inicial (R$)
+                </span>
+                <input
+                  type="number"
+                  min={0}
+                  step={100}
+                  value={initialInvestment}
+                  onChange={(event) => setInitialInvestment(event.target.value)}
                   className="input-base"
                 />
               </label>

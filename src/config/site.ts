@@ -20,12 +20,4 @@ export const SITE_CONFIG = {
     instagram: "https://www.instagram.com/accioneinvestimentos/",
     linkedin: "https://www.linkedin.com/company/accioneinvestimentos/",
   },
-  manualIndicators: {
-    cubR16n: {
-      value: null as number | null,
-      valueLabel: "Atualizar manualmente",
-      variation: null as number | null,
-      updatedAt: "Pendente de definição",
-    },
-  },
 } as const;

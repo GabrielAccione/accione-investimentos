@@ -16,7 +16,7 @@ const CONTEXT_CARDS = [
   {
     title: 'Mercado',
     description:
-      'Bitcoin, Ibovespa e CUB ajudam a compor leitura de apetite a risco e custo de reposição.',
+      'Bitcoin e Ibovespa ajudam a compor leitura de apetite a risco no mercado financeiro.',
   },
 ]
 

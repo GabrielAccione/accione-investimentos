@@ -27,13 +27,14 @@ export function calculateRetirementProjection(
   retirementAge: number,
   monthlyContribution: number,
   annualRate: number,
+  initialInvestment = 0,
 ): RetirementProjectionResult {
   const years = Math.max(retirementAge - currentAge, 0)
   const months = years * 12
   const monthlyRate = annualToMonthlyRate(annualRate)
 
-  let balance = 0
-  const points: RetirementProjectionPoint[] = [{ age: currentAge, year: 0, balance: 0 }]
+  let balance = initialInvestment
+  const points: RetirementProjectionPoint[] = [{ age: currentAge, year: 0, balance: initialInvestment }]
 
   for (let month = 1; month <= months; month += 1) {
     balance = balance * (1 + monthlyRate) + monthlyContribution

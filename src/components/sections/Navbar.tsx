@@ -28,8 +28,8 @@ const SOCIAL_LINKS = [
 
 const PRIMARY_LINKS = [
   { label: "Início", to: "/" },
-  { label: "Investimentos", to: "/investimentos" },
-  { label: "Empreendimentos", to: "/empreendimentos" },
+  { label: "Investimentos Financeiros", to: "/investimentos" },
+  { label: "Empreendimentos Imobiliarios", to: "/empreendimentos" },
   { label: "Indicadores", to: "/indicadores" },
   { label: "Sobre", to: "/sobre" },
   { label: "Blog", to: "/blog" },
@@ -80,7 +80,7 @@ export default function Navbar() {
       >
         <nav
           className={`section-container flex items-center justify-between gap-4 transition-all duration-500 h-12 w-auto object-contain ${
-            scrolled ? "h-16" : "h-20"
+            scrolled ? "h-18" : "h-28"
           }`}
         >
           {/* Logo */}
@@ -94,7 +94,9 @@ export default function Navbar() {
               <img
                 src={theme === "dark" ? logoDark : logoLight}
                 alt="Accione Investimentos"
-                className="h-14 w-auto object-contain"
+                className={`w-auto object-contain transition-all duration-500 ${
+                  scrolled ? "h-16" : "h-24"
+                }`}
                 style={
                   theme === "light" ? { mixBlendMode: "multiply" } : undefined
                 }
