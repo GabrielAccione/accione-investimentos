@@ -43,17 +43,29 @@ const SIMULATOR_LINKS = [
 
 const ALL_MOBILE_LINKS = [...PRIMARY_LINKS, ...SIMULATOR_LINKS];
 
-function DesktopNavLink({ to, label }: { to: string; label: string }) {
+function DesktopNavLink({
+  to,
+  label,
+  lightUnscrolled = false,
+}: {
+  to: string;
+  label: string;
+  lightUnscrolled?: boolean;
+}) {
   return (
     <NavLink
       to={to}
       className={({ isActive }) =>
         [
-          "relative text-sm font-medium transition-colors duration-200",
+          "relative text-sm font-medium transition-colors duration-200 whitespace-nowrap",
           "after:absolute after:bottom-[-4px] after:left-0 after:h-px after:bg-[var(--accent)] after:transition-all after:duration-300",
           isActive
-            ? "text-[#E0E0E0] dark:text-white after:w-full"
-            : "text-[#E0E0E0] hover:text-white dark:text-white/70 dark:hover:text-white after:w-0 hover:after:w-full",
+            ? lightUnscrolled
+              ? "text-[#041A2A] after:w-full"
+              : "text-[#E0E0E0] dark:text-white after:w-full"
+            : lightUnscrolled
+              ? "text-[#041A2A]/80 hover:text-[#041A2A] after:w-0 hover:after:w-full"
+              : "text-[#E0E0E0] hover:text-white dark:text-white/70 dark:hover:text-white after:w-0 hover:after:w-full",
         ].join(" ")
       }
     >
@@ -68,6 +80,7 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const simulatorsActive = pathname.startsWith("/simuladores/");
   const { theme, toggleTheme } = useTheme();
+  const lightUnscrolled = !scrolled && theme === "light";
 
   return (
     <>
@@ -75,7 +88,7 @@ export default function Navbar() {
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out ${
           scrolled
             ? "border-b border-black/10 dark:border-white/10 bg-[#2C2C2C]/95 dark:bg-black/95 shadow-lg shadow-black/10 dark:shadow-black/20 backdrop-blur-md"
-            : "bg-[#2C2C2C]/80 backdrop-blur-md dark:bg-transparent dark:backdrop-blur-none"
+            : "bg-white/80 backdrop-blur-md dark:bg-transparent dark:backdrop-blur-none"
         }`}
       >
         <nav
@@ -105,19 +118,19 @@ export default function Navbar() {
           </motion.div>
 
           {/* Desktop links */}
-          <div className="hidden lg:flex lg:items-center lg:gap-5 xl:gap-7">
+          <div className="hidden lg:flex lg:items-center lg:gap-4 xl:gap-6">
             {PRIMARY_LINKS.map((link) => (
-              <DesktopNavLink key={link.to} to={link.to} label={link.label} />
+              <DesktopNavLink key={link.to} to={link.to} label={link.label} lightUnscrolled={lightUnscrolled} />
             ))}
 
             {/* Simuladores dropdown */}
             <div className="group relative">
               <button
                 type="button"
-                className={`inline-flex items-center gap-1 text-sm font-medium transition-colors duration-200 ${
+                className={`inline-flex items-center gap-1 text-sm font-medium transition-colors duration-200 whitespace-nowrap ${
                   simulatorsActive
-                    ? "text-[#E0E0E0] dark:text-white"
-                    : "text-[#E0E0E0] hover:text-white dark:text-white/70 dark:hover:text-white"
+                    ? lightUnscrolled ? "text-[#041A2A]" : "text-[#E0E0E0] dark:text-white"
+                    : lightUnscrolled ? "text-[#041A2A]/80 hover:text-[#041A2A]" : "text-[#E0E0E0] hover:text-white dark:text-white/70 dark:hover:text-white"
                 }`}
               >
                 Simuladores
