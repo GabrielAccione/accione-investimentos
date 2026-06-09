@@ -799,43 +799,23 @@ export default function EmpreendimentoDetalhe() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            {/* Map — Google Maps for sync-floriano, placeholder for others */}
-            {slug === 'sync-floriano' ? (
-              <motion.div
-                initial={{ opacity: 0, x: -24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="lg:col-span-2 rounded-xl overflow-hidden border border-[#484949]/20"
-              >
-                <iframe
-                  src="MAPS_EMBED_URL_PLACEHOLDER"
-                  title="Localização Sync Floriano"
-                  width="100%"
-                  height="400"
-                  style={{ border: 'none', display: 'block' }}
-                  loading="lazy"
-                  allowFullScreen
+            {/* Map placeholder */}
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-2 rounded-xl overflow-hidden border border-[#484949]/20 bg-[var(--bg-primary)] h-72 flex items-center justify-center"
+            >
+              <div className="text-center text-[var(--text-muted)]">
+                <MapPin
+                  size={40}
+                  className="mx-auto mb-3 text-[var(--accent)]/40"
                 />
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, x: -24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="lg:col-span-2 rounded-xl overflow-hidden border border-[#484949]/20 bg-[var(--bg-primary)] h-72 flex items-center justify-center"
-              >
-                <div className="text-center text-[var(--text-muted)]">
-                  <MapPin
-                    size={40}
-                    className="mx-auto mb-3 text-[var(--accent)]/40"
-                  />
-                  <p className="text-sm">Mapa interativo em breve</p>
-                  <p className="text-xs mt-1">{location}</p>
-                </div>
-              </motion.div>
-            )}
+                <p className="text-sm">Mapa interativo em breve</p>
+                <p className="text-xs mt-1">{location}</p>
+              </div>
+            </motion.div>
 
             {/* Points of interest */}
             <motion.div

@@ -1,24 +1,653 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trajetória Solar</title>
-  <style>
-    body {
-      margin: 0;
-      background: #041A2A;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      font-family: sans-serif;
-      color: #8899AA;
-    }
-    p { font-size: 14px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Trajetória Solar — Edifício 20 Pavimentos · Santa Maria/RS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c1118; --panel:rgba(16,22,31,.78); --line:rgba(140,170,200,.16);
+    --txt:#e8eef5; --dim:#8fa3b8; --sun:#ffb347; --sun2:#ffd98a;
+    --summer:#ff8a3d; --winter:#56b6ff; --good:#7CE3A6;
+    --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans',sans-serif; --disp:'Syne',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:var(--sans)}
+  #scene{position:fixed;inset:0;touch-action:none}
+  .panel{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--line);border-radius:14px}
+
+  /* ---- Top-left identity ---- */
+  #head{position:fixed;top:14px;left:14px;padding:13px 16px;max-width:min(82vw,320px);z-index:10}
+  #head h1{font-family:var(--disp);font-weight:800;font-size:15px;letter-spacing:.2px;line-height:1.15}
+  #head .loc{font-family:var(--mono);font-size:10.5px;color:var(--dim);margin-top:5px;letter-spacing:.3px}
+  #head .loc b{color:var(--sun2);font-weight:600}
+
+  /* ---- Season badge ---- */
+  #badge{position:fixed;top:14px;right:14px;z-index:10;padding:11px 15px;text-align:right;min-width:148px}
+  #badge .szn{font-family:var(--disp);font-weight:800;font-size:18px;letter-spacing:.4px;display:flex;
+    align-items:center;justify-content:flex-end;gap:7px;transition:color .4s}
+  #badge .date{font-family:var(--mono);font-size:10.5px;color:var(--dim);margin-top:3px}
+  #badge .dot{width:9px;height:9px;border-radius:50%}
+
+  /* ---- Solar readout ---- */
+  #data{position:fixed;left:14px;bottom:118px;z-index:10;padding:12px 14px;width:182px}
+  #data .clk{font-family:var(--mono);font-weight:600;font-size:30px;letter-spacing:1px;line-height:1}
+  #data .clk span{font-size:13px;color:var(--dim)}
+  #data .row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;margin-top:8px;color:var(--dim)}
+  #data .row b{color:var(--txt);font-weight:600}
+  #data .sep{height:1px;background:var(--line);margin:9px 0}
+
+  /* ---- Facade chips ---- */
+  #faces{position:fixed;right:14px;bottom:118px;z-index:10;padding:11px 13px;width:178px}
+  #faces .t{font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:1px;color:var(--dim);
+    text-transform:uppercase;margin-bottom:9px}
+  .chip{margin-bottom:8px}
+  .chip:last-child{margin-bottom:0}
+  .chip .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;margin-bottom:3px}
+  .chip .lab .nm{color:var(--txt);font-weight:500}
+  .chip .lab .pc{color:var(--dim)}
+  .chip .bar{height:5px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+  .chip .fill{height:100%;width:0;border-radius:3px;
+    background:linear-gradient(90deg,var(--sun),var(--sun2));transition:width .12s linear}
+
+  /* ---- Timeline / controls ---- */
+  #ctrl{position:fixed;left:14px;right:14px;bottom:14px;z-index:10;padding:12px 16px}
+  #ctrl .lns{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;
+    letter-spacing:.5px;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
+  #ctrl .lns .a{color:var(--summer)} #ctrl .lns .b{color:var(--winter)}
+  #track{position:relative;height:14px;cursor:pointer;border-radius:7px;overflow:hidden;
+    background:linear-gradient(90deg,rgba(255,138,61,.22) 0 50%,rgba(86,182,255,.22) 50% 100%)}
+  #track .mid{position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.35)}
+  #prog{position:absolute;top:0;bottom:0;left:0;width:0;
+    background:linear-gradient(90deg,rgba(255,179,71,.35),rgba(255,217,138,.5));border-right:2px solid #fff}
+  #ctrl .btns{display:flex;align-items:center;gap:8px;margin-top:11px;flex-wrap:wrap}
+  button{font-family:var(--mono);font-size:11px;color:var(--txt);background:rgba(255,255,255,.06);
+    border:1px solid var(--line);border-radius:9px;padding:7px 11px;cursor:pointer;transition:.15s;font-weight:500}
+  button:hover{background:rgba(255,255,255,.12);border-color:rgba(140,170,200,.34)}
+  button.on{background:rgba(255,179,71,.16);border-color:var(--sun);color:var(--sun2)}
+  button.play{background:var(--sun);color:#1a1206;border-color:var(--sun);font-weight:600;min-width:46px}
+  button.play:hover{background:var(--sun2)}
+  .grow{flex:1}
+  .hint{font-family:var(--mono);font-size:9.5px;color:var(--dim);letter-spacing:.3px}
+
+  @media (max-width:640px){
+    #data{bottom:130px;width:150px;padding:10px 12px} #data .clk{font-size:25px}
+    #faces{bottom:130px;width:150px;padding:9px 11px}
+    #badge{min-width:0;padding:9px 12px} #badge .szn{font-size:15px}
+    #head{max-width:60vw;padding:10px 13px} #head h1{font-size:12.5px}
+    .hint{display:none}
+  }
+  @media (max-width:430px){
+    #faces{display:none}
+  }
+</style>
 </head>
 <body>
-  <p>Visualização em preparação</p>
+<canvas id="scene"></canvas>
+
+<div id="head" class="panel">
+  <h1>Trajetória do Sol · Edifício 20 Pavimentos</h1>
+  <div class="loc">SANTA MARIA / RS · LAT <b>29,7° S</b> · HEMISFÉRIO SUL</div>
+</div>
+
+<div id="badge" class="panel">
+  <div class="szn" id="szn"><span class="dot" id="szn-dot"></span><span id="szn-txt">VERÃO</span></div>
+  <div class="date" id="szn-date">21 dez · solstício</div>
+</div>
+
+<div id="data" class="panel">
+  <div class="clk"><span id="clk-amp"></span><b id="clk">06:00</b></div>
+  <div class="sep"></div>
+  <div class="row"><span>Elevação</span><b id="d-elev">0°</b></div>
+  <div class="row"><span>Azimute</span><b id="d-azi">—</b></div>
+  <div class="row"><span>Duração dia</span><b id="d-len">—</b></div>
+</div>
+
+<div id="faces" class="panel">
+  <div class="t">Sol nas fachadas</div>
+  <div class="chip" data-f="N"><div class="lab"><span class="nm">▲ Norte</span><span class="pc">0%</span></div><div class="bar"><div class="fill"></div></div></div>
+  <div class="chip" data-f="L"><div class="lab"><span class="nm">▶ Leste</span><span class="pc">0%</span></div><div class="bar"><div class="fill"></div></div></div>
+  <div class="chip" data-f="O"><div class="lab"><span class="nm">◀ Oeste</span><span class="pc">0%</span></div><div class="bar"><div class="fill"></div></div></div>
+  <div class="chip" data-f="S"><div class="lab"><span class="nm">▼ Sul</span><span class="pc">0%</span></div><div class="bar"><div class="fill"></div></div></div>
+  <div class="chip" data-f="C"><div class="lab"><span class="nm">■ Cobertura</span><span class="pc">0%</span></div><div class="bar"><div class="fill"></div></div></div>
+</div>
+
+<div id="ctrl" class="panel">
+  <div class="lns"><span class="a">◐ Verão (0–50%)</span><span class="b">Inverno (50–100%) ◑</span></div>
+  <div id="track"><div id="prog"></div><div class="mid"></div></div>
+  <div class="btns">
+    <button class="play" id="b-play">⏸</button>
+    <button id="b-restart">↺</button>
+    <button id="b-speed">1×</button>
+    <button id="b-arcs" class="on">Arcos ☀</button>
+    <button id="b-view">Topo ⤓</button>
+    <span class="grow"></span>
+    <span class="hint">arraste p/ girar · scroll/pinça p/ zoom</span>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+const THREE = window.THREE;
+const D2R = Math.PI/180, R2D = 180/Math.PI;
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp = (a,b,t)=>a+(b-a)*t;
+
+/* ===== Site / coordinate convention =====
+   +X = Leste (East) · +Z = Sul (South) · -Z = Norte (North) · +Y = up      */
+const LAT = -29.7 * D2R;                 // Santa Maria, RS
+const DECL_SUMMER = -23.45 * D2R;        // 21 dez (verão no hemisfério sul)
+const DECL_WINTER =  23.45 * D2R;        // 21 jun (inverno)
+
+// Sun altitude & azimuth (azimuth clockwise from North) for a given hour angle
+function sunAltAz(decl, ha){
+  const sinAlt = Math.sin(LAT)*Math.sin(decl) + Math.cos(LAT)*Math.cos(decl)*Math.cos(ha);
+  const alt = Math.asin(clamp(sinAlt,-1,1));
+  let cosAz = (Math.sin(decl) - sinAlt*Math.sin(LAT)) / (Math.cos(alt)*Math.cos(LAT));
+  cosAz = clamp(cosAz,-1,1);
+  let az = Math.acos(cosAz);              // 0..PI measured from North
+  if (ha > 0) az = 2*Math.PI - az;        // afternoon -> swing to the West
+  return {alt, az};
+}
+// Convert alt/az to a Three.js direction (unit vector pointing toward the sun)
+function sunDir(alt, az){
+  return new THREE.Vector3(
+    Math.cos(alt)*Math.sin(az),          // East  (+X)
+    Math.sin(alt),                       // Up    (+Y)
+    -Math.cos(alt)*Math.cos(az)          // North = -Z
+  );
+}
+// Hour angle at sunrise/sunset for a declination
+function haSunset(decl){
+  let c = -Math.tan(LAT)*Math.tan(decl);
+  return Math.acos(clamp(c,-1,1));        // sun above horizon for ha in [-this, +this]
+}
+
+/* ===== Renderer / scene / camera ===== */
+const canvas = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x0c1118, 300, 880);
+
+const camera = new THREE.PerspectiveCamera(48, 1, 1, 2000);
+const target = new THREE.Vector3(0, 30, 0);
+let camR = 235, camTheta = 128*D2R, camPhi = 62*D2R;   // start NE, elevated, wide enough for the city
+function placeCamera(){
+  const sp = Math.sin(camPhi);
+  camera.position.set(
+    target.x + camR*sp*Math.sin(camTheta),
+    target.y + camR*Math.cos(camPhi),
+    target.z + camR*sp*Math.cos(camTheta)
+  );
+  camera.lookAt(target);
+}
+
+/* ===== Lights ===== */
+const hemi = new THREE.HemisphereLight(0xbcd4f0, 0x2a2620, 0.55);
+scene.add(hemi);
+const ambient = new THREE.AmbientLight(0xffffff, 0.12); scene.add(ambient);
+const sun = new THREE.DirectionalLight(0xfff2d6, 1.1);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048,2048);
+const sc = sun.shadow.camera;
+sc.left=-210; sc.right=210; sc.top=210; sc.bottom=-210; sc.near=1; sc.far=1100;
+sun.shadow.bias = -0.0004;
+scene.add(sun); scene.add(sun.target);
+
+/* ===== Ground (asphalt) ===== */
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(760, 760),
+  new THREE.MeshStandardMaterial({color:0x141920, roughness:1, metalness:0})
+);
+ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
+
+/* ===== Building (20 pavimentos) ===== */
+const FLOORS=20, FLOOR_H=3, H=FLOORS*FLOOR_H;  // 60 m
+const W=24, D=18;                              // E-W width, N-S depth
+function windowTexture(){
+  const c=document.createElement('canvas'); c.width=c.height=128; const x=c.getContext('2d');
+  x.fillStyle='#aeb9c4'; x.fillRect(0,0,128,128);              // concrete frame
+  const g=x.createLinearGradient(0,0,120,120);
+  g.addColorStop(0,'#5f88a6'); g.addColorStop(.45,'#a7c8dd'); g.addColorStop(1,'#4a6d86');
+  x.fillStyle=g; x.fillRect(9,9,110,110);                       // glass
+  x.fillStyle='rgba(255,255,255,.18)'; x.fillRect(20,18,40,38); // reflection
+  x.strokeStyle='rgba(20,30,40,.5)'; x.lineWidth=3; x.strokeRect(9,9,110,110);
+  x.beginPath(); x.moveTo(64,9); x.lineTo(64,119); x.lineWidth=2; x.stroke();
+  const t=new THREE.CanvasTexture(c); t.wrapS=t.wrapT=THREE.RepeatWrapping; return t;
+}
+function faceMat(colsRepeat){
+  const t=windowTexture(); t.repeat.set(colsRepeat, FLOORS);
+  return new THREE.MeshStandardMaterial({map:t, roughness:.55, metalness:.15, color:0xffffff});
+}
+const roofMat = new THREE.MeshStandardMaterial({color:0x6d7884, roughness:.9, metalness:.1});
+const baseMat = new THREE.MeshStandardMaterial({color:0x2b333c, roughness:1});
+// BoxGeometry material order: +X, -X, +Y, -Y, +Z, -Z
+const building = new THREE.Mesh(new THREE.BoxGeometry(W,H,D), [
+  faceMat(6),  // +X Leste
+  faceMat(6),  // -X Oeste
+  roofMat,     // +Y cobertura
+  baseMat,     // -Y base
+  faceMat(8),  // +Z Sul
+  faceMat(8)   // -Z Norte
+]);
+building.position.y = H/2; building.castShadow = true; building.receiveShadow = true;
+scene.add(building);
+// rooftop detail
+(function(){
+  const box=new THREE.Mesh(new THREE.BoxGeometry(7,4,6), roofMat);
+  box.position.set(-4,H+2,3); box.castShadow=true; scene.add(box);
+  const box2=new THREE.Mesh(new THREE.BoxGeometry(4,6,4), roofMat);
+  box2.position.set(6,H+3,-3); box2.castShadow=true; scene.add(box2);
+})();
+
+/* ===== Urban context — cidade fictícia ===== */
+const BLOCK=56, STREET=16, PITCH=BLOCK+STREET, GRID=2;
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+const rng=mulberry32(7);
+const ri=(a,b)=>a+Math.floor(rng()*(b-a+1));
+const rf=(a,b)=>a+rng()*(b-a);
+function shade(hex,f){const r=hex>>16&255,g=hex>>8&255,b=hex&255;
+  return 'rgb('+clamp(Math.round(r*f),0,255)+','+clamp(Math.round(g*f),0,255)+','+clamp(Math.round(b*f),0,255)+')';}
+
+/* --- tiles de fachada (2 pav x 4 colunas), reaproveitados --- */
+function facadeTile(glass, frame, balcony){
+  const c=document.createElement('canvas'); c.width=256;c.height=256; const x=c.getContext('2d');
+  x.fillStyle=shade(frame,1); x.fillRect(0,0,256,256);
+  const cols=4, rows=2, cw=256/cols, rh=256/rows, pad=7, sp=12;
+  for(let r=0;r<rows;r++)for(let k=0;k<cols;k++){
+    const gx=k*cw+pad, gy=r*rh+pad, gw=cw-2*pad, gh=rh-2*pad-sp;
+    const lit=rng()<0.10;
+    if(lit){ x.fillStyle='#ffdf9c'; }
+    else{ const g=x.createLinearGradient(gx,gy,gx+gw*0.6,gy+gh);
+      g.addColorStop(0,shade(glass,1.25)); g.addColorStop(.5,shade(glass,1)); g.addColorStop(1,shade(glass,.72));
+      x.fillStyle=g; }
+    x.fillRect(gx,gy,gw,gh);
+    if(!lit){ x.fillStyle='rgba(255,255,255,.16)'; x.fillRect(gx+3,gy+3,gw*0.4,gh*0.45); }
+    x.strokeStyle='rgba(12,18,26,.5)'; x.lineWidth=2; x.strokeRect(gx,gy,gw,gh);
+    x.beginPath(); x.moveTo(gx+gw/2,gy); x.lineTo(gx+gw/2,gy+gh); x.stroke();
+    x.fillStyle=shade(frame,.82); x.fillRect(k*cw, gy+gh+1, cw, sp+pad);   // peitoril/laje
+    if(balcony){ x.strokeStyle='rgba(190,205,220,.6)'; x.lineWidth=1.5; x.strokeRect(k*cw+2, gy+gh+2, cw-4, 6); }
+  }
+  const t=new THREE.CanvasTexture(c); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.anisotropy=4; return t;
+}
+const FAC=[
+  facadeTile(0x5f88a6,0xb9c3cd,false), // vidro azul / concreto claro
+  facadeTile(0x4f8a86,0x9aa6ae,false), // verde-água
+  facadeTile(0x8b97a3,0x6e7882,false), // neutro
+  facadeTile(0x9a7d5a,0xc7bca6,true),  // bronze c/ varanda
+  facadeTile(0x6f93ad,0xcfd6dd,true),  // residencial c/ varanda
+  facadeTile(0x7d8a96,0x55606a,false)  // grafite
+];
+const roofTop=new THREE.MeshStandardMaterial({color:0x474f58,roughness:.95,metalness:.05});
+function bodyMats(fw,fd,floors,fi){
+  const t=FAC[fi];
+  const mk=(w)=>{const c=t.clone();c.wrapS=c.wrapT=THREE.RepeatWrapping;c.repeat.set(Math.max(1,Math.round(w/10)),Math.max(1,Math.round(floors/2)));c.needsUpdate=true;
+    return new THREE.MeshStandardMaterial({map:c,roughness:.62,metalness:.16});};
+  return [mk(fd),mk(fd),roofTop,baseMat,mk(fw),mk(fw)];
+}
+function waterTank(x,y,z,s){            // caixa d'água sobre pernas (cheap, sem sombra)
+  const g=new THREE.Group();
+  const t=new THREE.Mesh(new THREE.CylinderGeometry(s,s,s*1.4,10),
+    new THREE.MeshStandardMaterial({color:0x3f6fa0,roughness:.8})); t.position.y=s*1.5; g.add(t);
+  const leg=new THREE.MeshStandardMaterial({color:0x5a626b});
+  for(const dx of [-s*.6,s*.6])for(const dz of [-s*.6,s*.6]){
+    const l=new THREE.Mesh(new THREE.BoxGeometry(.3,s*1.6,.3),leg); l.position.set(dx,s*.8,dz); g.add(l);}
+  g.position.set(x,y,z); scene.add(g);
+}
+function rooftop(cx,cz,fw,fd,h){
+  const p=new THREE.Mesh(new THREE.BoxGeometry(fw+1,1.4,fd+1),roofTop);
+  p.position.set(cx,h+0.7,cz); p.castShadow=false; scene.add(p);   // platibanda
+  waterTank(cx+rf(-fw*.25,fw*.25), h+1.2, cz+rf(-fd*.25,fd*.25), rf(1,1.8));
+  if(rng()<0.5){ const ac=new THREE.Mesh(new THREE.BoxGeometry(rf(2,4),1.6,rf(2,4)),roofTop);
+    ac.position.set(cx+rf(-fw*.2,fw*.2),h+1.6,cz+rf(-fd*.2,fd*.2)); scene.add(ac);}
+}
+function tower(cx,cz,fw,fd,floors){    // médio/alto, com embasamento e recuo
+  const fi=Math.floor(rng()*FAC.length);
+  if(floors>=8 && rng()<0.7){
+    const pf=ri(2,3), ph=pf*3;
+    const pod=new THREE.Mesh(new THREE.BoxGeometry(fw,ph,fd),bodyMats(fw,fd,pf,fi));
+    pod.position.set(cx,ph/2,cz); pod.castShadow=pod.receiveShadow=true; scene.add(pod);
+    const tw=fw*rf(.62,.8), td=fd*rf(.62,.8), tf=floors-pf, th=tf*3;
+    const ox=rf(-(fw-tw)/2,(fw-tw)/2), oz=rf(-(fd-td)/2,(fd-td)/2);
+    const tb=new THREE.Mesh(new THREE.BoxGeometry(tw,th,td),bodyMats(tw,td,tf,fi));
+    tb.position.set(cx+ox,ph+th/2,cz+oz); tb.castShadow=tb.receiveShadow=true; scene.add(tb);
+    rooftop(cx+ox,cz+oz,tw,td,ph+th);
+  } else {
+    const h=floors*3;
+    const b=new THREE.Mesh(new THREE.BoxGeometry(fw,h,fd),bodyMats(fw,fd,floors,fi));
+    b.position.set(cx,h/2,cz); b.castShadow=b.receiveShadow=true; scene.add(b);
+    rooftop(cx,cz,fw,fd,h);
+  }
+}
+const wallCols=[0xb9a98c,0xc9b79a,0xa8b0a0,0xc2a59a,0x9fb0bd,0xd2c4a8,0xb0a0a8];
+function house(cx,cz,w,d){             // casa 1–2 pav com telhado
+  const floors=ri(1,2), h=floors*3;
+  const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),
+    new THREE.MeshStandardMaterial({color:wallCols[Math.floor(rng()*wallCols.length)],roughness:.95}));
+  b.position.set(cx,h/2,cz); b.castShadow=b.receiveShadow=true; scene.add(b);
+  const mx=Math.max(w,d);
+  const roof=new THREE.Mesh(new THREE.ConeGeometry(mx*0.72,rf(2.5,4),4),
+    new THREE.MeshStandardMaterial({color:rng()<.5?0x8f4f37:0x6b6f74,roughness:1}));
+  roof.rotation.y=Math.PI/4; roof.position.set(cx,h+1.4,cz); roof.scale.set(w/mx,1,d/mx);
+  roof.castShadow=true; scene.add(roof);
+}
+function lowCommercial(cx,cz,w,d){     // comércio/misto 2–4 pav, laje plana
+  const floors=ri(2,4), h=floors*3, fi=Math.floor(rng()*FAC.length);
+  const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),bodyMats(w,d,floors,fi));
+  b.position.set(cx,h/2,cz); b.castShadow=b.receiveShadow=true; scene.add(b);
+  const p=new THREE.Mesh(new THREE.BoxGeometry(w+.6,1,d+.6),roofTop); p.position.set(cx,h+.5,cz); scene.add(p);
+  if(rng()<.7) waterTank(cx+rf(-w*.2,w*.2),h+1,cz+rf(-d*.2,d*.2),rf(.8,1.3));
+}
+function addTree(x,z,s){
+  s=s||1;
+  const tr=new THREE.Mesh(new THREE.CylinderGeometry(.3*s,.5*s,4*s,6),
+    new THREE.MeshStandardMaterial({color:0x4a3a2a,roughness:1}));
+  tr.position.set(x,2*s,z); tr.castShadow=true; scene.add(tr);
+  const f=new THREE.Mesh(new THREE.SphereGeometry(2.4*s,8,7),
+    new THREE.MeshStandardMaterial({color:rng()<.5?0x33522e:0x3e6033,roughness:1}));
+  f.position.set(x,5.4*s,z); f.scale.y=rf(.8,1.1); f.castShadow=true; scene.add(f);
+}
+
+for(let i=-GRID;i<=GRID;i++)for(let j=-GRID;j<=GRID;j++){
+  const cx=i*PITCH, cz=j*PITCH, ring=Math.max(Math.abs(i),Math.abs(j)), hero=ring===0;
+  const lot=new THREE.Mesh(new THREE.PlaneGeometry(BLOCK,BLOCK),
+    new THREE.MeshStandardMaterial({color:hero?0x35312a:(ring===1?0x2b332c:0x272e36), roughness:1}));
+  lot.rotation.x=-Math.PI/2; lot.position.set(cx,0.05,cz); lot.receiveShadow=true; scene.add(lot);
+  if(hero) continue;                          // empreendimento (já construído)
+
+  if(ring===1){
+    // VIZINHANÇA IMEDIATA — somente 1 a 4 pavimentos
+    const q=BLOCK/4;
+    for(const sx of [-q,q])for(const sz of [-q,q]){
+      if(rng()<0.12) continue;                // alguns lotes vazios
+      const w=rf(10,18), d=rf(10,18), px=cx+sx+rf(-2,2), pz=cz+sz+rf(-2,2);
+      if(rng()<0.55) house(px,pz,w,d); else lowCommercial(px,pz,w,d);
+    }
+    const e=BLOCK/2-3;
+    addTree(cx+(rng()<.5?-e:e), cz+(rng()<.5?-e:e), rf(.8,1.2));
+    if(rng()<.6) addTree(cx+rf(-e,e), cz+(rng()<.5?-e:e), rf(.7,1));
+  } else {
+    // ANEL EXTERNO — médios e altos
+    if(rng()<0.4){ const o=BLOCK/4;
+      tower(cx-o,cz,rf(14,22),rf(14,22),ri(6,12));
+      tower(cx+o,cz,rf(14,22),rf(14,22),ri(6,12));
+    } else tower(cx+rf(-4,4),cz+rf(-4,4),rf(18,30),rf(16,26),ri(8,20));
+    if(rng()<.5) addTree(cx+rf(-BLOCK/2+3,BLOCK/2-3), cz+rf(-BLOCK/2+3,BLOCK/2-3));
+  }
+}
+
+// skyline ao fundo (silhuetas, sem sombra, esmaecidas pela neblina)
+(function(){
+  const mats=[0x2b3440,0x323c49,0x283038,0x39434f].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:1}));
+  for(let R=215; R<=330; R+=58){
+    const n=Math.round(R/12);
+    for(let k=0;k<n;k++){
+      const a=(k/n)*Math.PI*2 + rng()*0.3, r=R+rf(-18,18);
+      const w=rf(14,28), d=rf(14,28), h=rf(30,92);
+      const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mats[Math.floor(rng()*mats.length)]);
+      b.position.set(Math.cos(a)*r, h/2, Math.sin(a)*r); scene.add(b);
+    }
+  }
+})();
+
+// faixas centrais das ruas
+(function(){
+  const mat=new THREE.LineDashedMaterial({color:0xc9a23a, dashSize:3, gapSize:4, transparent:true, opacity:.4});
+  const ext=(GRID+0.5)*PITCH;
+  for(let k=-GRID;k<GRID;k++){
+    const c=(k+0.5)*PITCH;
+    const a=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(c,0.12,-ext),new THREE.Vector3(c,0.12,ext)]),mat); a.computeLineDistances(); scene.add(a);
+    const b=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-ext,0.12,c),new THREE.Vector3(ext,0.12,c)]),mat); b.computeLineDistances(); scene.add(b);
+  }
+})();
+
+/* ===== Per-face sun highlight overlays ===== */
+const overlays = {};
+function makeOverlay(w,h){
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),
+    new THREE.MeshBasicMaterial({color:0xffc15a, transparent:true, opacity:0,
+      blending:THREE.AdditiveBlending, depthWrite:false, side:THREE.DoubleSide}));
+  scene.add(m); return m;
+}
+overlays.N=makeOverlay(W,H); overlays.N.position.set(0,H/2,-D/2-0.25); overlays.N.rotation.y=Math.PI;
+overlays.S=makeOverlay(W,H); overlays.S.position.set(0,H/2, D/2+0.25);
+overlays.L=makeOverlay(D,H); overlays.L.position.set( W/2+0.25,H/2,0); overlays.L.rotation.y= Math.PI/2;
+overlays.O=makeOverlay(D,H); overlays.O.position.set(-W/2-0.25,H/2,0); overlays.O.rotation.y=-Math.PI/2;
+overlays.C=makeOverlay(W,D); overlays.C.position.set(0,H+0.25,0); overlays.C.rotation.x=-Math.PI/2;
+const faceNormals={
+  N:new THREE.Vector3(0,0,-1), S:new THREE.Vector3(0,0,1),
+  L:new THREE.Vector3(1,0,0),  O:new THREE.Vector3(-1,0,0),
+  C:new THREE.Vector3(0,1,0)
+};
+
+/* ===== Compass labels ===== */
+function label(text, color, size){
+  const c=document.createElement('canvas'); c.width=256;c.height=128; const x=c.getContext('2d');
+  x.font='bold 88px "IBM Plex Mono", monospace'; x.textAlign='center'; x.textBaseline='middle';
+  x.fillStyle=color; x.fillText(text,128,64);
+  const t=new THREE.CanvasTexture(c);
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:t, transparent:true, depthTest:false}));
+  s.scale.set(size, size/2, 1); return s;
+}
+const RC=58;
+const lN=label('N','#ff9a4d',26); lN.position.set(0,3,-RC); scene.add(lN);
+const lS=label('S','#9fb3c8',22); lS.position.set(0,3, RC); scene.add(lS);
+const lL=label('L','#9fb3c8',22); lL.position.set( RC,3,0); scene.add(lL);
+const lO=label('O','#9fb3c8',22); lO.position.set(-RC,3,0); scene.add(lO);
+const lNasce=label('nasce →','#7a8a9a',16);
+const lPoe  =label('← põe','#7a8a9a',16);
+
+/* ===== Sun sphere + glow ===== */
+const sunMesh=new THREE.Mesh(new THREE.SphereGeometry(4.5,24,24),
+  new THREE.MeshBasicMaterial({color:0xffd98a}));
+scene.add(sunMesh);
+(function(){
+  const c=document.createElement('canvas'); c.width=c.height=128; const x=c.getContext('2d');
+  const g=x.createRadialGradient(64,64,4,64,64,64);
+  g.addColorStop(0,'rgba(255,221,138,.95)'); g.addColorStop(.3,'rgba(255,179,71,.55)');
+  g.addColorStop(1,'rgba(255,179,71,0)'); x.fillStyle=g; x.fillRect(0,0,128,128);
+  const t=new THREE.CanvasTexture(c);
+  const glow=new THREE.Sprite(new THREE.SpriteMaterial({map:t, transparent:true,
+    blending:THREE.AdditiveBlending, depthWrite:false}));
+  glow.scale.set(46,46,1); sunMesh.add(glow);
+})();
+const SUN_DIST=150;
+
+/* ===== Sun path arcs (summer high / winter low, both through the North) ===== */
+function arc(decl, color, opacity){
+  const h0=haSunset(decl), pts=[];
+  for(let i=0;i<=120;i++){
+    const ha=lerp(-h0,h0,i/120); const {alt,az}=sunAltAz(decl,ha);
+    pts.push(sunDir(alt,az).multiplyScalar(SUN_DIST));
+  }
+  const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+    new THREE.LineBasicMaterial({color, transparent:true, opacity}));
+  scene.add(line); return line;
+}
+const arcSummer=arc(DECL_SUMMER, 0xff8a3d, .85);
+const arcWinter=arc(DECL_WINTER, 0x56b6ff, .85);
+let arcsVisible=true;
+
+/* ===== Sky color from sun altitude ===== */
+const cNight=new THREE.Color(0x0c1118), cHoriz=new THREE.Color(0x4a3a52),
+      cLow=new THREE.Color(0xe98a4a),  cDay=new THREE.Color(0x2b5a86),
+      cZenith=new THREE.Color(0x12304f);
+const tmpA=new THREE.Color(), tmpB=new THREE.Color();
+function skyColor(alt){
+  const out=new THREE.Color();
+  if(alt<=0){ const k=clamp((alt+0.1)/0.1,0,1); out.copy(cNight).lerp(cHoriz,k);}
+  else if(alt<8*D2R){ const k=alt/(8*D2R); tmpA.copy(cHoriz).lerp(cLow,Math.min(k*1.4,1)); out.copy(tmpA);}
+  else if(alt<25*D2R){ const k=(alt-8*D2R)/(17*D2R); tmpA.copy(cLow); tmpB.copy(cDay); out.copy(tmpA).lerp(tmpB,k);}
+  else { const k=clamp((alt-25*D2R)/(50*D2R),0,1); out.copy(cDay).lerp(cZenith,k);}
+  return out;
+}
+
+/* ===== Timeline ===== */
+const CYCLE=30;        // seconds total
+let elapsed=0, playing=true, speed=1, topView=false;
+let last=performance.now();
+
+function seasonAt(t){
+  // 0..15s = verão, 15..30s = inverno
+  if(t<CYCLE/2){ return {name:'VERÃO', emoji:'☀', date:'21 dez · solstício', color:'#ff8a3d',
+                         decl:DECL_SUMMER, p:t/(CYCLE/2)}; }
+  return {name:'INVERNO', emoji:'❄', date:'21 jun · solstício', color:'#56b6ff',
+          decl:DECL_WINTER, p:(t-CYCLE/2)/(CYCLE/2)};
+}
+
+/* ===== HUD refs ===== */
+const el={
+  szn:document.getElementById('szn-txt'), sznDot:document.getElementById('szn-dot'),
+  sznWrap:document.getElementById('szn'), date:document.getElementById('szn-date'),
+  clk:document.getElementById('clk'), amp:document.getElementById('clk-amp'),
+  elev:document.getElementById('d-elev'), azi:document.getElementById('d-azi'), len:document.getElementById('d-len'),
+  prog:document.getElementById('prog'),
+  chips:{}
+};
+document.querySelectorAll('#faces .chip').forEach(ch=>{
+  el.chips[ch.dataset.f]={pc:ch.querySelector('.pc'), fill:ch.querySelector('.fill')};
+});
+function aziName(deg){
+  const dirs=['N','NNE','NE','ENE','L','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO'];
+  return dirs[Math.round(deg/22.5)%16];
+}
+function fmtClock(h){
+  const hh=Math.floor(h), mm=Math.round((h-hh)*60);
+  const m2=mm===60?0:mm, h2=mm===60?hh+1:hh;
+  return String(h2).padStart(2,'0')+':'+String(m2).padStart(2,'0');
+}
+
+/* ===== Main update ===== */
+function update(){
+  const s=seasonAt(elapsed);
+  const h0=haSunset(s.decl);
+  const ha=lerp(-h0,h0,s.p);
+  const {alt,az}=sunAltAz(s.decl,ha);
+  const dir=sunDir(alt,az);
+
+  // sun + light
+  sunMesh.position.copy(dir).multiplyScalar(SUN_DIST);
+  sun.position.copy(dir).multiplyScalar(340);
+  sun.target.position.set(0,10,0);
+  const aboveK=clamp(Math.sin(alt),0,1);
+  sun.intensity = 0.15 + aboveK*1.15;
+  sun.color.setHSL(0.11, 0.55, 0.55 + aboveK*0.35);   // warm low → bright high
+  hemi.intensity = 0.28 + aboveK*0.4;
+
+  // sky + fog
+  const sky=skyColor(alt); scene.background=sky; scene.fog.color.copy(sky);
+
+  // face overlays + chips
+  for(const f in overlays){
+    let illum = alt>0 ? Math.max(0, faceNormals[f].dot(dir)) : 0;
+    overlays[f].material.opacity = illum*0.5;
+    const c=el.chips[f]; const pct=Math.round(illum*100);
+    c.pc.textContent=pct+'%'; c.fill.style.width=pct+'%';
+    c.fill.style.opacity = pct>0?1:0.25;
+  }
+
+  // arcs emphasis
+  arcSummer.material.opacity = !arcsVisible?0 : (s.name==='VERÃO'?0.95:0.28);
+  arcWinter.material.opacity = !arcsVisible?0 : (s.name==='INVERNO'?0.95:0.28);
+
+  // sunrise/sunset hint labels follow current arc endpoints
+  const rise=sunDir(...Object.values(sunAltAz(s.decl,-h0)).slice(0,2)); // alt~0
+  const set =sunDir(...Object.values(sunAltAz(s.decl, h0)).slice(0,2));
+  lNasce.position.copy(rise).multiplyScalar(200).setY(6);
+  lPoe.position.copy(set).multiplyScalar(200).setY(6);
+  if(!lNasce.parent){scene.add(lNasce);scene.add(lPoe);}
+
+  // HUD text
+  el.szn.textContent=s.name; el.date.textContent=s.date;
+  el.sznDot.style.background=s.color; el.szn.style.color=s.color;
+  document.getElementById('szn').style.color=s.color;
+  const solarH = 12 + ha*12/Math.PI;
+  el.clk.textContent=fmtClock(solarH);
+  el.elev.textContent=Math.max(0,Math.round(alt*R2D))+'°';
+  if(alt>0){ const ad=((az*R2D)%360+360)%360; el.azi.textContent=Math.round(ad)+'° '+aziName(ad); }
+  else el.azi.textContent='— (noite)';
+  el.len.textContent=(2*h0*12/Math.PI).toFixed(1).replace('.',',')+' h';
+  el.prog.style.width=(elapsed/CYCLE*100)+'%';
+}
+
+/* ===== Camera tween for top view ===== */
+function updateCamera(){
+  if(topView){ camTheta=lerp(camTheta,128*D2R,0.08); camPhi=lerp(camPhi,8*D2R,0.08); }
+  placeCamera();
+}
+
+/* ===== Render loop ===== */
+function loop(now){
+  const dt=Math.min((now-last)/1000,0.05); last=now;
+  if(playing){ elapsed=(elapsed+dt*speed)%CYCLE; }
+  update(); updateCamera();
+  renderer.render(scene,camera);
+  requestAnimationFrame(loop);
+}
+
+/* ===== Resize ===== */
+function resize(){
+  const w=window.innerWidth,h=window.innerHeight;
+  renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix();
+}
+window.addEventListener('resize',resize); resize(); placeCamera();
+requestAnimationFrame((t)=>{last=t;loop(t);});
+
+/* ===== Orbit controls (mouse + touch) ===== */
+let drag=false, px=0, py=0, pinch=0;
+function rotate(dx,dy){
+  if(topView) topView=false;
+  camTheta -= dx*0.006; camPhi=clamp(camPhi - dy*0.006, 6*D2R, 92*D2R);
+}
+canvas.addEventListener('mousedown',e=>{drag=true;px=e.clientX;py=e.clientY;});
+window.addEventListener('mousemove',e=>{if(drag){rotate(e.clientX-px,e.clientY-py);px=e.clientX;py=e.clientY;}});
+window.addEventListener('mouseup',()=>drag=false);
+canvas.addEventListener('wheel',e=>{e.preventDefault();camR=clamp(camR*(1+Math.sign(e.deltaY)*0.08),95,540);},{passive:false});
+canvas.addEventListener('touchstart',e=>{
+  if(e.touches.length===1){drag=true;px=e.touches[0].clientX;py=e.touches[0].clientY;}
+  else if(e.touches.length===2){pinch=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);}
+},{passive:false});
+canvas.addEventListener('touchmove',e=>{
+  e.preventDefault();
+  if(e.touches.length===1&&drag){rotate(e.touches[0].clientX-px,e.touches[0].clientY-py);px=e.touches[0].clientX;py=e.touches[0].clientY;}
+  else if(e.touches.length===2){const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+    if(pinch)camR=clamp(camR*(pinch/d),95,540); pinch=d;}
+},{passive:false});
+window.addEventListener('touchend',()=>{drag=false;pinch=0;});
+
+/* ===== Controls ===== */
+const bPlay=document.getElementById('b-play');
+bPlay.onclick=()=>{playing=!playing; bPlay.textContent=playing?'⏸':'▶';};
+document.getElementById('b-restart').onclick=()=>{elapsed=0;playing=true;bPlay.textContent='⏸';};
+const speeds=[0.5,1,2], bSpeed=document.getElementById('b-speed'); let si=1;
+bSpeed.onclick=()=>{si=(si+1)%speeds.length;speed=speeds[si];bSpeed.textContent=speed+'×';};
+const bArcs=document.getElementById('b-arcs');
+bArcs.onclick=()=>{arcsVisible=!arcsVisible;bArcs.classList.toggle('on',arcsVisible);};
+const bView=document.getElementById('b-view');
+bView.onclick=()=>{topView=!topView;bView.classList.toggle('on',topView);
+  bView.textContent=topView?'3D ⤒':'Topo ⤓'; if(!topView){camPhi=64*D2R;}};
+
+// timeline scrub
+const track=document.getElementById('track');
+function scrub(clientX){const r=track.getBoundingClientRect();elapsed=clamp((clientX-r.left)/r.width,0,0.999)*CYCLE;}
+let scrubbing=false;
+track.addEventListener('mousedown',e=>{scrubbing=true;playing=false;bPlay.textContent='▶';scrub(e.clientX);});
+window.addEventListener('mousemove',e=>{if(scrubbing)scrub(e.clientX);});
+window.addEventListener('mouseup',()=>scrubbing=false);
+track.addEventListener('touchstart',e=>{scrubbing=true;playing=false;bPlay.textContent='▶';scrub(e.touches[0].clientX);},{passive:true});
+track.addEventListener('touchmove',e=>{if(scrubbing)scrub(e.touches[0].clientX);},{passive:true});
+window.addEventListener('touchend',()=>scrubbing=false);
+})();
+</script>
 </body>
 </html>
