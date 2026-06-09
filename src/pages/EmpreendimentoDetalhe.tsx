@@ -319,6 +319,8 @@ export default function EmpreendimentoDetalhe() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const solarRef = useRef<HTMLDivElement>(null);
   const [solarVisible, setSolarVisible] = useState(false);
+  const solarIframeRef = useRef<HTMLIFrameElement>(null);
+  const solarShownRef = useRef(false);
 
   useEffect(() => {
     if (slug !== 'sync-floriano') return;
@@ -327,8 +329,14 @@ export default function EmpreendimentoDetalhe() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setSolarVisible(true);
-          observer.disconnect();
+          if (!solarShownRef.current) {
+            solarShownRef.current = true;
+            setSolarVisible(true);
+          } else {
+            solarIframeRef.current?.contentWindow?.postMessage('resume', '*');
+          }
+        } else if (solarShownRef.current) {
+          solarIframeRef.current?.contentWindow?.postMessage('pause', '*');
         }
       },
       { threshold: 0.1 },
@@ -641,12 +649,18 @@ export default function EmpreendimentoDetalhe() {
                 >
                   {solarVisible ? (
                     <iframe
+                      ref={solarIframeRef}
                       src="/trajetoria-solar-edificio.html"
                       title="Trajetória Solar do Edifício"
                       width="100%"
                       height="100%"
                       loading="lazy"
                       style={{ border: 'none', overflow: 'hidden' }}
+                      onLoad={() => {
+                        if (solarShownRef.current) {
+                          solarIframeRef.current?.contentWindow?.postMessage('resume', '*');
+                        }
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full bg-[var(--bg-primary)] flex items-center justify-center">
