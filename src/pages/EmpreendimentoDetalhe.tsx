@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -317,6 +317,25 @@ export default function EmpreendimentoDetalhe() {
   const { slug } = useParams<{ slug: string }>();
   const empreendimento = EMPREENDIMENTOS.find((e) => e.slug === slug);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const solarRef = useRef<HTMLDivElement>(null);
+  const [solarVisible, setSolarVisible] = useState(false);
+
+  useEffect(() => {
+    if (slug !== 'sync-floriano') return;
+    const el = solarRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSolarVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [slug]);
 
   if (!empreendimento) {
     return (
@@ -616,14 +635,24 @@ export default function EmpreendimentoDetalhe() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <div className="h-[420px] md:h-[600px] rounded-xl overflow-hidden border border-[#484949]/20">
-                  <iframe
-                    src="/trajetoria-solar-edificio.html"
-                    title="Trajetória Solar do Edifício"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 'none', overflow: 'hidden' }}
-                  />
+                <div
+                  ref={solarRef}
+                  className="h-[420px] md:h-[600px] rounded-xl overflow-hidden border border-[#484949]/20"
+                >
+                  {solarVisible ? (
+                    <iframe
+                      src="/trajetoria-solar-edificio.html"
+                      title="Trajetória Solar do Edifício"
+                      width="100%"
+                      height="100%"
+                      loading="lazy"
+                      style={{ border: 'none', overflow: 'hidden' }}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-[var(--bg-primary)] flex items-center justify-center">
+                      <p className="text-sm text-[var(--text-muted)]">Carregando visualização solar...</p>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </div>
