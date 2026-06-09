@@ -88,7 +88,7 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     parceria: "Accione Investimentos + Zacon Zanini Construções",
     coverImage: avenueFachadaCoverImg,
     fachadaImage: {
-      src: avenueFachadaPrincipalImg,
+      src: avenueFachadaCoverImg,
       alt: "Fachada Avenue Residence",
       objectPosition: "center bottom",
     },

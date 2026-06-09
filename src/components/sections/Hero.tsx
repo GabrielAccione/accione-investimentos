@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useInView } from "@/hooks/useInView";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
@@ -106,12 +105,10 @@ export default function Hero() {
                 Nossos números
               </h2>
             </div>
-            <div className="hidden h-16 w-16 items-center justify-center rounded-full bg-[var(--accent)]/10 text-[var(--accent)] sm:flex">
-              <ArrowRight size={24} />
-            </div>
+            <div className="hidden h-16 w-16 items-center justify-center rounded-full bg-[var(--accent)]/10 text-[var(--accent)] sm:flex"></div>
           </div>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <CounterCard
               prefix="R$ "
               target={100}
@@ -121,13 +118,13 @@ export default function Hero() {
             />
             <CounterCard
               target={5}
-              suffix="+"
+              suffix=" +"
               label="anos de atuação"
               inView={countersInView}
             />
             <CounterCard
               target={100}
-              suffix="+"
+              suffix=" +"
               label="investimentos financeiros alternativos"
               inView={countersInView}
             />
