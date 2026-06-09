@@ -496,6 +496,8 @@ function skyColor(alt){
 const CYCLE=30;        // seconds total
 let elapsed=0, playing=true, speed=1, topView=false;
 let last=performance.now();
+let paused = false;
+let rafId = null;
 
 function seasonAt(t){
   // 0..15s = verão, 15..30s = inverno
@@ -592,7 +594,7 @@ function loop(now){
   if(playing){ elapsed=(elapsed+dt*speed)%CYCLE; }
   update(); updateCamera();
   renderer.render(scene,camera);
-  requestAnimationFrame(loop);
+  if(!paused) rafId = requestAnimationFrame(loop);
 }
 
 /* ===== Resize ===== */
@@ -601,7 +603,7 @@ function resize(){
   renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix();
 }
 window.addEventListener('resize',resize); resize(); placeCamera();
-requestAnimationFrame((t)=>{last=t;loop(t);});
+rafId = requestAnimationFrame((t)=>{last=t;loop(t);});
 
 /* ===== Orbit controls (mouse + touch) ===== */
 let drag=false, px=0, py=0, pinch=0;
@@ -647,6 +649,18 @@ window.addEventListener('mouseup',()=>scrubbing=false);
 track.addEventListener('touchstart',e=>{scrubbing=true;playing=false;bPlay.textContent='▶';scrub(e.touches[0].clientX);},{passive:true});
 track.addEventListener('touchmove',e=>{if(scrubbing)scrub(e.touches[0].clientX);},{passive:true});
 window.addEventListener('touchend',()=>scrubbing=false);
+
+window.addEventListener('message', function(e){
+  if(e.data === 'pause'){
+    paused = true;
+    if(rafId) cancelAnimationFrame(rafId);
+  }
+  if(e.data === 'resume'){
+    paused = false;
+    last = performance.now();
+    rafId = requestAnimationFrame(loop);
+  }
+});
 })();
 </script>
 </body>
