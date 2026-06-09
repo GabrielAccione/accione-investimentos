@@ -1,6 +1,5 @@
 // Avenue
 import avenueFachadaCoverImg from "@/assets/avenue/avenue-fachada.png";
-import avenueFachadaPrincipalImg from "@/assets/avenue/avenue-fachada-principal.png";
 import avenueSalaImg from "@/assets/avenue/avenue-sala.png";
 import avenueSala2Img from "@/assets/avenue/avenue-sala2.png";
 import avenueSalaTvImg from "@/assets/avenue/avenue-sala-tv.png";
