@@ -41,7 +41,7 @@ export default function SobrePage() {
       />
 
       {/* Founder — two-column: photo | content */}
-      <section className="bg-[#F7F7F7] py-20 dark:bg-[#041A2A] sm:py-24">
+      <section className="py-20 sm:py-24">
         <div className="section-container grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
 
           {/* Left — photo */}
@@ -112,7 +112,7 @@ export default function SobrePage() {
       </section>
 
       {/* Partner */}
-      <section className="bg-[#F7F7F7] pb-12 dark:bg-[#041A2A] sm:pb-16">
+      <section className="pb-12 sm:pb-16">
         <div className="section-container">
           <ScrollReveal direction="up">
             <article className="surface-card p-6 sm:p-8">
@@ -130,7 +130,7 @@ export default function SobrePage() {
       </section>
 
       {/* Values */}
-      <section className="bg-white py-20 dark:bg-[#0C2030] sm:py-24">
+      <section className="py-20 sm:py-24">
         <div className="section-container grid gap-5 md:grid-cols-3">
           {VALUE_CARDS.map((card, index) => {
             const Icon = card.icon

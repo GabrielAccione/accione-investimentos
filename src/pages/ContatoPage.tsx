@@ -14,7 +14,7 @@ const INFO_ITEMS = [
 
 export default function ContatoPage() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#F7F7F7] pt-24 dark:bg-[#041A2A]">
+    <section className="relative min-h-screen overflow-hidden pt-24">
       {/* Background blobs */}
       <div className="pointer-events-none absolute left-[12%] top-32 h-64 w-64 rounded-full bg-[var(--accent)]/10 blur-3xl" />
       <div className="pointer-events-none absolute bottom-24 right-[10%] h-56 w-56 rounded-full bg-white/5 blur-3xl" />

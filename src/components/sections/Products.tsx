@@ -18,7 +18,7 @@ export default function Products({ variant = "home" }: ProductsProps) {
   return (
     <section
       id={variant === "home" ? "produtos" : undefined}
-      className="bg-[var(--bg-secondary)] py-20 sm:py-24"
+      className="py-20 sm:py-24"
     >
       <div className="section-container">
         <SectionHeading

@@ -33,7 +33,7 @@ export default function BlogPage() {
         description="Uma base editorial para traduzir conceitos, aprofundar estruturas e registrar a visão da Accione sobre mercado, imóveis, agro e investimentos alternativos."
       />
 
-      <section className="bg-[var(--bg-primary)] py-16 sm:py-20">
+      <section className="py-16 sm:py-20">
         <div className="section-container">
           <div className="flex flex-wrap gap-3">
             {ALL_CATEGORIES.map((category) => (

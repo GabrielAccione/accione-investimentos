@@ -4,7 +4,7 @@ import { SITE_CONFIG } from '@/config/site'
 
 export default function ContactForm() {
   return (
-    <section id="contato" className="bg-[var(--bg-secondary)] py-20 sm:py-24">
+    <section id="contato" className="py-20 sm:py-24">
       <div className="section-container">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div className="surface-card p-6 sm:p-8">

@@ -26,7 +26,7 @@ export default function BlogPostPage() {
         }
       />
 
-      <article className="bg-[var(--bg-primary)] py-20 sm:py-24">
+      <article className="py-20 sm:py-24">
         <div className="section-container max-w-4xl">
           <img src={post.coverImage} alt={post.title} className="surface-card h-[360px] w-full object-cover" />
 

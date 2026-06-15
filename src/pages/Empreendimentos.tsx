@@ -132,7 +132,7 @@ export default function Empreendimentos() {
       </section>
 
       {/* Cards */}
-      <section className="py-20 bg-[var(--bg-primary)]">
+      <section className="py-20">
         <div className="section-container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {EMPREENDIMENTOS.map((item, index) => (

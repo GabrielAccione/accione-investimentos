@@ -85,7 +85,7 @@ export default function RetirementSimulatorPage() {
         description="A simulação considera aportes mensais e rentabilidade anual esperada para estimar evolução patrimonial até a idade-alvo."
       />
 
-      <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
+      <section className="py-20 sm:py-24">
         <div className="section-container grid gap-8 xl:grid-cols-[380px_minmax(0,1fr)]">
           <aside className="surface-card p-6 sm:p-8">
             <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-[#484949] dark:text-amber-200">

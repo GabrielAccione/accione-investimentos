@@ -20,7 +20,7 @@ export default function Footer() {
   const { theme } = useTheme();
 
   return (
-    <footer className="bg-[#F0F0F0] pt-16 pb-8 dark:bg-[#1D1D1D]">
+    <footer className="bg-white/80 backdrop-blur-sm pt-16 pb-8 dark:bg-black/60">
       <div className="section-container">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.9fr)_minmax(0,0.9fr)]">
           <div>

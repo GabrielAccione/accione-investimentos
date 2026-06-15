@@ -100,7 +100,7 @@ export default function CreditoPrivadoPage() {
       </section>
 
       {/* Como funciona */}
-      <section className="bg-[var(--bg-secondary)] py-20 sm:py-24">
+      <section className="py-20 sm:py-24">
         <div className="section-container">
           <ScrollReveal>
             <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Como funciona</h2>
@@ -120,7 +120,7 @@ export default function CreditoPrivadoPage() {
       </section>
 
       {/* Características */}
-      <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
+      <section className="py-20 sm:py-24">
         <div className="section-container">
           <ScrollReveal>
             <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Características</h2>
@@ -141,7 +141,7 @@ export default function CreditoPrivadoPage() {
       </section>
 
       {/* Diferenciais */}
-      <section className="bg-[var(--bg-secondary)] py-20 sm:py-24">
+      <section className="py-20 sm:py-24">
         <div className="section-container">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-center">
             <div>
@@ -169,7 +169,7 @@ export default function CreditoPrivadoPage() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
+      <section className="py-20 sm:py-24">
         <div className="section-container">
           <ScrollReveal>
             <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Perguntas frequentes</h2>

@@ -4,7 +4,7 @@ import { STEPS } from '@/data/howItWorks'
 
 export default function HowItWorks() {
   return (
-    <section id="como-funciona" className="bg-[var(--bg-primary)] py-20 sm:py-24">
+    <section id="como-funciona" className="py-20 sm:py-24">
       <div className="section-container">
         <SectionHeading
           eyebrow="Como funciona"

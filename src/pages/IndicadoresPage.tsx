@@ -39,7 +39,7 @@ export default function IndicadoresPage() {
         }
       />
 
-      <section className="bg-[var(--bg-secondary)] py-14">
+      <section className="py-14">
         <div className="section-container grid gap-4 md:grid-cols-3">
           {CONTEXT_CARDS.map((card) => (
             <article key={card.title} className="surface-card p-6">

@@ -426,7 +426,7 @@ export default function EmpreendimentoDetalhe() {
       </section>
 
       {/* ── 2. Fachada + Descrição ───────────────────────────── */}
-      <section className="overflow-hidden py-20 bg-[var(--bg-primary)]">
+      <section className="overflow-hidden py-20">
         <div className="section-container grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Coluna esquerda — descrição + destaques */}
           <motion.div
@@ -496,7 +496,7 @@ export default function EmpreendimentoDetalhe() {
       <div className="section-divider" />
 
       {/* ── 3. Destaques ─────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-primary)]">
+      <section className="py-20">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -544,7 +544,7 @@ export default function EmpreendimentoDetalhe() {
       <div className="section-divider" />
 
       {/* ── 4. Galeria ───────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-primary)]">
+      <section className="py-20">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -616,7 +616,7 @@ export default function EmpreendimentoDetalhe() {
       {/* ── Trajetória Solar (Sync Floriano only) ────────────── */}
       {slug === 'sync-floriano' && (
         <>
-          <section className="py-20 bg-[var(--bg-primary)]">
+          <section className="py-20">
             <div className="section-container">
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
@@ -676,7 +676,7 @@ export default function EmpreendimentoDetalhe() {
       )}
 
       {/* ── 5. Ficha Técnica ─────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-secondary)]">
+      <section className="py-20">
         <div className="section-container max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -732,7 +732,7 @@ export default function EmpreendimentoDetalhe() {
       <div className="section-divider" />
 
       {/* ── 6. Modelo SPE ────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-primary)]">
+      <section className="py-20">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -824,7 +824,7 @@ export default function EmpreendimentoDetalhe() {
       <div className="section-divider" />
 
       {/* ── 7. Localização ───────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-secondary)]">
+      <section className="py-20">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 24 }}

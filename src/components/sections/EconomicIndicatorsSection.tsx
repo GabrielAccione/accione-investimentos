@@ -20,7 +20,7 @@ export default function EconomicIndicatorsSection({
   return (
     <section
       id="indicadores-home"
-      className="bg-[var(--bg-primary)] py-20 sm:py-24"
+      className="py-20 sm:py-24"
     >
       <div className="section-container">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">

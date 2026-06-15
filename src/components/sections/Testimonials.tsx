@@ -46,7 +46,7 @@ export default function Testimonials() {
   const mobile = TESTIMONIALS[start]
 
   return (
-    <section id="depoimentos" className="bg-[var(--bg-primary)] py-20 sm:py-24">
+    <section id="depoimentos" className="py-20 sm:py-24">
       <div className="section-container">
         <SectionHeading
           eyebrow="Quem investe com a Accione"

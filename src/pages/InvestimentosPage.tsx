@@ -44,7 +44,7 @@ export default function InvestimentosPage() {
         }
       />
 
-      <section className="bg-[var(--bg-secondary)] py-20 sm:py-24">
+      <section className="py-20 sm:py-24">
         <div className="section-container">
           <div className="grid gap-6 sm:grid-cols-2">
             {CARDS.map(

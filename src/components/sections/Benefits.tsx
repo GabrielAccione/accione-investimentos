@@ -4,7 +4,7 @@ import { BENEFITS } from "@/data/benefits";
 
 export default function Benefits() {
   return (
-    <section id="beneficios" className="bg-[var(--bg-primary)] py-20 sm:py-24">
+    <section id="beneficios" className="py-20 sm:py-24">
       <div className="section-container">
         <SectionHeading
           eyebrow="Por que a Accione"

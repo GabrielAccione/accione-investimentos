@@ -6,7 +6,7 @@ import SectionHeading from '@/components/ui/SectionHeading'
 
 export default function About() {
   return (
-    <section id="sobre" className="bg-[var(--bg-secondary)] py-20 sm:py-24">
+    <section id="sobre" className="py-20 sm:py-24">
       <div className="section-container">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_420px]">
           <motion.div

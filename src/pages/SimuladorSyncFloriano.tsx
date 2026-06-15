@@ -118,7 +118,7 @@ export default function SimuladorSyncFloriano() {
         description="Selecione a unidade e o modo de cálculo para ver o fluxo de pagamentos ao longo dos 54 meses do projeto — outubro de 2025 a março de 2030."
       />
 
-      <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
+      <section className="py-20 sm:py-24">
         <div className="section-container grid gap-8 xl:grid-cols-[420px_minmax(0,1fr)]">
 
           {/* ── Painel esquerdo ─────────────────────────────── */}
