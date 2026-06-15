@@ -23,12 +23,11 @@
       #f5f5f5 100%
     );
     --bg-gradient: linear-gradient(
-      45deg,
-      #fbcfe8 0%,
-      #bae6fd 25%,
-      #ddd6fe 50%,
-      #fed7aa 75%,
-      #fbcfe8 100%
+      360deg,
+      #f4f7fa 0%,
+      #041a2a 10%,
+      #a26547 50%,
+      #f4f7fa 80%
     );
   }
 
@@ -49,11 +48,11 @@
       #0c2030 100%
     );
     --bg-gradient: linear-gradient(
-      45deg,
+      360deg,
       #041a2a 0%,
-      #1e3a8a 25%,
-      #a26547 50%,
-      #080a6b 75%,
+      #041a2a 35%,
+      #a26547 65%,
+      #041a2a 75%,
       #041a2a 100%
     );
   }

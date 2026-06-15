@@ -10,7 +10,7 @@ interface PageHeroProps {
 
 export default function PageHero({ eyebrow, title, description, actions }: PageHeroProps) {
   return (
-    <section className="hero-gradient relative overflow-hidden pt-24">
+    <section className="relative overflow-hidden pt-24">
       <div className="absolute left-[12%] top-24 h-48 w-48 rounded-full bg-[var(--accent)]/10 blur-3xl" />
       <div className="absolute bottom-10 right-[10%] h-56 w-56 rounded-full bg-white/5 blur-3xl" />
 

@@ -323,7 +323,7 @@ export default function EmpreendimentoDetalhe() {
   const solarShownRef = useRef(false);
 
   useEffect(() => {
-    if (slug !== 'sync-floriano') return;
+    if (slug !== "sync-floriano") return;
     const el = solarRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -333,10 +333,10 @@ export default function EmpreendimentoDetalhe() {
             solarShownRef.current = true;
             setSolarVisible(true);
           } else {
-            solarIframeRef.current?.contentWindow?.postMessage('resume', '*');
+            solarIframeRef.current?.contentWindow?.postMessage("resume", "*");
           }
         } else if (solarShownRef.current) {
-          solarIframeRef.current?.contentWindow?.postMessage('pause', '*');
+          solarIframeRef.current?.contentWindow?.postMessage("pause", "*");
         }
       },
       { threshold: 0.1 },
@@ -455,7 +455,7 @@ export default function EmpreendimentoDetalhe() {
               {destaques.map((d: Destaque) => (
                 <div
                   key={d.label}
-                  className="rounded-xl border border-[#E5E5E5] bg-white p-4 dark:border-white/10 dark:bg-transparent"
+                  className="rounded-xl border border-[#E5E5E5] bg-[var(--bg-secondary)] p-4 dark:border-white/10 dark:bg-white/5"
                 >
                   <span className="text-[var(--accent)] font-bold text-lg leading-none">
                     {d.valor}
@@ -531,7 +531,7 @@ export default function EmpreendimentoDetalhe() {
                   <h3 className="font-semibold text-[#041A2A] dark:text-white text-base mb-2">
                     {h.title}
                   </h3>
-                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+                  <p className="text-[var(--text-muted)] dark:text-white text-sm leading-relaxed">
                     {h.description}
                   </p>
                 </motion.div>
@@ -559,7 +559,7 @@ export default function EmpreendimentoDetalhe() {
             <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
               Galeria
             </h2>
-            <p className="text-[var(--text-muted)] text-sm mt-2">
+            <p className="text-[var(--text-muted)] dark:text-white text-sm mt-2">
               Clique em uma imagem para ampliar
             </p>
           </motion.div>
@@ -585,7 +585,7 @@ export default function EmpreendimentoDetalhe() {
                   />
                 </button>
                 {item.alt && (
-                  <p className="mt-1.5 text-center text-xs text-[var(--text-muted)]">
+                  <p className="mt-1.5 text-center text-xs text-[var(--text-muted)] dark:text-white">
                     {item.alt}
                   </p>
                 )}
@@ -594,7 +594,7 @@ export default function EmpreendimentoDetalhe() {
           </div>
 
           {status === "em-breve" && (
-            <p className="mt-6 text-center text-sm text-[var(--text-muted)]">
+            <p className="mt-6 text-center text-sm text-[var(--text-muted)] dark:text-white">
               Mais detalhes e imagens em breve. Cadastre seu interesse abaixo.
             </p>
           )}
@@ -614,7 +614,7 @@ export default function EmpreendimentoDetalhe() {
       <div className="section-divider" />
 
       {/* ── Trajetória Solar (Sync Floriano only) ────────────── */}
-      {slug === 'sync-floriano' && (
+      {slug === "sync-floriano" && (
         <>
           <section className="py-20">
             <div className="section-container">
@@ -632,8 +632,8 @@ export default function EmpreendimentoDetalhe() {
                   Trajetória Solar do Edifício
                 </h2>
                 <p className="text-[var(--text-muted)] text-sm mt-2 max-w-2xl mx-auto">
-                  Visualize a incidência solar ao longo do ano em cada fachada do edifício,
-                  com base na latitude de Santa Maria/RS.
+                  Visualize a incidência solar ao longo do ano em cada fachada
+                  do edifício, com base na latitude de Santa Maria/RS.
                 </p>
               </motion.div>
 
@@ -655,16 +655,21 @@ export default function EmpreendimentoDetalhe() {
                       width="100%"
                       height="100%"
                       loading="lazy"
-                      style={{ border: 'none', overflow: 'hidden' }}
+                      style={{ border: "none", overflow: "hidden" }}
                       onLoad={() => {
                         if (solarShownRef.current) {
-                          solarIframeRef.current?.contentWindow?.postMessage('resume', '*');
+                          solarIframeRef.current?.contentWindow?.postMessage(
+                            "resume",
+                            "*",
+                          );
                         }
                       }}
                     />
                   ) : (
                     <div className="w-full h-full bg-[var(--bg-primary)] flex items-center justify-center">
-                      <p className="text-sm text-[var(--text-muted)]">Carregando visualização solar...</p>
+                      <p className="text-sm text-[var(--text-muted)]">
+                        Carregando visualização solar...
+                      </p>
                     </div>
                   )}
                 </div>
@@ -806,7 +811,7 @@ export default function EmpreendimentoDetalhe() {
                     size="lg"
                     className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
                   />
-                  {slug === 'sync-floriano' && (
+                  {slug === "sync-floriano" && (
                     <Link
                       to="/simuladores/sync-floriano"
                       className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/40 px-8 py-4 text-lg font-medium text-[var(--accent)] transition-all duration-300 hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 hover:scale-105 active:scale-95"

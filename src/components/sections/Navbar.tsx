@@ -43,15 +43,7 @@ const SIMULATOR_LINKS = [
 
 const ALL_MOBILE_LINKS = [...PRIMARY_LINKS, ...SIMULATOR_LINKS];
 
-function DesktopNavLink({
-  to,
-  label,
-  lightUnscrolled = false,
-}: {
-  to: string;
-  label: string;
-  lightUnscrolled?: boolean;
-}) {
+function DesktopNavLink({ to, label }: { to: string; label: string }) {
   return (
     <NavLink
       to={to}
@@ -60,12 +52,8 @@ function DesktopNavLink({
           "relative text-sm font-medium transition-colors duration-200 whitespace-nowrap",
           "after:absolute after:bottom-[-4px] after:left-0 after:h-px after:bg-[var(--accent)] after:transition-all after:duration-300",
           isActive
-            ? lightUnscrolled
-              ? "text-[#041A2A] after:w-full"
-              : "text-[#E0E0E0] dark:text-white after:w-full"
-            : lightUnscrolled
-              ? "text-[#041A2A]/80 hover:text-[#041A2A] after:w-0 hover:after:w-full"
-              : "text-[#E0E0E0] hover:text-white dark:text-white/70 dark:hover:text-white after:w-0 hover:after:w-full",
+            ? "text-[#041A2A] dark:text-white after:w-full"
+            : "text-[#041A2A]/75 hover:text-[#041A2A] dark:text-white/70 dark:hover:text-white after:w-0 hover:after:w-full",
         ].join(" ")
       }
     >
@@ -80,15 +68,14 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const simulatorsActive = pathname.startsWith("/simuladores/");
   const { theme, toggleTheme } = useTheme();
-  const lightUnscrolled = !scrolled && theme === "light";
 
   return (
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out ${
           scrolled
-            ? "border-b border-black/10 dark:border-white/10 bg-[#2C2C2C]/95 dark:bg-black/95 shadow-lg shadow-black/10 dark:shadow-black/20 backdrop-blur-md"
-            : "bg-white/80 backdrop-blur-md dark:bg-transparent dark:backdrop-blur-none"
+            ? "border-b border-black/5 dark:border-white/10 bg-white/30 backdrop-blur-md shadow-lg shadow-black/5 dark:bg-slate-950/40 dark:shadow-black/20"
+            : "bg-white/20 backdrop-blur-md dark:bg-transparent"
         }`}
       >
         <nav
@@ -120,7 +107,7 @@ export default function Navbar() {
           {/* Desktop links */}
           <div className="hidden lg:flex lg:items-center lg:gap-4 xl:gap-6">
             {PRIMARY_LINKS.map((link) => (
-              <DesktopNavLink key={link.to} to={link.to} label={link.label} lightUnscrolled={lightUnscrolled} />
+              <DesktopNavLink key={link.to} to={link.to} label={link.label} />
             ))}
 
             {/* Simuladores dropdown */}
@@ -129,8 +116,8 @@ export default function Navbar() {
                 type="button"
                 className={`inline-flex items-center gap-1 text-sm font-medium transition-colors duration-200 whitespace-nowrap ${
                   simulatorsActive
-                    ? lightUnscrolled ? "text-[#041A2A]" : "text-[#E0E0E0] dark:text-white"
-                    : lightUnscrolled ? "text-[#041A2A]/80 hover:text-[#041A2A]" : "text-[#E0E0E0] hover:text-white dark:text-white/70 dark:hover:text-white"
+                    ? "text-[#041A2A] dark:text-white"
+                    : "text-[#041A2A]/75 hover:text-[#041A2A] dark:text-white/70 dark:hover:text-white"
                 }`}
               >
                 Simuladores
@@ -140,7 +127,7 @@ export default function Navbar() {
                 />
               </button>
 
-              <div className="invisible absolute right-0 top-full mt-3 w-56 -translate-y-2 rounded-2xl border border-[#E5E5E5] bg-white p-2 opacity-0 shadow-xl shadow-black/10 backdrop-blur-md transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 dark:border-white/10 dark:bg-[#0C2030] dark:shadow-black/40">
+              <div className="invisible absolute right-0 top-full mt-3 w-56 -translate-y-2 rounded-2xl border border-black/5 bg-white/90 p-2 opacity-0 shadow-xl shadow-black/10 backdrop-blur-md transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 dark:border-white/10 dark:bg-slate-900/90 dark:shadow-black/40">
                 {SIMULATOR_LINKS.map((link) => (
                   <NavLink
                     key={link.to}
@@ -202,7 +189,7 @@ export default function Navbar() {
           {/* Hamburger */}
           <button
             type="button"
-            className="rounded-full border border-white/20 p-2 text-[#E0E0E0] transition-colors hover:border-white/35 dark:border-white/10 dark:text-white dark:hover:border-white/25 lg:hidden"
+            className="rounded-full border border-black/10 p-2 text-[#041A2A] transition-colors hover:border-black/20 dark:border-white/10 dark:text-white dark:hover:border-white/25 lg:hidden"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           >
@@ -242,7 +229,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="border-t border-black/10 bg-[#2C2C2C]/95 px-4 py-5 backdrop-blur-md dark:border-white/10 dark:bg-black/95 lg:hidden"
+              className="border-t border-black/5 bg-white/30 px-4 py-5 backdrop-blur-md dark:border-white/10 dark:bg-slate-950/50 lg:hidden"
             >
               <div className="space-y-1">
                 {ALL_MOBILE_LINKS.map((link, index) => (
@@ -258,8 +245,8 @@ export default function Navbar() {
                       className={({ isActive }) =>
                         `block rounded-2xl px-4 py-3 text-sm transition-colors duration-200 ${
                           isActive
-                            ? "bg-[var(--accent)]/12 text-[#E0E0E0] dark:text-white"
-                            : "text-[#E0E0E0] hover:bg-white/5 hover:text-white dark:text-white/70 dark:hover:text-white"
+                            ? "bg-[var(--accent)]/12 text-[#041A2A] dark:text-white"
+                            : "text-[#041A2A]/80 hover:bg-black/5 hover:text-[#041A2A] dark:text-white/70 dark:hover:bg-white/5 dark:hover:text-white"
                         }`
                       }
                     >

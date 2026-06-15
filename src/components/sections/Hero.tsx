@@ -43,10 +43,7 @@ export default function Hero() {
   const [countersRef, countersInView] = useInView({ threshold: 0.25 });
 
   return (
-    <section
-      id="inicio"
-      className="hero-gradient relative overflow-hidden pt-20"
-    >
+    <section id="inicio" className="relative overflow-hidden pt-20">
       <div className="absolute left-[8%] top-28 h-56 w-56 rounded-full bg-[var(--accent)]/15 blur-3xl" />
       <div className="absolute right-[10%] top-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
 
@@ -141,20 +138,20 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.35 }}
-        className="relative z-10 border-t border-[#E5E5E5] bg-white dark:border-white/10 dark:bg-[#0C2030]"
+        className="relative z-10 border-none bg-transparent"
       >
-        <div className="section-container py-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4">
+        <div className="section-container py-8 ">
+          <div className="grid grid-cols-2 lg:grid-cols-4 bg-transparent border-none shadow-none">
             {METRICAS.map((m, i) => (
               <div
                 key={m.label}
                 className={[
-                  "px-6 py-2",
+                  "px-6 py-4",
                   i % 2 !== 0 ? "border-l border-[var(--accent)]/35" : "",
                   i === 2 ? "lg:border-l lg:border-[var(--accent)]/35" : "",
                 ].join(" ")}
               >
-                <p className="font-display text-4xl font-semibold text-[#041A2A] dark:text-white sm:text-5xl">
+                <p className="font-display text-4xl font-semibold text-[var(--text-primary)] sm:text-5xl">
                   {m.valor}
                 </p>
                 <p className="mt-1 text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
