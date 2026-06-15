@@ -42,7 +42,7 @@ function RouteFallback() {
 function App() {
   return (
     <EconomicIndicatorsProvider>
-      <main className="min-h-screen overflow-x-hidden bg-[var(--bg-primary)]">
+      <main className="min-h-screen overflow-x-hidden">
         <ScrollToTop />
         <Navbar />
         <Suspense fallback={<RouteFallback />}>
