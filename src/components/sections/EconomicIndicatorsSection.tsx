@@ -1,27 +1,26 @@
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { useEconomicIndicators } from '@/context/EconomicIndicatorsContext'
-import IndicatorCard from '@/components/indicators/IndicatorCard'
-import SectionHeading from '@/components/ui/SectionHeading'
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useEconomicIndicators } from "@/context/EconomicIndicatorsContext";
+import IndicatorCard from "@/components/indicators/IndicatorCard";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 interface EconomicIndicatorsSectionProps {
-  showPageLink?: boolean
+  showPageLink?: boolean;
 }
 
 function SkeletonCard() {
-  return <div className="h-44 animate-pulse rounded-2xl border border-[#E5E5E5] bg-white dark:border-white/10 dark:bg-white/[0.03]" />
+  return (
+    <div className="h-44 animate-pulse rounded-2xl border border-[#E5E5E5] bg-white dark:border-white/10 dark:bg-white/[0.03]" />
+  );
 }
 
 export default function EconomicIndicatorsSection({
   showPageLink = true,
 }: EconomicIndicatorsSectionProps) {
-  const { indicators, isLoading, error, lastUpdated, refreshIndicators } = useEconomicIndicators()
+  const { indicators, isLoading, error, lastUpdated } = useEconomicIndicators();
 
   return (
-    <section
-      id="indicadores-home"
-      className="py-20 sm:py-24"
-    >
+    <section id="indicadores-home" className="py-20 sm:py-24">
       <div className="section-container">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
@@ -37,9 +36,6 @@ export default function EconomicIndicatorsSection({
           />
 
           <div className="flex flex-wrap items-center gap-3">
-            <button type="button" onClick={() => void refreshIndicators()} className="btn-ghost text-sm">
-              Atualizar agora
-            </button>
             {showPageLink ? (
               <Link to="/indicadores" className="btn-accent text-sm">
                 Ver página completa
@@ -56,7 +52,9 @@ export default function EconomicIndicatorsSection({
 
         <div className="mt-10 grid grid-cols-1 gap-5 xl:grid-cols-2">
           {isLoading
-            ? Array.from({ length: 6 }).map((_, index) => <SkeletonCard key={index} />)
+            ? Array.from({ length: 6 }).map((_, index) => (
+                <SkeletonCard key={index} />
+              ))
             : indicators.map((indicator, index) => (
                 <motion.div
                   key={indicator.id}
@@ -77,5 +75,5 @@ export default function EconomicIndicatorsSection({
         ) : null}
       </div>
     </section>
-  )
+  );
 }

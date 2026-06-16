@@ -11,23 +11,22 @@
     --accent: #a26547;
     --accent-alt: #8c5139;
     --text-primary: #041a2a;
-    --text-secondary: #484949;
+    --text-secondary: #3a4d5c;
     --text-muted: #6b7280;
     --text-body: #484949;
     --text-dark: var(--text-body);
     --hero-gradient: linear-gradient(
       135deg,
-      #f8f4f1 0%,
-      #f0ebe6 38%,
-      #eef2f6 68%,
-      #f5f5f5 100%
+      #fdfbf7 0%,
+      #f6f1eb 40%,
+      #f0f4f8 75%,
+      #ffffff 100%
     );
     --bg-gradient: linear-gradient(
-      360deg,
-      #f4f7fa 0%,
-      #041a2a 10%,
-      #a26547 50%,
-      #f4f7fa 80%
+      180deg,
+      #f7f5f2 0%,
+      #f9fafb 40%,
+      #ffffff 100%
     );
   }
 
@@ -63,6 +62,7 @@
     background-attachment: fixed !important;
     background-size: 300% 300% !important;
     animation: gradient-shift-light 10s ease infinite !important;
+    min-height: 100vh;
   }
 
   html.dark {

@@ -29,7 +29,7 @@ const SOCIAL_LINKS = [
 const PRIMARY_LINKS = [
   { label: "Início", to: "/" },
   { label: "Investimentos Financeiros", to: "/investimentos" },
-  { label: "Empreendimentos Imobiliarios", to: "/empreendimentos" },
+  { label: "Empreendimentos Imobiliários", to: "/empreendimentos" },
   { label: "Indicadores", to: "/indicadores" },
   { label: "Sobre", to: "/sobre" },
   { label: "Blog", to: "/blog" },
@@ -186,7 +186,7 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Hamburger */}
+          {/* Mobile */}
           <button
             type="button"
             className="rounded-full border border-black/10 p-2 text-[#041A2A] transition-colors hover:border-black/20 dark:border-white/10 dark:text-white dark:hover:border-white/25 lg:hidden"
