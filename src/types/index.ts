@@ -37,6 +37,7 @@ export interface Testimonial {
   role: string
   text: string
   rating: number
+  image: string
 }
 
 export interface EconomicIndicator {

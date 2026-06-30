@@ -19,9 +19,11 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
         "{t.text}"
       </p>
       <div className="mt-6 flex items-center gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--accent)]/12 text-sm font-semibold text-[var(--accent)]">
-          {t.name[0]}
-        </div>
+        <img
+          src={t.image}
+          alt={t.name}
+          className="h-10 w-10 shrink-0 rounded-full object-cover"
+        />
         <div>
           <p className="text-sm font-semibold text-[var(--text-primary)]">{t.name}</p>
           <p className="text-xs text-[var(--text-muted)]">{t.role}</p>
