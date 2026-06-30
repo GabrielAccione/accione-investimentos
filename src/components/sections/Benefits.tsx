@@ -4,7 +4,7 @@ import { BENEFITS } from "@/data/benefits";
 
 export default function Benefits() {
   return (
-    <section id="beneficios" className="py-20 sm:py-24">
+    <section id="beneficios" className="pb-20 pt-6 sm:pb-24 pt:-10 sm:pt-10">
       <div className="section-container">
         <SectionHeading
           eyebrow="Por que a Accione"
