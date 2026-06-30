@@ -136,8 +136,8 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     name: "Sync Conde",
     status: "em-captacao",
     statusLabel: "Aberto para Investimento",
-    location: "Rua Conde de Porto Alegre, 646 — Centro, Santa Maria/RS",
-    mapQuery: "Rua Conde de Porto Alegre, 646, Centro, Santa Maria, RS",
+    location: "Rua Conde de Porto Alegre, 656 - Centro, Santa Maria/RS",
+    mapQuery: "Rua Conde de Porto Alegre, 656 - Centro, Santa Maria/RS",
     shortDescription:
       "Compactos de luxo. Empreendimento com 22 pavimentos e 187 apartamentos (estúdios, 1 e 2 dormitórios). Rooftop com espelho d’água e bar, academia, coworking, lavanderia compartilhada, piscina, átrio central com elevadores panorâmicos. Retrofit programado a cada 10 anos. Modelo SPE a preço de custo.",
     fullDescription:
