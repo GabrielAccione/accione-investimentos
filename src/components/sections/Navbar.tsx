@@ -6,8 +6,6 @@ import {
   Linkedin,
   Menu,
   MessageCircle,
-  Moon,
-  Sun,
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -67,7 +65,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
   const simulatorsActive = pathname.startsWith("/simuladores/");
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <>
@@ -161,20 +159,6 @@ export default function Navbar() {
                 <Icon className="h-4 w-4" />
               </a>
             ))}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label={
-                theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
-              }
-              className="p-2 text-[#9E9E9E] transition-colors duration-200 hover:text-[#A26547] dark:text-white/50"
-            >
-              {theme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
-            </button>
             <a
               href={SITE_CONFIG.whatsappHref}
               target="_blank"
@@ -285,22 +269,6 @@ export default function Navbar() {
                       <Icon className="h-5 w-5" />
                     </a>
                   ))}
-                  <button
-                    type="button"
-                    onClick={toggleTheme}
-                    aria-label={
-                      theme === "dark"
-                        ? "Ativar tema claro"
-                        : "Ativar tema escuro"
-                    }
-                    className="text-[#9E9E9E] transition-colors hover:text-[#A26547] dark:text-white/50"
-                  >
-                    {theme === "dark" ? (
-                      <Sun className="h-5 w-5" />
-                    ) : (
-                      <Moon className="h-5 w-5" />
-                    )}
-                  </button>
                 </div>
               </motion.div>
             </motion.div>
