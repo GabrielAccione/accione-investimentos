@@ -4,6 +4,7 @@ import PageHero from '@/components/ui/PageHero'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import { SITE_CONFIG } from '@/config/site'
 import gabrielImg from '@/assets/gabriel.jpg'
+import zaconImg from '@/assets/marcazacon.png'
 
 const VALUE_CARDS = [
   {
@@ -120,7 +121,13 @@ export default function SobrePage() {
                 <Building2 size={20} />
                 <span className="text-sm font-semibold uppercase tracking-[0.16em]">Parceiro estratégico</span>
               </div>
-              <h2 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">{SITE_CONFIG.partner.name}</h2>
+              <div className="mt-5 inline-flex rounded-lg bg-white p-3">
+                <img
+                  src={zaconImg}
+                  alt={SITE_CONFIG.partner.name}
+                  className="h-16 w-auto object-contain"
+                />
+              </div>
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)]">
                 {SITE_CONFIG.partner.description}
               </p>
