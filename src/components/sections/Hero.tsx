@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useInView } from "@/hooks/useInView";
@@ -69,10 +68,10 @@ export default function Hero() {
       <div className="section-container relative z-10 grid min-h-[calc(100vh-5rem)] items-center gap-12 py-14 lg:grid-cols-[minmax(0,1fr)_420px]">
         <div>
           <motion.h1
-            initial={{ opacity: 0, y: 20 }} //reduzido de 24 para20 para movimento mais sofisticado
+            initial={{ opacity: 0, y: 20 }} //reduzido de 24 para 20 para movimento mais sofisticado
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: PREMIUM_EASE, delay: 0.05 }}
-            className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.96] text-[#041A2A] dark:text-white sm:text-6xl lg:text-7xl"
+            className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.96] text-[#041A2A] dark:text-white sm:text-5xl lg:text-5xl"
           >
             Entregamos a investidores oportunidades criteriosamente criadas.
           </motion.h1>
@@ -81,7 +80,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: PREMIUM_EASE, delay: 0.12 }}
-            className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg"
+            className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg"
           >
             Somos uma empresa de investimentos multiestratégia. Identificamos as
             melhores oportunidades considerando seus interesses e buscando
@@ -99,12 +98,6 @@ export default function Hero() {
               label="Falar pelo WhatsApp"
               size="md"
             />
-            <Link
-              to="/investimentos"
-              className="btn-ghost active:scale-95 transition-transform duration 200"
-            >
-              Conhecer oportunidades
-            </Link>
           </motion.div>
         </div>
 
@@ -115,35 +108,23 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: PREMIUM_EASE, delay: 0.15 }}
           className="surface-card p-6 sm:p-8"
         >
-          <div className="flex items-center justify-between gap-4 border-b border-[#E5E5E5] pb-5 dark:border-white/10">
-            <div>
-              <p className="text-sm uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                ACCIONE INVESTIMENTOS
-              </p>
-              <h2 className="mt-2 text-3xl font-semibold text-[#041A2A] dark:text-white">
-                Nossos números
-              </h2>
-            </div>
-            <div className="hidden h-16 w-16 items-center justify-center rounded-full bg-[var(--accent)]/10 text-[var(--accent)] sm:flex"></div>
-          </div>
-
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             <CounterCard
-              prefix="R$ "
+              prefix="R$ +"
               target={100}
-              suffix="M+"
+              suffix="M"
               label="em negócios desenvolvidos"
               inView={countersInView}
             />
             <CounterCard
+              prefix="+"
               target={5}
-              suffix=" +"
               label="anos de atuação"
               inView={countersInView}
             />
             <CounterCard
+              prefix=" +"
               target={100}
-              suffix=" +"
               label="investimentos financeiros alternativos"
               inView={countersInView}
             />

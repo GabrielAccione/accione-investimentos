@@ -46,14 +46,18 @@
       #0a1a14 50%,
       #0c2030 100%
     );
-    --bg-gradient: linear-gradient(
-      360deg,
-      #041a2a 0%,
-      #041a2a 35%,
-      #a26547 65%,
-      #041a2a 75%,
-      #041a2a 100%
-    );
+    --bg-gradient:
+      radial-gradient(
+        ellipse 50% 70% at 0% 30%,
+        rgba(162, 101, 71, 0.4),
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 50% 70% at 100% 70%,
+        rgba(162, 101, 71, 0.4),
+        transparent 55%
+      ),
+      #041a2a;
   }
 
   html {
@@ -66,7 +70,8 @@
   }
 
   html.dark {
-    animation: gradient-shift-dark 12s ease infinite !important;
+    background-size: 180% 180% !important;
+    animation: gradient-shift-dark 14s ease infinite !important;
   }
 
   body {
@@ -217,12 +222,18 @@
 
 @keyframes gradient-shift-dark {
   0% {
-    background-position: 0% 50%;
+    background-position:
+      0% 0%,
+      100% 100%;
   }
   50% {
-    background-position: 100% 50%;
+    background-position:
+      15% 25%,
+      85% 75%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position:
+      0% 0%,
+      100% 100%;
   }
 }
