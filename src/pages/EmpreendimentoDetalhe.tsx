@@ -45,25 +45,25 @@ const HIGHLIGHTS = [
     icon: Wallet,
     title: "Acessível",
     description:
-      "Invista com menor capital do que a compra direta de um imóvel, via SPE fracionada.",
+      "Invista com menor capital do que a compra direta de um imóvel tornand-se sócio da SPE.",
   },
   {
     icon: Shield,
     title: "Seguro",
     description:
-      "Patrimônio segregado em SPE própria, com contrato registrado e gestão auditada.",
+      "Patrimônio segregado em SPE própria, com gestão auditada, totalmente transparente.",
   },
   {
     icon: TrendingUp,
     title: "Rentável",
     description:
-      "Retorno acima da poupança e da renda fixa tradicional, atrelado à valorização real.",
+      "Retorno acima do convencional. Grupo de investidores participa do negócio na origem",
   },
   {
     icon: Zap,
     title: "Ágil",
     description:
-      "Processo digital simplificado: assine o contrato, faça o aporte e acompanhe online.",
+      "Processo digital simplificado: contratos, relatórios e comunicação por whatsapp, e-mail e sistemas apropriados.",
   },
 ];
 
@@ -72,19 +72,19 @@ const SPE_CARDS = [
     icon: HelpCircle,
     title: "O que é SPE",
     description:
-      "Sociedade de Propósito Específico é uma empresa criada exclusivamente para este empreendimento. Cada investidor recebe cotas proporcionais ao valor aportado, com direitos registrados em cartório.",
+      "Sociedade de Propósito Específico é uma empresa criada para um único propósito, que é a construção do empreendimento. Cada investidor se torna sócio do negócio, com cotas ou ações proporcionais aos seus aportes de recursos financeiros, com direitos reconhecidos em instrumentos legais e transparentes.",
   },
   {
     icon: Shield,
     title: "Por que é seguro",
     description:
-      "O patrimônio da SPE é separado do patrimônio da construtora e da gestora. Em caso de problemas em outras operações, seus recursos permanecem protegidos e vinculados apenas a este projeto.",
+      "O patrimônio da SPE é separado do patrimônio da construtora e da gestora, que são contratadas para administrar a construção do empreendimento. Em caso de problemas em outras operações, os recursos dos investidores/sócios permanecem protegidos e vinculados apenas a este projeto.",
   },
   {
     icon: CheckCircle,
     title: "Como participar",
     description:
-      "Preencha o formulário de interesse, nossa equipe entra em contato, você assina o contrato digitalmente e realiza o aporte. O acompanhamento da obra e dos resultados é feito pelo nosso portal.",
+      "Entre em contato com a gestora ou construtora, conheça os detalhes do negócio e entre para o grupo de investidores. O acompanhamento da obra e dos resultados é feito rotineiramente por relatórios, comunicados e outros instrumentos apropriados a cada atividade, tudo à luz da legislação e com boas práticas de mercado.",
   },
 ];
 
@@ -182,135 +182,6 @@ function Lightbox({
   );
 }
 
-/* ─── Contact Form ───────────────────────────────────────────── */
-
-// function ContatoEmpreendimento({ name }: { name: string }) {
-//   const [form, setForm] = useState({
-//     nome: "",
-//     email: "",
-//     telefone: "",
-//     mensagem: "",
-//   });
-//   const [submitted, setSubmitted] = useState(false);
-
-//   function handleChange(
-//     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-//   ) {
-//     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
-//   }
-
-//   function handleSubmit(e: React.FormEvent) {
-//     e.preventDefault();
-//     setSubmitted(true);
-//   }
-
-//   const inputClass =
-//     "w-full rounded-lg border border-[#D0D0D0] bg-white px-4 py-3 text-sm text-[#041A2A] placeholder-[#9E9E9E] outline-none transition-colors duration-200 focus:border-[var(--accent)] dark:border-white/10 dark:bg-[#0C2030] dark:text-white dark:placeholder-[#69727D]";
-
-//   return (
-//     <section
-//       id="contato-empreendimento"
-//       className="py-20 bg-[var(--bg-secondary)]"
-//     >
-//       <div className="section-container max-w-2xl mx-auto">
-//         <motion.div
-//           initial={{ opacity: 0, y: 24 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true }}
-//           transition={{ duration: 0.6 }}
-//           className="text-center mb-10"
-//         >
-//           <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
-//             Próximo passo
-//           </span>
-//           <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
-//             Quero investir em {name}
-//           </h2>
-//           <p className="text-[var(--text-secondary)] mt-3 text-sm leading-relaxed">
-//             Preencha o formulário e nossa equipe entrará em contato em até 24
-//             horas.
-//           </p>
-//         </motion.div>
-
-//         {submitted ? (
-//           <motion.div
-//             initial={{ opacity: 0, scale: 0.9 }}
-//             animate={{ opacity: 1, scale: 1 }}
-//             className="text-center py-10"
-//           >
-//             <CheckCircle
-//               size={48}
-//               className="text-[var(--accent)] mx-auto mb-4"
-//             />
-//             <h3 className="font-display text-2xl font-bold text-[#041A2A] dark:text-white mb-2">
-//               Mensagem enviada!
-//             </h3>
-//             <p className="text-[var(--text-secondary)] text-sm">
-//               Nossa equipe entrará em contato em breve.
-//             </p>
-//           </motion.div>
-//         ) : (
-//           <motion.form
-//             initial={{ opacity: 0, y: 24 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             viewport={{ once: true }}
-//             transition={{ duration: 0.6, delay: 0.1 }}
-//             onSubmit={handleSubmit}
-//             className="flex flex-col gap-4"
-//           >
-//             <input
-//               type="text"
-//               name="nome"
-//               placeholder="Nome completo"
-//               required
-//               value={form.nome}
-//               onChange={handleChange}
-//               className={inputClass}
-//             />
-//             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-//               <input
-//                 type="email"
-//                 name="email"
-//                 placeholder="E-mail"
-//                 required
-//                 value={form.email}
-//                 onChange={handleChange}
-//                 className={inputClass}
-//               />
-//               <input
-//                 type="tel"
-//                 name="telefone"
-//                 placeholder="Telefone / WhatsApp"
-//                 value={form.telefone}
-//                 onChange={handleChange}
-//                 className={inputClass}
-//               />
-//             </div>
-//             <textarea
-//               name="mensagem"
-//               placeholder="Mensagem (opcional)"
-//               rows={4}
-//               value={form.mensagem}
-//               onChange={handleChange}
-//               className={`${inputClass} resize-none`}
-//             />
-//             <button
-//               type="submit"
-//               className="btn-accent py-3 text-base flex items-center justify-center gap-2 group"
-//             >
-//               Enviar interesse
-//               <ArrowRight
-//                 size={18}
-//                 className="transition-transform duration-200 group-hover:translate-x-1"
-//               />
-//             </button>
-//           </motion.form>
-//         )}
-//       </div>
-//     </section>
-//   );
-// }
-
 /* ─── Main Page ──────────────────────────────────────────────── */
 
 export default function EmpreendimentoDetalhe() {
@@ -366,6 +237,7 @@ export default function EmpreendimentoDetalhe() {
     status,
     statusLabel,
     location,
+    mapQuery,
     fullDescription,
     parceria,
     coverImage,
@@ -375,6 +247,10 @@ export default function EmpreendimentoDetalhe() {
     fichaTecnica,
     pontosDeInteresse,
   } = empreendimento;
+
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(
+    mapQuery ?? location,
+  )}&z=16&output=embed`;
 
   return (
     <>
@@ -396,9 +272,7 @@ export default function EmpreendimentoDetalhe() {
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <StatusBadge status={status} label={statusLabel} />
               {status === "captacao-encerrada" && (
-                <span className="text-xs text-white/60">
-                  Grupo 100% fechado
-                </span>
+                <span className="text-xs text-white/60"></span>
               )}
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
@@ -706,15 +580,16 @@ export default function EmpreendimentoDetalhe() {
             className="rounded-xl border border-[#A26547]/20 overflow-hidden"
           >
             {[
-              { label: "Construtora", value: fichaTecnica.construtora },
               { label: "Gestora", value: fichaTecnica.gestora },
-              { label: "Modelo de investimento", value: fichaTecnica.modelo },
+              { label: "Construtora", value: fichaTecnica.construtora },
+              { label: "Modelo de negócio", value: fichaTecnica.modelo },
               { label: "Localização", value: fichaTecnica.localizacao },
               {
                 label: "Tipologias disponíveis",
                 value: fichaTecnica.tipologias,
               },
-              ...(fichaTecnica.extras ?? []),
+              { label: "Pavimentos", value: fichaTecnica.pavimentos },
+              { label: "Total de unidades", value: fichaTecnica.totalUnidades },
             ].map((row, i) => (
               <div
                 key={row.label}
@@ -853,16 +728,17 @@ export default function EmpreendimentoDetalhe() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-2 rounded-xl overflow-hidden border border-[#484949]/20 bg-[var(--bg-primary)] h-72 flex items-center justify-center"
+              className="lg:col-span-2 rounded-xl overflow-hidden border border-[#484949]/20 bg-[var(--bg-primary)] h-72"
             >
-              <div className="text-center text-[var(--text-muted)]">
-                <MapPin
-                  size={40}
-                  className="mx-auto mb-3 text-[var(--accent)]/40"
-                />
-                <p className="text-sm">Mapa interativo em breve</p>
-                <p className="text-xs mt-1">{location}</p>
-              </div>
+              <iframe
+                title={`Mapa — ${name}`}
+                src={mapSrc}
+                className="w-full h-full"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
             </motion.div>
 
             {/* Points of interest */}

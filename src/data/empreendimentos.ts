@@ -37,12 +37,13 @@ import florianoAcademiaImg from "@/assets/syncFloriano/sync-floriano-academia.jp
 import florianoMinimarketImg from "@/assets/syncFloriano/sync-floriano-minimarket.jpg";
 
 export interface FichaTecnica {
-  construtora: string;
   gestora: string;
+  construtora: string;
   modelo: string;
   localizacao: string;
   tipologias: string;
-  extras?: { label: string; value: string }[];
+  pavimentos: string;
+  totalUnidades: string;
 }
 
 export interface GalleryItem {
@@ -62,10 +63,12 @@ export interface EmpreendimentoData {
   status: "em-captacao" | "em-breve" | "captacao-encerrada";
   statusLabel: string;
   location: string;
+  mapQuery?: string;
   shortDescription: string;
   fullDescription: string;
   parceria: string;
   coverImage: string;
+  coverPosition?: string;
   fachadaImage?: GalleryItem;
   gallery: GalleryItem[];
   destaques: Destaque[];
@@ -78,14 +81,16 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     slug: "avenue-residence",
     name: "Avenue Residence",
     status: "captacao-encerrada",
-    statusLabel: "Captação Encerrada",
+    statusLabel: "Grupo 100% Fechado",
     location: "Rua Demétrio Ribeiro, 404 — Santa Maria/RS",
+    mapQuery: "Rua Demétrio Ribeiro, 404, Santa Maria, RS",
     shortDescription:
       "Apartamentos de 2 e 3 dormitórios com suíte, sacada, espaço gourmet e rooftop. Modelo SPE a preço de custo.",
     fullDescription:
-      "O Avenue Residence é um empreendimento exclusivo que une sofisticação e praticidade no coração de Santa Maria. Com unidades de 2 e 3 dormitórios — sendo as de 3 com suíte — o projeto entrega acabamento de alto padrão, sacada privativa, espaço gourmet e um rooftop com vista privilegiada. Desenvolvido no modelo SPE (Sociedade de Propósito Específico), o Avenue Residence oferece ao investidor a oportunidade de adquirir frações de um ativo imobiliário real, com gestão profissional e rentabilidade acima da média do mercado tradicional.",
+      "O Avenue Residence é um empreendimento exclusivo que une sofisticação e praticidade em localização de pleno crescimento em Santa Maria. Com unidades de 2 e 3 dormitórios — ambas com suíte — o projeto entrega área privativa acima da média, acabamento de alto padrão, sacada privativa, churrasqueira, área de serviço separada da cozinha, alérm de espaço gourmet e um rooftop com vista privilegiada. Desenvolvido no modelo SPE (Sociedade de Propósito Específico) a preço de custo, o Avenue Residence oferece ao investidor a oportunidade de ingressar como sócio do empreendimento, potencializando os resultados, sem a necessidade de se envolver ativamente no processo, pois conta com a gestão profissional da Accione Investimentos e da Zacon Zanini Construções, idealizadores do negócio.",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
     coverImage: avenueFachadaCoverImg,
+    coverPosition: "center bottom",
     fachadaImage: {
       src: avenueFachadaCoverImg,
       alt: "Fachada Avenue Residence",
@@ -103,36 +108,40 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
       { src: avenueRooftopImg, alt: "Rooftop" },
     ],
     destaques: [
-      { valor: "2 e 3", label: "Dormitórios" },
-      { valor: "SPE", label: "Modelo de investimento" },
-      { valor: "Rooftop", label: "Espaço gourmet" },
-      { valor: "Preço de custo", label: "Aquisição" },
+      { valor: "2 e 3 dormitórios com suíte", label: "Tipologias" },
+      { valor: "SPE", label: "Modelo" },
+      { valor: "11 (com subsolo)", label: "Pavimentos" },
+      { valor: "Accione e Zacon", label: "Gestão e Construção" },
     ],
     fichaTecnica: {
-      construtora: "Zacon Zanini Construções — CNPJ 93.295.335/0001-65",
-      gestora: "Accione Investimentos — CNPJ 53.404.254/0001-31",
-      modelo: "SPE — Sociedade de Propósito Específico",
-      localizacao: "R. Demétrio Ribeiro, 404, Santa Maria/RS",
-      tipologias: "2 dormitórios (50,82 m²) e 3 dormitórios com suíte",
+      gestora: "Accione Investimentos",
+      construtora: "Zacon Zanini Construções",
+      modelo: "SPE a preço de custo",
+      localizacao: "R. Demétrio Ribeiro nº 404 - Santa Maria/RS",
+      tipologias: "2 dormitórios com suíte e 3 dormitórios com suíte",
+      pavimentos: "11 (incluindo o subsolo)",
+      totalUnidades: "16 apartamentos",
     },
     pontosDeInteresse: [
-      "Calçadão do Centro — 5 min a pé",
-      "UFSM — 10 min de carro",
-      "Shopping Praça Nova — 8 min de carro",
-      "Hospital Universitário — 12 min de carro",
-      "Parque Itaimbé — 6 min de carro",
+      "Calçadão do Centro - 4 min de carro",
+      "Mercado Peruzzo - 2 min a pé",
+      "Mercado Beltrame - 3 min de carro",
+      "Shopping Praça Nova - 4 min de carro",
+      "Avenida Tênis Clube - 3 min de carro",
+      "Parque da Medianeira - 4 min de carro",
     ],
   },
   {
     slug: "sync-conde",
     name: "Sync Conde",
     status: "em-captacao",
-    statusLabel: "Aberto para Captação",
+    statusLabel: "Aberto para Investimento",
     location: "Rua Conde de Porto Alegre, 646 — Centro, Santa Maria/RS",
+    mapQuery: "Rua Conde de Porto Alegre, 646, Centro, Santa Maria, RS",
     shortDescription:
-      "21 pavimentos, 187 apartamentos (estúdios, 1 e 2 dorms). Rooftop com piscina, academia, coworking e bar. Retrofit programado a cada 10 anos.",
+      "Compactos de luxo. Empreendimento com 22 pavimentos e 187 apartamentos (estúdios, 1 e 2 dormitórios). Rooftop com espelho d’água e bar, academia, coworking, lavanderia compartilhada, piscina, átrio central com elevadores panorâmicos. Retrofit programado a cada 10 anos. Modelo SPE a preço de custo.",
     fullDescription:
-      "O Sync Viva On é um empreendimento de alto impacto urbanístico no Centro de Santa Maria. Com 21 pavimentos e 187 apartamentos distribuídos em estúdios, 1 e 2 dormitórios, o projeto foi concebido para o investidor moderno que busca rentabilidade com liquidez. O rooftop oferece piscina, academia completa, espaço de coworking e bar panorâmico. Um diferencial exclusivo é o retrofit programado a cada 10 anos, garantindo que o ativo se mantenha sempre valorizado e atualizado. Modelo SPE, gestão profissional Accione.",
+      "O Sync Viva On é um empreendimento de alto impacto urbanístico no Centro de Santa Maria. Com 22 pavimentos e 187 apartamentos distribuídos em estúdios, 1 e 2 dormitórios, o projeto foi concebido para o investidor moderno que busca rentabilidade com liquidez. O rooftop oferece piscina, academia completa, espaço de coworking e bar panorâmico. Um diferencial exclusivo é o retrofit programado a cada 10 anos, garantindo que o ativo se mantenha sempre valorizado e atualizado. Modelo SPE, gestão profissional Accione.",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
     coverImage: syncCondeCoverImg,
     fachadaImage: { src: syncCondeFachadaImg, alt: "Fachada Sync Viva On" },
@@ -148,21 +157,20 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
       { src: syncResidenceImg, alt: "Vista geral" },
     ],
     destaques: [
-      { valor: "187", label: "Apartamentos" },
-      { valor: "21", label: "Pavimentos" },
-      { valor: "Rooftop", label: "Com piscina e bar" },
-      { valor: "10 anos", label: "Retrofit programado" },
+      { valor: "187", label: "Tipologias" },
+      { valor: "SPE", label: "Modelo" },
+      { valor: "22", label: "Pavimentos" },
+      { valor: "Accione e Zacon", label: "Gestão e Construção" },
     ],
     fichaTecnica: {
-      construtora: "Zacon Zanini Construções",
       gestora: "Accione Investimentos",
-      modelo: "SPE — Sociedade de Propósito Específico",
-      localizacao: "R. Conde de Porto Alegre, 646, Centro, Santa Maria/RS",
-      tipologias: "Estúdio (23–33 m²), 1 dorm (27–36 m²), 2 dorms (45–50 m²)",
-      extras: [
-        { label: "Total de unidades", value: "187 apartamentos" },
-        { label: "Pavimentos", value: "21" },
-      ],
+      construtora: "Zacon Zanini Construções",
+      modelo: "SPE a preço de custo",
+      localizacao: "R. Conde de Porto Alegre nº 646 - Centro, Santa Maria/RS",
+      tipologias:
+        "Estúdio (23–33 m²), 1 dormitório (27–36 m²) e 2 dormitórios (45–50 m²)",
+      pavimentos: "22",
+      totalUnidades: "187 apartamentos",
     },
     pontosDeInteresse: [
       "Calçadão do Centro — 3 min a pé",
@@ -176,14 +184,16 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     slug: "sync-floriano",
     name: "Sync Floriano",
     status: "em-captacao",
-    statusLabel: "Aberto para Captação",
-    location: "Rua Marechal Floriano Peixoto, 1355 — Centro, Santa Maria/RS",
+    statusLabel: "Aberto para Investimento",
+    location: "Rua Marechal Floriano Peixoto, 1354 - Centro, Santa Maria/RS",
+    mapQuery: "Rua Marechal Floriano Peixoto, 1354, Centro, Santa Maria, RS",
     shortDescription:
-      "14 pavimentos, 172 unidades residenciais entre studios e apartamentos de 1 e 2 dormitórios. Coworking, academia, lavanderia, gourmet, pub, áreas verdes e espaços de convivência",
+      "Compactos de luxo. Empreendimento com 14 pavimentos e 172 apartamentos (estúdios, 1 e 2 dormitórios). Amplo hall de entrada, minimercado, pub exclusivo, área verde, academia, coworking, gourmet pizza, gourmet churrasco, lavanderia compartilhada. Modelo SPE a preço de custo.",
     fullDescription:
       "O Sync Viva On – Floriano é um empreendimento de compactos de luxo localizado no coração de Santa Maria, na tradicional Rua Floriano Peixoto. Desenvolvido pela parceria entre Zacon Zanini e Accione, o projeto une arquitetura contemporânea, infraestrutura inteligente e alto potencial de valorização em uma das regiões mais desejadas da cidade. Com studios, apartamentos de 1 e 2 dormitórios, áreas comuns premium, coworking, academia, gourmet, lavanderia compartilhada e espaços de convivência modernos, o Sync Viva On foi pensado para atender o novo perfil urbano — combinando praticidade, sofisticação e flexibilidade para moradia ou locação premium. Estruturado para atender a crescente demanda por locações executivas e short stay, o empreendimento oferece ao investidor um ativo imobiliário com forte liquidez, elevada rentabilidade por m² e localização estratégica próxima a universidades, hospitais, comércio e serviços..",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
     coverImage: florianoCoverImg,
+    coverPosition: "center bottom",
     fachadaImage: { src: florianoFachadaImg, alt: "Fachada Sync Floriano" },
     gallery: [
       { src: florianoPubImg, alt: "Pub / Bar" },
@@ -197,17 +207,20 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
       { src: florianoMinimarketImg, alt: "Minimarket" },
     ],
     destaques: [
-      { valor: "SPE", label: "Modelo de investimento" },
-      { valor: "Em breve", label: "Lançamento" },
-      { valor: "Centro", label: "Localização" },
-      { valor: "Accione", label: "Gestão" },
+      { valor: "1 e 2 dormitórios", label: "Tipologia" },
+      { valor: "SPE", label: "Modelo" },
+      { valor: "14", label: "Pavimentos" },
+      { valor: "Accione e Zacon", label: "Gestão e Construção" },
     ],
     fichaTecnica: {
-      construtora: "Zacon Zanini Construções",
       gestora: "Accione Investimentos",
-      modelo: "SPE — Sociedade de Propósito Específico",
-      localizacao: "Santa Maria/RS — endereço a divulgar",
-      tipologias: "A definir",
+      construtora: "Zacon Zanini Construções",
+      modelo: "SPE a preço de custo",
+      localizacao:
+        "R. Marechal Floriano Peixoto nº 1354 - Centro, Santa Maria/RS",
+      tipologias: "Estúdios, 1 e 2 dormitórios",
+      pavimentos: "14",
+      totalUnidades: "172 apartamentos",
     },
     pontosDeInteresse: [
       "UFSM - 1 min",
