@@ -4,12 +4,12 @@ import { SITE_CONFIG } from '@/config/site'
 
 export default function ContactForm() {
   return (
-    <section id="contato" className="bg-[var(--bg-secondary)] py-20 sm:py-24">
+    <section id="contato" className="py-20 sm:py-24">
       <div className="section-container">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div className="surface-card p-6 sm:p-8">
             <span className="section-tag">Contato</span>
-            <h2 className="mt-5 text-4xl font-semibold text-white">
+            <h2 className="mt-5 text-4xl font-semibold text-[#041A2A] dark:text-white">
               Fale com um consultor da Accione.
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">

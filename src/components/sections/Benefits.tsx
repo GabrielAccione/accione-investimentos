@@ -1,20 +1,20 @@
-import { motion } from 'framer-motion'
-import SectionHeading from '@/components/ui/SectionHeading'
-import { BENEFITS } from '@/data/benefits'
+import { motion } from "framer-motion";
+import SectionHeading from "@/components/ui/SectionHeading";
+import { BENEFITS } from "@/data/benefits";
 
 export default function Benefits() {
   return (
-    <section id="beneficios" className="bg-[var(--bg-primary)] py-20 sm:py-24">
+    <section id="beneficios" className="pb-20 pt-6 sm:pb-24 pt:-10 sm:pt-10">
       <div className="section-container">
         <SectionHeading
-          eyebrow="Por que Accione"
-          title="Uma assessoria desenhada para decisões patrimoniais menos superficiais."
-          description="Selecionamos teses, traduzimos riscos e conduzimos a conversa com profundidade suficiente para o investidor entender o que está comprando."
+          eyebrow="Por que a Accione"
+          title="Uma empresa desenhada para decisões patrimoniais robustas."
+          description="Desenvolvemos teses, traduzimos riscos e conduzimos a conversa com profundidade suficiente para o investidor entender o que está fazendo."
         />
 
         <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
           {BENEFITS.map((benefit, index) => {
-            const Icon = benefit.icon
+            const Icon = benefit.icon;
 
             return (
               <motion.article
@@ -28,15 +28,17 @@ export default function Benefits() {
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent)]/12 text-[var(--accent)]">
                   <Icon size={24} />
                 </div>
-                <h3 className="mt-5 text-3xl font-semibold text-white">{benefit.title}</h3>
+                <h3 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">
+                  {benefit.title}
+                </h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
                   {benefit.description}
                 </p>
               </motion.article>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }

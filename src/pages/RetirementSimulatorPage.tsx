@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from "react";
 import {
   Area,
   AreaChart,
@@ -8,42 +7,60 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from 'recharts'
-import PageHero from '@/components/ui/PageHero'
-import { calculateRetirementProjection } from '@/lib/financial'
-import { formatCompactCurrency, formatCurrency, formatPercent } from '@/lib/formatters'
+} from "recharts";
+import PageHero from "@/components/ui/PageHero";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import { useTheme } from "@/context/ThemeContext";
+import { calculateRetirementProjection } from "@/lib/financial";
+import {
+  formatCompactCurrency,
+  formatCurrency,
+  formatPercent,
+} from "@/lib/formatters";
 
 const DEFAULT_VALUES = {
   currentAge: 35,
   retirementAge: 60,
   monthlyContribution: 1500,
   annualRate: 12,
-}
+};
 
 export default function RetirementSimulatorPage() {
-  const [currentAge, setCurrentAge] = useState(String(DEFAULT_VALUES.currentAge))
-  const [retirementAge, setRetirementAge] = useState(String(DEFAULT_VALUES.retirementAge))
+  const { theme } = useTheme();
+  const [currentAge, setCurrentAge] = useState(
+    String(DEFAULT_VALUES.currentAge),
+  );
+  const [retirementAge, setRetirementAge] = useState(
+    String(DEFAULT_VALUES.retirementAge),
+  );
   const [monthlyContribution, setMonthlyContribution] = useState(
     String(DEFAULT_VALUES.monthlyContribution),
-  )
-  const [annualRate, setAnnualRate] = useState(String(DEFAULT_VALUES.annualRate))
+  );
+  const [annualRate, setAnnualRate] = useState(
+    String(DEFAULT_VALUES.annualRate),
+  );
+  const [initialInvestment, setInitialInvestment] = useState('0');
 
-  const parsedCurrentAge = Number(currentAge)
-  const parsedRetirementAge = Number(retirementAge)
-  const parsedMonthlyContribution = Number(monthlyContribution)
-  const parsedAnnualRate = Number(annualRate)
+  const parsedCurrentAge = Number(currentAge);
+  const parsedRetirementAge = Number(retirementAge);
+  const parsedMonthlyContribution = Number(monthlyContribution);
+  const parsedAnnualRate = Number(annualRate);
+  const parsedInitialInvestment = Number(initialInvestment);
 
   const validationError = (() => {
     if (parsedRetirementAge <= parsedCurrentAge)
-      return 'A idade de aposentadoria deve ser maior que a idade atual.'
+      return "A idade de aposentadoria deve ser maior que a idade atual.";
     if (parsedMonthlyContribution < 100)
-      return 'O aporte mínimo é de R$ 100,00.'
+      return "O aporte mínimo é de R$ 100,00.";
     if (parsedAnnualRate < 1 || parsedAnnualRate > 50)
-      return 'Informe uma taxa entre 1% e 50% ao ano.'
-    return null
-  })()
+      return "Informe uma taxa entre 1% e 50% ao ano.";
+    return null;
+  })();
 
-  const isValidScenario = parsedCurrentAge > 0 && !validationError
+  const isValidScenario = parsedCurrentAge > 0 && !validationError;
+  const isDark = theme === "dark";
+  const chartGridStroke = isDark ? "rgba(255,255,255,0.08)" : "#E5E5E5";
+  const chartAxisStroke = isDark ? "#69727D" : "#484949";
 
   const projection = isValidScenario
     ? calculateRetirementProjection(
@@ -51,8 +68,9 @@ export default function RetirementSimulatorPage() {
         parsedRetirementAge,
         parsedMonthlyContribution,
         parsedAnnualRate,
+        parsedInitialInvestment,
       )
-    : null
+    : null;
 
   return (
     <>
@@ -67,16 +85,20 @@ export default function RetirementSimulatorPage() {
         description="A simulação considera aportes mensais e rentabilidade anual esperada para estimar evolução patrimonial até a idade-alvo."
       />
 
-      <section className="bg-[var(--bg-primary)] py-20 sm:py-24">
+      <section className="py-20 sm:py-24">
         <div className="section-container grid gap-8 xl:grid-cols-[380px_minmax(0,1fr)]">
           <aside className="surface-card p-6 sm:p-8">
-            <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-amber-200">
-              <strong>Aviso importante:</strong> Os resultados apresentados são estimativas baseadas nos dados informados e em projeções matemáticas. Não constituem garantia de rentabilidade nem recomendação de investimento. Rentabilidade passada não garante resultados futuros.
+            <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-[#484949] dark:text-amber-200">
+              <strong>Aviso importante:</strong> Os resultados apresentados são
+              estimativas baseadas nos dados informados e em projeções
+              matemáticas. Não constituem garantia de rentabilidade nem
+              recomendação de investimento. Rentabilidade passada não garante
+              resultados futuros.
             </div>
             <span className="mt-6 block section-tag">Entradas</span>
             <div className="mt-4 space-y-5">
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+                <span className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
                   Idade atual
                 </span>
                 <input
@@ -89,7 +111,7 @@ export default function RetirementSimulatorPage() {
               </label>
 
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+                <span className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
                   Idade de aposentadoria
                 </span>
                 <input
@@ -102,7 +124,21 @@ export default function RetirementSimulatorPage() {
               </label>
 
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+                <span className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
+                  Investimento inicial (R$)
+                </span>
+                <input
+                  type="number"
+                  min={0}
+                  step={100}
+                  value={initialInvestment}
+                  onChange={(event) => setInitialInvestment(event.target.value)}
+                  className="input-base"
+                />
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
                   Aporte mensal (R$)
                 </span>
                 <input
@@ -110,13 +146,15 @@ export default function RetirementSimulatorPage() {
                   min={0}
                   step={100}
                   value={monthlyContribution}
-                  onChange={(event) => setMonthlyContribution(event.target.value)}
+                  onChange={(event) =>
+                    setMonthlyContribution(event.target.value)
+                  }
                   className="input-base"
                 />
               </label>
 
               <label className="block">
-                <span className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+                <span className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
                   Rentabilidade anual esperada (%)
                 </span>
                 <input
@@ -131,23 +169,26 @@ export default function RetirementSimulatorPage() {
             </div>
 
             <p className="mt-6 text-sm leading-relaxed text-[var(--text-secondary)]">
-              A renda passiva estimada considera a mesma taxa anual informada, convertida para base mensal apenas como referência de planejamento.
+              A renda passiva estimada considera a mesma taxa anual informada,
+              convertida para base mensal apenas como referência de
+              planejamento.
             </p>
           </aside>
 
           <div className="space-y-6">
             {!isValidScenario || !projection ? (
               <div className="surface-card p-8 text-sm leading-relaxed text-[var(--text-secondary)]">
-                {validationError ?? 'Preencha os campos para visualizar a projeção.'}
+                {validationError ??
+                  "Preencha os campos para visualizar a projeção."}
               </div>
             ) : (
               <>
-                <div className="grid gap-5 md:grid-cols-3">
+                <div className="grid gap-5 md:grid-cols-3 [&>*]:min-w-0">
                   <article className="surface-card p-6">
                     <p className="text-xs font-normal uppercase tracking-[0.1em] text-[var(--text-muted)]">
                       Patrimônio acumulado
                     </p>
-                    <h2 className="mt-4 font-body text-[2.5rem] font-semibold tracking-normal tabular-nums text-white">
+                    <h2 className="mt-4 font-body text-[1.2rem] sm:text-[1.5rem] xl:text-[1.8rem] font-semibold tracking-normal tabular-nums text-[#A26547] break-words leading-tightmt-4 font-body text-[1.4rem] font-semibold tracking-normal tabular-nums text-[#A26547]">
                       {formatCurrency(projection.balance)}
                     </h2>
                   </article>
@@ -156,7 +197,7 @@ export default function RetirementSimulatorPage() {
                     <p className="text-xs font-normal uppercase tracking-[0.1em] text-[var(--text-muted)]">
                       Renda passiva estimada
                     </p>
-                    <h2 className="mt-4 font-body text-[2.5rem] font-semibold tracking-normal tabular-nums text-white">
+                    <h2 className="mt-4 font-body text-[1.2rem] sm:text-[1.5rem] xl:text-[1.8rem] font-semibold tracking-normal tabular-nums text-[#A26547] break-words leading-tight">
                       {formatCurrency(projection.monthlyIncome)}
                     </h2>
                   </article>
@@ -165,11 +206,11 @@ export default function RetirementSimulatorPage() {
                     <p className="text-xs font-normal uppercase tracking-[0.1em] text-[var(--text-muted)]">
                       Horizonte
                     </p>
-                    <h2 className="mt-4 font-body text-[2.5rem] font-semibold tracking-normal tabular-nums text-white">
+                    <h2 className="mt-4 font-body text-[1.2rem] sm:text-[1.5rem] xl:text-[1.8rem] font-semibold tracking-normal tabular-nums text-[#A26547] break-words leading-tight">
                       {projection.months / 12} anos
                     </h2>
                     <p className="mt-3 text-[0.8rem] text-[var(--text-muted)]">
-                      Taxa usada: {formatPercent(parsedAnnualRate, '% a.a.')}
+                      Taxa usada: {formatPercent(parsedAnnualRate, "% a.a.")}
                     </p>
                   </article>
                 </div>
@@ -178,7 +219,7 @@ export default function RetirementSimulatorPage() {
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                     <div>
                       <span className="section-tag">Evolução patrimonial</span>
-                      <h2 className="mt-4 text-4xl font-semibold text-white">
+                      <h2 className="mt-4 text-4xl font-semibold text-[#041A2A] dark:text-white">
                         Crescimento projetado ao longo do tempo
                       </h2>
                     </div>
@@ -191,27 +232,56 @@ export default function RetirementSimulatorPage() {
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={projection.points}>
                         <defs>
-                          <linearGradient id="retirementBalance" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#A26547" stopOpacity={0.45} />
-                            <stop offset="95%" stopColor="#A26547" stopOpacity={0.05} />
+                          <linearGradient
+                            id="retirementBalance"
+                            x1="0"
+                            y1="0"
+                            x2="0"
+                            y2="1"
+                          >
+                            <stop
+                              offset="5%"
+                              stopColor="#A26547"
+                              stopOpacity={0.45}
+                            />
+                            <stop
+                              offset="95%"
+                              stopColor="#A26547"
+                              stopOpacity={0.05}
+                            />
                           </linearGradient>
                         </defs>
-                        <CartesianGrid stroke="rgba(255,255,255,0.08)" vertical={false} />
-                        <XAxis dataKey="age" stroke="#69727D" tickLine={false} axisLine={false} />
-                        <YAxis
-                          stroke="#69727D"
+                        <CartesianGrid
+                          stroke={chartGridStroke}
+                          vertical={false}
+                        />
+                        <XAxis
+                          dataKey="age"
+                          stroke={chartAxisStroke}
                           tickLine={false}
                           axisLine={false}
-                          tickFormatter={(value: number) => formatCompactCurrency(value)}
+                        />
+                        <YAxis
+                          stroke={chartAxisStroke}
+                          tickLine={false}
+                          axisLine={false}
+                          tickFormatter={(value: number) =>
+                            formatCompactCurrency(value)
+                          }
                         />
                         <Tooltip
-                          formatter={(value) => [formatCurrency(Number(value ?? 0)), 'Patrimônio']}
+                          formatter={(value) => [
+                            formatCurrency(Number(value ?? 0)),
+                            "Patrimônio",
+                          ]}
                           labelFormatter={(label) => `Idade ${label}`}
                           contentStyle={{
-                            backgroundColor: '#0C2030',
-                            border: '1px solid rgba(255,255,255,0.1)',
-                            borderRadius: '16px',
-                            color: '#FFFFFF',
+                            backgroundColor: isDark ? "#0C2030" : "#FFFFFF",
+                            border: isDark
+                              ? "1px solid rgba(255,255,255,0.1)"
+                              : "1px solid #E5E5E5",
+                            borderRadius: "16px",
+                            color: isDark ? "#FFFFFF" : "#041A2A",
                           }}
                         />
                         <Area
@@ -230,13 +300,14 @@ export default function RetirementSimulatorPage() {
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <span className="section-tag">Próximo passo</span>
-                      <h2 className="mt-4 text-3xl font-semibold text-white">
+                      <h2 className="mt-4 text-3xl font-semibold text-[#041A2A] dark:text-white">
                         Transforme a simulação em um plano de alocação.
                       </h2>
                     </div>
-                    <Link to="/contato" className="btn-accent">
-                      Fale com um consultor
-                    </Link>
+                    <WhatsAppButton
+                      mensagem="Olá! Fiz uma simulação de aposentadoria no site e gostaria de conversar sobre investimentos."
+                      label="Falar pelo WhatsApp"
+                    />
                   </div>
                 </div>
               </>
@@ -245,5 +316,5 @@ export default function RetirementSimulatorPage() {
         </div>
       </section>
     </>
-  )
+  );
 }

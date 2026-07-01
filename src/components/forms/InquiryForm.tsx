@@ -9,14 +9,13 @@ interface FormState {
   name: string
   email: string
   phone: string
-  subject: string
   message: string
 }
 
 type FormField = keyof FormState
 
-const INITIAL_FORM: FormState = { name: '', email: '', phone: '', subject: '', message: '' }
-const INITIAL_TOUCH = { name: false, email: false, phone: false, subject: false, message: false }
+const INITIAL_FORM: FormState = { name: '', email: '', phone: '', message: '' }
+const INITIAL_TOUCH = { name: false, email: false, phone: false, message: false }
 
 function applyPhoneMask(raw: string) {
   const d = raw.replace(/\D/g, '').slice(0, 11)
@@ -34,8 +33,6 @@ function validate(form: FormState): Partial<Record<FormField, string>> {
     errors.email = 'Informe um e-mail válido.'
   if (form.phone.replace(/\D/g, '').length < 10)
     errors.phone = 'Informe o telefone com DDD (mínimo 10 dígitos).'
-  if (!form.subject)
-    errors.subject = 'Selecione um assunto.'
   if (form.message.trim().length < 10)
     errors.message = 'A mensagem deve ter pelo menos 10 caracteres.'
   return errors
@@ -64,7 +61,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setTouched({ name: true, email: true, phone: true, subject: true, message: true })
+    setTouched({ name: true, email: true, phone: true, message: true })
     if (!isValid) return
     setIsSubmitting(true)
     // Substituir por integração real quando disponível (Formspree, EmailJS, etc.)
@@ -81,7 +78,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-300">
           <CheckCircle2 size={30} />
         </div>
-        <h3 className="mt-5 text-3xl font-semibold text-white">Obrigado!</h3>
+        <h3 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">Obrigado!</h3>
         <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
           Em breve entraremos em contato. Um consultor da Accione retornará para entender seu momento e apresentar as alternativas mais aderentes ao seu perfil.
         </p>
@@ -103,7 +100,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
     <form onSubmit={handleSubmit} noValidate className="surface-card p-6 sm:p-8">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
-          <label htmlFor="name" className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+          <label htmlFor="name" className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
             Nome
           </label>
           <input
@@ -116,7 +113,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
         </div>
 
         <div>
-          <label htmlFor="email" className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
             E-mail
           </label>
           <input
@@ -129,7 +126,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
         </div>
 
         <div>
-          <label htmlFor="phone" className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+          <label htmlFor="phone" className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
             Telefone
           </label>
           <input
@@ -142,25 +139,7 @@ export default function InquiryForm({ submitLabel = 'Enviar mensagem' }: Inquiry
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor="subject" className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
-            Assunto
-          </label>
-          <select
-            id="subject" name="subject"
-            value={form.subject} onChange={handleChange} onBlur={() => handleBlur('subject')}
-            className={fieldClass('subject')}
-          >
-            <option value="" disabled>Selecione o tema do contato</option>
-            <option value="investimentos">Quero conhecer oportunidades</option>
-            <option value="empreendimentos">Tenho interesse em empreendimentos</option>
-            <option value="simuladores">Quero ajuda para planejar um aporte</option>
-            <option value="parcerias">Parcerias e relacionamento</option>
-          </select>
-          <FieldError field="subject" />
-        </div>
-
-        <div className="sm:col-span-2">
-          <label htmlFor="message" className="mb-2 block text-sm font-medium text-[var(--text-secondary)]">
+          <label htmlFor="message" className="mb-2 block text-sm font-medium text-[#041A2A] dark:text-white">
             Mensagem
           </label>
           <textarea

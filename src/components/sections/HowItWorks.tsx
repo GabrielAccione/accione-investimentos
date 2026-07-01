@@ -4,7 +4,7 @@ import { STEPS } from '@/data/howItWorks'
 
 export default function HowItWorks() {
   return (
-    <section id="como-funciona" className="bg-[var(--bg-primary)] py-20 sm:py-24">
+    <section id="como-funciona" className="py-20 sm:py-24">
       <div className="section-container">
         <SectionHeading
           eyebrow="Como funciona"
@@ -31,7 +31,7 @@ export default function HowItWorks() {
                     <Icon size={20} />
                   </div>
                 </div>
-                <h3 className="mt-5 text-3xl font-semibold text-white">{step.title}</h3>
+                <h3 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">{step.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
                   {step.description}
                 </p>

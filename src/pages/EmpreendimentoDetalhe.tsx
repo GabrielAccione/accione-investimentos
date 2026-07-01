@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useCallback, useRef } from "react";
+import { useParams, Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin,
   Wallet,
@@ -12,64 +12,81 @@ import {
   X,
   HelpCircle,
   CheckCircle,
-  ArrowRight,
-} from 'lucide-react'
-import { EMPREENDIMENTOS, type EmpreendimentoData, type GalleryItem, type Destaque } from '@/data/empreendimentos'
+} from "lucide-react";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import {
+  EMPREENDIMENTOS,
+  type EmpreendimentoData,
+  type GalleryItem,
+  type Destaque,
+} from "@/data/empreendimentos";
 
 /* ─── Sub-components ─────────────────────────────────────────── */
 
-function StatusBadge({ status, label }: { status: EmpreendimentoData['status']; label: string }) {
-  const color = status === 'em-captacao' ? 'bg-[var(--accent)]' : 'bg-[#69727D]'
+function StatusBadge({
+  status,
+  label,
+}: {
+  status: EmpreendimentoData["status"];
+  label: string;
+}) {
+  const color = status === "em-captacao" ? "bg-[#25D366]" : "bg-[#69727D]";
   return (
-    <span className={`${color} text-white text-xs font-semibold px-4 py-1.5 rounded-full`}>
+    <span
+      className={`${color} text-white text-xs font-semibold px-4 py-1.5 rounded-full`}
+    >
       {label}
     </span>
-  )
+  );
 }
 
 const HIGHLIGHTS = [
   {
     icon: Wallet,
-    title: 'Acessível',
-    description: 'Invista com menor capital do que a compra direta de um imóvel, via SPE fracionada.',
+    title: "Acessível",
+    description:
+      "Invista com menor capital do que a compra direta de um imóvel tornand-se sócio da SPE.",
   },
   {
     icon: Shield,
-    title: 'Seguro',
-    description: 'Patrimônio segregado em SPE própria, com contrato registrado e gestão auditada.',
+    title: "Seguro",
+    description:
+      "Patrimônio segregado em SPE própria, com gestão auditada, totalmente transparente.",
   },
   {
     icon: TrendingUp,
-    title: 'Rentável',
-    description: 'Retorno acima da poupança e da renda fixa tradicional, atrelado à valorização real.',
+    title: "Rentável",
+    description:
+      "Retorno acima do convencional. Grupo de investidores participa do negócio na origem",
   },
   {
     icon: Zap,
-    title: 'Ágil',
-    description: 'Processo digital simplificado: assine o contrato, faça o aporte e acompanhe online.',
+    title: "Ágil",
+    description:
+      "Processo digital simplificado: contratos, relatórios e comunicação por whatsapp, e-mail e sistemas apropriados.",
   },
-]
+];
 
 const SPE_CARDS = [
   {
     icon: HelpCircle,
-    title: 'O que é SPE',
+    title: "O que é SPE",
     description:
-      'Sociedade de Propósito Específico é uma empresa criada exclusivamente para este empreendimento. Cada investidor recebe cotas proporcionais ao valor aportado, com direitos registrados em cartório.',
+      "Sociedade de Propósito Específico é uma empresa criada para um único propósito, que é a construção do empreendimento. Cada investidor se torna sócio do negócio, com cotas ou ações proporcionais aos seus aportes de recursos financeiros, com direitos reconhecidos em instrumentos legais e transparentes.",
   },
   {
     icon: Shield,
-    title: 'Por que é seguro',
+    title: "Por que é seguro",
     description:
-      'O patrimônio da SPE é separado do patrimônio da construtora e da gestora. Em caso de problemas em outras operações, seus recursos permanecem protegidos e vinculados apenas a este projeto.',
+      "O patrimônio da SPE é separado do patrimônio da construtora e da gestora, que são contratadas para administrar a construção do empreendimento. Em caso de problemas em outras operações, os recursos dos investidores/sócios permanecem protegidos e vinculados apenas a este projeto.",
   },
   {
     icon: CheckCircle,
-    title: 'Como participar',
+    title: "Como participar",
     description:
-      'Preencha o formulário de interesse, nossa equipe entra em contato, você assina o contrato digitalmente e realiza o aporte. O acompanhamento da obra e dos resultados é feito pelo nosso portal.',
+      "Entre em contato com a gestora ou construtora, conheça os detalhes do negócio e entre para o grupo de investidores. O acompanhamento da obra e dos resultados é feito rotineiramente por relatórios, comunicados e outros instrumentos apropriados a cada atividade, tudo à luz da legislação e com boas práticas de mercado.",
   },
-]
+];
 
 /* ─── Lightbox ───────────────────────────────────────────────── */
 
@@ -78,30 +95,30 @@ function Lightbox({
   initial,
   onClose,
 }: {
-  images: GalleryItem[]
-  initial: number
-  onClose: () => void
+  images: GalleryItem[];
+  initial: number;
+  onClose: () => void;
 }) {
-  const [current, setCurrent] = useState(initial)
+  const [current, setCurrent] = useState(initial);
 
   const prev = useCallback(
     () => setCurrent((c) => (c - 1 + images.length) % images.length),
     [images.length],
-  )
+  );
   const next = useCallback(
     () => setCurrent((c) => (c + 1) % images.length),
     [images.length],
-  )
+  );
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowLeft') prev()
-      if (e.key === 'ArrowRight') next()
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
     }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onClose, prev, next])
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose, prev, next]);
 
   return (
     <motion.div
@@ -119,11 +136,20 @@ function Lightbox({
         className="relative max-w-4xl w-full"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
-          src={images[current].src}
-          alt={images[current].alt}
-          className="w-full rounded-xl"
-        />
+        <div className="relative">
+          <img
+            src={images[current].src}
+            alt={images[current].alt}
+            className="w-full rounded-xl"
+          />
+          {images[current].alt && (
+            <div className="absolute bottom-0 inset-x-0 rounded-b-xl bg-black/60 px-4 py-2.5">
+              <p className="text-center text-sm text-white/90">
+                {images[current].alt}
+              </p>
+            </div>
+          )}
+        </div>
 
         {/* Controls */}
         <button
@@ -153,141 +179,79 @@ function Lightbox({
         </p>
       </motion.div>
     </motion.div>
-  )
-}
-
-/* ─── Contact Form ───────────────────────────────────────────── */
-
-function ContatoEmpreendimento({ name }: { name: string }) {
-  const [form, setForm] = useState({ nome: '', email: '', telefone: '', mensagem: '' })
-  const [submitted, setSubmitted] = useState(false)
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
-  }
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setSubmitted(true)
-  }
-
-  const inputClass =
-    'w-full bg-[var(--bg-secondary)] border border-[#484949]/30 focus:border-[var(--accent)] text-white placeholder-[var(--text-muted)] rounded-lg px-4 py-3 text-sm outline-none transition-colors duration-200'
-
-  return (
-    <section
-      id="contato-empreendimento"
-      className="py-20 bg-[var(--bg-secondary)]"
-    >
-      <div className="section-container max-w-2xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
-            Próximo passo
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
-            Quero investir em {name}
-          </h2>
-          <p className="text-[var(--text-secondary)] mt-3 text-sm leading-relaxed">
-            Preencha o formulário e nossa equipe entrará em contato em até 24 horas.
-          </p>
-        </motion.div>
-
-        {submitted ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-10"
-          >
-            <CheckCircle size={48} className="text-[var(--accent)] mx-auto mb-4" />
-            <h3 className="font-display text-2xl font-bold text-white mb-2">
-              Mensagem enviada!
-            </h3>
-            <p className="text-[var(--text-secondary)] text-sm">
-              Nossa equipe entrará em contato em breve.
-            </p>
-          </motion.div>
-        ) : (
-          <motion.form
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-4"
-          >
-            <input
-              type="text"
-              name="nome"
-              placeholder="Nome completo"
-              required
-              value={form.nome}
-              onChange={handleChange}
-              className={inputClass}
-            />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <input
-                type="email"
-                name="email"
-                placeholder="E-mail"
-                required
-                value={form.email}
-                onChange={handleChange}
-                className={inputClass}
-              />
-              <input
-                type="tel"
-                name="telefone"
-                placeholder="Telefone / WhatsApp"
-                value={form.telefone}
-                onChange={handleChange}
-                className={inputClass}
-              />
-            </div>
-            <textarea
-              name="mensagem"
-              placeholder="Mensagem (opcional)"
-              rows={4}
-              value={form.mensagem}
-              onChange={handleChange}
-              className={`${inputClass} resize-none`}
-            />
-            <button type="submit" className="btn-accent py-3 text-base flex items-center justify-center gap-2 group">
-              Enviar interesse
-              <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
-            </button>
-          </motion.form>
-        )}
-      </div>
-    </section>
-  )
+  );
 }
 
 /* ─── Main Page ──────────────────────────────────────────────── */
 
 export default function EmpreendimentoDetalhe() {
-  const { slug } = useParams<{ slug: string }>()
-  const empreendimento = EMPREENDIMENTOS.find((e) => e.slug === slug)
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const { slug } = useParams<{ slug: string }>();
+  const empreendimento = EMPREENDIMENTOS.find((e) => e.slug === slug);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const solarRef = useRef<HTMLDivElement>(null);
+  const [solarVisible, setSolarVisible] = useState(false);
+  const solarIframeRef = useRef<HTMLIFrameElement>(null);
+  const solarShownRef = useRef(false);
+
+  useEffect(() => {
+    if (slug !== "sync-floriano") return;
+    const el = solarRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!solarShownRef.current) {
+            solarShownRef.current = true;
+            setSolarVisible(true);
+          } else {
+            solarIframeRef.current?.contentWindow?.postMessage("resume", "*");
+          }
+        } else if (solarShownRef.current) {
+          solarIframeRef.current?.contentWindow?.postMessage("pause", "*");
+        }
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [slug]);
 
   if (!empreendimento) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--bg-primary)] pt-16 text-center px-4">
-        <h1 className="font-display text-4xl font-bold text-white mb-4">Empreendimento não encontrado</h1>
-        <p className="text-[var(--text-secondary)] mb-8">O empreendimento que você procura não existe ou foi removido.</p>
+        <h1 className="font-display text-4xl font-bold text-[#041A2A] dark:text-white mb-4">
+          Empreendimento não encontrado
+        </h1>
+        <p className="text-[var(--text-secondary)] mb-8">
+          O empreendimento que você procura não existe ou foi removido.
+        </p>
         <Link to="/empreendimentos" className="btn-accent">
           Ver todos os empreendimentos
         </Link>
       </div>
-    )
+    );
   }
 
-  const { name, status, statusLabel, location, fullDescription, parceria, coverImage, fachadaImage, gallery, destaques, fichaTecnica, pontosDeInteresse } = empreendimento
+  const {
+    name,
+    status,
+    statusLabel,
+    location,
+    mapQuery,
+    fullDescription,
+    parceria,
+    coverImage,
+    coverPosition,
+    fachadaImage,
+    gallery,
+    destaques,
+    fichaTecnica,
+    pontosDeInteresse,
+  } = empreendimento;
+
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(
+    mapQuery ?? location,
+  )}&z=16&output=embed`;
 
   return (
     <>
@@ -297,6 +261,7 @@ export default function EmpreendimentoDetalhe() {
           src={coverImage}
           alt={name}
           className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: coverPosition }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
 
@@ -306,8 +271,11 @@ export default function EmpreendimentoDetalhe() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <div className="mb-4">
+            <div className="mb-4 flex flex-wrap items-center gap-3">
               <StatusBadge status={status} label={statusLabel} />
+              {status === "captacao-encerrada" && (
+                <span className="text-xs text-white/60"></span>
+              )}
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
               {name}
@@ -316,17 +284,26 @@ export default function EmpreendimentoDetalhe() {
               <MapPin size={15} className="text-[var(--accent)]" />
               <span>{location}</span>
             </div>
-            <a href="#contato-empreendimento" className="btn-accent text-base px-8 py-4">
-              Quero investir
-            </a>
+            {status === "captacao-encerrada" ? (
+              <WhatsAppButton
+                mensagem="Olá! Tenho interesse em entrar na lista de espera do Avenue Residence."
+                label="Lista de espera"
+                size="lg"
+              />
+            ) : (
+              <WhatsAppButton
+                mensagem={`Olá! Tenho interesse no empreendimento ${name}. Pode me enviar o material completo?`}
+                label="Quero investir"
+                size="lg"
+              />
+            )}
           </motion.div>
         </div>
       </section>
 
       {/* ── 2. Fachada + Descrição ───────────────────────────── */}
-      <section className="overflow-hidden py-20 bg-[var(--bg-primary)]">
+      <section className="overflow-hidden py-20">
         <div className="section-container grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-
           {/* Coluna esquerda — descrição + destaques */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -337,21 +314,31 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               O Projeto
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3 mb-5">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3 mb-5">
               {name}
             </h2>
             <p className="text-[var(--text-secondary)] leading-relaxed text-base">
               {fullDescription}
             </p>
             <p className="mt-4 text-xs text-[var(--text-muted)]">
-              Em parceria com <span className="text-white/70">{parceria}</span>
+              Em parceria com{" "}
+              <span className="text-[#041A2A] dark:text-white/70">
+                {parceria}
+              </span>
             </p>
 
             <div className="mt-8 grid grid-cols-2 gap-4">
               {destaques.map((d: Destaque) => (
-                <div key={d.label} className="rounded-xl border border-white/10 p-4">
-                  <span className="text-[var(--accent)] font-bold text-lg leading-none">{d.valor}</span>
-                  <p className="mt-1 text-sm text-white/60">{d.label}</p>
+                <div
+                  key={d.label}
+                  className="rounded-xl border border-[#E5E5E5] bg-[var(--bg-secondary)] p-4 dark:border-white/10 dark:bg-white/5"
+                >
+                  <span className="text-[var(--accent)] font-bold text-lg leading-none">
+                    {d.valor}
+                  </span>
+                  <p className="mt-1 text-sm text-[#484949] dark:text-white/60">
+                    {d.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -370,6 +357,11 @@ export default function EmpreendimentoDetalhe() {
                 src={fachadaImage.src}
                 alt={fachadaImage.alt}
                 className="w-full h-[600px] rounded-2xl object-cover object-center shadow-2xl shadow-black/50"
+                style={
+                  fachadaImage.objectPosition
+                    ? { objectPosition: fachadaImage.objectPosition }
+                    : undefined
+                }
               />
               <div className="absolute -bottom-3 -right-3 h-full w-full rounded-2xl border border-[var(--accent)]/30 -z-10" />
             </motion.div>
@@ -380,7 +372,7 @@ export default function EmpreendimentoDetalhe() {
       <div className="section-divider" />
 
       {/* ── 3. Destaques ─────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-primary)]">
+      <section className="py-20">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -392,14 +384,14 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Por que investir
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
               Diferenciais do investimento
             </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {HIGHLIGHTS.map((h, i) => {
-              const Icon = h.icon
+              const Icon = h.icon;
               return (
                 <motion.div
                   key={h.title}
@@ -412,10 +404,14 @@ export default function EmpreendimentoDetalhe() {
                   <div className="w-12 h-12 rounded-lg bg-[#A26547]/10 flex items-center justify-center mb-4">
                     <Icon size={22} className="text-[var(--accent)]" />
                   </div>
-                  <h3 className="font-semibold text-white text-base mb-2">{h.title}</h3>
-                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">{h.description}</p>
+                  <h3 className="font-semibold text-[#041A2A] dark:text-white text-base mb-2">
+                    {h.title}
+                  </h3>
+                  <p className="text-[var(--text-muted)] dark:text-white text-sm leading-relaxed">
+                    {h.description}
+                  </p>
                 </motion.div>
-              )
+              );
             })}
           </div>
         </div>
@@ -424,7 +420,7 @@ export default function EmpreendimentoDetalhe() {
       <div className="section-divider" />
 
       {/* ── 4. Galeria ───────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-primary)]">
+      <section className="py-20">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -436,34 +432,45 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Imagens
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">Galeria</h2>
-            <p className="text-[var(--text-muted)] text-sm mt-2">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
+              Galeria
+            </h2>
+            <p className="text-[var(--text-muted)] dark:text-white text-sm mt-2">
               Clique em uma imagem para ampliar
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {gallery.map((item, i) => (
-              <motion.button
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.96 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.07 }}
-                onClick={() => setLightboxIndex(i)}
-                className="rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-[var(--accent)] group"
               >
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </motion.button>
+                <button
+                  type="button"
+                  onClick={() => setLightboxIndex(i)}
+                  className="w-full rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-[var(--accent)] group"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </button>
+                {item.alt && (
+                  <p className="mt-1.5 text-center text-xs text-[var(--text-muted)] dark:text-white">
+                    {item.alt}
+                  </p>
+                )}
+              </motion.div>
             ))}
           </div>
 
-          {status === 'em-breve' && (
-            <p className="mt-6 text-center text-sm text-[var(--text-muted)]">
+          {status === "em-breve" && (
+            <p className="mt-6 text-center text-sm text-[var(--text-muted)] dark:text-white">
               Mais detalhes e imagens em breve. Cadastre seu interesse abaixo.
             </p>
           )}
@@ -482,8 +489,75 @@ export default function EmpreendimentoDetalhe() {
 
       <div className="section-divider" />
 
+      {/* ── Trajetória Solar (Sync Floriano only) ────────────── */}
+      {slug === "sync-floriano" && (
+        <>
+          <section className="py-20">
+            <div className="section-container">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
+                  Diferencial
+                </span>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
+                  Trajetória Solar do Edifício
+                </h2>
+                <p className="text-[var(--text-muted)] text-sm mt-2 max-w-2xl mx-auto">
+                  Visualize a incidência solar ao longo do ano em cada fachada
+                  do edifício, com base na latitude de Santa Maria/RS.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <div
+                  ref={solarRef}
+                  className="h-[420px] md:h-[600px] rounded-xl overflow-hidden border border-[#484949]/20"
+                >
+                  {solarVisible ? (
+                    <iframe
+                      ref={solarIframeRef}
+                      src="/trajetoria-solar-edificio.html"
+                      title="Trajetória Solar do Edifício"
+                      width="100%"
+                      height="100%"
+                      loading="lazy"
+                      style={{ border: "none", overflow: "hidden" }}
+                      onLoad={() => {
+                        if (solarShownRef.current) {
+                          solarIframeRef.current?.contentWindow?.postMessage(
+                            "resume",
+                            "*",
+                          );
+                        }
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-[var(--bg-primary)] flex items-center justify-center">
+                      <p className="text-sm text-[var(--text-muted)]">
+                        Carregando visualização solar...
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </div>
+          </section>
+          <div className="section-divider" />
+        </>
+      )}
+
       {/* ── 5. Ficha Técnica ─────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-secondary)]">
+      <section className="py-20">
         <div className="section-container max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -495,7 +569,7 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Dados do projeto
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
               Ficha Técnica
             </h2>
           </motion.div>
@@ -508,23 +582,29 @@ export default function EmpreendimentoDetalhe() {
             className="rounded-xl border border-[#A26547]/20 overflow-hidden"
           >
             {[
-              { label: 'Construtora', value: fichaTecnica.construtora },
-              { label: 'Gestora', value: fichaTecnica.gestora },
-              { label: 'Modelo de investimento', value: fichaTecnica.modelo },
-              { label: 'Localização', value: fichaTecnica.localizacao },
-              { label: 'Tipologias disponíveis', value: fichaTecnica.tipologias },
-              ...(fichaTecnica.extras ?? []),
+              { label: "Gestora", value: fichaTecnica.gestora },
+              { label: "Construtora", value: fichaTecnica.construtora },
+              { label: "Modelo de negócio", value: fichaTecnica.modelo },
+              { label: "Localização", value: fichaTecnica.localizacao },
+              {
+                label: "Tipologias disponíveis",
+                value: fichaTecnica.tipologias,
+              },
+              { label: "Pavimentos", value: fichaTecnica.pavimentos },
+              { label: "Total de unidades", value: fichaTecnica.totalUnidades },
             ].map((row, i) => (
               <div
                 key={row.label}
                 className={`flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 px-6 py-4 ${
-                  i % 2 === 0 ? 'bg-[var(--bg-primary)]/60' : 'bg-transparent'
+                  i % 2 === 0 ? "bg-[var(--bg-primary)]/60" : "bg-transparent"
                 } border-b border-[#484949]/20 last:border-b-0`}
               >
                 <span className="text-[var(--text-muted)] text-xs font-medium uppercase tracking-wider sm:w-48 shrink-0">
                   {row.label}
                 </span>
-                <span className="text-white text-sm">{row.value}</span>
+                <span className="text-[#041A2A] dark:text-white text-sm">
+                  {row.value}
+                </span>
               </div>
             ))}
           </motion.div>
@@ -534,7 +614,7 @@ export default function EmpreendimentoDetalhe() {
       <div className="section-divider" />
 
       {/* ── 6. Modelo SPE ────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-primary)]">
+      <section className="py-20">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -546,18 +626,18 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Como funciona
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
               Modelo de Investimento — SPE
             </h2>
             <p className="text-[var(--text-secondary)] mt-4 max-w-2xl mx-auto text-sm leading-relaxed">
-              A Sociedade de Propósito Específico é o modelo mais seguro e transparente para
-              investimentos imobiliários coletivos no Brasil.
+              A Sociedade de Propósito Específico é o modelo mais seguro e
+              transparente para investimentos imobiliários coletivos no Brasil.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {SPE_CARDS.map((card, i) => {
-              const Icon = card.icon
+              const Icon = card.icon;
               return (
                 <motion.div
                   key={card.title}
@@ -570,10 +650,14 @@ export default function EmpreendimentoDetalhe() {
                   <div className="w-12 h-12 rounded-lg bg-[#A26547]/10 flex items-center justify-center mb-4">
                     <Icon size={22} className="text-[var(--accent)]" />
                   </div>
-                  <h3 className="font-semibold text-white text-base mb-3">{card.title}</h3>
-                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">{card.description}</p>
+                  <h3 className="font-semibold text-[#041A2A] dark:text-white text-base mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+                    {card.description}
+                  </p>
                 </motion.div>
-              )
+              );
             })}
           </div>
 
@@ -584,9 +668,37 @@ export default function EmpreendimentoDetalhe() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-center"
           >
-            <a href="#contato-empreendimento" className="btn-accent text-base px-10 py-4">
-              Quero investir neste empreendimento
-            </a>
+            <div className="flex flex-wrap justify-center gap-4">
+              {status === "captacao-encerrada" ? (
+                <WhatsAppButton
+                  mensagem="Olá! Tenho interesse em entrar na lista de espera do Avenue Residence."
+                  label="Entrar na lista de espera"
+                  size="lg"
+                />
+              ) : (
+                <>
+                  <WhatsAppButton
+                    mensagem={`Olá! Tenho interesse no empreendimento ${name}. Pode me enviar o material completo?`}
+                    label="Quero investir"
+                    size="lg"
+                  />
+                  <WhatsAppButton
+                    mensagem={`Olá! Gostaria de receber o material completo sobre o ${name}.`}
+                    label="Receber material completo"
+                    size="lg"
+                    className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
+                  />
+                  {slug === "sync-floriano" && (
+                    <Link
+                      to="/simuladores/sync-floriano"
+                      className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/40 px-8 py-4 text-lg font-medium text-[var(--accent)] transition-all duration-300 hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 hover:scale-105 active:scale-95"
+                    >
+                      Simular meus aportes
+                    </Link>
+                  )}
+                </>
+              )}
+            </div>
           </motion.div>
         </div>
       </section>
@@ -594,7 +706,7 @@ export default function EmpreendimentoDetalhe() {
       <div className="section-divider" />
 
       {/* ── 7. Localização ───────────────────────────────────── */}
-      <section className="py-20 bg-[var(--bg-secondary)]">
+      <section className="py-20">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -606,7 +718,7 @@ export default function EmpreendimentoDetalhe() {
             <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
               Onde fica
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-3">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
               Localização
             </h2>
           </motion.div>
@@ -618,13 +730,17 @@ export default function EmpreendimentoDetalhe() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-2 rounded-xl overflow-hidden border border-[#484949]/20 bg-[var(--bg-primary)] h-72 flex items-center justify-center"
+              className="lg:col-span-2 rounded-xl overflow-hidden border border-[#484949]/20 bg-[var(--bg-primary)] h-72"
             >
-              <div className="text-center text-[var(--text-muted)]">
-                <MapPin size={40} className="mx-auto mb-3 text-[var(--accent)]/40" />
-                <p className="text-sm">Mapa interativo em breve</p>
-                <p className="text-xs mt-1">{location}</p>
-              </div>
+              <iframe
+                title={`Mapa — ${name}`}
+                src={mapSrc}
+                className="w-full h-full"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
             </motion.div>
 
             {/* Points of interest */}
@@ -635,13 +751,19 @@ export default function EmpreendimentoDetalhe() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="rounded-xl border border-[#484949]/20 bg-[var(--bg-primary)]/60 p-6"
             >
-              <h3 className="font-semibold text-white text-sm uppercase tracking-wider mb-5">
+              <h3 className="font-semibold text-[#041A2A] dark:text-white text-sm uppercase tracking-wider mb-5">
                 Pontos de interesse
               </h3>
               <ul className="flex flex-col gap-3">
                 {pontosDeInteresse.map((poi) => (
-                  <li key={poi} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                    <MapPin size={14} className="mt-0.5 shrink-0 text-[var(--accent)]" />
+                  <li
+                    key={poi}
+                    className="flex items-start gap-2 text-sm text-[var(--text-secondary)]"
+                  >
+                    <MapPin
+                      size={14}
+                      className="mt-0.5 shrink-0 text-[var(--accent)]"
+                    />
                     {poi}
                   </li>
                 ))}
@@ -652,7 +774,6 @@ export default function EmpreendimentoDetalhe() {
       </section>
 
       {/* ── 8. Formulário de contato ─────────────────────────── */}
-      <ContatoEmpreendimento name={name} />
     </>
-  )
+  );
 }

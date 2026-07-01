@@ -19,7 +19,7 @@ export default function SectionHeading({
   return (
     <div className={`${alignmentClass} ${widthClass}`}>
       <span className="section-tag">{eyebrow}</span>
-      <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+      <h2 className="mt-4 text-3xl font-semibold leading-tight text-[var(--text-primary)] sm:text-4xl lg:text-5xl">
         {title}
       </h2>
       {description ? (
