@@ -23,48 +23,52 @@ export default function IndicatorCard({ indicator }: IndicatorCardProps) {
   const VariationIcon =
     tone === 'positive' ? ArrowUpRight : tone === 'negative' ? ArrowDownRight : ArrowRight
 
+  const dateLabel = indicator.sourceDate
+    ? indicator.isManual
+      ? `Atualizado em ${indicator.sourceDate}`
+      : indicator.value === null
+        ? `Última leitura: ${indicator.sourceDate}`
+        : indicator.sourceDate
+    : null
+
   return (
-    <div className="rounded-2xl border border-[#E5E5E5] bg-white p-5 backdrop-blur-sm transition-colors duration-300 hover:border-[var(--accent)]/45 dark:border-white/10 dark:bg-[#0C2030]">
-      <div className="flex items-start gap-4">
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[var(--accent)]/12 text-[var(--accent)]">
-          <Icon size={24} />
+    <div className="group flex h-full flex-col rounded-2xl border border-[#E5E5E5] bg-white p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)]/45 hover:shadow-[0_8px_32px_rgba(162,101,71,0.10)] dark:border-white/10 dark:bg-[#0C2030]/70">
+      {/* Cabeçalho: ícone + variação */}
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--accent)]/12 text-[var(--accent)] transition-transform duration-300 group-hover:scale-105">
+          <Icon size={20} />
         </div>
+        <span
+          className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-semibold tabular-nums ${toneClass}`}
+        >
+          <VariationIcon size={13} />
+          {indicator.variationLabel}
+        </span>
+      </div>
 
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
-                {indicator.label}
-              </p>
-              <p className="mt-2 max-w-md text-sm leading-relaxed text-[var(--text-secondary)]">
-                {indicator.description}
-              </p>
-            </div>
+      {/* Nome + valor em destaque */}
+      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">
+        {indicator.label}
+      </p>
+      <p className="mt-1.5 font-display text-4xl font-semibold leading-none tabular-nums text-[var(--text-primary)]">
+        {indicator.valueLabel}
+      </p>
 
-            <div className="text-left lg:text-right">
-              <p className="text-3xl font-semibold leading-none text-[var(--text-primary)]">{indicator.valueLabel}</p>
-              {indicator.sourceDate ? (
-                <p className="mt-2 text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
-                  {indicator.isManual
-                    ? `Atualizado manualmente em ${indicator.sourceDate}`
-                    : indicator.value === null
-                      ? `Dado desatualizado — última leitura: ${indicator.sourceDate}`
-                      : indicator.sourceDate}
-                </p>
-              ) : null}
-            </div>
-          </div>
+      {/* Descrição curta */}
+      <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
+        {indicator.description}
+      </p>
 
-          <div className="mt-4 flex flex-wrap items-center gap-3">
-            <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium ${toneClass}`}>
-              <VariationIcon size={14} />
-              {indicator.variationLabel}
-            </span>
-            <span className="text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
-              {indicator.source}
-            </span>
-          </div>
-        </div>
+      {/* Rodapé: fonte · data */}
+      <div className="mt-auto flex items-center justify-between gap-2 border-t border-[#E5E5E5] pt-4 dark:border-white/10">
+        <span className="text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)]">
+          {indicator.source}
+        </span>
+        {dateLabel ? (
+          <span className="text-right text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)]">
+            {dateLabel}
+          </span>
+        ) : null}
       </div>
     </div>
   )

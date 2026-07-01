@@ -10,7 +10,7 @@ interface EconomicIndicatorsSectionProps {
 
 function SkeletonCard() {
   return (
-    <div className="h-44 animate-pulse rounded-2xl border border-[#E5E5E5] bg-white dark:border-white/10 dark:bg-white/[0.03]" />
+    <div className="h-56 animate-pulse rounded-2xl border border-[#E5E5E5] bg-white dark:border-white/10 dark:bg-white/[0.03]" />
   );
 }
 
@@ -50,7 +50,7 @@ export default function EconomicIndicatorsSection({
           </div>
         ) : null}
 
-        <div className="mt-10 grid grid-cols-1 gap-5 xl:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {isLoading
             ? Array.from({ length: 6 }).map((_, index) => (
                 <SkeletonCard key={index} />
