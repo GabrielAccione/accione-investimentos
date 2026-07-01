@@ -241,6 +241,7 @@ export default function EmpreendimentoDetalhe() {
     fullDescription,
     parceria,
     coverImage,
+    coverPosition,
     fachadaImage,
     gallery,
     destaques,
@@ -260,6 +261,7 @@ export default function EmpreendimentoDetalhe() {
           src={coverImage}
           alt={name}
           className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: coverPosition }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
 
