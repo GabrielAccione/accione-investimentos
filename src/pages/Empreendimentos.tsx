@@ -40,8 +40,6 @@ export default function Empreendimentos() {
             rentável e gerido profissionalmente.
           </motion.p>
         </div>
-
-        <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-[var(--bg-primary)] to-transparent pointer-events-none" />
       </section>
 
       {/* Cards */}

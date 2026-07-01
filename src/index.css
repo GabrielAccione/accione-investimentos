@@ -48,14 +48,14 @@
     );
     --bg-gradient:
       radial-gradient(
-        ellipse 50% 70% at 0% 30%,
+        ellipse 45% 90% at 0% 50%,
         rgba(162, 101, 71, 0.4),
-        transparent 55%
+        transparent 60%
       ),
       radial-gradient(
-        ellipse 50% 70% at 100% 70%,
+        ellipse 45% 90% at 100% 50%,
         rgba(162, 101, 71, 0.4),
-        transparent 55%
+        transparent 60%
       ),
       #041a2a;
   }
@@ -118,9 +118,7 @@
   }
 
   .hero-gradient {
-    background: var(--hero-gradient);
-    background-size: 200% 200%;
-    animation: gradient-shift-light 8s ease infinite;
+    background: transparent;
   }
 
   .btn-accent {
@@ -222,18 +220,12 @@
 
 @keyframes gradient-shift-dark {
   0% {
-    background-position:
-      0% 0%,
-      100% 100%;
+    background-position: 0% 50%, 100% 50%;
   }
   50% {
-    background-position:
-      15% 25%,
-      85% 75%;
+    background-position: 0% 45%, 100% 55%;
   }
   100% {
-    background-position:
-      0% 0%,
-      100% 100%;
+    background-position: 0% 50%, 100% 50%;
   }
 }
