@@ -89,7 +89,7 @@ export default function CreditoPrivadoPage() {
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="section-tag">Renda Fixa Corporativa</span>
             </div>
-            <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
               Crédito Privado
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">

@@ -277,7 +277,7 @@ export default function EmpreendimentoDetalhe() {
                 <span className="text-xs text-white/60"></span>
               )}
             </div>
-            <h1 className="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
               {name}
             </h1>
             <div className="flex items-center gap-2 text-white/70 text-sm mb-8">
