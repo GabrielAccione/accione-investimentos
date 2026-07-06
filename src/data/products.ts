@@ -44,7 +44,7 @@ export const PRODUCTS: Product[] = [
       "Due diligence rigorosa",
       "Fluxo de amortização previamente modelado",
       "Prazo Típico: 12 a 48 meses",
-      "Perfil: Moderado a sofisticado",
+      "Perfil: Moderado a Sofisticado",
     ],
     icon: CreditCard,
   },
