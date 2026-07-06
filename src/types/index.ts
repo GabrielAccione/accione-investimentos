@@ -16,6 +16,10 @@ export interface Product {
   description: string
   features: string[]
   icon: LucideIcon
+  /** Imagem de capa do card (formato do card de empreendimento) */
+  image: string
+  /** Selo exibido sobre a imagem do card (ex: "Renda Fixa") */
+  badge: string
   tag?: string
   stats?: { label: string; value: string }[]
   /** Substitui o label padrão "Falar com um consultor" no botão CTA */
@@ -41,13 +45,17 @@ export interface Testimonial {
 }
 
 export interface EconomicIndicator {
-  id: 'selic' | 'cdi' | 'ipca' | 'igpm' | 'bitcoin' | 'ibovespa' | 'incc'
+  id: 'selic' | 'cdi' | 'ipca' | 'ipca15' | 'igpm' | 'igpdi' | 'incc' | 'bitcoin' | 'ibovespa'
   label: string
   description: string
   value: number | null
   valueLabel: string
+  /** Legenda do período do valor exibido, ex: "no último mês · mai/2026" */
+  periodLabel?: string
   variation: number | null
   variationLabel: string
+  /** Quando true, a variação é neutra (não usa verde/vermelho) — ex: acumulado de inflação */
+  neutralVariation?: boolean
   icon: LucideIcon
   source: string
   sourceDate?: string
