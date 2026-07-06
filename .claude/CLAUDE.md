@@ -43,7 +43,7 @@
 /empreendimentos → listagem
 /empreendimentos/:id → detalhe (avenue-residence | sync-conde | sync-floriano)
 /simuladores/aposentadoria
-/simuladores/tir
+/simuladores/sync-floriano
 /indicadores
 /sobre
 /contato
