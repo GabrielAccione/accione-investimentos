@@ -12,7 +12,9 @@ function getVariationTone(value: number | null) {
 
 export default function IndicatorCard({ indicator }: IndicatorCardProps) {
   const Icon = indicator.icon
-  const tone = getVariationTone(indicator.variation)
+  const sign = getVariationTone(indicator.variation)
+  // Variação de inflação (acumulado 12m) é sempre neutra: não usa verde/vermelho.
+  const tone = indicator.neutralVariation ? 'neutral' : sign
   const toneClass =
     tone === 'positive'
       ? 'text-emerald-300 bg-emerald-400/10 border-emerald-400/20'
@@ -21,7 +23,7 @@ export default function IndicatorCard({ indicator }: IndicatorCardProps) {
         : 'text-[#484949] bg-[#F7F7F7] border-[#E5E5E5] dark:text-slate-300 dark:bg-white/5 dark:border-white/10'
 
   const VariationIcon =
-    tone === 'positive' ? ArrowUpRight : tone === 'negative' ? ArrowDownRight : ArrowRight
+    sign === 'positive' ? ArrowUpRight : sign === 'negative' ? ArrowDownRight : ArrowRight
 
   const dateLabel = indicator.sourceDate
     ? indicator.isManual
@@ -53,6 +55,11 @@ export default function IndicatorCard({ indicator }: IndicatorCardProps) {
       <p className="mt-1.5 font-display text-4xl font-semibold leading-none tabular-nums text-[var(--text-primary)]">
         {indicator.valueLabel}
       </p>
+      {indicator.periodLabel ? (
+        <p className="mt-1.5 text-xs text-[var(--text-muted)]">
+          {indicator.periodLabel}
+        </p>
+      ) : null}
 
       {/* Descrição curta */}
       <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">

@@ -10,7 +10,6 @@ const FOOTER_LINKS = [
   { label: "Empreendimentos", to: "/empreendimentos" },
   { label: "Indicadores", to: "/indicadores" },
   { label: "Aposentadoria", to: "/simuladores/aposentadoria" },
-  { label: "TIR", to: "/simuladores/tir" },
   { label: "Sobre", to: "/sobre" },
   { label: "Blog", to: "/blog" },
   { label: "Contato", to: "/contato" },

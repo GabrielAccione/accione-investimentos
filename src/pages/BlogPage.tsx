@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
 import PageHero from '@/components/ui/PageHero'
+import BlogCard from '@/components/ui/BlogCard'
 import { BLOG_POSTS } from '@/data/blogPosts'
 import type { BlogCategory } from '@/types'
 
@@ -52,25 +52,9 @@ export default function BlogPage() {
             ))}
           </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            {filteredPosts.map((post) => (
-              <article key={post.slug} className="surface-card overflow-hidden">
-                <img src={post.coverImage} alt={post.title} className="h-56 w-full object-cover" />
-                <div className="p-6 sm:p-8">
-                  <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
-                    <span>{new Date(post.date).toLocaleDateString('pt-BR')}</span>
-                    <span>{post.category}</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <h2 className="mt-4 text-4xl font-semibold text-[#041A2A] dark:text-white">{post.title}</h2>
-                  <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
-                    {post.excerpt}
-                  </p>
-                  <Link to={`/blog/${post.slug}`} className="btn-accent mt-6 inline-flex">
-                    Ler artigo
-                  </Link>
-                </div>
-              </article>
+          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredPosts.map((post, index) => (
+              <BlogCard key={post.slug} item={post} index={index} />
             ))}
           </div>
         </div>

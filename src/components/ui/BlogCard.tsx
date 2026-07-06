@@ -2,31 +2,14 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { animate } from "animejs";
-import { MapPin } from "lucide-react";
-import type { EmpreendimentoData } from "@/data/empreendimentos";
+import { Clock } from "lucide-react";
+import type { BlogPost } from "@/types";
 
-function StatusBadge({
-  status,
-  label,
-}: {
-  status: EmpreendimentoData["status"];
-  label: string;
-}) {
-  const color = status === "em-captacao" ? "bg-[#25D366]" : "bg-[#69727D]";
-  return (
-    <span
-      className={`${color} text-white text-xs font-medium px-3 py-1 rounded-full`}
-    >
-      {label}
-    </span>
-  );
-}
-
-export default function EmpreendimentoCard({
+export default function BlogCard({
   item,
   index,
 }: {
-  item: EmpreendimentoData;
+  item: BlogPost;
   index: number;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -66,38 +49,38 @@ export default function EmpreendimentoCard({
         <div className="relative overflow-hidden">
           <img
             src={item.coverImage}
-            alt={item.name}
+            alt={item.title}
             className="w-full h-52 object-cover"
-            style={{ objectPosition: item.coverPosition }}
           />
           <div className="absolute top-3 left-3">
-            <StatusBadge status={item.status} label={item.statusLabel} />
+            <span className="bg-[var(--accent)] text-white text-xs font-medium px-3 py-1 rounded-full">
+              {item.category}
+            </span>
           </div>
         </div>
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-1">
           <h3 className="font-display text-xl font-bold text-[#041A2A] dark:text-white mb-2">
-            {item.name}
+            {item.title}
           </h3>
 
-          <div className="flex items-start gap-1.5 text-[var(--text-muted)] text-sm mb-3">
-            <MapPin
-              size={14}
-              className="mt-0.5 shrink-0 text-[var(--accent)]"
-            />
-            <span>{item.location}</span>
+          <div className="flex items-center gap-1.5 text-[var(--text-muted)] text-sm mb-3">
+            <Clock size={14} className="shrink-0 text-[var(--accent)]" />
+            <span>
+              {new Date(item.date).toLocaleDateString("pt-BR")} · {item.readTime}
+            </span>
           </div>
 
           <p className="text-[var(--text-secondary)] text-sm leading-relaxed flex-1 mb-5">
-            {item.shortDescription}
+            {item.excerpt}
           </p>
 
           <Link
-            to={`/empreendimentos/${item.slug}`}
+            to={`/blog/${item.slug}`}
             className="btn-accent text-sm py-2.5 px-5 flex items-center justify-center gap-2 group"
           >
-            Conhecer empreendimento
+            Ler artigo
           </Link>
         </div>
       </div>

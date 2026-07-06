@@ -16,7 +16,6 @@ const Empreendimentos = lazy(() => import('@/pages/Empreendimentos'))
 const HomePage = lazy(() => import('@/pages/HomePage'))
 const IndicadoresPage = lazy(() => import('@/pages/IndicadoresPage'))
 const InvestimentosPage = lazy(() => import('@/pages/InvestimentosPage'))
-const IrrSimulatorPage = lazy(() => import('@/pages/IrrSimulatorPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 const RetirementSimulatorPage = lazy(() => import('@/pages/RetirementSimulatorPage'))
 const SimuladorSyncFloriano = lazy(() => import('@/pages/SimuladorSyncFloriano'))
@@ -55,7 +54,6 @@ function App() {
             <Route path="/empreendimentos/:slug" element={<EmpreendimentoDetalhe />} />
             <Route path="/indicadores" element={<IndicadoresPage />} />
             <Route path="/simuladores/aposentadoria" element={<RetirementSimulatorPage />} />
-            <Route path="/simuladores/tir" element={<IrrSimulatorPage />} />
             <Route path="/simuladores/sync-floriano" element={<SimuladorSyncFloriano />} />
             <Route path="/sobre" element={<SobrePage />} />
             <Route path="/contato" element={<ContatoPage />} />
