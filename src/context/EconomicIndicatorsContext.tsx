@@ -1,7 +1,9 @@
 import {
   Activity,
   BadgePercent,
+  BarChart3,
   Bitcoin,
+  Gauge,
   Landmark,
   LineChart,
   PiggyBank,
@@ -38,8 +40,9 @@ interface BcbPoint {
   valor: string;
 }
 
-interface AccumValue {
-  value: number;
+interface InflationData {
+  mensal: number;
+  acum12m: number;
   date: string;
 }
 
@@ -87,25 +90,26 @@ function buildIndicatorFromSeries(options: {
   } satisfies EconomicIndicator;
 }
 
-function buildAccumIndicator(options: {
+function buildInflationIndicator(options: {
   id: EconomicIndicator["id"];
   label: string;
   description: string;
   icon: EconomicIndicator["icon"];
-  source: string;
-  acum: AccumValue;
+  data: InflationData;
 }) {
   return {
     id: options.id,
     label: options.label,
     description: options.description,
-    value: options.acum.value,
-    valueLabel: formatPercent(options.acum.value, "% a.a."),
-    variation: null,
-    variationLabel: "acumulado no ano",
+    value: options.data.mensal,
+    valueLabel: formatPercent(options.data.mensal, "%"),
+    periodLabel: "no último mês",
+    variation: options.data.acum12m,
+    variationLabel: `${formatSignedPercent(options.data.acum12m)} nos últimos 12 meses`,
+    neutralVariation: true,
     icon: options.icon,
-    source: options.source,
-    sourceDate: options.acum.date,
+    source: "Banco Central do Brasil",
+    sourceDate: options.data.date,
   } satisfies EconomicIndicator;
 }
 
@@ -145,41 +149,58 @@ async function loadIndicators() {
       series: data.cdi,
       valueFormatter: (value) => formatPercent(value, "% a.a."),
     }),
-    ...(data.ipca_acum
+    ...(data.ipca
       ? [
-          buildAccumIndicator({
+          buildInflationIndicator({
             id: "ipca",
             label: "IPCA",
             description: "Índice oficial de inflação do país.",
             icon: BadgePercent,
-            source: "IBGE",
-            acum: data.ipca_acum,
+            data: data.ipca,
           }),
         ]
       : []),
-    ...(data.igpm_acum
+    ...(data.ipca15
       ? [
-          buildIndicatorFromSeries({
+          buildInflationIndicator({
+            id: "ipca15",
+            label: "IPCA-15",
+            description: "Prévia mensal da inflação oficial (IPCA).",
+            icon: Gauge,
+            data: data.ipca15,
+          }),
+        ]
+      : []),
+    ...(data.igpm
+      ? [
+          buildInflationIndicator({
             id: "igpm",
             label: "IGP-M",
             description: "Índice amplamente usado em contratos e reajustes.",
             icon: Activity,
-            source: "Banco Central do Brasil",
-            series: data.igpm_acum,
-            valueFormatter: (value) => formatPercent(value, "% no mês"),
+            data: data.igpm,
           }),
         ]
       : []),
-    ...(data.incc_acum
+    ...(data.igpdi
       ? [
-          buildIndicatorFromSeries({
+          buildInflationIndicator({
+            id: "igpdi",
+            label: "IGP-DI",
+            description: "Índice geral de preços — disponibilidade interna.",
+            icon: BarChart3,
+            data: data.igpdi,
+          }),
+        ]
+      : []),
+    ...(data.incc
+      ? [
+          buildInflationIndicator({
             id: "incc",
             label: "INCC",
             description: "Índice de custos da construção civil.",
             icon: TrendingUp,
-            source: "Banco Central do Brasil",
-            series: data.incc_acum,
-            valueFormatter: (value) => formatPercent(value, "% no mês"),
+            data: data.incc,
           }),
         ]
       : []),
