@@ -61,6 +61,9 @@
   }
 
   html {
+    /* Reduz a escala base ~8% (afeta tudo em rem) — deixa o site mais compacto
+       sem forçar o zoom do navegador. Mobile volta a 100% para não ficar pequeno. */
+    font-size: 92%;
     scroll-behavior: smooth;
     background: var(--bg-gradient) !important;
     background-attachment: fixed !important;
@@ -72,6 +75,12 @@
   html.dark {
     background-size: 180% 180% !important;
     animation: gradient-shift-dark 14s ease infinite !important;
+  }
+
+  @media (max-width: 639px) {
+    html {
+      font-size: 100%;
+    }
   }
 
   body {
