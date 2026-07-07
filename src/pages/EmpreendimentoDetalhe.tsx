@@ -320,9 +320,9 @@ export default function EmpreendimentoDetalhe() {
             <p className="text-[var(--text-secondary)] leading-relaxed text-base">
               {fullDescription}
             </p>
-            <p className="mt-4 text-xs text-[var(--text-muted)]">
+            <p className="mt-4 text-xs text-white/60">
               Em parceria com{" "}
-              <span className="text-[#041A2A] dark:text-white/70">
+              <span className="text-[#041A2A] dark:text-white">
                 {parceria}
               </span>
             </p>
@@ -331,13 +331,13 @@ export default function EmpreendimentoDetalhe() {
               {destaques.map((d: Destaque) => (
                 <div
                   key={d.label}
-                  className="rounded-xl border border-[#E5E5E5] bg-[var(--bg-secondary)] p-4 dark:border-white/10 dark:bg-white/5"
+                  className="rounded-xl border border-[#E5E5E5] bg-[#0C2030] p-4 dark:border-white/10"
                 >
-                  <span className="text-[var(--accent)] font-bold text-lg leading-none">
-                    {d.valor}
-                  </span>
-                  <p className="mt-1 text-sm text-[#484949] dark:text-white/60">
+                  <span className="text-[var(--accent)] font-bold text-lg leading-tight">
                     {d.label}
+                  </span>
+                  <p className="mt-1 text-lg font-semibold leading-tight text-[#041A2A] dark:text-white">
+                    {d.valor}
                   </p>
                 </div>
               ))}
@@ -399,7 +399,7 @@ export default function EmpreendimentoDetalhe() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="rounded-xl border border-[#484949]/20 hover:border-[#A26547]/40 bg-[var(--bg-secondary)] p-6 transition-colors duration-300 hover:shadow-[0_8px_32px_rgba(162,101,71,0.08)]"
+                  className="rounded-xl border border-[#484949]/20 hover:border-[#A26547]/40 bg-[#0C2030] p-6 transition-colors duration-300 hover:shadow-[0_8px_32px_rgba(162,101,71,0.08)]"
                 >
                   <div className="w-12 h-12 rounded-lg bg-[#A26547]/10 flex items-center justify-center mb-4">
                     <Icon size={22} className="text-[var(--accent)]" />
@@ -507,7 +507,7 @@ export default function EmpreendimentoDetalhe() {
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
                   Trajetória Solar do Edifício
                 </h2>
-                <p className="text-[var(--text-muted)] text-sm mt-2 max-w-2xl mx-auto">
+                <p className="text-white/80 text-sm mt-2 max-w-2xl mx-auto">
                   Visualize a incidência solar ao longo do ano em cada fachada
                   do edifício, com base na latitude de Santa Maria/RS.
                 </p>
@@ -579,7 +579,7 @@ export default function EmpreendimentoDetalhe() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-xl border border-[#A26547]/20 overflow-hidden"
+            className="rounded-xl border border-[#A26547]/20 bg-[#0C2030] overflow-hidden"
           >
             {[
               { label: "Gestora", value: fichaTecnica.gestora },
@@ -596,10 +596,10 @@ export default function EmpreendimentoDetalhe() {
               <div
                 key={row.label}
                 className={`flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 px-6 py-4 ${
-                  i % 2 === 0 ? "bg-[var(--bg-primary)]/60" : "bg-transparent"
+                  i % 2 === 0 ? "bg-white/[0.03]" : "bg-transparent"
                 } border-b border-[#484949]/20 last:border-b-0`}
               >
-                <span className="text-[var(--text-muted)] text-xs font-medium uppercase tracking-wider sm:w-48 shrink-0">
+                <span className="text-white text-xs font-medium uppercase tracking-wider sm:w-48 shrink-0">
                   {row.label}
                 </span>
                 <span className="text-[#041A2A] dark:text-white text-sm">
@@ -645,7 +645,7 @@ export default function EmpreendimentoDetalhe() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.12 }}
-                  className="rounded-xl border border-[#484949]/20 bg-[var(--bg-secondary)] p-6"
+                  className="rounded-xl border border-[#484949]/20 bg-[#0C2030] p-6"
                 >
                   <div className="w-12 h-12 rounded-lg bg-[#A26547]/10 flex items-center justify-center mb-4">
                     <Icon size={22} className="text-[var(--accent)]" />
@@ -653,7 +653,7 @@ export default function EmpreendimentoDetalhe() {
                   <h3 className="font-semibold text-[#041A2A] dark:text-white text-base mb-3">
                     {card.title}
                   </h3>
-                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+                  <p className="text-white/80 text-sm leading-relaxed">
                     {card.description}
                   </p>
                 </motion.div>
@@ -749,7 +749,7 @@ export default function EmpreendimentoDetalhe() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="rounded-xl border border-[#484949]/20 bg-[var(--bg-primary)]/60 p-6"
+              className="rounded-xl border border-[#484949]/20 bg-[#0C2030] p-6"
             >
               <h3 className="font-semibold text-[#041A2A] dark:text-white text-sm uppercase tracking-wider mb-5">
                 Pontos de interesse
@@ -758,7 +758,7 @@ export default function EmpreendimentoDetalhe() {
                 {pontosDeInteresse.map((poi) => (
                   <li
                     key={poi}
-                    className="flex items-start gap-2 text-sm text-[var(--text-secondary)]"
+                    className="flex items-start gap-2 text-sm text-white/85"
                   >
                     <MapPin
                       size={14}
