@@ -74,6 +74,7 @@ export default function CprFPage() {
           src={cprfImage}
           alt="CPR-F"
           className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: "center 30%" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#041A2A] via-[#041A2A]/75 to-[#041A2A]/20" />
         <div className="section-container relative z-10 py-16 sm:py-20">

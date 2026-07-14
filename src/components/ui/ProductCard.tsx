@@ -52,7 +52,8 @@ export default function ProductCard({
           <img
             src={item.image}
             alt={item.title}
-            className="w-full h-52 object-cover"
+            className="w-full h-60 object-cover"
+            style={{ objectPosition: item.imagePosition || "center" }}
           />
           <div className="absolute top-3 left-3">
             <span className="bg-[var(--accent)] text-white text-xs font-medium px-3 py-1 rounded-full">
