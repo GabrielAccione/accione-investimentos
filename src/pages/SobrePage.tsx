@@ -1,4 +1,4 @@
-import { Building2, Compass, Eye, Gem, Mail, MessageCircle } from 'lucide-react'
+import { Building2, Compass, Gem, Mail, MessageCircle, Users } from 'lucide-react'
 import { motion } from 'framer-motion'
 import PageHero from '@/components/ui/PageHero'
 import ScrollReveal from '@/components/ui/ScrollReveal'
@@ -8,21 +8,46 @@ import zaconImg from '@/assets/marcazacon.png'
 
 const VALUE_CARDS = [
   {
+    title: 'Quem somos',
+    description: (
+      <div className="space-y-3">
+        <p>
+          A Accione Investimentos é uma empresa <strong>multiestratégia</strong> que entrega a investidores oportunidades financeiras e imobiliárias criteriosamente selecionadas. Atuamos de forma personalizada, considerando o perfil e os objetivos de cada cliente, com foco em <strong>rentabilidade, segurança e eficiência na alocação de recursos</strong>.
+        </p>
+        <p>
+          Nossa atuação é pautada pela <strong>transparência, análise estratégica e orientação clara</strong>, viabilizando investimentos que contribuem para o crescimento patrimonial e a geração de renda.
+        </p>
+      </div>
+    ),
+    icon: Users,
+  },
+  {
     title: 'Missão',
-    description:
-      'Dar acesso a investimentos alternativos com leitura clara de estrutura, risco e aderência patrimonial.',
+    description: (
+      <p>
+        Oferecer oportunidades de <strong>investimentos financeiros e imobiliários inteligentes</strong>, conectando pessoas a negócios criteriosamente selecionados, com foco na <strong>geração de patrimônio, renda e resultados consistentes</strong>, sempre pautados pela transparência e pela excelência na gestão.
+      </p>
+    ),
     icon: Compass,
   },
   {
-    title: 'Visão',
-    description:
-      'Ser referência regional em assessoria para investidores que buscam profundidade antes de decidir.',
-    icon: Eye,
-  },
-  {
     title: 'Valores',
-    description:
-      'Clareza, diligência, proximidade e compromisso com decisões patrimoniais menos superficiais.',
+    description: (
+      <ul className="space-y-3.5 text-left">
+        <li className="text-sm leading-relaxed text-[var(--text-secondary)]">
+          <strong className="text-[var(--accent)] font-semibold">Inovação</strong> · buscar continuamente novas estratégias, produtos e soluções que ampliem o potencial dos investimentos e acompanhem a evolução do mercado.
+        </li>
+        <li className="text-sm leading-relaxed text-[var(--text-secondary)]">
+          <strong className="text-[var(--accent)] font-semibold">Transparência</strong> · atuar com clareza, ética e comunicação objetiva, fortalecendo relações de confiança e credibilidade em todas as interações.
+        </li>
+        <li className="text-sm leading-relaxed text-[var(--text-secondary)]">
+          <strong className="text-[var(--accent)] font-semibold">Compromisso</strong> · priorizar o melhor retorno aliado à segurança, à qualidade da experiência do cliente e ao sucesso de todos os envolvidos, promovendo relações genuinamente ganha-ganha.
+        </li>
+        <li className="text-sm leading-relaxed text-[var(--text-secondary)]">
+          <strong className="text-[var(--accent)] font-semibold">Gestão responsável</strong> · conduzir cada decisão com ética, responsabilidade e senso de pertencimento, atuando com visão estratégica e foco na sustentabilidade do negócio, no respeito ao cliente e ao mercado.
+        </li>
+      </ul>
+    ),
     icon: Gem,
   },
 ]
@@ -155,9 +180,9 @@ export default function SobrePage() {
                   <Icon size={22} />
                 </div>
                 <h2 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">{card.title}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
+                <div className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
                   {card.description}
-                </p>
+                </div>
               </motion.article>
             )
           })}

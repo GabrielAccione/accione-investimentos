@@ -9,18 +9,23 @@ import creditoPrivadoImage from '@/assets/Investimentos/credito-privado.png'
 const STEPS = [
   {
     num: '01',
-    title: 'Empresa capta recursos',
+    title: 'Empresa demanda recursos',
     desc: 'Empresas emitem títulos de dívida para financiar suas operações.',
   },
   {
     num: '02',
-    title: 'Você empresta',
-    desc: 'Adquire o título tornando-se credor da empresa com condições definidas em contrato.',
+    title: 'Você investe',
+    desc: 'Adquire o título tornando-se credor da empresa com condições definidas em contrato, com as garantias acordadas.',
   },
   {
     num: '03',
-    title: 'Recebe com juros',
-    desc: 'Ao longo do prazo, recebe os juros acordados e ao final o principal investido.',
+    title: 'Operação é monitorada',
+    desc: 'Acompanhamos a evolução do negócio e você tem contato direto conosco caso tenha dúvidas.',
+  },
+  {
+    num: '04',
+    title: 'Operação é concluída',
+    desc: 'Ao vencimento, o investidor recebe o valor investido acrescido da rentabilidade acordada.',
   },
 ]
 
@@ -34,11 +39,11 @@ const CARACTERISTICAS = [
 ]
 
 const DIFERENCIAIS = [
-  'Due diligence rigorosa antes de cada operação ofertada aos investidores',
-  'Fluxo de pagamentos previsível e definido em contrato desde o início',
-  'Diversificação com emissores de setores variados da economia real',
-  'Acompanhamento ativo com reuniões periódicas com o consultor',
-  'Rentabilidade superior às linhas de crédito bancário tradicional',
+  'Due diligence rigorosa antes de cada operação ser validada.',
+  'Fluxo de pagamentos previsível e definido em contrato desde o início.',
+  'Diversificação com emissores/empresas de setores variados da economia real.',
+  'Acompanhamento ativo com contato direto com o tomador/emissor.',
+  'Rentabilidade superior às comumente encontradas no mercado tradicional.',
 ]
 
 const FAQ = [
@@ -56,7 +61,7 @@ const FAQ = [
   },
   {
     q: 'Como acompanho meu investimento?',
-    a: 'Nossos clientes contam com acompanhamento ativo e reuniões periódicas com o consultor para monitoramento da carteira.',
+    a: 'Nossos clientes contam com acompanhamento ativo e contato direto com o tomador/emissor.',
   },
 ]
 
@@ -106,12 +111,12 @@ export default function CreditoPrivadoPage() {
           <ScrollReveal>
             <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Como funciona</h2>
           </ScrollReveal>
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {STEPS.map(({ num, title, desc }, i) => (
               <ScrollReveal key={num} delay={i * 0.1}>
                 <div className="surface-card h-full p-6">
-                  <p className="text-4xl font-semibold text-[var(--accent)]/30">{num}</p>
-                  <h3 className="mt-3 text-base font-semibold text-[var(--text-primary)]">{title}</h3>
+                  <p className="text-4xl font-bold text-[var(--accent)]/40">{num}</p>
+                  <h3 className="mt-3 text-base font-semibold text-[var(--accent)]">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{desc}</p>
                 </div>
               </ScrollReveal>
