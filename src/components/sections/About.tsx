@@ -19,22 +19,22 @@ export default function About() {
           >
             <SectionHeading
               eyebrow="Sobre a Accione"
-              title="Uma assessoria para quem prefere contexto, estrutura e tese antes da promessa."
-              description="A Accione nasceu para aproximar investidores de oportunidades alternativas com leitura mais qualificada e acompanhamento próximo."
+              title="Investimentos para quem prefere contexto, estrutura e tese antes da promessa."
+              description="A Accione nasceu para trazer a investidores oportunidades criadas a partir da leitura qualificada dos cenários econômicos, com ênfase em resultados acima da média, qualitativa e quantitativamente."
               align="left"
             />
 
             <div className="mt-8 space-y-4 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
               <p>
-                Atuamos em Santa Maria/RS com foco em investimentos
-                alternativos, crédito estruturado e empreendimentos imobiliários
-                desenhados para ampliar repertório patrimonial sem cair em
-                soluções genéricas.
+                Atuamos em Santa Maria/RS e região, com foco em empreendimentos
+                imobiliários e operações de investimentos financeiros desenhados
+                para ampliar o repertório patrimonial, sem cair em soluções
+                genéricas.
               </p>
               <p>
-                A lógica da casa é simples: entender o investidor, filtrar teses
-                de forma criteriosa e construir conversas objetivas sobre risco,
-                prazo, lastro e expectativa de retorno.
+                A lógica da casa é simples: entender o cenário, criar teses de
+                forma criteriosa e construir oportunidades objetivas para
+                investidores alocarem seus recursos.
               </p>
             </div>
 

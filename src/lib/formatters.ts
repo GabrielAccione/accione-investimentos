@@ -28,11 +28,7 @@ const compactCurrencyFormatter = new Intl.NumberFormat('pt-BR', {
   maximumFractionDigits: 1,
 })
 
-const dateFormatter = new Intl.DateTimeFormat('pt-BR', {
-  day: '2-digit',
-  month: 'short',
-  year: 'numeric',
-})
+
 
 export function formatCurrency(value: number) {
   return currencyFormatter.format(value)
@@ -65,9 +61,5 @@ export function formatNumber(value: number) {
 }
 
 export function formatDateLabel(value: string) {
-  if (!value.includes('/')) return value
-
-  const [day, month, year] = value.split('/').map(Number)
-  const date = new Date(year, month - 1, day)
-  return dateFormatter.format(date)
+  return value
 }

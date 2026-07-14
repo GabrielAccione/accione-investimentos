@@ -67,11 +67,20 @@ export default function Hero() {
 
       <div className="section-container relative z-10 grid min-h-[calc(100vh-5rem)] items-center gap-12 py-14 lg:grid-cols-[minmax(0,1fr)_420px]">
         <div>
+          <motion.span
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: PREMIUM_EASE }}
+            className="section-tag"
+          >
+            Accione Investimentos
+          </motion.span>
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }} //reduzido de 24 para 20 para movimento mais sofisticado
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: PREMIUM_EASE, delay: 0.05 }}
-            className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.96] text-[#041A2A] dark:text-white sm:text-5xl lg:text-5xl"
+            className="mt-4 max-w-4xl text-5xl font-semibold leading-[0.96] text-[#041A2A] dark:text-white sm:text-5xl lg:text-5xl"
           >
             Entregamos a investidores oportunidades criteriosamente criadas.
           </motion.h1>
@@ -82,9 +91,9 @@ export default function Hero() {
             transition={{ duration: 0.6, ease: PREMIUM_EASE, delay: 0.12 }}
             className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg"
           >
-            Somos uma empresa de investimentos multiestratégia. Identificamos as
-            melhores oportunidades considerando seus interesses e buscando
-            retornos acima da média de mercado.
+            Desenvolvemos investimentos a partir da leitura qualificada dos
+            cenários econômicos, com ênfase em resultados acima da média,
+            qualitativa e quantitativamente.
           </motion.p>
 
           <motion.div

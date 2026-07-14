@@ -45,20 +45,16 @@ export default function ProductCard({
         ref={cardRef}
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
-        className="rounded-xl border border-[#484949]/20 hover:border-[#A26547]/40 bg-white dark:bg-[#0C2030] overflow-hidden h-full flex flex-col transition-colors duration-300 hover:shadow-[0_8px_40px_rgba(162,101,71,0.10)]"
+        className="rounded-xl border border-[#484949]/20 hover:border-[#A26047]/40 bg-white dark:bg-[#0C2030] overflow-hidden h-full flex flex-col transition-colors duration-300 hover:shadow-[0_8px_40px_rgba(162,101,71,0.10)]"
       >
         {/* Cover image */}
         <div className="relative overflow-hidden">
           <img
             src={item.image}
             alt={item.title}
-            className="w-full h-52 object-cover"
+            className="w-full h-60 object-cover"
+            style={{ objectPosition: item.imagePosition || "center" }}
           />
-          <div className="absolute top-3 left-3">
-            <span className="bg-[var(--accent)] text-white text-xs font-medium px-3 py-1 rounded-full">
-              {item.badge}
-            </span>
-          </div>
         </div>
 
         {/* Content */}
@@ -69,7 +65,10 @@ export default function ProductCard({
 
           {item.subtitle ? (
             <div className="flex items-start gap-1.5 text-[var(--text-muted)] text-sm mb-3">
-              <Icon size={14} className="mt-0.5 shrink-0 text-[var(--accent)]" />
+              <Icon
+                size={14}
+                className="mt-0.5 shrink-0 text-[var(--accent)]"
+              />
               <span>{item.subtitle}</span>
             </div>
           ) : null}

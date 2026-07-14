@@ -9,18 +9,23 @@ import cprfImage from "@/assets/Investimentos/cpr-f.png";
 const STEPS = [
   {
     num: "01",
-    title: "Emissor capta recursos",
-    desc: "Produtores rurais e cooperativas emitem a CPR-F para financiar sua produção.",
+    title: "Emissor demanda recursos",
+    desc: "Produtores rurais e cooperativas emitem a CPR-F para financiar sua produção, atribuindo garantias, prazo e taxas.",
   },
   {
     num: "02",
     title: "Você investe",
-    desc: "Adquire o título com prazo e rentabilidade definidos no momento da compra.",
+    desc: "Adquire o título com prazo, rentabilidade e garantias definidos no momento da compra. A CPR-F é registrada na B3.",
   },
   {
     num: "03",
-    title: "Recebe o retorno",
-    desc: "Ao vencimento, recebe o valor investido acrescido da rentabilidade acordada.",
+    title: "Operação é monitorada",
+    desc: "Acompanhamos a evolução do negócio e você tem contato direto conosco caso tenha dúvidas.",
+  },
+  {
+    num: "04",
+    title: "Operação é concluída",
+    desc: "Ao vencimento, o investidor recebe o valor investido acrescido da rentabilidade acordada.",
   },
 ];
 
@@ -30,18 +35,18 @@ const CARACTERISTICAS = [
   { label: "Perfil:", value: "Moderado a sofisticado" },
   {
     label: "Lastro",
-    value: "Produção agrícola com muita rentabilidade acima do CDI",
+    value: "Produção agrícola e/ou garantia real",
   },
-  { label: "Registro", value: "Câmara de liquidação e custódia" },
+  { label: "Registro", value: "B3" },
   { label: "Amparo legal", value: "Lei 8.929/94" },
 ];
 
 const DIFERENCIAIS = [
-  "Rentabilidade acima do CDI — perfil moderado a sofisticado",
-  "Lastro em produção agrícola com muita rentabilidade acima do CDI, um dos setores mais sólidos do Brasil",
-  "Registro formal em câmara de custódia com segurança jurídica",
-  "Prazo previsível e retorno acordado no momento da compra",
-  "Amparo legal consolidado pela Lei 8.929/94",
+  "Rentabilidade acima do CDI — perfil moderado a sofisticado.",
+  "Lastro em produção agrícola e/ou garantia real, em um dos setores mais sólidos do Brasil.",
+  "Registro formal na B3 com segurança jurídica.",
+  "Prazo previsível e retorno acordado no momento da operação.",
+  "Amparo legal consolidado pela Lei 8.929/94.",
 ];
 
 const FAQ = [
@@ -51,15 +56,15 @@ const FAQ = [
   },
   {
     q: "CPR-F tem garantia do FGC?",
-    a: "A CPR-F não conta com garantia do FGC, mas é lastreada em produção agrícola com muita rentabilidade acima do CDI e registrada em câmara de custódia, o que confere segurança jurídica ao investidor.",
+    a: "A CPR-F não conta com garantia do FGC, mas é lastreada em produção agrícola e pode ter garantias reais (imóveis) na operação. Ela também é registrada na B3, o que confere segurança jurídica à operação.",
   },
   {
     q: "A CPR-F é indicada para qual perfil de investidor?",
-    a: "A CPR-F é recomendada para perfil moderado a sofisticado. Trata-se de um ativo estruturado do agronegócio com prazo definido e retorno acordado. Consulte nossos especialistas para entender como essa tese se encaixa no seu perfil.",
+    a: "A CPR-F é recomendada para perfil moderado a sofisticado. Trata-se de um ativo estruturado do agronegócio com prazo definido e retorno acordado. Consulte nossos especialistas para entender se essa tese é adequada para você.",
   },
   {
     q: "Posso resgatar antes do vencimento?",
-    a: "A CPR-F é um título com prazo definido. Consulte nossos especialistas para entender as condições de liquidez de cada operação disponível.",
+    a: "A CPR-F é um título com prazo definido. Normalmente não permite encerramento antes do prazo acordado.",
   },
 ];
 
@@ -74,6 +79,7 @@ export default function CprFPage() {
           src={cprfImage}
           alt="CPR-F"
           className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: "center 30%" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#041A2A] via-[#041A2A]/75 to-[#041A2A]/20" />
         <div className="section-container relative z-10 py-16 sm:py-20">
@@ -92,12 +98,11 @@ export default function CprFPage() {
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="section-tag">Perfil moderado a sofisticado</span>
             </div>
-            <h1 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+            <h1 className="mt-4 max-w-none text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl lg:whitespace-nowrap">
               CPR-F — Cédula de Produto Rural Financeira
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
-              Invista no agronegócio brasileiro com segurança jurídica e
-              rentabilidade acima do CDI.
+            <p className="mt-5 max-w-none text-base leading-relaxed text-white/75 sm:text-lg lg:whitespace-nowrap">
+              Invista no agronegócio brasileiro com segurança jurídica e rentabilidade acima do CDI.
             </p>
           </motion.div>
         </div>
@@ -111,14 +116,14 @@ export default function CprFPage() {
               Como funciona
             </h2>
           </ScrollReveal>
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {STEPS.map(({ num, title, desc }, i) => (
               <ScrollReveal key={num} delay={i * 0.1}>
                 <div className="surface-card h-full p-6">
-                  <p className="text-4xl font-semibold text-[var(--accent)]/30">
+                  <p className="text-4xl font-bold text-[var(--accent)]/40">
                     {num}
                   </p>
-                  <h3 className="mt-3 text-base font-semibold text-[var(--text-primary)]">
+                  <h3 className="mt-3 text-base font-semibold text-[var(--accent)]">
                     {title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">

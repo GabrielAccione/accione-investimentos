@@ -17,7 +17,7 @@ export default function InvestimentosPage() {
         description="A Accione trabalha com teses em que o retorno faz sentido porque a estrutura também faz. Selecione um produto para conhecer em detalhe."
         actions={
           <Link to="/contato" className="btn-accent">
-            Quero conversar sobre meu perfil
+            Quero conhecer melhor
           </Link>
         }
       />

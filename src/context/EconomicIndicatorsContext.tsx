@@ -95,6 +95,7 @@ function buildInflationIndicator(options: {
   label: string;
   description: string;
   icon: EconomicIndicator["icon"];
+  source: string;
   data: InflationData;
 }) {
   return {
@@ -108,7 +109,7 @@ function buildInflationIndicator(options: {
     variationLabel: `${formatSignedPercent(options.data.acum12m)} nos últimos 12 meses`,
     neutralVariation: true,
     icon: options.icon,
-    source: "Banco Central do Brasil",
+    source: options.source,
     sourceDate: options.data.date,
   } satisfies EconomicIndicator;
 }
@@ -136,7 +137,7 @@ async function loadIndicators() {
       label: "Selic",
       description: "Taxa básica de juros em base anual.",
       icon: Landmark,
-      source: "Banco Central do Brasil",
+      source: "BCB",
       series: data.selic,
       valueFormatter: (value) => formatPercent(value, "% a.a."),
     }),
@@ -145,7 +146,7 @@ async function loadIndicators() {
       label: "CDI",
       description: "Referência diária do mercado interbancário em base anual.",
       icon: PiggyBank,
-      source: "Banco Central do Brasil",
+      source: "B3",
       series: data.cdi,
       valueFormatter: (value) => formatPercent(value, "% a.a."),
     }),
@@ -156,6 +157,7 @@ async function loadIndicators() {
             label: "IPCA",
             description: "Índice oficial de inflação do país.",
             icon: BadgePercent,
+            source: "IBGE",
             data: data.ipca,
           }),
         ]
@@ -167,6 +169,7 @@ async function loadIndicators() {
             label: "IPCA-15",
             description: "Prévia mensal da inflação oficial (IPCA).",
             icon: Gauge,
+            source: "IBGE",
             data: data.ipca15,
           }),
         ]
@@ -178,6 +181,7 @@ async function loadIndicators() {
             label: "IGP-M",
             description: "Índice amplamente usado em contratos e reajustes.",
             icon: Activity,
+            source: "FGV",
             data: data.igpm,
           }),
         ]
@@ -189,6 +193,7 @@ async function loadIndicators() {
             label: "IGP-DI",
             description: "Índice geral de preços — disponibilidade interna.",
             icon: BarChart3,
+            source: "FGV",
             data: data.igpdi,
           }),
         ]
@@ -200,6 +205,7 @@ async function loadIndicators() {
             label: "INCC",
             description: "Índice de custos da construção civil.",
             icon: TrendingUp,
+            source: "FGV",
             data: data.incc,
           }),
         ]
@@ -228,7 +234,7 @@ async function loadIndicators() {
         data.ibovespa?.results?.[0]?.regularMarketChangePercent ?? 0,
       ),
       icon: LineChart,
-      source: "Brapi",
+      source: "B3",
     },
   ] satisfies EconomicIndicator[];
 }

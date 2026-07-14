@@ -18,6 +18,8 @@ export interface Product {
   icon: LucideIcon
   /** Imagem de capa do card (formato do card de empreendimento) */
   image: string
+  /** Posição do object-position para a imagem de capa */
+  imagePosition?: string
   /** Selo exibido sobre a imagem do card (ex: "Renda Fixa") */
   badge: string
   tag?: string

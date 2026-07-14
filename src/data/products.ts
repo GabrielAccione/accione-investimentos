@@ -14,6 +14,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Título de crédito emitido por produtores rurais e cooperativas, lastreado na produção agrícola brasileira. Oferece rentabilidade acima do CDI com proteção real contra inflação.",
     image: cprfImage,
+    imagePosition: "center 30%",
     badge: "Isenção de IR · PF",
     features: [
       "Lastro real — Garantido pela produção agrícola, um dos setores mais sólidos da economia brasileira",
@@ -37,6 +38,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Crédito estruturado para empresas sólidas e projetos com garantias compatíveis ao risco assumido. A tese combina diligência, colaterais bem definidos e acompanhamento de performance para capturar taxas superiores às linhas bancárias convencionais.",
     image: creditoPrivadoImage,
+    imagePosition: "center 45%",
     badge: "Renda Fixa",
     features: [
       "Taxas acima do CDI",
