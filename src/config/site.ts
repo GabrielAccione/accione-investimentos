@@ -8,13 +8,13 @@ export const SITE_CONFIG = {
   mapQuery: "Santa Maria RS",
   founder: {
     name: "Gabriel Rodrigues",
-    role: "Fundador — Accione Investimentos",
-    bio: "Especialista em investimentos multiestratégia, dedicado a identificar as melhores oportunidades do mercado com foco no perfil de cada cliente, transparência total e relacionamento de longo prazo.",
+    role: "Fundador da Accione Investimentos",
+    bio: "Economista de formação, especialista em investimentos multiestratégia, com experiência no mercado financeiro e de investimentos há mais de 20 anos. Dedicado a identificar e criar oportunidades para alocação de recursos, buscando resultados fora da curva, com a solidez que o investidor necessita.",
   },
   partner: {
     name: "Zacon Zanini",
     description:
-      "Parceiro estratégico da Accione nos empreendimentos imobiliários estruturados em modelo SPE.",
+      "Parceiro estratégico da Accione nos negócios imobiliários, unindo expertise em construção com qualidade de gestão.",
   },
   socialLinks: {
     instagram: "https://www.instagram.com/accioneinvestimentos/",

@@ -34,11 +34,11 @@ export default function SobrePage() {
         eyebrow="Sobre a Accione"
         title={
           <>
-            Uma assessoria construída para tratar patrimônio com
-            <span className="text-gradient"> seriedade e contexto.</span>
+            Investimentos para quem prefere contexto, estrutura e tese
+            <span className="text-gradient"> antes da promessa.</span>
           </>
         }
-        description="A Accione Investimentos nasceu em Santa Maria/RS com a proposta de aproximar investidores de oportunidades alternativas explicadas com clareza, diligência e proximidade."
+        description="A Accione nasceu para trazer a investidores oportunidades criadas a partir da leitura qualificada dos cenários econômicos, com ênfase em resultados acima da média, qualitativa e quantitativamente."
       />
 
       {/* Founder — two-column: photo | content */}
@@ -62,10 +62,10 @@ export default function SobrePage() {
 
             <div className="mt-6 space-y-4 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
               <p>
-                Somos uma empresa de investimentos multiestratégia. Nossa equipe é formada por especialistas dedicados a identificar as melhores oportunidades de investimento, levando em consideração seu perfil e buscando sempre as taxas e rendimentos mais competitivos do mercado.
+                Atuamos em Santa Maria/RS e região, com foco em empreendimentos imobiliários e operações de investimentos financeiros desenhados para ampliar o repertório patrimonial, sem cair em soluções genéricas.
               </p>
               <p>
-                Estamos sempre em busca dos melhores resultados para nossos clientes. Por isso, nosso time especializado facilita o acesso a investimentos alternativos e oportunidades imobiliárias, oferecendo orientação esclarecedora e com total transparência.
+                A lógica da casa é simples: entender o cenário, criar teses de forma criteriosa e construir oportunidades objetivas para investidores alocarem seus recursos.
               </p>
             </div>
 
