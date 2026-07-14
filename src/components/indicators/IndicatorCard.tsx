@@ -49,10 +49,10 @@ export default function IndicatorCard({ indicator }: IndicatorCardProps) {
       </div>
 
       {/* Nome + valor em destaque */}
-      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">
+      <h3 className="mt-6 font-display text-2xl font-bold text-[var(--text-primary)]">
         {indicator.label}
-      </p>
-      <p className="mt-1.5 font-display text-4xl font-semibold leading-none tabular-nums text-[var(--text-primary)]">
+      </h3>
+      <p className="mt-1.5 font-display text-2xl font-semibold leading-none tabular-nums text-[var(--text-primary)]">
         {indicator.valueLabel}
       </p>
       {indicator.periodLabel ? (
@@ -67,12 +67,12 @@ export default function IndicatorCard({ indicator }: IndicatorCardProps) {
       </p>
 
       {/* Rodapé: fonte · data */}
-      <div className="mt-auto flex items-center justify-between gap-2 border-t border-[#E5E5E5] pt-4 dark:border-white/10">
-        <span className="text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)]">
+      <div className="mt-auto flex items-center justify-between gap-4 border-t border-[#E5E5E5] pt-4 dark:border-white/10">
+        <span className="text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)] whitespace-nowrap">
           {indicator.source}
         </span>
         {dateLabel ? (
-          <span className="text-right text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)]">
+          <span className="text-right text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)] whitespace-nowrap">
             {dateLabel}
           </span>
         ) : null}
