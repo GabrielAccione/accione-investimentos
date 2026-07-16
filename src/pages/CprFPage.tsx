@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, ChevronDown, ChevronLeft, Wheat } from "lucide-react";
+import { CheckCircle2, ChevronDown, ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -109,7 +109,7 @@ export default function CprFPage() {
       </section>
 
       {/* Como funciona */}
-      <section className="py-20 sm:py-24">
+      <section className="pt-20 pb-10 sm:pt-24 sm:pb-12">
         <div className="section-container">
           <ScrollReveal>
             <h2 className="text-3xl font-semibold text-[var(--text-primary)]">
@@ -137,7 +137,7 @@ export default function CprFPage() {
       </section>
 
       {/* Características */}
-      <section className="py-20 sm:py-24">
+      <section className="pt-10 pb-10 sm:pt-12 sm:pb-12">
         <div className="section-container">
           <ScrollReveal>
             <h2 className="text-3xl font-semibold text-[var(--text-primary)]">
@@ -151,7 +151,7 @@ export default function CprFPage() {
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
                     {label}
                   </p>
-                  <p className="mt-2 text-lg font-semibold text-[var(--text-primary)]">
+                  <p className="mt-2 text-base font-medium text-[var(--text-primary)]">
                     {value}
                   </p>
                 </div>
@@ -162,7 +162,7 @@ export default function CprFPage() {
       </section>
 
       {/* Diferenciais */}
-      <section className="py-20 sm:py-24">
+      <section className="pt-10 pb-10 sm:pt-12 sm:pb-12">
         <div className="section-container">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-center">
             <div>
@@ -174,7 +174,7 @@ export default function CprFPage() {
               <ul className="mt-8 space-y-4">
                 {DIFERENCIAIS.map((d, i) => (
                   <ScrollReveal key={i} delay={i * 0.07}>
-                    <li className="flex items-start gap-3 text-sm leading-relaxed text-[var(--text-secondary)]">
+                    <li className="flex items-start gap-3 text-base leading-relaxed text-[var(--text-secondary)]">
                       <CheckCircle2
                         size={18}
                         className="mt-0.5 shrink-0 text-[var(--accent)]"
@@ -186,8 +186,12 @@ export default function CprFPage() {
               </ul>
             </div>
             <ScrollReveal direction="left">
-              <div className="mx-auto flex h-56 w-56 items-center justify-center rounded-[32px] border border-[var(--accent)]/20 bg-gradient-to-br from-[var(--accent)]/20 to-transparent text-[var(--accent)]">
-                <Wheat size={96} strokeWidth={1.2} />
+              <div className="mx-auto overflow-hidden h-56 w-56 rounded-[32px] border border-[var(--accent)]/20 shadow-lg">
+                <img
+                  src={cprfImage}
+                  alt="Cultivo de soja"
+                  className="h-full w-full object-cover"
+                />
               </div>
             </ScrollReveal>
           </div>
@@ -195,7 +199,7 @@ export default function CprFPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 sm:py-24">
+      <section className="pt-10 pb-20 sm:pt-12 sm:pb-24">
         <div className="section-container">
           <ScrollReveal>
             <h2 className="text-3xl font-semibold text-[var(--text-primary)]">

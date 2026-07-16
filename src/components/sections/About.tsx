@@ -42,7 +42,7 @@ export default function About() {
               to="/sobre"
               className="btn-accent mt-8 inline-flex items-center gap-2"
             >
-              Conhecer a história completa
+              Saiba mais
             </Link>
           </motion.div>
 

@@ -32,9 +32,7 @@ export default function Footer() {
               }
             />
             <p className="mt-5 max-w-md text-sm leading-relaxed text-[#484949] dark:text-[#69727D]">
-              A Accione Investimentos aproxima investidores de oportunidades
-              alternativas com diligência, clareza e conversa patrimonial mais
-              profunda.
+              A Accione Investimentos entrega a investidores oportunidades criteriosamente criadas, com diligência, clareza e solidez
             </p>
             <p className="mt-4 text-xs text-[#484949] dark:text-[#69727D]">
               CNPJ 53.404.254/0001-31
@@ -85,8 +83,7 @@ export default function Footer() {
             direitos reservados.
           </span>
           <span>
-            Conteúdo informativo. Avaliação individual deve considerar perfil,
-            prazo e risco.
+            Conteúdo estritamente informativo. Não substitui a análise criteriosa e profundo entendimento por parte de qualquer investidor.
           </span>
         </div>
       </div>

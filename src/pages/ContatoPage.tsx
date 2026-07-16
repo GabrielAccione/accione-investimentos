@@ -1,14 +1,14 @@
-import { Clock, Mail, MapPin, Phone } from 'lucide-react'
-import { motion } from 'framer-motion'
-import WhatsAppButton from '@/components/ui/WhatsAppButton'
-import { SITE_CONFIG } from '@/config/site'
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { motion } from "framer-motion";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import { SITE_CONFIG } from "@/config/site";
 
 const INFO_ITEMS = [
-  { icon: Phone, label: 'WhatsApp', value: SITE_CONFIG.whatsappDisplay },
-  { icon: Mail, label: 'E-mail', value: SITE_CONFIG.email },
-  { icon: Clock, label: 'Horário', value: 'Atendimento com horário marcado' },
-  { icon: MapPin, label: 'Localização', value: 'Santa Maria, RS — Brasil' },
-]
+  { icon: Phone, label: "WhatsApp", value: SITE_CONFIG.whatsappDisplay },
+  { icon: Mail, label: "E-mail", value: SITE_CONFIG.email },
+  { icon: Clock, label: "Horário", value: "Atendimento com horário marcado" },
+  { icon: MapPin, label: "Localização", value: "Santa Maria, RS — Brasil" },
+];
 
 export default function ContatoPage() {
   return (
@@ -48,16 +48,17 @@ export default function ContatoPage() {
         >
           {/* Aviso */}
           <div
-            className="rounded-xl border-l-4 py-3 pl-4 pr-3"
-            style={{ borderLeftColor: '#A26547', background: 'rgba(162, 101, 71, 0.08)' }}
+            className="rounded-xl py-3 px-4 text-center border border-[#A26547]/20"
+            style={{ background: "rgba(162, 101, 71, 0.08)" }}
           >
-            <p className="text-sm leading-relaxed text-[#484949] dark:text-[#69727D]">
-              ⚠️ Nosso atendimento é realizado exclusivamente com horário marcado.
+            <p className="text-sm leading-relaxed text-[#484949] dark:text-[#69727D] text-center w-full font-medium">
+              ⚠️ Nosso atendimento é realizado exclusivamente com horário
+              marcado.
             </p>
           </div>
 
-          {/* Botões — ambos à esquerda */}
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          {/* Botões — centralizados */}
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row justify-center items-center">
             <WhatsAppButton
               mensagem="Olá! Gostaria de agendar um horário com a Accione Investimentos."
               label="Falar com um especialista"
@@ -65,10 +66,10 @@ export default function ContatoPage() {
             />
             <a
               href={`mailto:${SITE_CONFIG.email}`}
-              className="btn-ghost inline-flex items-center justify-center gap-2 text-sm"
+              className="btn-ghost inline-flex items-center justify-center gap-2 flex-nowrap text-sm whitespace-nowrap"
             >
-              <Mail className="h-4 w-4" />
-              {SITE_CONFIG.email}
+              <Mail className="h-4 w-4 shrink-0" />
+              <span>{SITE_CONFIG.email}</span>
             </a>
           </div>
 
@@ -83,7 +84,9 @@ export default function ContatoPage() {
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
                     {label}
                   </p>
-                  <p className="mt-1 text-sm text-[var(--text-secondary)]">{value}</p>
+                  <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                    {value}
+                  </p>
                 </div>
               </div>
             ))}
@@ -91,5 +94,5 @@ export default function ContatoPage() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
