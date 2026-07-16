@@ -117,19 +117,19 @@ export default function SobrePage() {
               <div className="rounded-2xl border border-[#E5E5E5] bg-white p-5 dark:border-white/10 dark:bg-[#0C2030]">
                 <Building2 size={20} className="text-[var(--accent)]" />
                 <h3 className="mt-3 text-base font-semibold text-[#041A2A] dark:text-white">
-                  Gestão Financeira de Empreendimentos Imobiliários
+                  Empreendimentos Imobiliários Diferenciados
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-[var(--text-muted)]">
-                  Investimentos em parceria com construtoras renomadas no modelo SPE, a preço de custo, com transparência e rentabilidade.
+                  Idealização de negócios com empreendimentos imobiliários, com estrutura, gestão profissional e acompanhamento de ponta a ponta.
                 </p>
               </div>
               <div className="rounded-2xl border border-[#E5E5E5] bg-white p-5 dark:border-white/10 dark:bg-[#0C2030]">
                 <Gem size={20} className="text-[var(--accent)]" />
                 <h3 className="mt-3 text-base font-semibold text-[#041A2A] dark:text-white">
-                  Investimentos Alternativos de Qualidade
+                  Investimentos Financeiros de Qualidade
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-[var(--text-muted)]">
-                  Obras de arte, royalties musicais, crédito privado e certificado de recebíveis, com retornos acima da média e orientação profissional.
+                  Dois blocos centrais da atuação da Accione (CPR-F e Crédito Privado), com racional claro de retorno, risco e acompanhamento.
                 </p>
               </div>
             </div>

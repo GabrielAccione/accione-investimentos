@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -188,33 +188,6 @@ export default function EmpreendimentoDetalhe() {
   const { slug } = useParams<{ slug: string }>();
   const empreendimento = EMPREENDIMENTOS.find((e) => e.slug === slug);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const solarRef = useRef<HTMLDivElement>(null);
-  const [solarVisible, setSolarVisible] = useState(false);
-  const solarIframeRef = useRef<HTMLIFrameElement>(null);
-  const solarShownRef = useRef(false);
-
-  useEffect(() => {
-    if (slug !== "sync-floriano") return;
-    const el = solarRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (!solarShownRef.current) {
-            solarShownRef.current = true;
-            setSolarVisible(true);
-          } else {
-            solarIframeRef.current?.contentWindow?.postMessage("resume", "*");
-          }
-        } else if (solarShownRef.current) {
-          solarIframeRef.current?.contentWindow?.postMessage("pause", "*");
-        }
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [slug]);
 
   if (!empreendimento) {
     return (
@@ -488,73 +461,6 @@ export default function EmpreendimentoDetalhe() {
       </AnimatePresence>
 
       <div className="section-divider" />
-
-      {/* ── Trajetória Solar (Sync Floriano only) ────────────── */}
-      {slug === "sync-floriano" && (
-        <>
-          <section className="py-20">
-            <div className="section-container">
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-12"
-              >
-                <span className="text-[var(--accent)] text-sm font-medium uppercase tracking-widest">
-                  Diferencial
-                </span>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
-                  Trajetória Solar do Edifício
-                </h2>
-                <p className="text-white/80 text-sm mt-2 max-w-2xl mx-auto">
-                  Visualize a incidência solar ao longo do ano em cada fachada
-                  do edifício, com base na latitude de Santa Maria/RS.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                <div
-                  ref={solarRef}
-                  className="h-[420px] md:h-[600px] rounded-xl overflow-hidden border border-[#484949]/20"
-                >
-                  {solarVisible ? (
-                    <iframe
-                      ref={solarIframeRef}
-                      src="/trajetoria-solar-edificio.html"
-                      title="Trajetória Solar do Edifício"
-                      width="100%"
-                      height="100%"
-                      loading="lazy"
-                      style={{ border: "none", overflow: "hidden" }}
-                      onLoad={() => {
-                        if (solarShownRef.current) {
-                          solarIframeRef.current?.contentWindow?.postMessage(
-                            "resume",
-                            "*",
-                          );
-                        }
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-[var(--bg-primary)] flex items-center justify-center">
-                      <p className="text-sm text-[var(--text-muted)]">
-                        Carregando visualização solar...
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            </div>
-          </section>
-          <div className="section-divider" />
-        </>
-      )}
 
       {/* ── 5. Ficha Técnica ─────────────────────────────────── */}
       <section className="py-20">
