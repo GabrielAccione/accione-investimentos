@@ -130,84 +130,90 @@ export default function RetirementSimulatorPage() {
 
           {/* Gráfico (tamanho de card) + resultados lado a lado */}
           <div className="mt-6 grid gap-6 border-t border-[#484949]/15 pt-6 lg:grid-cols-[minmax(0,1fr)_260px]">
-            <div className="min-w-0">
-              <div className="flex items-center justify-between">
-                <span className="section-tag">Evolução patrimonial</span>
-                {projection ? (
-                  <span className="text-xs text-[var(--text-muted)]">
-                    Final: {formatCompactCurrency(projection.balance)}
-                  </span>
-                ) : null}
+            <div className="min-w-0 relative overflow-hidden rounded-xl">
+              {/* Logo Marca d'água no fundo do gráfico (centralizado na área do gráfico) */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.09] dark:opacity-[0.06] z-0">
+                <img
+                  src={logoSrc}
+                  alt="Accione Watermark"
+                  className="w-11/12 max-w-xl h-auto object-contain select-none"
+                  style={
+                    theme === "light" ? { mixBlendMode: "multiply" } : undefined
+                  }
+                />
               </div>
-              <div className="mt-3 h-[220px] relative">
-                {/* Logo Marca d'água no fundo do gráfico */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.035] dark:opacity-[0.025]">
-                  <img
-                    src={logoSrc}
-                    alt="Accione Watermark"
-                    className="h-28 w-auto object-contain select-none"
-                  />
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between">
+                  <span className="section-tag">Evolução patrimonial</span>
+                  {projection ? (
+                    <span className="text-xs text-[var(--text-muted)]">
+                      Final: {formatCompactCurrency(projection.balance)}
+                    </span>
+                  ) : null}
                 </div>
-                {isValidScenario && projection ? (
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={projection.points}>
-                      <defs>
-                        <linearGradient
-                          id="retirementBalance"
-                          x1="0"
-                          y1="0"
-                          x2="0"
-                          y2="1"
-                        >
-                          <stop offset="5%" stopColor="#A26547" stopOpacity={0.45} />
-                          <stop offset="95%" stopColor="#A26547" stopOpacity={0.05} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid stroke={chartGridStroke} vertical={false} />
-                      <XAxis
-                        dataKey="age"
-                        stroke={chartAxisStroke}
-                        tickLine={false}
-                        axisLine={false}
-                        fontSize={12}
-                      />
-                      <YAxis
-                        stroke={chartAxisStroke}
-                        tickLine={false}
-                        axisLine={false}
-                        width={48}
-                        fontSize={12}
-                        tickFormatter={(value: number) => formatCompactCurrency(value)}
-                      />
-                      <Tooltip
-                        formatter={(value) => [
-                          formatCurrency(Number(value ?? 0)),
-                          "Patrimônio",
-                        ]}
-                        labelFormatter={(label) => `Idade ${label}`}
-                        contentStyle={{
-                          backgroundColor: isDark ? "#0C2030" : "#FFFFFF",
-                          border: isDark
-                            ? "1px solid rgba(255,255,255,0.1)"
-                            : "1px solid #E5E5E5",
-                          borderRadius: "12px",
-                          color: isDark ? "#FFFFFF" : "#041A2A",
-                        }}
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey="balance"
-                        stroke="#A26547"
-                        fill="url(#retirementBalance)"
-                        strokeWidth={2.5}
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                ) : (
-                  <div className="flex h-full items-center justify-center rounded-xl border border-dashed border-[#484949]/25 px-4 text-center text-sm text-[var(--text-secondary)]">
-                    {validationError ?? "Preencha os campos para ver a projeção."}
-                  </div>
-                )}
+                <div className="mt-3 h-[220px]">
+                  {isValidScenario && projection ? (
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart data={projection.points}>
+                        <defs>
+                          <linearGradient
+                            id="retirementBalance"
+                            x1="0"
+                            y1="0"
+                            x2="0"
+                            y2="1"
+                          >
+                            <stop offset="5%" stopColor="#A26547" stopOpacity={0.45} />
+                            <stop offset="95%" stopColor="#A26547" stopOpacity={0.05} />
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid stroke={chartGridStroke} vertical={false} />
+                        <XAxis
+                          dataKey="age"
+                          stroke={chartAxisStroke}
+                          tickLine={false}
+                          axisLine={false}
+                          fontSize={12}
+                        />
+                        <YAxis
+                          stroke={chartAxisStroke}
+                          tickLine={false}
+                          axisLine={false}
+                          width={48}
+                          fontSize={12}
+                          tickFormatter={(value: number) => formatCompactCurrency(value)}
+                        />
+                        <Tooltip
+                          formatter={(value) => [
+                            formatCurrency(Number(value ?? 0)),
+                            "Patrimônio",
+                          ]}
+                          labelFormatter={(label) => `Idade ${label}`}
+                          contentStyle={{
+                            backgroundColor: isDark ? "#0C2030" : "#FFFFFF",
+                            border: isDark
+                              ? "1px solid rgba(255,255,255,0.1)"
+                              : "1px solid #E5E5E5",
+                            borderRadius: "12px",
+                            color: isDark ? "#FFFFFF" : "#041A2A",
+                          }}
+                        />
+                        <Area
+                          type="monotone"
+                          dataKey="balance"
+                          stroke="#A26547"
+                          fill="url(#retirementBalance)"
+                          strokeWidth={2.5}
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <div className="flex h-full items-center justify-center rounded-xl border border-dashed border-[#484949]/25 px-4 text-center text-sm text-[var(--text-secondary)]">
+                      {validationError ?? "Preencha os campos para ver a projeção."}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
