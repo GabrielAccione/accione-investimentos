@@ -16,7 +16,8 @@ import {
   formatCurrency,
   formatPercent,
 } from "@/lib/formatters";
-
+import logoDark from "@/assets/logo.png";
+import logoLight from "@/assets/logo-accione-dark.png";
 const DEFAULT_VALUES = {
   currentAge: 35,
   retirementAge: 60,
@@ -34,6 +35,7 @@ const inputs = [
 
 export default function RetirementSimulatorPage() {
   const { theme } = useTheme();
+  const logoSrc = theme === "dark" ? logoDark : logoLight;
   const [currentAge, setCurrentAge] = useState(String(DEFAULT_VALUES.currentAge));
   const [retirementAge, setRetirementAge] = useState(
     String(DEFAULT_VALUES.retirementAge),
@@ -137,7 +139,15 @@ export default function RetirementSimulatorPage() {
                   </span>
                 ) : null}
               </div>
-              <div className="mt-3 h-[220px]">
+              <div className="mt-3 h-[220px] relative">
+                {/* Logo Marca d'água no fundo do gráfico */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.035] dark:opacity-[0.025]">
+                  <img
+                    src={logoSrc}
+                    alt="Accione Watermark"
+                    className="h-28 w-auto object-contain select-none"
+                  />
+                </div>
                 {isValidScenario && projection ? (
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={projection.points}>

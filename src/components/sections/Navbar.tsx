@@ -36,7 +36,7 @@ const PRIMARY_LINKS = [
 
 const SIMULATOR_LINKS = [
   { label: "Aposentadoria", to: "/simuladores/aposentadoria" },
-  { label: "Sync Floriano", to: "/simuladores/sync-floriano" },
+  // { label: "Sync Floriano", to: "/simuladores/sync-floriano" },
 ];
 
 const ALL_MOBILE_LINKS = [...PRIMARY_LINKS, ...SIMULATOR_LINKS];
