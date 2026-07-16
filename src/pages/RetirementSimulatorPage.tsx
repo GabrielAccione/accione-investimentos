@@ -131,12 +131,12 @@ export default function RetirementSimulatorPage() {
           {/* Gráfico (tamanho de card) + resultados lado a lado */}
           <div className="mt-6 grid gap-6 border-t border-[#484949]/15 pt-6 lg:grid-cols-[minmax(0,1fr)_260px]">
             <div className="min-w-0 relative overflow-hidden rounded-xl">
-              {/* Logo Marca d'água no fundo do gráfico (centralizado na área do gráfico) */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.09] dark:opacity-[0.06] z-0">
+              {/* Logo Marca d'água no fundo do gráfico (posicionado levemente acima para não conflitar com o eixo X) */}
+              <div className="absolute inset-0 flex items-center justify-center -translate-y-6 pointer-events-none opacity-[0.09] dark:opacity-[0.06] z-0">
                 <img
                   src={logoSrc}
                   alt="Accione Watermark"
-                  className="w-[60%] max-w-md h-auto object-contain select-none"
+                  className="w-[45%] max-w-xs h-auto object-contain select-none"
                   style={
                     theme === "light" ? { mixBlendMode: "multiply" } : undefined
                   }
