@@ -157,7 +157,7 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
       { src: syncResidenceImg, alt: "Vista geral" },
     ],
     destaques: [
-      { valor: "187", label: "Tipologias" },
+      { valor: "Estúdios, 1 e 2 dormitórios", label: "Tipologia" },
       { valor: "SPE", label: "Modelo" },
       { valor: "22", label: "Pavimentos" },
       { valor: "Accione e Zacon", label: "Gestão e Construção" },
@@ -167,17 +167,18 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
       construtora: "Zacon Zanini Construções",
       modelo: "SPE a preço de custo",
       localizacao: "R. Conde de Porto Alegre nº 646 - Centro, Santa Maria/RS",
-      tipologias:
-        "Estúdio (23–33 m²), 1 dormitório (27–36 m²) e 2 dormitórios (45–50 m²)",
+      tipologias: "Estúdio, 1 dormitório e 2 dormitórios",
       pavimentos: "22",
       totalUnidades: "187 apartamentos",
     },
     pontosDeInteresse: [
       "Calçadão do Centro — 3 min a pé",
-      "Catedral de Santa Maria — 5 min a pé",
+      "Catedral de Santa Maria — 3 min de carro",
       "Terminal Urbano — 4 min a pé",
-      "UFSM — 12 min de carro",
+      "UFN — 5 min a pé",
       "Shopping Praça Nova — 10 min de carro",
+      "Costa Dourada — 7 min a pé",
+      "Churrasquito — 5 min a pé",
     ],
   },
   {
