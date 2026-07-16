@@ -136,7 +136,7 @@ export default function RetirementSimulatorPage() {
                 <img
                   src={logoSrc}
                   alt="Accione Watermark"
-                  className="w-11/12 max-w-xl h-auto object-contain select-none"
+                  className="w-[60%] max-w-md h-auto object-contain select-none"
                   style={
                     theme === "light" ? { mixBlendMode: "multiply" } : undefined
                   }
