@@ -32,7 +32,7 @@ export const PRODUCTS: Product[] = [
     id: 1,
     slug: "credito-privado",
     title: "Crédito Privado",
-    subtitle: "Renda fixa corporativa",
+    subtitle: "Renda Fixa Corporativa",
     summary:
       "Estruturas com garantia e remuneração acima do crédito bancário tradicional.",
     description:

@@ -106,7 +106,7 @@ export default function CreditoPrivadoPage() {
       </section>
 
       {/* Como funciona */}
-      <section className="py-20 sm:py-24">
+      <section className="pt-20 pb-10 sm:pt-24 sm:pb-12">
         <div className="section-container">
           <ScrollReveal>
             <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Como funciona</h2>
@@ -126,7 +126,7 @@ export default function CreditoPrivadoPage() {
       </section>
 
       {/* Características */}
-      <section className="py-20 sm:py-24">
+      <section className="pt-10 pb-20 sm:pt-12 sm:pb-24">
         <div className="section-container">
           <ScrollReveal>
             <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Características</h2>
@@ -138,7 +138,7 @@ export default function CreditoPrivadoPage() {
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
                     {label}
                   </p>
-                  <p className="mt-2 text-lg font-semibold text-[var(--text-primary)]">{value}</p>
+                  <p className="mt-2 text-base font-medium text-[var(--text-primary)]">{value}</p>
                 </div>
               </ScrollReveal>
             ))}
