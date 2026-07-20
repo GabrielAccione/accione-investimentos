@@ -1,6 +1,77 @@
 import type { BlogPost } from '@/types'
+import imoveisCover from '@/assets/blog-images/imoveis.png'
+import gabrielImg from '@/assets/gabriel.jpg'
 
 export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: 'retomada-do-centro-imoveis-compactos',
+    title: 'O Centro voltou a ser protagonista — e os investidores já perceberam',
+    category: 'Imóveis',
+    date: '2026-07-20',
+    excerpt:
+      'A revitalização das regiões centrais e a procura por imóveis compactos bem localizados são uma tendência estrutural — e o Sync Floriano se encaixa exatamente nesse cenário.',
+    coverImage: imoveisCover,
+    coverZoom: true,
+    readTime: '7 min de leitura',
+    heroTagline:
+      'A retomada das regiões centrais como tendência estrutural do mercado imobiliário.',
+    author: {
+      name: 'Gabriel Rodrigues',
+      role: 'Economista',
+      image: gabrielImg,
+    },
+    content: [
+      {
+        paragraphs: [
+          'Durante muitos anos, o mercado imobiliário brasileiro concentrou seus lançamentos na expansão horizontal das cidades. Novos bairros surgiam enquanto os centros urbanos, apesar de concentrarem infraestrutura, comércio, universidades e serviços, perdiam espaço na preferência dos incorporadores. Hoje, esse movimento começa a se inverter. As grandes cidades já demonstram que a revitalização das regiões centrais é uma tendência consistente, impulsionada por mudanças demográficas, novas formas de viver e pela busca cada vez maior por mobilidade e praticidade.',
+        ],
+      },
+      {
+        heading: 'Um movimento estrutural, não uma moda',
+        paragraphs: [
+          'Essa transformação não acontece por acaso. Segundo dados do IBGE, os domicílios brasileiros estão ficando menores, enquanto cresce continuamente o número de pessoas morando sozinhas, casais sem filhos e famílias reduzidas. Ao mesmo tempo, cresce a procura por imóveis compactos bem localizados, capazes de atender tanto quem deseja morar quanto quem busca renda através de locação tradicional ou por temporada. Em termos econômicos, trata-se de um movimento estrutural, e não apenas de uma moda passageira.',
+        ],
+      },
+      {
+        heading: 'Santa Maria no centro da tendência',
+        paragraphs: [
+          'Santa Maria vive exatamente esse momento. Com uma das maiores populações universitárias do sul do Brasil, forte presença militar, intensa atividade na área da saúde e um comércio consolidado, a cidade mantém um fluxo permanente de pessoas chegando para estudar, trabalhar e empreender. Esse comportamento cria uma demanda contínua por imóveis compactos próximos aos principais polos urbanos, especialmente no Centro, onde praticamente toda a infraestrutura da cidade está concentrada.',
+        ],
+      },
+      {
+        heading: 'Por que o Sync Floriano entra no radar',
+        paragraphs: [
+          'É justamente nesse contexto que projetos como o Sync Floriano chamam atenção do investidor. Não se trata apenas de um edifício residencial. O empreendimento nasce em um dos endereços mais tradicionais da cidade, na Rua Floriano Peixoto, reunindo proximidade com universidades, hospitais, comércio, transporte público e serviços essenciais, fatores que historicamente sustentam a valorização imobiliária ao longo do tempo.',
+          'Outro aspecto que considero relevante é o conceito adotado pelo empreendimento. O mercado não procura mais apenas metragem; procura eficiência. Apartamentos compactos, aliados a uma infraestrutura completa com coworking, academia, lavanderia compartilhada, market, espaços gourmet e áreas de convivência, aumentam significativamente a atratividade do imóvel para moradores e locatários. Essa combinação amplia o público potencial e reduz períodos de vacância, dois fatores fundamentais para quem investe pensando em geração de renda.',
+        ],
+      },
+      {
+        heading: 'A leitura financeira: liquidez, valorização e renda',
+        paragraphs: [
+          'Sob a ótica financeira, gosto de analisar investimentos imobiliários observando três pilares: liquidez, potencial de valorização e capacidade de geração de renda. Empreendimentos localizados em regiões consolidadas normalmente apresentam desempenho superior nesses três indicadores quando comparados a projetos desenvolvidos em áreas de expansão ainda dependentes da formação de infraestrutura. O valor do imóvel deixa de depender apenas do empreendimento e passa a ser sustentado também pela própria localização.',
+        ],
+      },
+      {
+        heading: 'Credibilidade dos desenvolvedores',
+        paragraphs: [
+          'Outro fator que merece destaque é a credibilidade dos desenvolvedores. No mercado imobiliário, confiança representa um ativo extremamente valioso. O Sync Floriano reúne a experiência construtiva da Zacon Zanini, empresa com mais de três décadas de atuação em Santa Maria, associada à modelagem financeira e à gestão de investimentos conduzida pela Accione. Para o investidor, essa combinação reduz assimetrias de informação e aumenta a previsibilidade do projeto.',
+        ],
+      },
+      {
+        heading: 'Um conceito já validado pelo mercado',
+        paragraphs: [
+          'Também considero relevante observar o comportamento do mercado diante da marca. O primeiro empreendimento Sync apresentou forte velocidade de comercialização, demonstrando que existe demanda para esse tipo de produto. Quando um conceito é validado pelo próprio mercado, diminui-se parte do risco comercial normalmente associado a novos lançamentos. Evidentemente, resultados passados não garantem resultados futuros, mas representam um importante sinal sobre a aceitação do produto.',
+        ],
+      },
+      {
+        heading: 'Capturar a tendência antes do preço',
+        paragraphs: [
+          'Na economia, costumamos dizer que bons investimentos são aqueles capazes de capturar tendências antes que elas sejam percebidas pela maioria. A retomada dos centros urbanos, a valorização dos imóveis compactos de alto padrão e a crescente procura por empreendimentos multifuncionais parecem caminhar exatamente nessa direção. Quem entende esses movimentos costuma tomar decisões antes que o mercado incorpore totalmente esse novo cenário aos preços.',
+          'Por isso, quando analiso o Sync Floriano sob uma perspectiva exclusivamente de investimento, vejo um empreendimento alinhado a diversas tendências estruturais do mercado imobiliário brasileiro. Localização consolidada, produto aderente às novas demandas habitacionais, infraestrutura completa, parceiros experientes e um conceito que dialoga com o futuro das cidades. Para investidores que procuram ativos reais capazes de combinar potencial de valorização patrimonial com geração de renda, certamente é um projeto que merece estar no radar antes da conclusão das obras.',
+        ],
+      },
+    ],
+  },
   {
     slug: 'como-analisar-investimentos-alternativos',
     title: 'Como analisar investimentos alternativos sem cair na armadilha do discurso fácil',
