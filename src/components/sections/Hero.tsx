@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useInView } from "@/hooks/useInView";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import backgroundImg from "@/assets/imagem-fundo.jpg";
 //define assinatura de curva
 const PREMIUM_EASE = [0.16, 1, 0.3, 1];
 const METRICAS = [
@@ -62,6 +63,17 @@ export default function Hero() {
   };
   return (
     <section id="inicio" className="relative overflow-hidden pt-20">
+      {/* Background Image with Gradient Overlay */}
+      <div className="absolute inset-0 -z-10">
+        <img
+          src={backgroundImg}
+          alt="Accione Background"
+          className="h-full w-full object-cover object-center"
+        />
+        {/* Soft theme-aware gradient overlay to ensure text readability and theme blending */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/80 to-[var(--bg-primary)] dark:from-[#041A2A]/40 dark:via-[#041A2A]/85 dark:to-[#041a2a]" />
+      </div>
+
       <div className="absolute left-[8%] top-28 h-56 w-56 rounded-full bg-[var(--accent)]/15 blur-3xl" />
       <div className="absolute right-[10%] top-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
 
