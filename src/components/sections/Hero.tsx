@@ -3,6 +3,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import { useInView } from "@/hooks/useInView";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import backgroundImg from "@/assets/imagem-fundo.jpg";
+import gabrielImg from "@/assets/gabriel.jpg";
 //define assinatura de curva
 const PREMIUM_EASE = [0.16, 1, 0.3, 1];
 const METRICAS = [
@@ -33,14 +34,14 @@ function CounterCard({
       whileHover={{ y: -4, scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
       transition={{ duration: 0.3, ease: PREMIUM_EASE }}
-      className="rounded-2xl border border-[#E5E5E5] bg-white p-4 text-left dark:border-white/10 dark:bg-white/[0.04]"
+      className="rounded-2xl border border-[#E5E5E5] bg-white p-3 text-left dark:border-white/10 dark:bg-white/[0.04]"
     >
-      <p className="text-2xl font-semibold text-[#041A2A] dark:text-white sm:text-3xl">
+      <p className="text-lg font-semibold leading-tight text-[#041A2A] dark:text-white">
         {prefix}
         {count}
         <span className="text-[var(--accent)]">{suffix}</span>
       </p>
-      <p className="mt-2 text-sm text-[var(--text-muted)]">{label}</p>
+      <p className="mt-1 text-[11px] leading-tight text-[var(--text-muted)]">{label}</p>
     </motion.div>
   );
 }
@@ -127,9 +128,17 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: PREMIUM_EASE, delay: 0.15 }}
-          className="surface-card p-6 sm:p-8"
+          className="surface-card p-5"
         >
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="mb-5 flex justify-center border-b border-[#484949]/15 pb-5">
+            <img
+              src={gabrielImg}
+              alt="Gabriel Rodrigues"
+              className="h-28 w-28 rounded-full object-cover sm:h-32 sm:w-32"
+            />
+          </div>
+
+          <div className="grid grid-cols-3 gap-2">
             <CounterCard
               prefix="R$ +"
               target={100}
@@ -151,7 +160,7 @@ export default function Hero() {
             />
           </div>
 
-          <p className="mt-6 text-sm leading-relaxed text-[var(--text-secondary)]">
+          <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
             Trabalhamos com estrutura, explicação e acompanhamento. A proposta é
             ampliar horizontes, andando lado a lado.
           </p>
