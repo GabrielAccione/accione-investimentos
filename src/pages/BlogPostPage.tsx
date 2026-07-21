@@ -50,7 +50,7 @@ export default function BlogPostPage() {
                   <img
                     src={post.author.image}
                     alt={post.author.name}
-                    className="h-11 w-11 rounded-full object-cover"
+                    className="h-11 w-11 rounded-full object-cover object-top"
                   />
                 ) : null}
                 <div className="leading-tight">

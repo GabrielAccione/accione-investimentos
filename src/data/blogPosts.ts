@@ -1,6 +1,6 @@
 import type { BlogPost } from '@/types'
 import imoveisCover from '@/assets/blog-images/imoveis.png'
-import gabrielImg from '@/assets/gabriel.jpg'
+import gabrielImg from '@/assets/gabriel-2.jpg'
 
 export const BLOG_POSTS: BlogPost[] = [
   {
