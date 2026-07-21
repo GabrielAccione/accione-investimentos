@@ -34,14 +34,14 @@ function CounterCard({
       whileHover={{ y: -4, scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
       transition={{ duration: 0.3, ease: PREMIUM_EASE }}
-      className="rounded-2xl border border-[#E5E5E5] bg-white p-3 text-left dark:border-white/10 dark:bg-white/[0.04]"
+      className="rounded-2xl border border-[#E5E5E5] bg-white p-4 text-left dark:border-white/10 dark:bg-white/[0.04]"
     >
-      <p className="text-lg font-semibold leading-tight text-[#041A2A] dark:text-white">
+      <p className="text-2xl font-semibold leading-tight text-[#041A2A] dark:text-white">
         {prefix}
         {count}
         <span className="text-[var(--accent)]">{suffix}</span>
       </p>
-      <p className="mt-1 text-[11px] leading-tight text-[var(--text-muted)]">
+      <p className="mt-1 text-xs leading-tight text-[var(--text-muted)]">
         {label}
       </p>
     </motion.div>
@@ -78,11 +78,11 @@ export default function Hero() {
           src={gabrielBgImg}
           alt=""
           aria-hidden="true"
-          className="absolute inset-y-0 right-0 hidden h-full w-[40%] object-cover object-top opacity-100 lg:block"
+          className="absolute inset-y-0 right-0 hidden h-full w-[40%] object-cover object-top opacity-100 xl:block"
           style={{
-            maskImage: "linear-gradient(to left, black 35%, transparent 82%)",
+            maskImage: "linear-gradient(to left, black 55%, transparent 92%)",
             WebkitMaskImage:
-              "linear-gradient(to left, black 35%, transparent 82%)",
+              "linear-gradient(to left, black 55%, transparent 82%)",
           }}
         />
         {/* Soft theme-aware gradient overlay to ensure text readability and theme blending */}
@@ -92,7 +92,7 @@ export default function Hero() {
       <div className="absolute left-[8%] top-28 h-56 w-56 rounded-full bg-[var(--accent)]/15 blur-3xl" />
       <div className="absolute right-[10%] top-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
 
-      <div className="section-container relative z-10 grid min-h-[calc(100vh-5rem)] items-center gap-10 py-14 lg:grid-cols-[minmax(0,520px)_300px] lg:justify-start">
+      <div className="section-container relative z-10 grid min-h-[calc(100vh-5rem)] items-center gap-10 py-14 lg:grid-cols-[minmax(0,520px)_360px] lg:justify-start">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 16 }}
@@ -142,9 +142,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: PREMIUM_EASE, delay: 0.15 }}
-          className="surface-card p-5"
+          className="surface-card p-6"
         >
-          <div className="grid grid-cols-1 gap-3">
+          <div className="grid grid-cols-1 gap-4">
             <CounterCard
               prefix="R$ +"
               target={100}
