@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
 import SectionHeading from "@/components/ui/SectionHeading";
-import gabrielImg from "@/assets/gabriel.jpg";
+import gabrielImg from "@/assets/gabriel-2.jpg";
 import zaconImg from "@/assets/marcazacon.png";
 
 export default function About() {
@@ -57,7 +57,7 @@ export default function About() {
               <img
                 src={gabrielImg}
                 alt={SITE_CONFIG.founder.name}
-                className="h-24 w-24 rounded-full object-cover"
+                className="h-24 w-24 rounded-full object-cover object-top"
               />
               <h3 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">
                 {SITE_CONFIG.founder.name}

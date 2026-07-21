@@ -84,5 +84,8 @@ export interface BlogPost {
   coverImage: string
   readTime: string
   heroTagline: string
+  /** Aplica um leve zoom (108%, ancorado à esquerda) na capa — ex: esconder marca d'água */
+  coverZoom?: boolean
+  author?: { name: string; role: string; image?: string }
   content: BlogSection[]
 }

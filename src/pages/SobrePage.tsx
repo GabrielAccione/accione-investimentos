@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import PageHero from '@/components/ui/PageHero'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import { SITE_CONFIG } from '@/config/site'
-import gabrielImg from '@/assets/gabriel.jpg'
+import gabrielImg from '@/assets/gabriel-2.jpg'
 import zaconImg from '@/assets/marcazacon.png'
 
 const VALUE_CARDS = [

@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useInView } from "@/hooks/useInView";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import backgroundImg from "@/assets/imagem-fundo.jpg";
+import gabrielBgImg from "@/assets/gabriel-fundo.jpg";
 //define assinatura de curva
 const PREMIUM_EASE = [0.16, 1, 0.3, 1];
 const METRICAS = [
@@ -32,14 +34,14 @@ function CounterCard({
       whileHover={{ y: -4, scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
       transition={{ duration: 0.3, ease: PREMIUM_EASE }}
-      className="rounded-2xl border border-[#E5E5E5] bg-white p-4 text-left dark:border-white/10 dark:bg-white/[0.04]"
+      className="rounded-2xl border border-[#E5E5E5] bg-white p-3 text-left dark:border-white/10 dark:bg-white/[0.04]"
     >
-      <p className="text-2xl font-semibold text-[#041A2A] dark:text-white sm:text-3xl">
+      <p className="text-lg font-semibold leading-tight text-[#041A2A] dark:text-white">
         {prefix}
         {count}
         <span className="text-[var(--accent)]">{suffix}</span>
       </p>
-      <p className="mt-2 text-sm text-[var(--text-muted)]">{label}</p>
+      <p className="mt-1 text-[11px] leading-tight text-[var(--text-muted)]">{label}</p>
     </motion.div>
   );
 }
@@ -62,10 +64,34 @@ export default function Hero() {
   };
   return (
     <section id="inicio" className="relative overflow-hidden pt-20">
+      {/* Background Image with Gradient Overlay */}
+      <div className="absolute inset-0 -z-10">
+        <img
+          src={backgroundImg}
+          alt="Accione Background"
+          className="h-full w-full object-cover object-center"
+        />
+        {/* Gabriel à direita, fundido no cenário (só desktop) */}
+        <img
+          src={gabrielBgImg}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-y-0 right-0 hidden h-full w-[55%] object-cover object-top opacity-90 lg:block"
+          style={{
+            maskImage:
+              "linear-gradient(to left, black 35%, transparent 82%)",
+            WebkitMaskImage:
+              "linear-gradient(to left, black 35%, transparent 82%)",
+          }}
+        />
+        {/* Soft theme-aware gradient overlay to ensure text readability and theme blending */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/80 to-[var(--bg-primary)] dark:from-[#041A2A]/40 dark:via-[#041A2A]/85 dark:to-[#041a2a]" />
+      </div>
+
       <div className="absolute left-[8%] top-28 h-56 w-56 rounded-full bg-[var(--accent)]/15 blur-3xl" />
       <div className="absolute right-[10%] top-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
 
-      <div className="section-container relative z-10 grid min-h-[calc(100vh-5rem)] items-center gap-12 py-14 lg:grid-cols-[minmax(0,1fr)_420px]">
+      <div className="section-container relative z-10 grid min-h-[calc(100vh-5rem)] items-center gap-10 py-14 lg:grid-cols-[minmax(0,520px)_300px] lg:justify-start">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 16 }}
@@ -115,9 +141,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: PREMIUM_EASE, delay: 0.15 }}
-          className="surface-card p-6 sm:p-8"
+          className="surface-card p-5"
         >
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3">
             <CounterCard
               prefix="R$ +"
               target={100}
@@ -139,7 +165,7 @@ export default function Hero() {
             />
           </div>
 
-          <p className="mt-6 text-sm leading-relaxed text-[var(--text-secondary)]">
+          <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
             Trabalhamos com estrutura, explicação e acompanhamento. A proposta é
             ampliar horizontes, andando lado a lado.
           </p>
