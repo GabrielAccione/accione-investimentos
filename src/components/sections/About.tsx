@@ -57,7 +57,7 @@ export default function About() {
               <img
                 src={gabrielImg}
                 alt={SITE_CONFIG.founder.name}
-                className="h-24 w-24 rounded-full object-cover object-top"
+                className="h-32 w-32 rounded-full object-cover object-top sm:h-36 sm:w-36"
               />
               <h3 className="mt-5 text-3xl font-semibold text-[#041A2A] dark:text-white">
                 {SITE_CONFIG.founder.name}

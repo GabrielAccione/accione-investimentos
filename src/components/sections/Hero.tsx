@@ -41,7 +41,9 @@ function CounterCard({
         {count}
         <span className="text-[var(--accent)]">{suffix}</span>
       </p>
-      <p className="mt-1 text-[11px] leading-tight text-[var(--text-muted)]">{label}</p>
+      <p className="mt-1 text-[11px] leading-tight text-[var(--text-muted)]">
+        {label}
+      </p>
     </motion.div>
   );
 }
@@ -76,10 +78,9 @@ export default function Hero() {
           src={gabrielBgImg}
           alt=""
           aria-hidden="true"
-          className="absolute inset-y-0 right-0 hidden h-full w-[55%] object-cover object-top opacity-90 lg:block"
+          className="absolute inset-y-0 right-0 hidden h-full w-[35%] object-cover object-top opacity-90 lg:block"
           style={{
-            maskImage:
-              "linear-gradient(to left, black 35%, transparent 82%)",
+            maskImage: "linear-gradient(to left, black 35%, transparent 82%)",
             WebkitMaskImage:
               "linear-gradient(to left, black 35%, transparent 82%)",
           }}

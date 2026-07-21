@@ -50,7 +50,7 @@ export default function BlogCard({
           <img
             src={item.coverImage}
             alt={item.title}
-            className={`w-full h-52 object-cover${
+            className={`w-full h-60 object-cover${
               item.coverZoom ? " origin-top-left scale-[1.18]" : ""
             }`}
           />
