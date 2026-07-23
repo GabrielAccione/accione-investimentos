@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import creditoPrivadoImage from '@/assets/Investimentos/credito-privado.png'
+import { useSeo } from '@/hooks/useSeo'
 
 const STEPS = [
   {
@@ -67,6 +68,13 @@ const FAQ = [
 
 export default function CreditoPrivadoPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+
+  useSeo({
+    title: 'Crédito Privado — Renda Fixa Corporativa',
+    description:
+      'Empreste diretamente para empresas com garantias definidas em contrato, due diligence rigorosa e acompanhamento ativo da operação até o vencimento.',
+    path: '/investimentos/credito-privado',
+  })
 
   return (
     <>

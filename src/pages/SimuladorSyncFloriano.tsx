@@ -3,6 +3,7 @@ import PageHero from '@/components/ui/PageHero'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import { unidades } from '@/data/syncFloriano'
 import { formatCurrency } from '@/lib/formatters'
+import { useSeo } from '@/hooks/useSeo'
 
 // Cronograma: mês 1 = outubro/2025, prazo total = 54 meses
 const START_YEAR = 2025
@@ -47,6 +48,14 @@ const apartamentos = unidades.filter((u) => u.categoria === 'apartamento')
 const boxes = unidades.filter((u) => u.categoria === 'box')
 
 export default function SimuladorSyncFloriano() {
+  // Página fora da navegação e com valores por unidade: mantida fora dos buscadores.
+  useSeo({
+    title: 'Simulador de Aportes — Sync Floriano',
+    description: 'Simulação de cronograma de aportes do Sync Floriano.',
+    path: '/simuladores/sync-floriano',
+    noIndex: true,
+  })
+
   const [selectedAdesao, setSelectedAdesao] = useState(unidades[0]?.adesao ?? '')
   const [mode, setMode] = useState<Mode>('valor')
   const [totalInput, setTotalInput] = useState(() =>

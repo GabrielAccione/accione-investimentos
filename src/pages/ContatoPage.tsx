@@ -2,6 +2,7 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { SITE_CONFIG } from "@/config/site";
+import { useSeo } from "@/hooks/useSeo";
 
 const INFO_ITEMS = [
   { icon: Phone, label: "WhatsApp", value: SITE_CONFIG.whatsappDisplay },
@@ -11,6 +12,13 @@ const INFO_ITEMS = [
 ];
 
 export default function ContatoPage() {
+  useSeo({
+    title: "Contato — Agende um atendimento",
+    description:
+      "Atendimento consultivo com horário marcado em Santa Maria/RS. Fale com a Accione Investimentos pelo WhatsApp (55) 99643-1020 ou por e-mail.",
+    path: "/contato",
+  });
+
   return (
     <section className="relative min-h-screen overflow-hidden pt-24">
       {/* Background blobs */}

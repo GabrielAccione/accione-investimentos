@@ -3,6 +3,7 @@ import PageHero from '@/components/ui/PageHero'
 import BlogCard from '@/components/ui/BlogCard'
 import { BLOG_POSTS } from '@/data/blogPosts'
 import type { BlogCategory } from '@/types'
+import { useSeo } from '@/hooks/useSeo'
 
 const ALL_CATEGORIES: Array<BlogCategory | 'Todos'> = [
   'Todos',
@@ -14,6 +15,13 @@ const ALL_CATEGORIES: Array<BlogCategory | 'Todos'> = [
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState<BlogCategory | 'Todos'>('Todos')
+
+  useSeo({
+    title: 'Blog — Mercado, imóveis, agro e investimentos alternativos',
+    description:
+      'Análises da Accione sobre cenário econômico, mercado imobiliário, agronegócio e investimentos alternativos, com leitura crítica de teses e estruturas.',
+    path: '/blog',
+  })
 
   const filteredPosts = useMemo(() => {
     if (activeCategory === 'Todos') return BLOG_POSTS

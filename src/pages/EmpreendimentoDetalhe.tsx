@@ -14,12 +14,18 @@ import {
   CheckCircle,
 } from "lucide-react";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import { SITE_URL, useSeo } from "@/hooks/useSeo";
 import {
   EMPREENDIMENTOS,
   type EmpreendimentoData,
   type GalleryItem,
   type Destaque,
 } from "@/data/empreendimentos";
+
+/** Meta description tem limite prático de ~160 caracteres nos buscadores. */
+function truncate(text: string, max = 155) {
+  return text.length > max ? `${text.slice(0, max).trimEnd()}…` : text;
+}
 
 /* ─── Sub-components ─────────────────────────────────────────── */
 
@@ -188,6 +194,20 @@ export default function EmpreendimentoDetalhe() {
   const { slug } = useParams<{ slug: string }>();
   const empreendimento = EMPREENDIMENTOS.find((e) => e.slug === slug);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  useSeo({
+    title: empreendimento
+      ? `${empreendimento.name} — Santa Maria/RS`
+      : "Empreendimento não encontrado",
+    description: empreendimento
+      ? truncate(empreendimento.shortDescription)
+      : "O empreendimento que você procura não existe ou foi removido.",
+    path: `/empreendimentos/${slug ?? ""}`,
+    image: empreendimento
+      ? `${SITE_URL}${empreendimento.coverImage}`
+      : undefined,
+    noIndex: !empreendimento,
+  });
 
   if (!empreendimento) {
     return (

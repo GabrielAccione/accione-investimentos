@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import cprfImage from "@/assets/Investimentos/cpr-f.png";
+import { useSeo } from "@/hooks/useSeo";
 
 const STEPS = [
   {
@@ -77,6 +78,13 @@ const FAQ = [
 
 export default function CprFPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useSeo({
+    title: "CPR-F — Cédula de Produto Rural Financeira",
+    description:
+      "Invista no agronegócio brasileiro com isenção de IR para pessoa física, lastro em produção agrícola, registro na B3 e amparo na Lei 8.929/94.",
+    path: "/investimentos/cpr-f",
+  });
 
   return (
     <>

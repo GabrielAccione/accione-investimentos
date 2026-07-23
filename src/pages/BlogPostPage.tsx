@@ -5,10 +5,25 @@ import SectionHeading from '@/components/ui/SectionHeading'
 import BlogCard from '@/components/ui/BlogCard'
 import { BLOG_POSTS } from '@/data/blogPosts'
 import NotFoundPage from '@/pages/NotFoundPage'
+import { SITE_URL, useSeo } from '@/hooks/useSeo'
+
+/** Capas podem ser assets do build (caminho relativo) ou URLs externas. */
+function absoluteImage(src: string | undefined) {
+  if (!src) return undefined
+  return src.startsWith('http') ? src : `${SITE_URL}${src}`
+}
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>()
   const post = BLOG_POSTS.find((entry) => entry.slug === slug)
+
+  useSeo({
+    title: post ? post.title : 'Artigo não encontrado',
+    description: post ? post.excerpt : 'O artigo que você procura não existe ou foi movido.',
+    path: `/blog/${slug ?? ''}`,
+    image: absoluteImage(post?.coverImage),
+    noIndex: !post,
+  })
 
   if (!post) {
     return <NotFoundPage />

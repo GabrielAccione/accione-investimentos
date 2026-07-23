@@ -1,8 +1,16 @@
 import PageHero from "@/components/ui/PageHero";
 import { EMPREENDIMENTOS } from "@/data/empreendimentos";
 import EmpreendimentoCard from "@/components/ui/EmpreendimentoCard";
+import { useSeo } from "@/hooks/useSeo";
 
 export default function Empreendimentos() {
+  useSeo({
+    title: "Empreendimentos Imobiliários em Santa Maria/RS",
+    description:
+      "Invista em imóveis a preço de custo pelo modelo SPE: Avenue Residence, Sync Conde e Sync Floriano, com gestão profissional da Accione e construção Zacon Zanini.",
+    path: "/empreendimentos",
+  });
+
   return (
     <>
       <PageHero

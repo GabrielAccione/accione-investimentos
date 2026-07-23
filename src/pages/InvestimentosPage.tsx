@@ -2,8 +2,16 @@ import { Link } from "react-router-dom";
 import PageHero from "@/components/ui/PageHero";
 import ProductCard from "@/components/ui/ProductCard";
 import { PRODUCTS } from "@/data/products";
+import { useSeo } from "@/hooks/useSeo";
 
 export default function InvestimentosPage() {
+  useSeo({
+    title: "Investimentos Financeiros — CPR-F e Crédito Privado",
+    description:
+      "Teses de investimento com lastro, garantia e prazo definidos: CPR-F do agronegócio, com isenção de IR para pessoa física, e crédito privado corporativo.",
+    path: "/investimentos",
+  });
+
   return (
     <>
       <PageHero
