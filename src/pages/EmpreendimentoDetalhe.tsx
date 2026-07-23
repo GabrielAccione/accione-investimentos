@@ -51,7 +51,7 @@ const HIGHLIGHTS = [
     icon: Wallet,
     title: "Acessível",
     description:
-      "Invista com menor capital do que a compra direta de um imóvel tornand-se sócio da SPE.",
+      "Invista com menor capital do que a compra direta de um imóvel, tornando-se sócio da SPE.",
   },
   {
     icon: Shield,
@@ -63,13 +63,13 @@ const HIGHLIGHTS = [
     icon: TrendingUp,
     title: "Rentável",
     description:
-      "Retorno acima do convencional. Grupo de investidores participa do negócio na origem",
+      "Retorno acima do convencional. Grupo de investidores participa do negócio na origem.",
   },
   {
     icon: Zap,
     title: "Ágil",
     description:
-      "Processo digital simplificado: contratos, relatórios e comunicação por whatsapp, e-mail e sistemas apropriados.",
+      "Processo digital simplificado: contratos, relatórios e comunicação por WhatsApp, e-mail e sistemas apropriados.",
   },
 ];
 

@@ -38,7 +38,7 @@ export const TESTIMONIALS: Testimonial[] = [
     id: 3,
     name: 'Guilherme Perlin',
     role: 'Economista',
-    text: 'Eu não tinha ideia que existiam tantas boas possibilidades de investimento com apenas 10mil. Sem falar no suporte recebido pela Accione através do Gabriel. Estou impressionado e satisfeito!',
+    text: 'Eu não tinha ideia que existiam tantas boas possibilidades de investimento com apenas 10 mil. Sem falar no suporte recebido pela Accione através do Gabriel. Estou impressionado e satisfeito!',
     rating: 5,
     image: guilhermePerlinImg,
   },

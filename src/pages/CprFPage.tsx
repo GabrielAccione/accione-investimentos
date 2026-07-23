@@ -34,7 +34,7 @@ const CARACTERISTICAS = [
   { label: "Prazo típico", value: "12 a 36 meses" },
   { label: "Tributação", value: "Isento de IR para pessoa física" },
   { label: "Rentabilidade", value: "Muito acima do CDI" },
-  { label: "Perfil:", value: "Moderado a sofisticado" },
+  { label: "Perfil", value: "Moderado a sofisticado" },
   {
     label: "Lastro",
     value: "Produção agrícola e/ou garantia real",

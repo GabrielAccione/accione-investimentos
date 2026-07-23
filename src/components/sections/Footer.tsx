@@ -85,7 +85,8 @@ export default function Footer() {
           </span>
           <span>
             Conteúdo estritamente informativo. Não substitui a análise
-            criteriosa e profundo entendimento por parte de qualquer investidor.
+            criteriosa e o profundo entendimento por parte de qualquer
+            investidor.
           </span>
         </div>
       </div>
