@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react'
 import PageHero from '@/components/ui/PageHero'
 import SectionHeading from '@/components/ui/SectionHeading'
 import BlogCard from '@/components/ui/BlogCard'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import { BLOG_POSTS } from '@/data/blogPosts'
 import NotFoundPage from '@/pages/NotFoundPage'
 import { SITE_URL, useSeo } from '@/hooks/useSeo'
@@ -105,6 +106,30 @@ export default function BlogPostPage() {
           </div>
         </div>
       </article>
+
+      {/* CTA de contato */}
+      <section className="pb-16 sm:pb-20">
+        <div className="section-container max-w-4xl">
+          <div className="surface-card p-8 text-center sm:p-10">
+            <span className="section-tag">Fale com a Accione</span>
+            <h2 className="mt-5 text-2xl font-semibold text-[#041A2A] dark:text-white sm:text-3xl">
+              Quer avaliar como isso se aplica ao seu patrimônio?
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
+              A Accione estrutura investimentos financeiros e imobiliários com
+              leitura de cenário, garantias definidas e acompanhamento até o
+              vencimento.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <WhatsAppButton
+                mensagem={`Olá! Li o artigo "${post.title}" no site da Accione e gostaria de conversar sobre o assunto.`}
+                label="Falar com a Accione"
+                size="md"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Outros artigos */}
       {related.length > 0 ? (

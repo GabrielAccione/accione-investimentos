@@ -699,7 +699,59 @@ export default function EmpreendimentoDetalhe() {
         </div>
       </section>
 
-      {/* ── 8. Formulário de contato ─────────────────────────── */}
+      {/* ── 8. CTA final ─────────────────────────────────────── */}
+      <section className="hero-gradient py-20 sm:py-24">
+        <div className="section-container text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {status === "captacao-encerrada" ? (
+              <>
+                <h2 className="font-display text-3xl font-bold text-[#041A2A] dark:text-white sm:text-4xl">
+                  A captação do {name} está encerrada.
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-[var(--text-secondary)]">
+                  Entre na lista de espera e seja avisado assim que abrirmos o
+                  próximo empreendimento.
+                </p>
+                <div className="mt-8 flex justify-center">
+                  <WhatsAppButton
+                    mensagem={`Olá! Tenho interesse em entrar na lista de espera do ${name}.`}
+                    label="Entrar na lista de espera"
+                    size="lg"
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="font-display text-3xl font-bold text-[#041A2A] dark:text-white sm:text-4xl">
+                  Quer participar do {name}?
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-[var(--text-secondary)]">
+                  Fale com a Accione e receba o material completo: estrutura da
+                  SPE, cronograma de aportes e condições de participação.
+                </p>
+                <div className="mt-8 flex flex-wrap justify-center gap-4">
+                  <WhatsAppButton
+                    mensagem={`Olá! Tenho interesse no empreendimento ${name}. Pode me enviar o material completo?`}
+                    label="Quero investir"
+                    size="lg"
+                  />
+                  <WhatsAppButton
+                    mensagem={`Olá! Gostaria de receber o material completo sobre o ${name}.`}
+                    label="Receber material completo"
+                    size="lg"
+                    className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
+                  />
+                </div>
+              </>
+            )}
+          </motion.div>
+        </div>
+      </section>
     </>
   );
 }

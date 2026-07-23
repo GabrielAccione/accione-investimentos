@@ -5,12 +5,10 @@ import { BLOG_POSTS } from '@/data/blogPosts'
 import type { BlogCategory } from '@/types'
 import { useSeo } from '@/hooks/useSeo'
 
+// Derivado dos artigos publicados: nenhum filtro aparece sem ter conteúdo por trás.
 const ALL_CATEGORIES: Array<BlogCategory | 'Todos'> = [
   'Todos',
-  'Investimentos Alternativos',
-  'Agronegócio',
-  'Mercado Financeiro',
-  'Imóveis',
+  ...Array.from(new Set(BLOG_POSTS.map((post) => post.category))),
 ]
 
 export default function BlogPage() {
@@ -60,11 +58,18 @@ export default function BlogPage() {
             ))}
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredPosts.map((post, index) => (
-              <BlogCard key={post.slug} item={post} index={index} />
-            ))}
-          </div>
+          {filteredPosts.length > 0 ? (
+            <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredPosts.map((post, index) => (
+                <BlogCard key={post.slug} item={post} index={index} />
+              ))}
+            </div>
+          ) : (
+            <p className="mt-10 text-sm text-[var(--text-secondary)]">
+              Ainda não há artigos publicados nesta categoria. Novos conteúdos
+              são publicados periodicamente.
+            </p>
+          )}
         </div>
       </section>
     </>

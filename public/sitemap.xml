@@ -56,20 +56,12 @@
     <loc>https://www.accioneinvestimentos.com.br/blog/retomada-do-centro-imoveis-compactos</loc>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://www.accioneinvestimentos.com.br/blog/como-analisar-investimentos-alternativos</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.accioneinvestimentos.com.br/blog/credito-privado-com-garantia</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.accioneinvestimentos.com.br/blog/imoveis-spe-preco-de-custo</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.accioneinvestimentos.com.br/blog/agronegocio-e-diversificacao-patrimonial</loc>
-    <priority>0.5</priority>
-  </url>
+  <!--
+    Artigos em rascunho (draft: true em src/data/blogPosts.ts) ficam fora do
+    sitemap. Ao publicar um deles, acrescente a URL aqui:
+      /blog/como-analisar-investimentos-alternativos
+      /blog/credito-privado-com-garantia
+      /blog/imoveis-spe-preco-de-custo
+      /blog/agronegocio-e-diversificacao-patrimonial
+  -->
 </urlset>

@@ -87,5 +87,7 @@ export interface BlogPost {
   /** Aplica um leve zoom (108%, ancorado à esquerda) na capa — ex: esconder marca d'água */
   coverZoom?: boolean
   author?: { name: string; role: string; image?: string }
+  /** Rascunho: fica fora do blog e da URL direta até ter capa própria. */
+  draft?: boolean
   content: BlogSection[]
 }
