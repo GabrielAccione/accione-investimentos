@@ -210,6 +210,17 @@ export default function CreditoPrivadoPage() {
               </ScrollReveal>
             ))}
           </div>
+
+          <ScrollReveal>
+            <p className="mt-10 max-w-3xl text-xs leading-relaxed text-[var(--text-muted)]">
+              Investimento sujeito a riscos, inclusive de crédito do emissor.
+              Não conta com garantia do Fundo Garantidor de Créditos (FGC).
+              Prazo, taxa e garantias são definidos em cada operação, no momento
+              da contratação. Rentabilidade passada não representa garantia de
+              rentabilidade futura. Conteúdo informativo — não constitui
+              recomendação de investimento.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
