@@ -5,12 +5,6 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
-      transitionTimingFunction: {
-        //efeito spring sutil
-        "brand-bouce": "cubic-bezier(0.34, 1.56, 0.64, 1)",
-        //saida rapida e elegante para modals e menus
-        "brand-exit": "cubic-bezier(0.16, 1, 0.3, 1)",
-      },
       colors: {
         "bg-primary": "var(--bg-primary)",
         "bg-secondary": "var(--bg-secondary)",

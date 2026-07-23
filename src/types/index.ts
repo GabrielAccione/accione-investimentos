@@ -12,7 +12,6 @@ export interface Product {
   title: string
   /** Quando presente, exibido como subtítulo no painel de conteúdo (ex: nome completo do ativo) */
   subtitle?: string
-  summary: string
   description: string
   features: string[]
   icon: LucideIcon
@@ -20,14 +19,7 @@ export interface Product {
   image: string
   /** Posição do object-position para a imagem de capa */
   imagePosition?: string
-  /** Selo exibido sobre a imagem do card (ex: "Renda Fixa") */
-  badge: string
-  tag?: string
   stats?: { label: string; value: string }[]
-  /** Substitui o label padrão "Falar com um consultor" no botão CTA */
-  ctaLabel?: string
-  /** Quando presente, o CTA aponta para esta URL externa em vez de /contato */
-  ctaHref?: string
 }
 
 export interface Step {

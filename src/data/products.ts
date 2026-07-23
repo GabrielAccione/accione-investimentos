@@ -9,13 +9,10 @@ export const PRODUCTS: Product[] = [
     slug: "cpr-f",
     title: "CPR-F",
     subtitle: "Cédula de Produto Rural Financeira",
-    summary:
-      "Lastro em produção agrícola com isenção de IR e rentabilidade acima do CDI.",
     description:
       "Título de crédito emitido por produtores rurais e cooperativas, lastreado na produção agrícola brasileira. Oferece rentabilidade acima do CDI com proteção real contra inflação.",
     image: cprfImage,
     imagePosition: "center 30%",
-    badge: "Isenção de IR · PF",
     features: [
       "Lastro real — Garantido pela produção agrícola, um dos setores mais sólidos da economia brasileira",
       "Rentabilidade superior — Historicamente acima do CDI, com isenção de IR para pessoa física",
@@ -24,22 +21,16 @@ export const PRODUCTS: Product[] = [
       "Perfil: Moderado a Sofisticado",
     ],
     icon: Wheat,
-    ctaLabel: "Quero investir em CPR-F",
-    ctaHref:
-      "https://wa.me/5555000000000?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CPR-F.",
   },
   {
     id: 1,
     slug: "credito-privado",
     title: "Crédito Privado",
     subtitle: "Renda Fixa Corporativa",
-    summary:
-      "Estruturas com garantia e remuneração acima do crédito bancário tradicional.",
     description:
       "Crédito estruturado para empresas sólidas e projetos com garantias compatíveis ao risco assumido. A tese combina diligência, colaterais bem definidos e acompanhamento de performance para capturar taxas superiores às linhas bancárias convencionais.",
     image: creditoPrivadoImage,
     imagePosition: "center 45%",
-    badge: "Renda Fixa",
     features: [
       "Taxas acima do CDI",
       "Garantias reais",
