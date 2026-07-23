@@ -71,7 +71,7 @@ export default function SobrePage() {
         <div className="section-container grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
 
           {/* Left — photo */}
-          <ScrollReveal direction="right" className="flex justify-center lg:justify-start">
+          <ScrollReveal direction="right" className="flex justify-center lg:justify-end">
             <img
               src={gabrielImg}
               alt="Gabriel Rodrigues"
