@@ -2,7 +2,18 @@ import type { BlogPost } from '@/types'
 import imoveisCover from '@/assets/blog-images/imoveis.png'
 import gabrielImg from '@/assets/gabriel-2.jpg'
 
-export const BLOG_POSTS: BlogPost[] = [
+const AUTOR_GABRIEL = {
+  name: 'Gabriel Rodrigues',
+  role: 'Economista',
+  image: gabrielImg,
+}
+
+/**
+ * Todos os artigos escritos. Os marcados com `draft: true` estão fora do ar
+ * por ainda usarem capa provisória — para publicar, troque `coverImage` por
+ * uma imagem real (src/assets/blog-images/) e remova a marcação de rascunho.
+ */
+const TODOS_OS_POSTS: BlogPost[] = [
   {
     slug: 'retomada-do-centro-imoveis-compactos',
     title: 'O Centro voltou a ser protagonista — e os investidores já perceberam',
@@ -15,11 +26,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: '7 min de leitura',
     heroTagline:
       'A retomada das regiões centrais como tendência estrutural do mercado imobiliário.',
-    author: {
-      name: 'Gabriel Rodrigues',
-      role: 'Economista',
-      image: gabrielImg,
-    },
+    author: AUTOR_GABRIEL,
     content: [
       {
         paragraphs: [
@@ -82,6 +89,8 @@ export const BLOG_POSTS: BlogPost[] = [
     coverImage: 'https://placehold.co/1200x700/041A2A/A26547?text=Investimentos+Alternativos',
     readTime: '5 min de leitura',
     heroTagline: 'Leitura crítica para separar narrativa de estrutura.',
+    author: AUTOR_GABRIEL,
+    draft: true,
     content: [
       {
         paragraphs: [
@@ -108,6 +117,8 @@ export const BLOG_POSTS: BlogPost[] = [
     coverImage: 'https://placehold.co/1200x700/0C2030/A26547?text=Cr%C3%A9dito+Privado',
     readTime: '6 min de leitura',
     heroTagline: 'Prêmio só faz sentido quando o risco é legível.',
+    author: AUTOR_GABRIEL,
+    draft: true,
     content: [
       {
         paragraphs: [
@@ -133,6 +144,8 @@ export const BLOG_POSTS: BlogPost[] = [
     coverImage: 'https://placehold.co/1200x700/041A2A/69727D?text=Im%C3%B3veis+SPE',
     readTime: '5 min de leitura',
     heroTagline: 'Estrutura societária importa tanto quanto localização e produto.',
+    author: AUTOR_GABRIEL,
+    draft: true,
     content: [
       {
         paragraphs: [
@@ -158,6 +171,8 @@ export const BLOG_POSTS: BlogPost[] = [
     coverImage: 'https://placehold.co/1200x700/0C2030/8A9F72?text=Agroneg%C3%B3cio',
     readTime: '4 min de leitura',
     heroTagline: 'Uma tese real precisa ser entendida além do headline.',
+    author: AUTOR_GABRIEL,
+    draft: true,
     content: [
       {
         paragraphs: [
@@ -168,3 +183,8 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
 ]
+
+/** Artigos publicados — usados no blog, nas URLs diretas e no sitemap. */
+export const BLOG_POSTS: BlogPost[] = TODOS_OS_POSTS.filter(
+  (post) => !post.draft,
+)

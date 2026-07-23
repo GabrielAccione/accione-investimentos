@@ -87,7 +87,7 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     shortDescription:
       "Apartamentos de 2 e 3 dormitórios com suíte, sacada, espaço gourmet e rooftop. Modelo SPE a preço de custo.",
     fullDescription:
-      "O Avenue Residence é um empreendimento exclusivo que une sofisticação e praticidade em localização de pleno crescimento em Santa Maria. Com unidades de 2 e 3 dormitórios — ambas com suíte — o projeto entrega área privativa acima da média, acabamento de alto padrão, sacada privativa, churrasqueira, área de serviço separada da cozinha, alérm de espaço gourmet e um rooftop com vista privilegiada. Desenvolvido no modelo SPE (Sociedade de Propósito Específico) a preço de custo, o Avenue Residence oferece ao investidor a oportunidade de ingressar como sócio do empreendimento, potencializando os resultados, sem a necessidade de se envolver ativamente no processo, pois conta com a gestão profissional da Accione Investimentos e da Zacon Zanini Construções, idealizadores do negócio.",
+      "O Avenue Residence é um empreendimento exclusivo que une sofisticação e praticidade em localização de pleno crescimento em Santa Maria. Com unidades de 2 e 3 dormitórios — ambas com suíte — o projeto entrega área privativa acima da média, acabamento de alto padrão, sacada privativa, churrasqueira, área de serviço separada da cozinha, além de espaço gourmet e um rooftop com vista privilegiada. Desenvolvido no modelo SPE (Sociedade de Propósito Específico) a preço de custo, o Avenue Residence oferece ao investidor a oportunidade de ingressar como sócio do empreendimento, potencializando os resultados, sem a necessidade de se envolver ativamente no processo, pois conta com a gestão profissional da Accione Investimentos e da Zacon Zanini Construções, idealizadores do negócio.",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
     coverImage: avenueFachadaCoverImg,
     coverPosition: "center bottom",
@@ -141,10 +141,10 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     shortDescription:
       "Compactos de luxo. Empreendimento com 22 pavimentos e 187 apartamentos (estúdios, 1 e 2 dormitórios). Rooftop com espelho d’água e bar, academia, coworking, lavanderia compartilhada, piscina, átrio central com elevadores panorâmicos. Retrofit programado a cada 10 anos. Modelo SPE a preço de custo.",
     fullDescription:
-      "O Sync Viva On é um empreendimento de alto impacto urbanístico no Centro de Santa Maria. Com 22 pavimentos e 187 apartamentos distribuídos em estúdios, 1 e 2 dormitórios, o projeto foi concebido para o investidor moderno que busca rentabilidade com liquidez. O rooftop oferece piscina, academia completa, espaço de coworking e bar panorâmico. Um diferencial exclusivo é o retrofit programado a cada 10 anos, garantindo que o ativo se mantenha sempre valorizado e atualizado. Modelo SPE, gestão profissional Accione.",
+      "O Sync Conde é um empreendimento de alto impacto urbanístico no Centro de Santa Maria. Com 22 pavimentos e 187 apartamentos distribuídos em estúdios, 1 e 2 dormitórios, o projeto foi concebido para o investidor moderno que busca rentabilidade com liquidez. O rooftop oferece piscina, academia completa, espaço de coworking e bar panorâmico. Um diferencial exclusivo é o retrofit programado a cada 10 anos, garantindo que o ativo se mantenha sempre valorizado e atualizado. Modelo SPE, gestão profissional Accione.",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
     coverImage: syncCondeCoverImg,
-    fachadaImage: { src: syncCondeFachadaImg, alt: "Fachada Sync Viva On" },
+    fachadaImage: { src: syncCondeFachadaImg, alt: "Fachada Sync Conde" },
     gallery: [
       { src: syncPiscinaImg, alt: "Piscina" },
       { src: syncRooftopImg, alt: "Rooftop" },
@@ -157,7 +157,7 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
       { src: syncResidenceImg, alt: "Vista geral" },
     ],
     destaques: [
-      { valor: "Estúdios, 1 e 2 dormitórios", label: "Tipologia" },
+      { valor: "Estúdios, 1 e 2 dormitórios", label: "Tipologias" },
       { valor: "SPE", label: "Modelo" },
       { valor: "22", label: "Pavimentos" },
       { valor: "Accione e Zacon", label: "Gestão e Construção" },
@@ -166,7 +166,7 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
       gestora: "Accione Investimentos",
       construtora: "Zacon Zanini Construções",
       modelo: "SPE a preço de custo",
-      localizacao: "R. Conde de Porto Alegre nº 646 - Centro, Santa Maria/RS",
+      localizacao: "R. Conde de Porto Alegre nº 656 - Centro, Santa Maria/RS",
       tipologias: "Estúdio, 1 dormitório e 2 dormitórios",
       pavimentos: "22",
       totalUnidades: "187 apartamentos",
@@ -191,7 +191,7 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     shortDescription:
       "Compactos de luxo. Empreendimento com 14 pavimentos e 172 apartamentos (estúdios, 1 e 2 dormitórios). Amplo hall de entrada, minimercado, pub exclusivo, área verde, academia, coworking, gourmet pizza, gourmet churrasco, lavanderia compartilhada. Modelo SPE a preço de custo.",
     fullDescription:
-      "O Sync Viva On – Floriano é um empreendimento de compactos de luxo localizado no coração de Santa Maria, na tradicional Rua Floriano Peixoto. Desenvolvido pela parceria entre Zacon Zanini e Accione, o projeto une arquitetura contemporânea, infraestrutura inteligente e alto potencial de valorização em uma das regiões mais desejadas da cidade. Com studios, apartamentos de 1 e 2 dormitórios, áreas comuns premium, coworking, academia, gourmet, lavanderia compartilhada e espaços de convivência modernos, o Sync Viva On foi pensado para atender o novo perfil urbano — combinando praticidade, sofisticação e flexibilidade para moradia ou locação premium. Estruturado para atender a crescente demanda por locações executivas e short stay, o empreendimento oferece ao investidor um ativo imobiliário com forte liquidez, elevada rentabilidade por m² e localização estratégica próxima a universidades, hospitais, comércio e serviços..",
+      "O Sync Floriano é um empreendimento de compactos de luxo localizado no coração de Santa Maria, na tradicional Rua Floriano Peixoto. Desenvolvido pela parceria entre Zacon Zanini e Accione, o projeto une arquitetura contemporânea, infraestrutura inteligente e alto potencial de valorização em uma das regiões mais desejadas da cidade. Com estúdios, apartamentos de 1 e 2 dormitórios, áreas comuns premium, coworking, academia, gourmet, lavanderia compartilhada e espaços de convivência modernos, o Sync Floriano foi pensado para atender o novo perfil urbano — combinando praticidade, sofisticação e flexibilidade para moradia ou locação premium. Estruturado para atender a crescente demanda por locações executivas e short stay, o empreendimento oferece ao investidor um ativo imobiliário com forte liquidez, elevada rentabilidade por m² e localização estratégica próxima a universidades, hospitais, comércio e serviços.",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
     coverImage: florianoCoverImg,
     coverPosition: "center bottom",
@@ -208,7 +208,7 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
       { src: florianoMinimarketImg, alt: "Minimarket" },
     ],
     destaques: [
-      { valor: "1 e 2 dormitórios", label: "Tipologia" },
+      { valor: "Estúdios, 1 e 2 dormitórios", label: "Tipologias" },
       { valor: "SPE", label: "Modelo" },
       { valor: "14", label: "Pavimentos" },
       { valor: "Accione e Zacon", label: "Gestão e Construção" },

@@ -8,7 +8,7 @@ import gabrielBgImg from "@/assets/gabriel-fundo.jpg";
 const PREMIUM_EASE = [0.16, 1, 0.3, 1];
 const METRICAS = [
   { valor: "2x", label: "Até o dobro da média de mercado" },
-  { valor: "3", label: "Empreendimentos imobilíarios" },
+  { valor: "3", label: "Empreendimentos imobiliários" },
   { valor: "100%", label: "Transparência nas operações" },
 ];
 
@@ -60,7 +60,7 @@ export default function Hero() {
   const itemVariantes = {
     hidden: { opacity: 0, y: 16 },
     visible: {
-      opcacity: 1,
+      opacity: 1,
       transition: { duration: 0.5, ease: PREMIUM_EASE },
     },
   };

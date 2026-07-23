@@ -18,6 +18,7 @@ import {
 } from "@/lib/formatters";
 import logoDark from "@/assets/logo.png";
 import logoLight from "@/assets/logo-accione-dark.png";
+import { useSeo } from "@/hooks/useSeo";
 const DEFAULT_VALUES = {
   currentAge: 35,
   retirementAge: 60,
@@ -34,6 +35,13 @@ const inputs = [
 ] as const;
 
 export default function RetirementSimulatorPage() {
+  useSeo({
+    title: "Simulador de Aposentadoria",
+    description:
+      "Projete a evolução do seu patrimônio e a renda passiva estimada a partir de aportes mensais, rentabilidade anual esperada e idade-alvo.",
+    path: "/simuladores/aposentadoria",
+  });
+
   const { theme } = useTheme();
   const logoSrc = theme === "dark" ? logoDark : logoLight;
   const [currentAge, setCurrentAge] = useState(String(DEFAULT_VALUES.currentAge));

@@ -57,8 +57,14 @@ function computeInflacao(raw: unknown): InflationValue | null {
 const sgs = (code: number, ultimos: number) =>
   `https://api.bcb.gov.br/dados/serie/bcdata.sgs.${code}/dados/ultimos/${ultimos}?formato=json`;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function handler(req: any, res: any) {
+// Assinatura mínima da função serverless da Vercel (evita depender de @vercel/node).
+interface ApiResponse {
+  setHeader(name: string, value: string): void;
+  status(code: number): ApiResponse;
+  json(body: unknown): ApiResponse;
+}
+
+export default async function handler(_req: unknown, res: ApiResponse) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Cache-Control", "s-maxage=300");
 

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import creditoPrivadoImage from '@/assets/Investimentos/credito-privado.png'
+import { useSeo } from '@/hooks/useSeo'
 
 const STEPS = [
   {
@@ -68,6 +69,13 @@ const FAQ = [
 export default function CreditoPrivadoPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
+  useSeo({
+    title: 'Crédito Privado — Renda Fixa Corporativa',
+    description:
+      'Empreste diretamente para empresas com garantias definidas em contrato, due diligence rigorosa e acompanhamento ativo da operação até o vencimento.',
+    path: '/investimentos/credito-privado',
+  })
+
   return (
     <>
       {/* Hero */}
@@ -79,7 +87,7 @@ export default function CreditoPrivadoPage() {
           style={{ objectPosition: "center 50%" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#041A2A] via-[#041A2A]/75 to-[#041A2A]/20" />
-        <div className="section-container relative z-10 py-24 sm:py-32">
+        <div className="section-container relative z-10 py-16 sm:py-20">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -210,6 +218,17 @@ export default function CreditoPrivadoPage() {
               </ScrollReveal>
             ))}
           </div>
+
+          <ScrollReveal>
+            <p className="mt-10 max-w-3xl text-xs leading-relaxed text-[var(--text-muted)]">
+              Investimento sujeito a riscos, inclusive de crédito do emissor.
+              Não conta com garantia do Fundo Garantidor de Créditos (FGC).
+              Prazo, taxa e garantias são definidos em cada operação, no momento
+              da contratação. Rentabilidade passada não representa garantia de
+              rentabilidade futura. Conteúdo informativo — não constitui
+              recomendação de investimento.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 

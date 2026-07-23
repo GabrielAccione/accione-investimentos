@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import cprfImage from "@/assets/Investimentos/cpr-f.png";
+import { useSeo } from "@/hooks/useSeo";
 
 const STEPS = [
   {
@@ -31,18 +32,21 @@ const STEPS = [
 
 const CARACTERISTICAS = [
   { label: "Prazo típico", value: "12 a 36 meses" },
+  { label: "Tributação", value: "Isento de IR para pessoa física" },
   { label: "Rentabilidade", value: "Muito acima do CDI" },
-  { label: "Perfil:", value: "Moderado a sofisticado" },
+  { label: "Perfil", value: "Moderado a sofisticado" },
   {
     label: "Lastro",
     value: "Produção agrícola e/ou garantia real",
   },
+  { label: "Liquidez", value: "No vencimento" },
   { label: "Registro", value: "B3" },
   { label: "Amparo legal", value: "Lei 8.929/94" },
 ];
 
 const DIFERENCIAIS = [
-  "Rentabilidade acima do CDI — perfil moderado a sofisticado.",
+  "Isenção de Imposto de Renda para pessoa física, elevando o retorno líquido frente a aplicações tributadas.",
+  "Rentabilidade acima do CDI.",
   "Lastro em produção agrícola e/ou garantia real, em um dos setores mais sólidos do Brasil.",
   "Registro formal na B3 com segurança jurídica.",
   "Prazo previsível e retorno acordado no momento da operação.",
@@ -53,6 +57,10 @@ const FAQ = [
   {
     q: "Qual o valor mínimo para investir em CPR-F?",
     a: "Entre em contato via WhatsApp para consultar as oportunidades disponíveis e valores mínimos atuais.",
+  },
+  {
+    q: "O CPR-F é isento de Imposto de Renda?",
+    a: "Sim. Para pessoa física, os rendimentos da CPR-F são isentos de Imposto de Renda — o que aumenta o retorno líquido em relação a aplicações tributadas, como CDB e Tesouro Direto. Para pessoa jurídica, a tributação segue o regime da empresa.",
   },
   {
     q: "CPR-F tem garantia do FGC?",
@@ -70,6 +78,13 @@ const FAQ = [
 
 export default function CprFPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useSeo({
+    title: "CPR-F — Cédula de Produto Rural Financeira",
+    description:
+      "Invista no agronegócio brasileiro com isenção de IR para pessoa física, lastro em produção agrícola, registro na B3 e amparo na Lei 8.929/94.",
+    path: "/investimentos/cpr-f",
+  });
 
   return (
     <>
@@ -98,11 +113,11 @@ export default function CprFPage() {
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="section-tag">Perfil moderado a sofisticado</span>
             </div>
-            <h1 className="mt-4 max-w-none text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl lg:whitespace-nowrap">
+            <h1 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
               CPR-F — Cédula de Produto Rural Financeira
             </h1>
-            <p className="mt-5 max-w-none text-base leading-relaxed text-white/75 sm:text-lg lg:whitespace-nowrap">
-              Invista no agronegócio brasileiro com segurança jurídica e rentabilidade acima do CDI.
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
+              Invista no agronegócio brasileiro com isenção de IR para pessoa física, segurança jurídica e rentabilidade acima do CDI.
             </p>
           </motion.div>
         </div>
@@ -234,6 +249,17 @@ export default function CprFPage() {
               </ScrollReveal>
             ))}
           </div>
+
+          <ScrollReveal>
+            <p className="mt-10 max-w-3xl text-xs leading-relaxed text-[var(--text-muted)]">
+              Investimento sujeito a riscos, inclusive de crédito do emissor.
+              Não conta com garantia do Fundo Garantidor de Créditos (FGC).
+              Prazo, taxa e garantias são definidos em cada operação, no momento
+              da contratação. Rentabilidade passada não representa garantia de
+              rentabilidade futura. Conteúdo informativo — não constitui
+              recomendação de investimento.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 

@@ -5,6 +5,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal'
 import { SITE_CONFIG } from '@/config/site'
 import gabrielImg from '@/assets/gabriel-2.jpg'
 import zaconImg from '@/assets/marcazacon.png'
+import { useSeo } from '@/hooks/useSeo'
 
 const VALUE_CARDS = [
   {
@@ -53,6 +54,13 @@ const VALUE_CARDS = [
 ]
 
 export default function SobrePage() {
+  useSeo({
+    title: 'Sobre a Accione — Quem somos, missão e valores',
+    description:
+      'Empresa multiestratégia de Santa Maria/RS fundada por Gabriel Rodrigues, economista com mais de 20 anos de mercado. Conheça a missão, os valores e o parceiro Zacon Zanini.',
+    path: '/sobre',
+  })
+
   return (
     <>
       <PageHero

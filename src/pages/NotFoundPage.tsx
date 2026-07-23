@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom'
+import { useSeo } from '@/hooks/useSeo'
 
 export default function NotFoundPage() {
+  useSeo({
+    title: 'Página não encontrada',
+    description: 'O endereço que você tentou acessar não existe ou foi movido.',
+    path: '/404',
+    noIndex: true,
+  })
+
   return (
     <section className="hero-gradient flex min-h-screen items-center pt-16">
       <div className="section-container text-center">

@@ -52,7 +52,7 @@ export default function EconomicIndicatorsSection({
 
         <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {isLoading
-            ? Array.from({ length: 6 }).map((_, index) => (
+            ? Array.from({ length: 9 }).map((_, index) => (
                 <SkeletonCard key={index} />
               ))
             : indicators.map((indicator, index) => (

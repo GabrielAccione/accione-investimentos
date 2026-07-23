@@ -14,12 +14,18 @@ import {
   CheckCircle,
 } from "lucide-react";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import { SITE_URL, useSeo } from "@/hooks/useSeo";
 import {
   EMPREENDIMENTOS,
   type EmpreendimentoData,
   type GalleryItem,
   type Destaque,
 } from "@/data/empreendimentos";
+
+/** Meta description tem limite prático de ~160 caracteres nos buscadores. */
+function truncate(text: string, max = 155) {
+  return text.length > max ? `${text.slice(0, max).trimEnd()}…` : text;
+}
 
 /* ─── Sub-components ─────────────────────────────────────────── */
 
@@ -45,7 +51,7 @@ const HIGHLIGHTS = [
     icon: Wallet,
     title: "Acessível",
     description:
-      "Invista com menor capital do que a compra direta de um imóvel tornand-se sócio da SPE.",
+      "Invista com menor capital do que a compra direta de um imóvel, tornando-se sócio da SPE.",
   },
   {
     icon: Shield,
@@ -57,13 +63,13 @@ const HIGHLIGHTS = [
     icon: TrendingUp,
     title: "Rentável",
     description:
-      "Retorno acima do convencional. Grupo de investidores participa do negócio na origem",
+      "Retorno acima do convencional. Grupo de investidores participa do negócio na origem.",
   },
   {
     icon: Zap,
     title: "Ágil",
     description:
-      "Processo digital simplificado: contratos, relatórios e comunicação por whatsapp, e-mail e sistemas apropriados.",
+      "Processo digital simplificado: contratos, relatórios e comunicação por WhatsApp, e-mail e sistemas apropriados.",
   },
 ];
 
@@ -189,6 +195,20 @@ export default function EmpreendimentoDetalhe() {
   const empreendimento = EMPREENDIMENTOS.find((e) => e.slug === slug);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
+  useSeo({
+    title: empreendimento
+      ? `${empreendimento.name} — Santa Maria/RS`
+      : "Empreendimento não encontrado",
+    description: empreendimento
+      ? truncate(empreendimento.shortDescription)
+      : "O empreendimento que você procura não existe ou foi removido.",
+    path: `/empreendimentos/${slug ?? ""}`,
+    image: empreendimento
+      ? `${SITE_URL}${empreendimento.coverImage}`
+      : undefined,
+    noIndex: !empreendimento,
+  });
+
   if (!empreendimento) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--bg-primary)] pt-16 text-center px-4">
@@ -246,9 +266,6 @@ export default function EmpreendimentoDetalhe() {
           >
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <StatusBadge status={status} label={statusLabel} />
-              {status === "captacao-encerrada" && (
-                <span className="text-xs text-white/60"></span>
-              )}
             </div>
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
               {name}
@@ -259,7 +276,7 @@ export default function EmpreendimentoDetalhe() {
             </div>
             {status === "captacao-encerrada" ? (
               <WhatsAppButton
-                mensagem="Olá! Tenho interesse em entrar na lista de espera do Avenue Residence."
+                mensagem={`Olá! Tenho interesse em entrar na lista de espera do ${name}.`}
                 label="Lista de espera"
                 size="lg"
               />
@@ -577,7 +594,7 @@ export default function EmpreendimentoDetalhe() {
             <div className="flex flex-wrap justify-center gap-4">
               {status === "captacao-encerrada" ? (
                 <WhatsAppButton
-                  mensagem="Olá! Tenho interesse em entrar na lista de espera do Avenue Residence."
+                  mensagem={`Olá! Tenho interesse em entrar na lista de espera do ${name}.`}
                   label="Entrar na lista de espera"
                   size="lg"
                 />
@@ -594,14 +611,6 @@ export default function EmpreendimentoDetalhe() {
                     size="lg"
                     className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
                   />
-                  {/* {slug === "sync-floriano" && (
-                    <Link
-                      to="/simuladores/sync-floriano"
-                      className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/40 px-8 py-4 text-lg font-medium text-[var(--accent)] transition-all duration-300 hover:border-[var(--accent)] hover:bg-[var(--accent)]/10 hover:scale-105 active:scale-95"
-                    >
-                      Simular meus aportes
-                    </Link>
-                  )} */}
                 </>
               )}
             </div>
@@ -679,7 +688,59 @@ export default function EmpreendimentoDetalhe() {
         </div>
       </section>
 
-      {/* ── 8. Formulário de contato ─────────────────────────── */}
+      {/* ── 8. CTA final ─────────────────────────────────────── */}
+      <section className="hero-gradient py-20 sm:py-24">
+        <div className="section-container text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {status === "captacao-encerrada" ? (
+              <>
+                <h2 className="font-display text-3xl font-bold text-[#041A2A] dark:text-white sm:text-4xl">
+                  A captação do {name} está encerrada.
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-[var(--text-secondary)]">
+                  Entre na lista de espera e seja avisado assim que abrirmos o
+                  próximo empreendimento.
+                </p>
+                <div className="mt-8 flex justify-center">
+                  <WhatsAppButton
+                    mensagem={`Olá! Tenho interesse em entrar na lista de espera do ${name}.`}
+                    label="Entrar na lista de espera"
+                    size="lg"
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="font-display text-3xl font-bold text-[#041A2A] dark:text-white sm:text-4xl">
+                  Quer participar do {name}?
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-[var(--text-secondary)]">
+                  Fale com a Accione e receba o material completo: estrutura da
+                  SPE, cronograma de aportes e condições de participação.
+                </p>
+                <div className="mt-8 flex flex-wrap justify-center gap-4">
+                  <WhatsAppButton
+                    mensagem={`Olá! Tenho interesse no empreendimento ${name}. Pode me enviar o material completo?`}
+                    label="Quero investir"
+                    size="lg"
+                  />
+                  <WhatsAppButton
+                    mensagem={`Olá! Gostaria de receber o material completo sobre o ${name}.`}
+                    label="Receber material completo"
+                    size="lg"
+                    className="border border-[#25D366]/40 bg-transparent hover:bg-[#25D366] text-[#25D366] hover:text-white"
+                  />
+                </div>
+              </>
+            )}
+          </motion.div>
+        </div>
+      </section>
     </>
   );
 }
