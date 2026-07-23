@@ -259,7 +259,7 @@ export default function EmpreendimentoDetalhe() {
             </div>
             {status === "captacao-encerrada" ? (
               <WhatsAppButton
-                mensagem="Olá! Tenho interesse em entrar na lista de espera do Avenue Residence."
+                mensagem={`Olá! Tenho interesse em entrar na lista de espera do ${name}.`}
                 label="Lista de espera"
                 size="lg"
               />
@@ -577,7 +577,7 @@ export default function EmpreendimentoDetalhe() {
             <div className="flex flex-wrap justify-center gap-4">
               {status === "captacao-encerrada" ? (
                 <WhatsAppButton
-                  mensagem="Olá! Tenho interesse em entrar na lista de espera do Avenue Residence."
+                  mensagem={`Olá! Tenho interesse em entrar na lista de espera do ${name}.`}
                   label="Entrar na lista de espera"
                   size="lg"
                 />

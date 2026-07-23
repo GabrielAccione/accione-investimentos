@@ -115,21 +115,27 @@ function buildInflationIndicator(options: {
 }
 
 async function loadIndicators() {
-  console.log("Iniciando loadIndicators...");
-
   const response = await fetch("/api/indicators");
-  console.log("Status da resposta:", response.status);
 
   if (!response.ok) {
     throw new Error("Falha ao carregar os indicadores.");
   }
 
   const data = await response.json();
-  console.log("DATA DA API:", JSON.stringify(data, null, 2));
 
   if (!data.selic || !data.cdi) {
     throw new Error("Dados incompletos retornados pela API.");
   }
+
+  // Cotações de mercado: quando a fonte externa falha, exibimos "indisponível"
+  // em vez de zero — mostrar R$ 0,00 como se fosse preço real induziria a erro.
+  const bitcoinPrice: number | null = data.bitcoin?.bitcoin?.brl ?? null;
+  const bitcoinChange: number | null =
+    data.bitcoin?.bitcoin?.brl_24h_change ?? null;
+  const ibovespaPoints: number | null =
+    data.ibovespa?.results?.[0]?.regularMarketPrice ?? null;
+  const ibovespaChange: number | null =
+    data.ibovespa?.results?.[0]?.regularMarketChangePercent ?? null;
 
   return [
     buildIndicatorFromSeries({
@@ -214,12 +220,13 @@ async function loadIndicators() {
       id: "bitcoin" as const,
       label: "Bitcoin",
       description: "Preço à vista da principal criptomoeda em BRL.",
-      value: data.bitcoin?.bitcoin?.brl ?? 0,
-      valueLabel: formatCurrency(data.bitcoin?.bitcoin?.brl ?? 0),
-      variation: data.bitcoin?.bitcoin?.brl_24h_change ?? 0,
-      variationLabel: formatSignedPercent(
-        data.bitcoin?.bitcoin?.brl_24h_change ?? 0,
-      ),
+      value: bitcoinPrice,
+      valueLabel: bitcoinPrice !== null ? formatCurrency(bitcoinPrice) : "—",
+      variation: bitcoinChange,
+      variationLabel:
+        bitcoinChange !== null
+          ? formatSignedPercent(bitcoinChange)
+          : "Indisponível",
       icon: Bitcoin,
       source: "CoinGecko",
     },
@@ -227,12 +234,16 @@ async function loadIndicators() {
       id: "ibovespa" as const,
       label: "Ibovespa",
       description: "Principal índice de ações da B3.",
-      value: data.ibovespa?.results?.[0]?.regularMarketPrice ?? 0,
-      valueLabel: `${Math.round(data.ibovespa?.results?.[0]?.regularMarketPrice ?? 0).toLocaleString("pt-BR")} pts`,
-      variation: data.ibovespa?.results?.[0]?.regularMarketChangePercent ?? 0,
-      variationLabel: formatSignedPercent(
-        data.ibovespa?.results?.[0]?.regularMarketChangePercent ?? 0,
-      ),
+      value: ibovespaPoints,
+      valueLabel:
+        ibovespaPoints !== null
+          ? `${Math.round(ibovespaPoints).toLocaleString("pt-BR")} pts`
+          : "—",
+      variation: ibovespaChange,
+      variationLabel:
+        ibovespaChange !== null
+          ? formatSignedPercent(ibovespaChange)
+          : "Indisponível",
       icon: LineChart,
       source: "B3",
     },

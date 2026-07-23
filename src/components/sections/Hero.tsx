@@ -60,7 +60,7 @@ export default function Hero() {
   const itemVariantes = {
     hidden: { opacity: 0, y: 16 },
     visible: {
-      opcacity: 1,
+      opacity: 1,
       transition: { duration: 0.5, ease: PREMIUM_EASE },
     },
   };
