@@ -49,10 +49,10 @@ export default function IndicatorCard({ indicator }: IndicatorCardProps) {
       </div>
 
       {/* Nome + valor em destaque */}
-      <h3 className="mt-6 font-display text-2xl font-bold text-[var(--text-primary)]">
+      <h3 className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
         {indicator.label}
       </h3>
-      <p className="mt-1.5 font-display text-2xl font-semibold leading-none tabular-nums text-[var(--text-primary)]">
+      <p className="mt-2 font-display text-3xl font-bold leading-none tabular-nums text-[var(--text-primary)]">
         {indicator.valueLabel}
       </p>
       {indicator.periodLabel ? (

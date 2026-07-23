@@ -45,7 +45,7 @@ export default function ProductCard({
         ref={cardRef}
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
-        className="rounded-xl border border-[#484949]/20 hover:border-[#A26047]/40 bg-white dark:bg-[#0C2030] overflow-hidden h-full flex flex-col transition-colors duration-300 hover:shadow-[0_8px_40px_rgba(162,101,71,0.10)]"
+        className="rounded-xl border border-[#484949]/20 hover:border-[#A26547]/40 bg-white dark:bg-[#0C2030] overflow-hidden h-full flex flex-col transition-colors duration-300 hover:shadow-[0_8px_40px_rgba(162,101,71,0.10)]"
       >
         {/* Cover image */}
         <div className="relative overflow-hidden">

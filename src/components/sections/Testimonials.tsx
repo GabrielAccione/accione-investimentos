@@ -35,14 +35,16 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
 
 export default function Testimonials() {
   const [start, setStart] = useState(0)
+  const [paused, setPaused] = useState(false)
 
   const next = useCallback(() => setStart((s) => (s + 1) % TOTAL), [])
   const prev = useCallback(() => setStart((s) => (s - 1 + TOTAL) % TOTAL), [])
 
   useEffect(() => {
+    if (paused) return
     const timer = setInterval(next, 4000)
     return () => clearInterval(timer)
-  }, [next])
+  }, [next, paused])
 
   const desktop = [0, 1, 2].map((i) => TESTIMONIALS[(start + i) % TOTAL])
   const mobile = TESTIMONIALS[start]
@@ -56,7 +58,13 @@ export default function Testimonials() {
           description="Alguns relatos que sintetizam a forma como a Accione conduz a experiência do investidor."
         />
 
-        <div className="relative mt-12">
+        <div
+          className="relative mt-12"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={() => setPaused(false)}
+        >
           {/* Desktop: 3 cards */}
           <div className="hidden overflow-hidden md:grid md:grid-cols-3 md:gap-6">
             <AnimatePresence mode="popLayout" initial={false}>

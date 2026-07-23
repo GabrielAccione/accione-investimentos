@@ -244,3 +244,23 @@
       100% 50%;
   }
 }
+
+/* Acessibilidade: respeita a preferência do sistema por menos movimento.
+   Desliga a animação contínua do fundo e reduz transições/animações a
+   praticamente instantâneas (inclui os efeitos de Framer Motion e anime.js). */
+@media (prefers-reduced-motion: reduce) {
+  html,
+  html.dark {
+    animation: none !important;
+    background-attachment: scroll !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

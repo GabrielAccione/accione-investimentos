@@ -87,7 +87,7 @@ export default function CreditoPrivadoPage() {
           style={{ objectPosition: "center 50%" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#041A2A] via-[#041A2A]/75 to-[#041A2A]/20" />
-        <div className="section-container relative z-10 py-24 sm:py-32">
+        <div className="section-container relative z-10 py-16 sm:py-20">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}

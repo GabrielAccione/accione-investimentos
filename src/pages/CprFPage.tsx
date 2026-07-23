@@ -113,10 +113,10 @@ export default function CprFPage() {
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="section-tag">Perfil moderado a sofisticado</span>
             </div>
-            <h1 className="mt-4 max-w-none text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl lg:whitespace-nowrap">
+            <h1 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
               CPR-F — Cédula de Produto Rural Financeira
             </h1>
-            <p className="mt-5 max-w-none text-base leading-relaxed text-white/75 sm:text-lg lg:whitespace-nowrap">
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
               Invista no agronegócio brasileiro com isenção de IR para pessoa física, segurança jurídica e rentabilidade acima do CDI.
             </p>
           </motion.div>
