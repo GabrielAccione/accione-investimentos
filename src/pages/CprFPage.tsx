@@ -32,8 +32,8 @@ const STEPS = [
 
 const CARACTERISTICAS = [
   { label: "Prazo típico", value: "12 a 36 meses" },
-  { label: "Tributação", value: "Isento de IR para pessoa física" },
-  { label: "Rentabilidade", value: "Muito acima do CDI" },
+  { label: "Tributação", value: "Possível isenção de IR para pessoa física" },
+  { label: "Rentabilidade", value: "Historicamente acima do CDI" },
   { label: "Perfil", value: "Moderado a sofisticado" },
   {
     label: "Lastro",
@@ -46,7 +46,7 @@ const CARACTERISTICAS = [
 
 const DIFERENCIAIS = [
   "Isenção de Imposto de Renda para pessoa física, elevando o retorno líquido frente a aplicações tributadas.",
-  "Rentabilidade acima do CDI.",
+  "Rentabilidade historicamente acima do CDI.",
   "Lastro em produção agrícola e/ou garantia real, em um dos setores mais sólidos do Brasil.",
   "Registro formal na B3 com segurança jurídica.",
   "Prazo previsível e retorno acordado no momento da operação.",
@@ -60,7 +60,7 @@ const FAQ = [
   },
   {
     q: "O CPR-F é isento de Imposto de Renda?",
-    a: "Sim. Para pessoa física, os rendimentos da CPR-F são isentos de Imposto de Renda — o que aumenta o retorno líquido em relação a aplicações tributadas, como CDB e Tesouro Direto. Para pessoa jurídica, a tributação segue o regime da empresa.",
+    a: "Sim. Para pessoa física, os rendimentos da CPR-F podem ser isentos de Imposto de Renda — o que aumenta o retorno líquido em relação a aplicações tributadas, como CDB e Tesouro Direto. Para pessoa jurídica, a tributação segue o regime da empresa.",
   },
   {
     q: "CPR-F tem garantia do FGC?",
@@ -117,7 +117,9 @@ export default function CprFPage() {
               CPR-F — Cédula de Produto Rural Financeira
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
-              Invista no agronegócio brasileiro com isenção de IR para pessoa física, segurança jurídica e rentabilidade acima do CDI.
+              Invista no agronegócio brasileiro com isenção de IR para pessoa
+              física, segurança jurídica e rentabilidade historicamente acima do
+              CDI.
             </p>
           </motion.div>
         </div>
@@ -257,7 +259,8 @@ export default function CprFPage() {
               Prazo, taxa e garantias são definidos em cada operação, no momento
               da contratação. Rentabilidade passada não representa garantia de
               rentabilidade futura. Conteúdo informativo — não constitui
-              recomendação de investimento.
+              recomendação de investimento. Não substitui a análise criteriosa e
+              o profundo entendimento por parte de qualquer investidor.
             </p>
           </ScrollReveal>
         </div>
