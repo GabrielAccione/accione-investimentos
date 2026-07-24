@@ -6,11 +6,6 @@ import backgroundImg from "@/assets/imagem-fundo.jpg";
 import gabrielBgImg from "@/assets/gabriel-fundo.jpg";
 //define assinatura de curva
 const PREMIUM_EASE = [0.16, 1, 0.3, 1];
-const METRICAS = [
-  { valor: "2x", label: "Até o dobro da média de mercado" },
-  { valor: "3", label: "Empreendimentos imobiliários" },
-  { valor: "100%", label: "Transparência nas operações" },
-];
 
 interface CounterCardProps {
   target: number;
@@ -50,20 +45,6 @@ function CounterCard({
 
 export default function Hero() {
   const [countersRef, countersInView] = useInView({ threshold: 0.25 });
-  const containerVariantes = {
-    hidden: { opacity: 0, y: 16 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.3 },
-    },
-  };
-  const itemVariantes = {
-    hidden: { opacity: 0, y: 16 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.5, ease: PREMIUM_EASE },
-    },
-  };
   return (
     <section id="inicio" className="relative overflow-hidden pt-20">
       {/* Background Image with Gradient Overlay */}
@@ -172,37 +153,6 @@ export default function Hero() {
           </p>
         </motion.div>
       </div>
-
-      <motion.div
-        variants={containerVariantes}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-        className="relative z-10 border-none bg-transparent"
-      >
-        <div className="section-container py-8 ">
-          <div className="grid grid-cols-2 lg:grid-cols-4 bg-transparent border-none shadow-none">
-            {METRICAS.map((m, i) => (
-              <motion.div
-                key={m.label}
-                variants={itemVariantes}
-                className={[
-                  "px-6 py-4",
-                  i % 2 !== 0 ? "border-l border-[var(--accent)]/35" : "",
-                  i === 2 ? "lg:border-l lg:border-[var(--accent)]/35" : "",
-                ].join(" ")}
-              >
-                <p className="font-display text-4xl font-semibold text-[var(--text-primary)] sm:text-5xl">
-                  {m.valor}
-                </p>
-                <p className="mt-1 text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
-                  {m.label}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
     </section>
   );
 }

@@ -1,4 +1,11 @@
-import { Eye, ShieldCheck, Target, TrendingUp, MessageCircle, LineChart } from "lucide-react";
+import {
+  Eye,
+  ShieldCheck,
+  Target,
+  TrendingUp,
+  MessageCircle,
+  LineChart,
+} from "lucide-react";
 import type { Benefit } from "@/types";
 
 export const BENEFITS: Benefit[] = [
@@ -10,7 +17,7 @@ export const BENEFITS: Benefit[] = [
   },
   {
     icon: Target,
-    title: "Planejamento financeiro com informações claras",
+    title: "Decisões de investimento com informações claras",
     description:
       "Construímos junto com você um horizonte claro e estruturado, com dados reais e projeções coerentes.",
   },

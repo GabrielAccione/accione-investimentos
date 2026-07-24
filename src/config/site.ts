@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
   partner: {
     name: "Zacon Zanini",
     description:
-      "Parceiro estratégico da Accione nos negócios imobiliários, com mais de 30 anos de atuação em Santa Maria, unindo expertise em construção com qualidade de gestão.",
+      "Parceiro estratégico da Accione nos negócios imobiliários, com mais de 35 anos de atuação em Santa Maria, unindo expertise em construção com qualidade de gestão.",
   },
   socialLinks: {
     instagram: "https://www.instagram.com/accioneinvestimentos/",
