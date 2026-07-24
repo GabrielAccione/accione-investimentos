@@ -2,6 +2,7 @@ import { Building2, Compass, Gem, Mail, MessageCircle, Users } from 'lucide-reac
 import { motion } from 'framer-motion'
 import PageHero from '@/components/ui/PageHero'
 import ScrollReveal from '@/components/ui/ScrollReveal'
+import Testimonials from '@/components/sections/Testimonials'
 import { SITE_CONFIG } from '@/config/site'
 import gabrielImg from '@/assets/gabriel-2.jpg'
 import zaconImg from '@/assets/marcazacon.png'
@@ -196,6 +197,9 @@ export default function SobrePage() {
           })}
         </div>
       </section>
+
+      {/* Depoimentos — mesmo bloco usado na home */}
+      <Testimonials />
     </>
   )
 }
