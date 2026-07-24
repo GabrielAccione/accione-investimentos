@@ -10,6 +10,17 @@ function getVariationTone(value: number | null) {
   return value > 0 ? 'positive' : 'negative'
 }
 
+/** Movimento abaixo deste limite conta como estável — evita o CDI trocar de cor
+    por variações diárias imperceptíveis (0,01 p.p. / 0,01%). */
+const LIMITE_ESTAVEL = 0.01
+
+/** Cor do valor por comportamento: alta (verde), estável (azul) e queda (laranja).
+    Diferente do selo, aqui a inflação também entra na regra. */
+function getValueTone(variation: number | null) {
+  if (variation === null || Math.abs(variation) <= LIMITE_ESTAVEL) return 'estavel'
+  return variation > 0 ? 'alta' : 'queda'
+}
+
 export default function IndicatorCard({ indicator }: IndicatorCardProps) {
   const Icon = indicator.icon
   const sign = getVariationTone(indicator.variation)
@@ -21,6 +32,20 @@ export default function IndicatorCard({ indicator }: IndicatorCardProps) {
       : tone === 'negative'
         ? 'text-rose-300 bg-rose-400/10 border-rose-400/20'
         : 'text-[#484949] bg-[#F7F7F7] border-[#E5E5E5] dark:text-slate-300 dark:bg-white/5 dark:border-white/10'
+
+  // Nos índices de inflação o valor exibido já É uma variação (o índice do mês),
+  // enquanto `variation` guarda o acumulado de 12 meses. A cor precisa seguir o
+  // número que está na tela — senão um mês negativo apareceria em verde.
+  const movimento = indicator.neutralVariation
+    ? indicator.value
+    : indicator.variation
+  const valueTone = getValueTone(movimento)
+  const valueToneClass =
+    valueTone === 'alta'
+      ? 'text-emerald-600 dark:text-emerald-400'
+      : valueTone === 'queda'
+        ? 'text-orange-600 dark:text-orange-400'
+        : 'text-sky-600 dark:text-sky-400'
 
   const VariationIcon =
     sign === 'positive' ? ArrowUpRight : sign === 'negative' ? ArrowDownRight : ArrowRight
@@ -49,10 +74,12 @@ export default function IndicatorCard({ indicator }: IndicatorCardProps) {
       </div>
 
       {/* Nome + valor em destaque */}
-      <h3 className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
+      <h3 className="mt-6 font-display text-2xl font-bold text-[var(--text-primary)]">
         {indicator.label}
       </h3>
-      <p className="mt-2 font-display text-3xl font-bold leading-none tabular-nums text-[var(--text-primary)]">
+      <p
+        className={`mt-1.5 font-display text-2xl font-semibold leading-none tabular-nums ${valueToneClass}`}
+      >
         {indicator.valueLabel}
       </p>
       {indicator.periodLabel ? (
