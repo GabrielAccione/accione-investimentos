@@ -7,7 +7,7 @@ export default function Empreendimentos() {
   useSeo({
     title: "Empreendimentos Imobiliários em Santa Maria/RS",
     description:
-      "Invista em imóveis a preço de custo pelo modelo SPE: Avenue Residence, Sync Conde e Sync Floriano, com gestão profissional da Accione e construção Zacon Zanini.",
+      "Invista em imóveis pelo modelo SPE a preço de custo: Avenue Residence, Sync Conde e Sync Floriano, com gestão profissional da Accione e construção Zacon Zanini.",
     path: "/empreendimentos",
   });
 
@@ -20,7 +20,7 @@ export default function Empreendimentos() {
             Nossos <span className="text-gradient">Empreendimentos</span>
           </>
         }
-        description="Invista em imóveis a preço de custo através do modelo SPE — seguro, rentável e gerido profissionalmente."
+        description="Invista em imóveis através do modelo SPE a preço de custo — seguro, rentável e gerido profissionalmente."
       />
 
       {/* Cards */}

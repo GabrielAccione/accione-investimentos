@@ -9,7 +9,7 @@ export default function EmpreendimentosSection() {
       <div className="section-container">
         <SectionHeading
           eyebrow="Empreendimentos Imobiliários"
-          title="Invista em imóveis a preço de custo pelo modelo SPE."
+          title="Invista em imóveis pelo modelo SPE a preço de custo."
           description="Participe da construção de empreendimentos selecionados, com estrutura, gestão profissional e acompanhamento de ponta a ponta."
           align="left"
         />

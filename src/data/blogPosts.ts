@@ -146,7 +146,7 @@ const TODOS_OS_POSTS: BlogPost[] = [
     category: "Imóveis",
     date: "2026-03-28",
     excerpt:
-      "O modelo SPE pode ampliar acesso a empreendimentos bem localizados, desde que a estrutura jurídica e a gestão do projeto sejam transparentes.",
+      "O modelo SPE a preço de custo pode ampliar acesso a empreendimentos bem localizados, desde que a estrutura jurídica e a gestão do projeto sejam transparentes.",
     coverImage:
       "https://placehold.co/1200x700/041A2A/69727D?text=Im%C3%B3veis+SPE",
     readTime: "5 min de leitura",
