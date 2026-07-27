@@ -153,7 +153,7 @@ export const EMPREENDIMENTOS: EmpreendimentoData[] = [
     shortDescription:
       "Compactos de luxo. Empreendimento com 22 pavimentos e 187 apartamentos (estúdios, 1 e 2 dormitórios). Rooftop com espelho d’água e bar, academia, coworking, lavanderia compartilhada, piscina, átrio central com elevadores panorâmicos. Retrofit programado a cada 10 anos. Modelo SPE a preço de custo.",
     fullDescription:
-      "O Sync Conde é um empreendimento de alto impacto urbanístico no Centro de Santa Maria. Com 22 pavimentos e 187 apartamentos distribuídos em estúdios, 1 e 2 dormitórios, o projeto foi concebido para o investidor moderno que busca rentabilidade com liquidez. O rooftop oferece piscina, academia completa, espaço de coworking e bar panorâmico. Um diferencial exclusivo é o retrofit programado a cada 10 anos, garantindo que o ativo se mantenha sempre valorizado e atualizado. Modelo SPE, gestão profissional Accione.",
+      "O Sync Conde é um empreendimento de alto impacto urbanístico no Centro de Santa Maria. Com 22 pavimentos e 187 apartamentos distribuídos em estúdios, 1 e 2 dormitórios, o projeto foi concebido para o investidor moderno que busca rentabilidade com liquidez. O rooftop oferece piscina, academia completa, espaço de coworking e bar panorâmico. Um diferencial exclusivo é o retrofit programado a cada 10 anos, garantindo que o ativo se mantenha sempre valorizado e atualizado. Modelo SPE a preço de custo, gestão profissional Accione.",
     parceria: "Accione Investimentos + Zacon Zanini Construções",
     coverImage: syncCondeCoverImg,
     fachadaImage: { src: syncCondeFachadaImg, alt: "Fachada Sync Conde" },

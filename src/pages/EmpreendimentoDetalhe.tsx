@@ -550,7 +550,7 @@ export default function EmpreendimentoDetalhe() {
               Como funciona
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-[#041A2A] dark:text-white mt-3">
-              Modelo de Investimento — SPE
+              Modelo de Investimento — SPE a preço de custo
             </h2>
             <p className="text-[var(--text-secondary)] mt-4 max-w-2xl mx-auto text-sm leading-relaxed">
               A Sociedade de Propósito Específico é o modelo mais seguro e
