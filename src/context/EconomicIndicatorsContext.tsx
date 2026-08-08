@@ -54,21 +54,22 @@ function parseBcbValue(value: string) {
   return Number.parseFloat(value.replace(",", "."));
 }
 
-function buildIndicatorFromSeries(options: {
+function parseBcbDate(value: string): number {
+  const [day, month, year] = value.split("/").map(Number);
+  return year * 10000 + month * 100 + day;
+}
+
+function buildRateIndicator(options: {
   id: EconomicIndicator["id"];
   label: string;
   description: string;
   icon: EconomicIndicator["icon"];
   source: string;
-  series: BcbPoint[];
-  valueFormatter?: (value: number) => string;
-  variationFormatter?: (value: number) => string;
+  point: BcbPoint;
+  previousPoint: BcbPoint;
 }) {
-  const [previousPoint, latestPoint] = options.series;
-  const latestValue = parseBcbValue(latestPoint.valor);
-  const previousValue = previousPoint
-    ? parseBcbValue(previousPoint.valor)
-    : latestValue;
+  const latestValue = parseBcbValue(options.point.valor);
+  const previousValue = parseBcbValue(options.previousPoint.valor);
   const variation = latestValue - previousValue;
 
   return {
@@ -76,18 +77,62 @@ function buildIndicatorFromSeries(options: {
     label: options.label,
     description: options.description,
     value: latestValue,
-    valueLabel:
-      options.valueFormatter?.(latestValue) ?? formatPercent(latestValue),
+    valueLabel: formatPercent(latestValue, "% a.a."),
     variation,
     variationLabel:
-      options.variationFormatter?.(variation) ??
-      (variation === 0
+      variation === 0
         ? "Sem variação recente"
-        : formatSignedPoints(variation)),
+        : formatSignedPoints(variation),
     icon: options.icon,
     source: options.source,
-    sourceDate: formatDateLabel(latestPoint.data),
+    sourceDate: formatDateLabel(options.point.data),
   } satisfies EconomicIndicator;
+}
+
+/**
+ * Selic (meta, prospectiva) e CDI (diário, realizado com ~1 dia de defasagem)
+ * são séries distintas do SGS. Pegar o último ponto de cada uma isoladamente
+ * pode comparar dias diferentes e fazer o CDI aparecer acima da Selic sem ser
+ * o caso. O CDI define a data de referência comum (é a série que só existe
+ * depois de realizada); a Selic usa a meta vigente naquela mesma data.
+ */
+function buildSelicCdiIndicators(selicSeries: BcbPoint[], cdiSeries: BcbPoint[]) {
+  const byDateAsc = (a: BcbPoint, b: BcbPoint) =>
+    parseBcbDate(a.data) - parseBcbDate(b.data);
+
+  const sortedCdi = [...cdiSeries].sort(byDateAsc);
+  const cdiLatest = sortedCdi[sortedCdi.length - 1];
+  const cdiPrevious = sortedCdi[sortedCdi.length - 2] ?? cdiLatest;
+
+  const sortedSelic = [...selicSeries].sort(byDateAsc);
+  const targetDateKey = parseBcbDate(cdiLatest.data);
+  const selicUpToTarget = sortedSelic.filter(
+    (point) => parseBcbDate(point.data) <= targetDateKey,
+  );
+  const selicLatest = selicUpToTarget[selicUpToTarget.length - 1] ?? sortedSelic[0];
+  const selicLatestIndex = sortedSelic.indexOf(selicLatest);
+  const selicPrevious = sortedSelic[selicLatestIndex - 1] ?? selicLatest;
+
+  return {
+    selic: buildRateIndicator({
+      id: "selic",
+      label: "Selic",
+      description: "Taxa básica de juros em base anual.",
+      icon: Landmark,
+      source: "BCB",
+      point: selicLatest,
+      previousPoint: selicPrevious,
+    }),
+    cdi: buildRateIndicator({
+      id: "cdi",
+      label: "CDI",
+      description: "Referência diária do mercado interbancário em base anual.",
+      icon: PiggyBank,
+      source: "B3",
+      point: cdiLatest,
+      previousPoint: cdiPrevious,
+    }),
+  };
 }
 
 function buildInflationIndicator(options: {
@@ -96,8 +141,23 @@ function buildInflationIndicator(options: {
   description: string;
   icon: EconomicIndicator["icon"];
   source: string;
-  data: InflationData;
+  data: InflationData | null;
 }) {
+  if (!options.data) {
+    console.warn(`Indicador "${options.label}" indisponível: sem dado retornado pela API.`);
+    return {
+      id: options.id,
+      label: options.label,
+      description: options.description,
+      value: null,
+      valueLabel: "—",
+      variation: null,
+      variationLabel: "Indisponível",
+      icon: options.icon,
+      source: options.source,
+    } satisfies EconomicIndicator;
+  }
+
   return {
     id: options.id,
     label: options.label,
@@ -137,85 +197,51 @@ async function loadIndicators() {
   const ibovespaChange: number | null =
     data.ibovespa?.results?.[0]?.regularMarketChangePercent ?? null;
 
+  const { selic, cdi } = buildSelicCdiIndicators(data.selic, data.cdi);
+
   return [
-    buildIndicatorFromSeries({
-      id: "selic",
-      label: "Selic",
-      description: "Taxa básica de juros em base anual.",
-      icon: Landmark,
-      source: "BCB",
-      series: data.selic,
-      valueFormatter: (value) => formatPercent(value, "% a.a."),
+    selic,
+    cdi,
+    buildInflationIndicator({
+      id: "ipca",
+      label: "IPCA",
+      description: "Índice oficial de inflação do país.",
+      icon: BadgePercent,
+      source: "IBGE",
+      data: data.ipca,
     }),
-    buildIndicatorFromSeries({
-      id: "cdi",
-      label: "CDI",
-      description: "Referência diária do mercado interbancário em base anual.",
-      icon: PiggyBank,
-      source: "B3",
-      series: data.cdi,
-      valueFormatter: (value) => formatPercent(value, "% a.a."),
+    buildInflationIndicator({
+      id: "ipca15",
+      label: "IPCA-15",
+      description: "Prévia mensal da inflação oficial (IPCA).",
+      icon: Gauge,
+      source: "IBGE",
+      data: data.ipca15,
     }),
-    ...(data.ipca
-      ? [
-          buildInflationIndicator({
-            id: "ipca",
-            label: "IPCA",
-            description: "Índice oficial de inflação do país.",
-            icon: BadgePercent,
-            source: "IBGE",
-            data: data.ipca,
-          }),
-        ]
-      : []),
-    ...(data.ipca15
-      ? [
-          buildInflationIndicator({
-            id: "ipca15",
-            label: "IPCA-15",
-            description: "Prévia mensal da inflação oficial (IPCA).",
-            icon: Gauge,
-            source: "IBGE",
-            data: data.ipca15,
-          }),
-        ]
-      : []),
-    ...(data.igpm
-      ? [
-          buildInflationIndicator({
-            id: "igpm",
-            label: "IGP-M",
-            description: "Índice amplamente usado em contratos e reajustes.",
-            icon: Activity,
-            source: "FGV",
-            data: data.igpm,
-          }),
-        ]
-      : []),
-    ...(data.igpdi
-      ? [
-          buildInflationIndicator({
-            id: "igpdi",
-            label: "IGP-DI",
-            description: "Índice geral de preços — disponibilidade interna.",
-            icon: BarChart3,
-            source: "FGV",
-            data: data.igpdi,
-          }),
-        ]
-      : []),
-    ...(data.incc
-      ? [
-          buildInflationIndicator({
-            id: "incc",
-            label: "INCC",
-            description: "Índice de custos da construção civil.",
-            icon: TrendingUp,
-            source: "FGV",
-            data: data.incc,
-          }),
-        ]
-      : []),
+    buildInflationIndicator({
+      id: "igpm",
+      label: "IGP-M",
+      description: "Índice amplamente usado em contratos e reajustes.",
+      icon: Activity,
+      source: "FGV",
+      data: data.igpm,
+    }),
+    buildInflationIndicator({
+      id: "igpdi",
+      label: "IGP-DI",
+      description: "Índice geral de preços — disponibilidade interna.",
+      icon: BarChart3,
+      source: "FGV",
+      data: data.igpdi,
+    }),
+    buildInflationIndicator({
+      id: "incc",
+      label: "INCC-M",
+      description: "Índice de custos da construção civil — INCC-Mercado.",
+      icon: TrendingUp,
+      source: "FGV",
+      data: data.incc,
+    }),
     {
       id: "bitcoin" as const,
       label: "Bitcoin",
