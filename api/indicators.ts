@@ -57,6 +57,20 @@ function computeInflacao(raw: unknown): InflationValue | null {
 const sgs = (code: number, ultimos: number) =>
   `https://api.bcb.gov.br/dados/serie/bcdata.sgs.${code}/dados/ultimos/${ultimos}?formato=json`;
 
+function formatBcbDate(date: Date): string {
+  const dd = String(date.getUTCDate()).padStart(2, "0");
+  const mm = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const yyyy = date.getUTCFullYear();
+  return `${dd}/${mm}/${yyyy}`;
+}
+
+// Selic (432) via "ultimos" vem pré-preenchida com datas futuras (o BCB projeta a
+// meta vigente até a próxima reunião do Copom), o que impede alinhar com a data
+// real do CDI. Consultar por intervalo de datas termina sempre no "hoje" do
+// servidor e traz o histórico real.
+const sgsRange = (code: number, dataInicial: string, dataFinal: string) =>
+  `https://api.bcb.gov.br/dados/serie/bcdata.sgs.${code}/dados?formato=json&dataInicial=${dataInicial}&dataFinal=${dataFinal}`;
+
 // Assinatura mínima da função serverless da Vercel (evita depender de @vercel/node).
 interface ApiResponse {
   setHeader(name: string, value: string): void;
@@ -75,6 +89,12 @@ export default async function handler(_req: unknown, res: ApiResponse) {
       return r.json();
     };
 
+    const today = new Date();
+    const rangeStart = new Date(today);
+    rangeStart.setUTCDate(rangeStart.getUTCDate() - 20);
+    const dataInicial = formatBcbDate(rangeStart);
+    const dataFinal = formatBcbDate(today);
+
     const [
       selic,
       cdi,
@@ -86,13 +106,13 @@ export default async function handler(_req: unknown, res: ApiResponse) {
       bitcoin,
       ibovespa,
     ] = await Promise.allSettled([
-      fetchJson(sgs(432, 2)), // Meta Selic
-      fetchJson(sgs(4389, 2)), // CDI
+      fetchJson(sgsRange(432, dataInicial, dataFinal)), // Meta Selic — janela por data (evita "ultimos" pré-preenchida no futuro)
+      fetchJson(sgsRange(4389, dataInicial, dataFinal)), // CDI — mesma janela, para alinhar datas com a Selic
       fetchJson(sgs(433, 12)), // IPCA mensal
       fetchJson(sgs(7478, 12)), // IPCA-15 mensal
       fetchJson(sgs(189, 12)), // IGP-M mensal
       fetchJson(sgs(190, 12)), // IGP-DI mensal
-      fetchJson(sgs(192, 12)), // INCC mensal
+      fetchJson(sgs(7456, 12)), // INCC-M mensal (FGV, replicado pelo BCB SGS)
       fetchJson(
         "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl&include_24hr_change=true",
       ),
@@ -103,6 +123,21 @@ export default async function handler(_req: unknown, res: ApiResponse) {
 
     const inflacao = (r: PromiseSettledResult<unknown>) =>
       r.status === "fulfilled" ? computeInflacao(r.value) : null;
+
+    const warnIfRejected = (name: string, r: PromiseSettledResult<unknown>) => {
+      if (r.status === "rejected") {
+        console.warn(`Indicador "${name}" falhou ao buscar:`, r.reason);
+      }
+    };
+    warnIfRejected("Selic (SGS 432)", selic);
+    warnIfRejected("CDI (SGS 4389)", cdi);
+    warnIfRejected("IPCA (SGS 433)", ipcaRaw);
+    warnIfRejected("IPCA-15 (SGS 7478)", ipca15Raw);
+    warnIfRejected("IGP-M (SGS 189)", igpmRaw);
+    warnIfRejected("IGP-DI (SGS 190)", igpdiRaw);
+    warnIfRejected("INCC-M (SGS 7456)", inccRaw);
+    warnIfRejected("Bitcoin (CoinGecko)", bitcoin);
+    warnIfRejected("Ibovespa (brapi)", ibovespa);
 
     return res.status(200).json({
       selic: selic.status === "fulfilled" ? selic.value : null,
