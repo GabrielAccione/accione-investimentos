@@ -70,7 +70,13 @@ export function useSeo({
 }: SeoOptions) {
   useEffect(() => {
     const url = `${SITE_URL}${path}`;
-    const fullTitle = `${title} | ${SITE_NAME}`;
+    // Marca sempre primeiro: "Accione Investimentos | Página".
+    // Se o título vier vazio ou for a própria marca, exibe só a marca (sem barra solta).
+    const trimmedTitle = title.trim();
+    const fullTitle =
+      !trimmedTitle || trimmedTitle === SITE_NAME
+        ? SITE_NAME
+        : `${SITE_NAME} | ${trimmedTitle}`;
 
     document.title = fullTitle;
     upsertMeta("name", "description", description);
