@@ -1,0 +1,67 @@
+name: Dependabot auto-merge
+
+# Roda quando o Dependabot abre/atualiza um PR contra main.
+# - Sempre builda o projeto (tsc -b + vite build) e roda npm audit.
+# - Se passar E for dependência de DEV com bump patch/minor, aprova e
+#   marca auto-merge (squash) sozinho.
+# - Qualquer outro caso (dependência de runtime, ou bump major) só comenta
+#   pedindo revisão manual — nunca mergeia sozinho.
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-and-check:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx tsc -b
+      - run: npx vite build
+      - run: npm audit --audit-level=high
+
+  triage:
+    needs: build-and-check
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Metadados do Dependabot
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Auto-aprova e mergeia (dev, patch/minor)
+        if: |
+          steps.metadata.outputs.dependency-type == 'direct:development' &&
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.metadata.outputs.update-type == 'version-update:semver-minor')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr review --approve "$PR_URL"
+          gh pr merge --auto --squash "$PR_URL"
+
+      - name: Sinaliza revisão manual (runtime e/ou major)
+        if: |
+          steps.metadata.outputs.dependency-type != 'direct:development' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-major'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          gh pr comment "$PR_URL" --body "🔍 **Revisão manual necessária** — esta atualização é de dependência de runtime e/ou traz um bump major, então não é mergeada sozinha. O build/audit já passou nesta PR; rode \`npm run build\` localmente e teste as rotas afetadas antes de aprovar o merge."
