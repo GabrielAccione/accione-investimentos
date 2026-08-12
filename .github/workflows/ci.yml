@@ -1,0 +1,27 @@
+name: CI
+
+# Builda todo PR contra main — não só os do Dependabot (esses já se
+# auto-verificam em dependabot-auto-merge.yml). Pensado pra virar required
+# check em Settings → Branches, assim nenhum PR (de feature ou de dep) entra
+# na main sem o build passar.
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx tsc -b
+      - run: npx vite build
+      - run: npm audit --audit-level=high
