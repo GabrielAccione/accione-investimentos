@@ -2,8 +2,8 @@ name: Dependabot auto-merge
 
 # Roda quando o Dependabot abre/atualiza um PR contra main.
 # - Sempre builda o projeto (tsc -b + vite build) e roda npm audit.
-# - Se passar E for dependência de DEV com bump patch/minor, aprova e
-#   marca auto-merge (squash) sozinho.
+# - Se passar E for dependência de DEV com bump patch/minor, mergeia
+#   (squash) sozinho.
 # - Qualquer outro caso (dependência de runtime, ou bump major) só comenta
 #   pedindo revisão manual — nunca mergeia sozinho.
 
@@ -44,7 +44,10 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Auto-aprova e mergeia (dev, patch/minor)
+      - name: Mergeia (dev, patch/minor)
+        # Sem branch protection em main exigindo review, então não precisa
+        # (e não dá: GITHUB_TOKEN não tem permissão de aprovar PRs, é
+        # restrição do próprio GitHub) aprovar antes — só mergeia direto.
         if: |
           steps.metadata.outputs.dependency-type == 'direct:development' &&
           (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
@@ -52,9 +55,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
-        run: |
-          gh pr review --approve "$PR_URL"
-          gh pr merge --auto --squash "$PR_URL"
+        run: gh pr merge --squash "$PR_URL"
 
       - name: Sinaliza revisão manual (runtime e/ou major)
         if: |
