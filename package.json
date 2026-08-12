@@ -12,7 +12,7 @@
     "sync-horas": "node sync-horas.js"
   },
   "dependencies": {
-    "animejs": "^4.3.6",
+    "animejs": "^4.5.0",
     "framer-motion": "^11.18.2",
     "lucide-react": "^0.400.0",
     "react": "^18.3.1",
