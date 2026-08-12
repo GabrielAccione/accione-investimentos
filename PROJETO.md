@@ -2,7 +2,7 @@
 
 ## Stack
 - React 18 + TypeScript
-- Vite 5
+- Vite 6
 - Tailwind CSS 3
 - Framer Motion (animações)
 - React Router 7
@@ -29,15 +29,18 @@
 |-------------------------------|-------------------------------|
 | `/`                           | Home (landing page)           |
 | `/investimentos`              | Produtos de investimento (abas) |
+| `/investimentos/cpr-f`        | CPR-F                          |
+| `/investimentos/credito-privado` | Crédito Privado             |
 | `/empreendimentos`            | Lista de empreendimentos      |
 | `/empreendimentos/:slug`      | Detalhe do empreendimento     |
 | `/indicadores`                | Indicadores econômicos        |
 | `/simuladores/aposentadoria`  | Simulador de Aposentadoria    |
-| `/simuladores/tir`            | Simulador de TIR              |
 | `/sobre`                      | Sobre Nós                     |
 | `/contato`                    | Contato                       |
 | `/blog`                       | Blog (listagem)               |
 | `/blog/:slug`                 | Post individual               |
+
+> `/simuladores/tir` listado em versões antigas deste doc não existe mais no código — removido daqui em 2026-08-12 pra bater com `src/App.tsx`.
 
 ## Módulos
 
@@ -81,6 +84,15 @@
 - Empreendimentos são data-driven via `src/data/empreendimentos.ts`
 - Indicadores econômicos via `EconomicIndicatorsContext` com polling/cache
 - Routing com React Router v7, lazy loading em todas as páginas
+
+## Segurança & infraestrutura (agosto/2026)
+
+- Corrigido: INCC do card de indicadores era o INCC genérico/INCC-DI (série BCB SGS 192) — trocado para o INCC-M correto (série 7456), como pedido pelo Gabriel.
+- Corrigido: card de indicador que falha na busca não some mais silenciosamente — mostra "Indisponível".
+- Corrigido: Selic e CDI apareciam de dias diferentes na comparação (Selic vem de série prospectiva, CDI de série realizada com defasagem) — `api/indicators.ts` e `EconomicIndicatorsContext.tsx` agora alinham os dois na mesma data de referência.
+- `npm audit`: 17 vulnerabilidades → 0. Detalhe de cada uma e por que os bumps foram os mínimos necessários (não os majors que o Dependabot propunha por padrão) está no histórico de PRs do repo.
+- Automação nova: `.github/dependabot.yml` (agenda semanal), `dependabot-auto-merge.yml` (builda + mergeia sozinho só dev-dependency patch/minor), `dependency-weekly-review.yml` (mantém issue fixa com `npm audit` + `npm outdated`), `ci.yml` (build gate genérico em todo PR, não só do Dependabot).
+- Ver [README.md](README.md) e [.claude/CLAUDE.md](.claude/CLAUDE.md) pra mais contexto de arquitetura e do fluxo de git do projeto.
 
 ## Observações do cliente
 - Aguardar material visual do Gabriel (Drive) para substituir placeholders nos empreendimentos
