@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { animate } from "animejs";
 import { Clock } from "lucide-react";
+import { formatIsoDate } from "@/lib/formatters";
 import type { BlogPost } from "@/types";
 
 export default function BlogCard({
@@ -70,7 +71,7 @@ export default function BlogCard({
           <div className="flex items-center gap-1.5 text-[var(--text-muted)] text-sm mb-3">
             <Clock size={14} className="shrink-0 text-[var(--accent)]" />
             <span>
-              {new Date(item.date).toLocaleDateString("pt-BR")} · {item.readTime}
+              {formatIsoDate(item.date)} · {item.readTime}
             </span>
           </div>
 

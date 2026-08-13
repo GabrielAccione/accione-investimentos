@@ -1,5 +1,6 @@
 import type { BlogPost } from "@/types";
 import imoveisCover from "@/assets/blog-images/imoveis.png";
+import imovelFuturoCover from "@/assets/blog-images/imovel-futuro.jpg";
 import gabrielImg from "@/assets/gabriel-2.jpg";
 
 const AUTOR_GABRIEL = {
@@ -14,6 +15,114 @@ const AUTOR_GABRIEL = {
  * uma imagem real (src/assets/blog-images/) e remova a marcação de rascunho.
  */
 const TODOS_OS_POSTS: BlogPost[] = [
+  {
+    slug: "imovel-do-futuro-mais-inteligente",
+    title: "O imóvel do futuro não será maior. Será mais inteligente.",
+    category: "Imóveis",
+    date: "2026-08-13",
+    excerpt:
+      "As transformações da sociedade estão redefinindo o mercado imobiliário — e quem compreender esse movimento hoje poderá tomar melhores decisões de investimento amanhã.",
+    coverImage: imovelFuturoCover,
+    readTime: "8 min de leitura",
+    heroTagline:
+      "As transformações da sociedade estão redefinindo o mercado imobiliário — e quem compreender esse movimento hoje poderá tomar melhores decisões de investimento amanhã.",
+    author: AUTOR_GABRIEL,
+    content: [
+      {
+        paragraphs: [
+          "Durante décadas, o mercado imobiliário brasileiro esteve alicerçado sobre uma premissa aparentemente incontestável: quanto maior o imóvel, maior seria seu valor, seu conforto e seu potencial de valorização. Durante muito tempo essa lógica fez sentido. Famílias numerosas, crescimento populacional acelerado e uma sociedade cujo patrimônio era frequentemente medido pela metragem construída sustentaram esse modelo por décadas.",
+          "Entretanto, os mercados evoluem porque as pessoas evoluem. E poucas transformações foram tão profundas quanto aquelas vividas pela sociedade nas últimas duas décadas. A forma de trabalhar mudou. A tecnologia alterou hábitos de consumo. As famílias ficaram menores. As cidades tornaram-se mais densas. O tempo passou a ser um recurso ainda mais valioso. Como consequência, o próprio conceito de morar começou a ser redesenhado.",
+          "Essa mudança não representa uma simples tendência arquitetônica. Trata-se de uma transformação econômica, social e demográfica que já produz impactos mensuráveis sobre o comportamento do consumidor e, naturalmente, sobre a valorização dos ativos imobiliários.",
+        ],
+      },
+      {
+        heading: "Uma mudança estrutural, não um modismo",
+        paragraphs: [
+          "Como economista, costumo dizer que bons investimentos dificilmente nascem de modismos. Eles normalmente surgem quando conseguimos identificar mudanças estruturais antes que elas sejam plenamente precificadas pelo mercado. E talvez poucas mudanças sejam tão relevantes hoje quanto a transformação do modo como as pessoas desejam viver.",
+          "Os números confirmam essa percepção.",
+        ],
+      },
+      {
+        heading: "O que os números mostram",
+        paragraphs: [
+          "O Censo Demográfico 2022, divulgado pelo IBGE, mostrou que o Brasil possui aproximadamente 11,8 milhões de domicílios ocupados por apenas uma pessoa, representando 15,9% de todas as residências brasileiras. Há poucas décadas, essa configuração era uma exceção. Hoje tornou-se parte significativa da sociedade brasileira.",
+          "Mais do que isso, observa-se crescimento constante dos casais sem filhos, do adiamento da maternidade, do envelhecimento populacional e do aumento da expectativa de vida. São fenômenos distintos, mas que convergem para um mesmo resultado: a redução do tamanho médio das famílias e, consequentemente, uma nova forma de consumir habitação.",
+          "Segundo a Câmara Brasileira da Indústria da Construção (CBIC), essa transformação demográfica já influencia diretamente o desenvolvimento dos novos empreendimentos imobiliários em todo o país. Incorporadoras passaram a projetar apartamentos mais eficientes, melhor localizados e capazes de atender diferentes perfis de moradores justamente porque o mercado consumidor mudou. Não se trata de uma escolha das construtoras. Trata-se de uma resposta objetiva àquilo que a sociedade passou a demandar.",
+        ],
+      },
+      {
+        heading: "O mercado segue, não lidera",
+        paragraphs: [
+          "Essa talvez seja uma das primeiras grandes lições para investidores.",
+          "O mercado imobiliário normalmente não cria tendências.",
+          "Ele responde às tendências. O mercado comprador costuma ter mais força que quem constrói ou vende.",
+          "Quando a sociedade muda, os produtos mudam. Quando os hábitos mudam, o mercado adapta sua oferta. Investidores atentos procuram compreender primeiro essas transformações para somente depois escolher os ativos capazes de capturar esse novo comportamento.",
+        ],
+      },
+      {
+        heading: "Menor não é sinônimo de pior",
+        paragraphs: [
+          "A redução da metragem dos imóveis, portanto, não representa perda de qualidade. Em muitos casos, significa exatamente o contrário.",
+          "Significa maior eficiência.",
+          "Nos últimos anos, pesquisadores da McKinsey & Company e da PwC, ao analisarem as transformações urbanas nas principais cidades do mundo, identificaram um comportamento bastante consistente entre as novas gerações: as pessoas passaram a valorizar muito mais conveniência, mobilidade, conectividade e acesso a serviços do que simplesmente espaço físico.",
+          "Essa mudança ajuda a explicar por que apartamentos compactos, quando bem localizados e inseridos em empreendimentos completos, vêm apresentando níveis elevados de demanda em diversos mercados internacionais.",
+        ],
+      },
+      {
+        heading: "O novo significado de conforto",
+        paragraphs: [
+          'Em outras palavras, o consumidor contemporâneo passou a perguntar menos "quantos metros quadrados este imóvel possui?" e muito mais "como este imóvel melhora minha qualidade de vida?".',
+          "Essa diferença parece pequena.",
+          "Na prática, ela muda completamente o mercado.",
+          "Durante décadas, conforto significava possuir salas amplas, grandes áreas de circulação e terrenos extensos. Hoje, conforto pode significar reduzir uma hora diária de deslocamento entre casa e trabalho. Pode representar morar próximo às universidades, aos hospitais, aos restaurantes, aos parques e aos centros comerciais. Pode significar trabalhar alguns dias por semana em um coworking localizado dentro do próprio condomínio. Pode significar receber compras por delivery sem preocupações, utilizar lavanderias compartilhadas, contar com academia no edifício e resolver boa parte da rotina sem precisar utilizar o automóvel.",
+          "Perceba que o conceito de conforto deixou de estar exclusivamente dentro do apartamento.",
+          "Ele passou a abranger toda a experiência de viver.",
+        ],
+      },
+      {
+        heading: "De unidade habitacional a ecossistema",
+        paragraphs: [
+          "Essa talvez seja a maior transformação do mercado imobiliário moderno.",
+          "O imóvel deixou de ser apenas uma unidade habitacional.",
+          "Ele passou a integrar um ecossistema.",
+          "Esse novo conceito encontra respaldo também em estudos conduzidos pela ONU-Habitat, que identifica um movimento global em direção a cidades mais compactas, sustentáveis e conectadas. O crescimento urbano, segundo o organismo das Nações Unidas, exige empreendimentos capazes de otimizar infraestrutura existente, reduzir deslocamentos e aproximar moradia, trabalho, lazer e serviços.",
+          "Na mesma direção, o World Economic Forum aponta que as cidades mais competitivas do futuro serão aquelas capazes de integrar mobilidade, tecnologia, sustentabilidade e qualidade de vida. Não por acaso, o mercado imobiliário tornou-se um dos principais agentes dessa transformação.",
+        ],
+      },
+      {
+        heading: "O que isso significa para o valor do imóvel",
+        paragraphs: [
+          "É interessante observar que esses estudos não falam apenas sobre urbanismo.",
+          "Eles falam sobre valor.",
+          "Porque, em última análise, um imóvel vale aquilo que as pessoas estão dispostas a pagar por ele.",
+          "E aquilo que as pessoas estão dispostas a pagar depende diretamente da forma como vivem.",
+          "Quando a sociedade muda, muda também o conceito econômico de valor imobiliário.",
+        ],
+      },
+      {
+        heading: "Entender pessoas antes de entender plantas",
+        paragraphs: [
+          "É exatamente por isso que investidores experientes dedicam tanto tempo para compreender comportamento humano. Antes de analisar plantas, acabamentos ou memorial descritivo, procuram entender para onde caminha a sociedade. Afinal, edifícios permanecem por décadas. Já os hábitos das pessoas podem mudar em poucos anos.",
+          "A história mostra que os empreendimentos que melhor atravessam o tempo são justamente aqueles concebidos para responder às necessidades do futuro, e não apenas às demandas do presente.",
+        ],
+      },
+      {
+        heading: "Referências",
+        paragraphs: [
+          "Instituto Brasileiro de Geografia e Estatística (IBGE). Censo Demográfico 2022 – Características dos Domicílios e População.",
+          "Instituto Brasileiro de Geografia e Estatística (IBGE). Características Urbanísticas do Entorno dos Domicílios.",
+          "Câmara Brasileira da Indústria da Construção (CBIC). Mercado Imobiliário Brasileiro – Relatórios e Indicadores.",
+          "Associação Brasileira de Incorporadoras Imobiliárias (ABRAINC). Indicadores do Mercado Imobiliário.",
+          "Fundação Getulio Vargas (FGV IBRE). Sondagens da Construção Civil e Indicadores Econômicos.",
+          "Instituto de Pesquisa Econômica Aplicada (IPEA). Estudos sobre Urbanização e Desenvolvimento Regional.",
+          "ONU-Habitat. World Cities Report.",
+          "World Economic Forum. Future of Cities e Smart Cities Framework.",
+          "PwC & Urban Land Institute. Emerging Trends in Real Estate.",
+          "McKinsey & Company. The Future of Cities e estudos sobre comportamento do consumidor e desenvolvimento urbano.",
+        ],
+      },
+    ],
+  },
   {
     slug: "retomada-do-centro-imoveis-compactos",
     title:
