@@ -63,3 +63,12 @@ export function formatNumber(value: number) {
 export function formatDateLabel(value: string) {
   return value
 }
+
+/** Formata uma data "YYYY-MM-DD" em pt-BR sem o bug de fuso horário:
+    `new Date("YYYY-MM-DD")` é interpretado como UTC, então em fusos atrás
+    de UTC (Brasil) `toLocaleDateString` mostra o dia anterior. Aqui a data
+    é montada com os componentes locais, sem passar pelo parser UTC. */
+export function formatIsoDate(value: string) {
+  const [year, month, day] = value.split('-').map(Number)
+  return new Date(year, month - 1, day).toLocaleDateString('pt-BR')
+}
