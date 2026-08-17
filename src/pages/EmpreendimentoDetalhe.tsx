@@ -14,6 +14,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import CoverImage from "@/components/ui/CoverImage";
 import { SITE_URL, useSeo } from "@/hooks/useSeo";
 import {
   EMPREENDIMENTOS,
@@ -343,15 +344,12 @@ export default function EmpreendimentoDetalhe() {
               transition={{ duration: 0.65, delay: 0.1 }}
               className="relative"
             >
-              <img
+              <CoverImage
                 src={fachadaImage.src}
                 alt={fachadaImage.alt}
-                className="w-full h-[600px] rounded-2xl object-cover object-center shadow-2xl shadow-black/50"
-                style={
-                  fachadaImage.objectPosition
-                    ? { objectPosition: fachadaImage.objectPosition }
-                    : undefined
-                }
+                aspect="3/4"
+                objectPosition={fachadaImage.objectPosition}
+                className="rounded-2xl shadow-2xl shadow-black/50"
               />
               <div className="absolute -bottom-3 -right-3 h-full w-full rounded-2xl border border-[var(--accent)]/30 -z-10" />
             </motion.div>
