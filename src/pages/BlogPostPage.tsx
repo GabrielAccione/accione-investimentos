@@ -8,6 +8,7 @@ import { BLOG_POSTS } from '@/data/blogPosts'
 import NotFoundPage from '@/pages/NotFoundPage'
 import { SITE_URL, useSeo } from '@/hooks/useSeo'
 import { formatIsoDate } from '@/lib/formatters'
+import CoverImage from '@/components/ui/CoverImage'
 
 /** Capas podem ser assets do build (caminho relativo) ou URLs externas. */
 function absoluteImage(src: string | undefined) {
@@ -49,15 +50,13 @@ export default function BlogPostPage() {
 
       <article className="py-16 sm:py-20">
         <div className="section-container max-w-4xl">
-          <div className="surface-card h-[360px] w-full overflow-hidden">
-            <img
-              src={post.coverImage}
-              alt={post.title}
-              className={`h-full w-full object-cover${
-                post.coverZoom ? ' origin-top-left scale-[1.18]' : ''
-              }`}
-            />
-          </div>
+          <CoverImage
+            src={post.coverImage}
+            alt={post.title}
+            aspect="16/9"
+            zoom={post.coverZoom}
+            className="surface-card"
+          />
 
           {/* Autor + meta */}
           <div className="mt-6 flex flex-col gap-4 border-b border-[#484949]/15 pb-6 sm:flex-row sm:items-center sm:justify-between">

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { animate } from "animejs";
 import { Clock } from "lucide-react";
 import { formatIsoDate } from "@/lib/formatters";
+import CoverImage from "@/components/ui/CoverImage";
 import type { BlogPost } from "@/types";
 
 export default function BlogCard({
@@ -47,13 +48,12 @@ export default function BlogCard({
         className="rounded-xl border border-[#484949]/20 hover:border-[#A26547]/40 bg-white dark:bg-[#0C2030] overflow-hidden h-full flex flex-col transition-colors duration-300 hover:shadow-[0_8px_40px_rgba(162,101,71,0.10)]"
       >
         {/* Cover image */}
-        <div className="relative overflow-hidden">
-          <img
+        <div className="relative">
+          <CoverImage
             src={item.coverImage}
             alt={item.title}
-            className={`w-full h-60 object-cover${
-              item.coverZoom ? " origin-top-left scale-[1.18]" : ""
-            }`}
+            aspect="16/9"
+            zoom={item.coverZoom}
           />
           <div className="absolute top-3 left-3">
             <span className="bg-[var(--accent)] text-white text-xs font-medium px-3 py-1 rounded-full">
