@@ -65,6 +65,9 @@ export type BlogCategory =
 export interface BlogSection {
   heading?: string
   paragraphs: string[]
+  /** Lista de referências/bibliografia — recebe mais respiro e linhas mais
+      compactas que uma seção de conteúdo normal, sem ganhar destaque visual. */
+  isReferences?: boolean
 }
 
 export interface BlogPost {
