@@ -89,22 +89,42 @@ export default function BlogPostPage() {
           </div>
 
           {/* Conteúdo */}
-          <div className="mt-8 space-y-8">
-            {post.content.map((section, index) => (
-              <section key={`${post.slug}-${index}`}>
+          <div className="mt-8 space-y-12">
+            {post.content
+              .filter((section) => !section.isReferences)
+              .map((section, index) => (
+                <section key={`${post.slug}-${index}`}>
+                  {section.heading ? (
+                    <h2 className="text-2xl font-semibold text-[#041A2A] dark:text-white sm:text-3xl">
+                      {section.heading}
+                    </h2>
+                  ) : null}
+                  <div className="mt-4 space-y-4 text-base leading-relaxed text-[var(--text-secondary)]">
+                    {section.paragraphs.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                </section>
+              ))}
+          </div>
+
+          {/* Referências: mais afastadas do corpo, linhas mais compactas — sem destaque visual */}
+          {post.content
+            .filter((section) => section.isReferences)
+            .map((section, index) => (
+              <section key={`${post.slug}-references-${index}`} className="mt-16">
                 {section.heading ? (
                   <h2 className="text-2xl font-semibold text-[#041A2A] dark:text-white sm:text-3xl">
                     {section.heading}
                   </h2>
                 ) : null}
-                <div className="mt-4 space-y-4 text-base leading-relaxed text-[var(--text-secondary)]">
+                <div className="mt-4 space-y-1.5 text-base leading-relaxed text-[var(--text-secondary)]">
                   {section.paragraphs.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
                 </div>
               </section>
             ))}
-          </div>
         </div>
       </article>
 
