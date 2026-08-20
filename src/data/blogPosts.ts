@@ -1,6 +1,7 @@
 import type { BlogPost } from "@/types";
 import imoveisCover from "@/assets/blog-images/centro_voltou_protagonista.png";
 import imovelFuturoCover from "@/assets/blog-images/imovel_do_futuro.png";
+import imovelFuturoParte2Cover from "@/assets/blog-images/imovel_do_futuro-parte-2.png";
 import gabrielImg from "@/assets/gabriel-2.jpg";
 
 const AUTOR_GABRIEL = {
@@ -15,6 +16,89 @@ const AUTOR_GABRIEL = {
  * uma imagem real (src/assets/blog-images/) e remova a marcação de rascunho.
  */
 const TODOS_OS_POSTS: BlogPost[] = [
+  {
+    slug: "imovel-do-futuro-mais-inteligente-parte-2",
+    title:
+      "O imóvel do futuro não será maior. Será mais inteligente — Parte 2",
+    category: "Imóveis",
+    date: "2026-08-20",
+    excerpt:
+      "Quando o comportamento gera valorização patrimonial: por que os ativos que permanecem relevantes por mais tempo — inteligentes, conectados e sustentáveis — são os que melhor preservam patrimônio.",
+    coverImage: imovelFuturoParte2Cover,
+    readTime: "8 min de leitura",
+    heroTagline:
+      "Quando comportamento gera valorização patrimonial — por que os ativos que permanecem relevantes por mais tempo são os que melhor preservam patrimônio.",
+    author: AUTOR_GABRIEL,
+    content: [
+      {
+        paragraphs: [
+          "Uma das maiores virtudes da economia é demonstrar que nenhum mercado evolui isoladamente. O mercado imobiliário não cresce porque os incorporadores decidem construir mais. Ele cresce quando pessoas mudam seus hábitos, empresas alteram sua forma de trabalhar, tecnologias transformam a rotina e a própria sociedade redefine aquilo que considera importante. Em outras palavras, o imóvel é apenas o reflexo físico de uma transformação muito maior.",
+        ],
+      },
+      {
+        heading: "Quando o valor deixa de ser metragem",
+        paragraphs: [
+          "Esse fenômeno fica evidente quando observamos o conceito de valor econômico. Durante décadas, o preço de um imóvel era fortemente influenciado por atributos tradicionais, como metragem, número de dormitórios ou tamanho do terreno. Esses fatores continuam relevantes, evidentemente, mas deixaram de ser suficientes para explicar por que determinados empreendimentos se valorizam mais rapidamente que outros.",
+          "Hoje, um ativo imobiliário incorpora uma série de atributos intangíveis que passaram a ter peso econômico. Mobilidade urbana, conectividade digital, eficiência energética, segurança, possibilidade de trabalho remoto, sustentabilidade, áreas compartilhadas e oferta de serviços agregam valor porque respondem às necessidades de uma sociedade diferente daquela que existia vinte anos atrás.",
+        ],
+      },
+      {
+        heading: "Obsolescência funcional: o risco silencioso",
+        paragraphs: [
+          "Sob essa perspectiva, é interessante observar que a valorização de um imóvel não depende apenas da localização. Ela depende também da capacidade daquele empreendimento permanecer atual ao longo do tempo. Na teoria econômica, isso pode ser compreendido pelo conceito de obsolescência funcional. Um ativo torna-se funcionalmente obsoleto quando deixa de atender às necessidades do mercado, ainda que permaneça estruturalmente íntegro. É exatamente o que acontece com tecnologias ultrapassadas, veículos antigos ou equipamentos industriais que já não entregam a produtividade esperada.",
+          "No mercado imobiliário, esse conceito merece cada vez mais atenção. Imagine dois edifícios construídos na mesma região, com padrão construtivo semelhante. Um deles foi concebido considerando as novas demandas urbanas: espaços compartilhados, infraestrutura para internet de alta velocidade, controle de acesso inteligente, eficiência energética, ambientes para trabalho híbrido, soluções sustentáveis e áreas de convivência multifuncionais. O outro foi projetado seguindo padrões que atendiam plenamente às necessidades de vinte anos atrás, mas que hoje oferecem pouca flexibilidade. Embora ambos possam estar lado a lado, dificilmente serão percebidos da mesma forma pelo mercado. Um continuará competitivo. O outro iniciará um processo gradual de perda relativa de atratividade.",
+          "É justamente essa diferença que investidores atentos procuram identificar antes da aquisição de um ativo.",
+        ],
+      },
+      {
+        heading: "O que os investidores institucionais passaram a priorizar",
+        paragraphs: [
+          "Segundo estudos da PwC, publicados no relatório internacional Emerging Trends in Real Estate, investidores institucionais passaram a considerar fatores como qualidade da localização, flexibilidade dos empreendimentos, sustentabilidade, infraestrutura tecnológica e capacidade de adaptação às novas formas de viver como critérios prioritários na seleção de ativos imobiliários. A simples existência de uma boa localização deixou de ser suficiente quando o empreendimento não acompanha as expectativas do consumidor contemporâneo.",
+          "A McKinsey & Company chega a uma conclusão semelhante ao analisar a evolução das cidades inteligentes. A consultoria observa que infraestrutura digital, conectividade, gestão eficiente dos recursos e integração entre moradia, trabalho e serviços deixaram de representar diferenciais para se tornarem requisitos fundamentais da competitividade urbana.",
+          "Esses estudos convergem para uma conclusão importante: o mercado passou a remunerar melhor os ativos que conseguem permanecer relevantes durante mais tempo. Em termos econômicos, isso significa menor risco. Menor risco de vacância. Menor risco de perda de liquidez. Menor necessidade de adaptações futuras. Maior estabilidade na geração de renda. Maior capacidade de preservação patrimonial.",
+        ],
+      },
+      {
+        heading: "Patrimônio não se constrói apenas comprando barato",
+        paragraphs: [
+          "É justamente nesse ponto que muitos investidores cometem um equívoco. Ao avaliar um imóvel, concentram sua análise exclusivamente no preço de aquisição. Poucos dedicam o mesmo esforço para compreender qual será o comportamento daquele ativo daqui a dez ou quinze anos. Entretanto, patrimônio não se constrói apenas comprando barato. Patrimônio se constrói adquirindo ativos que permanecerão desejados pelas próximas gerações. Essa diferença muda completamente a lógica da decisão de investimento.",
+        ],
+      },
+      {
+        heading: "A tecnologia saiu de dentro do apartamento",
+        paragraphs: [
+          "Outro aspecto frequentemente negligenciado diz respeito ao papel da tecnologia. Durante muitos anos, a tecnologia esteve restrita ao interior dos apartamentos. Hoje, ela faz parte do próprio empreendimento. Controle de acesso por reconhecimento facial, monitoramento inteligente, fechaduras digitais, infraestrutura para veículos elétricos, sistemas de reaproveitamento de água, geração fotovoltaica para áreas comuns, automação predial, sensores de iluminação, gestão inteligente de energia e conectividade de alta velocidade passaram a compor aquilo que o mercado já considera padrão para empreendimentos contemporâneos.",
+          "Essa transformação acompanha um movimento mais amplo de digitalização da economia. Segundo o World Economic Forum, a competitividade das cidades dependerá, cada vez mais, da integração entre tecnologia, infraestrutura urbana e sustentabilidade. O setor imobiliário ocupa posição central nesse processo, pois os edifícios deixarão de ser apenas espaços físicos para se tornarem plataformas de serviços capazes de acompanhar as transformações tecnológicas ao longo de sua vida útil.",
+        ],
+      },
+      {
+        heading: "Sustentabilidade como lógica econômica",
+        paragraphs: [
+          "Há também um componente ambiental que não pode ser ignorado. A crescente preocupação com eficiência energética, consumo consciente de recursos naturais e redução das emissões de carbono influencia diretamente o comportamento do consumidor. Estudos da ONU-Habitat demonstram que empreendimentos concebidos sob princípios de sustentabilidade tendem a apresentar maior aceitação do mercado e melhor capacidade de adaptação às políticas urbanas das próximas décadas.",
+          "Mais uma vez, percebe-se que sustentabilidade deixou de representar apenas responsabilidade ambiental. Ela passou a integrar a própria lógica econômica da valorização imobiliária. Quando um empreendimento reduz custos operacionais, otimiza recursos, incorpora soluções inteligentes e permanece competitivo por mais tempo, ele cria valor tanto para quem mora quanto para quem investe.",
+        ],
+      },
+      {
+        heading: "Antecipar transformações é o que remunera",
+        paragraphs: [
+          "No fundo, estamos falando da mesma lógica que sempre orientou os grandes ciclos econômicos. Os ativos que melhor remuneram seus investidores costumam ser aqueles que conseguem antecipar transformações estruturais da sociedade. O mercado imobiliário não é diferente. Os edifícios que liderarão a valorização nas próximas décadas provavelmente não serão aqueles que simplesmente oferecem mais metros quadrados, mas aqueles que compreenderam, desde sua concepção, como as pessoas viverão, trabalharão, consumirão e se relacionarão no futuro.",
+          "É exatamente nesse ponto que economia, comportamento humano e mercado imobiliário deixam de ser temas separados. Eles passam a contar a mesma história.",
+        ],
+      },
+      {
+        heading: "Referências",
+        isReferences: true,
+        paragraphs: [
+          "Instituto Brasileiro de Geografia e Estatística (IBGE). Censo Demográfico 2022 – Características dos Domicílios e População.",
+          "Câmara Brasileira da Indústria da Construção (CBIC). Mercado Imobiliário Brasileiro – Relatórios e Indicadores.",
+          "PwC & Urban Land Institute. Emerging Trends in Real Estate.",
+          "McKinsey & Company. The Future of Cities e estudos sobre comportamento do consumidor e desenvolvimento urbano.",
+          "World Economic Forum. Future of Cities e Smart Cities Framework.",
+          "ONU-Habitat. World Cities Report.",
+        ],
+      },
+    ],
+  },
   {
     slug: "imovel-do-futuro-mais-inteligente",
     title: "O imóvel do futuro não será maior. Será mais inteligente.",
