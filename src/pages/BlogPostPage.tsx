@@ -100,7 +100,9 @@ export default function BlogPostPage() {
                   ) : null}
                   <div className="mt-4 space-y-4 text-base leading-relaxed text-[var(--text-secondary)]">
                     {section.paragraphs.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
+                      <p key={paragraph} className="indent-8">
+                        {paragraph}
+                      </p>
                     ))}
                   </div>
                 </section>
