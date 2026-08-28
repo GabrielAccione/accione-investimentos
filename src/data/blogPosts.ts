@@ -2,6 +2,7 @@ import type { BlogPost } from "@/types";
 import imoveisCover from "@/assets/blog-images/centro_voltou_protagonista.png";
 import imovelFuturoCover from "@/assets/blog-images/imovel_do_futuro.png";
 import imovelFuturoParte2Cover from "@/assets/blog-images/imovel_do_futuro-parte-2.png";
+import imovelFuturoParte3Cover from "@/assets/blog-images/imovel_do_futuro_parte-3.png";
 import gabrielImg from "@/assets/gabriel-2.jpg";
 
 const AUTOR_GABRIEL = {
@@ -16,6 +17,105 @@ const AUTOR_GABRIEL = {
  * uma imagem real (src/assets/blog-images/) e remova a marcação de rascunho.
  */
 const TODOS_OS_POSTS: BlogPost[] = [
+  {
+    slug: "imovel-do-futuro-mais-inteligente-parte-3",
+    title:
+      "O imóvel do futuro não será maior. Será mais inteligente — Parte 3",
+    category: "Imóveis",
+    date: "2026-08-27",
+    excerpt:
+      "Quando as tendências globais encontram oportunidades locais: por que mercados como Santa Maria e projetos como o Sync Floriano capturam movimentos estruturais antes que virem consenso.",
+    coverImage: imovelFuturoParte3Cover,
+    readTime: "8 min de leitura",
+    heroTagline:
+      "Quando as tendências globais encontram oportunidades locais — por que enxergar a direção da sociedade importa mais do que o preço de aquisição.",
+    author: AUTOR_GABRIEL,
+    content: [
+      {
+        paragraphs: [
+          "Até aqui, analisamos como mudanças demográficas, tecnológicas e comportamentais estão transformando o mercado imobiliário em escala mundial. Entretanto, nenhuma dessas tendências produz valor por si só. Elas precisam encontrar cidades capazes de absorvê-las e empreendimentos preparados para traduzi-las em soluções concretas. É justamente nesse ponto que mercados regionais passam a oferecer oportunidades extremamente interessantes para investidores atentos.",
+        ],
+      },
+      {
+        heading: "Assimetria de informação: onde nascem as oportunidades",
+        paragraphs: [
+          "Em economia existe um conceito conhecido como assimetria de informação. Em termos simples, ele descreve situações em que parte do mercado ainda não percebeu completamente uma tendência que já começa a produzir efeitos econômicos. É justamente nesses momentos que surgem algumas das melhores oportunidades de investimento.",
+          "Historicamente, os grandes ciclos de valorização imobiliária ocorreram exatamente dessa maneira. Primeiro mudam os hábitos das pessoas. Depois surgem novos produtos. Somente mais tarde o mercado passa a reconhecer plenamente o valor desses ativos.",
+        ],
+      },
+      {
+        heading: "Santa Maria e sua demanda diversificada",
+        paragraphs: [
+          "Santa Maria vive, na minha percepção, um desses momentos. A cidade reúne características muito particulares dentro do cenário gaúcho. Seu dinamismo econômico não depende exclusivamente de um único setor produtivo. Universidades, hospitais de referência, organizações militares, comércio regional, prestação de serviços e atividades ligadas ao conhecimento criam um fluxo permanente de pessoas circulando pela cidade ao longo de todo o ano.",
+          "Esse movimento produz uma demanda imobiliária bastante diferente daquela observada em municípios cuja economia depende fortemente de um único segmento. Há estudantes que permanecem durante anos. Há professores e pesquisadores. Há médicos e profissionais da saúde. Há militares transferidos periodicamente. Há empresários. Há jovens profissionais iniciando suas carreiras. Há investidores buscando geração de renda através da locação. Embora todos pertençam a públicos distintos, compartilham uma característica comum: valorizam localização, praticidade e qualidade de vida.",
+        ],
+      },
+      {
+        heading: "Localização deixou de ser endereço. Virou acesso.",
+        paragraphs: [
+          "Essa percepção encontra respaldo nos próprios indicadores urbanos do IBGE, que demonstram como a infraestrutura disponível no entorno dos imóveis passou a exercer influência crescente sobre sua atratividade. Mobilidade, acesso a serviços, comércio, saúde, educação e equipamentos urbanos deixaram de ser apenas conveniências para se tornarem componentes do valor econômico dos imóveis.",
+          "Em outras palavras, localização deixou de significar apenas endereço. Passou a representar acesso.",
+          "Essa mudança ajuda a explicar um fenômeno observado em diversas cidades brasileiras: a revalorização das regiões centrais. Durante parte das décadas de 1990 e 2000, muitas cidades expandiram seus perímetros urbanos em direção a novos bairros. Era um movimento natural de crescimento. Entretanto, conforme o tempo passou, tornou-se evidente que a infraestrutura existente nas regiões centrais dificilmente poderia ser reproduzida com a mesma eficiência em áreas periféricas.",
+        ],
+      },
+      {
+        heading: "Tempo: o ativo mais escasso da economia",
+        paragraphs: [
+          "Hoje, morar próximo aos principais polos urbanos significa economizar tempo, reduzir custos de deslocamento, diminuir dependência do automóvel e ampliar a qualidade de vida. Tempo, aliás, talvez seja o ativo mais escasso da economia contemporânea. Nenhum investimento consegue produzir mais horas em um dia. Por isso, imóveis capazes de devolver tempo aos seus moradores tendem a gerar um benefício econômico que vai muito além da metragem privativa.",
+          "Esse aspecto também influencia diretamente a geração de renda para investidores. Dados apresentados pela ABRAINC e pela CBIC mostram que imóveis localizados em regiões consolidadas apresentam maior facilidade de comercialização e maior liquidez quando comparados a empreendimentos situados em áreas cuja infraestrutura ainda está em desenvolvimento. Embora cada mercado possua características próprias, a lógica permanece semelhante: quanto maior a demanda potencial por um imóvel, maior tende a ser sua capacidade de preservação de valor ao longo do tempo.",
+        ],
+      },
+      {
+        heading: "Ativos que permanecem competitivos por décadas",
+        paragraphs: [
+          "É justamente sob essa ótica que gosto de analisar um investimento imobiliário. Não procuro apenas identificar um bom edifício. Procuro identificar um ativo capaz de permanecer competitivo durante décadas. Essa diferença é fundamental. Edifícios envelhecem. Localizações consolidadas permanecem. Projetos podem ser copiados. Mas dificilmente se reproduz uma combinação entre endereço, infraestrutura urbana, conectividade e dinâmica econômica construída ao longo de décadas.",
+          "É nesse contexto que empreendimentos concebidos a partir das novas demandas da sociedade passam a adquirir uma relevância diferenciada. Quando um projeto reúne apartamentos com plantas inteligentes, áreas compartilhadas de alta qualidade, infraestrutura tecnológica, soluções sustentáveis e está inserido em uma localização consolidada, ele reduz significativamente o risco de obsolescência funcional discutido anteriormente. Não se trata apenas de atender às necessidades do comprador de hoje. Trata-se de permanecer relevante para o comprador de amanhã.",
+        ],
+      },
+      {
+        heading: "Por que o Sync Floriano entra nessa lógica",
+        paragraphs: [
+          "Na minha avaliação, é exatamente essa lógica que explica projetos como o Sync Floriano. O empreendimento não surge apenas como mais um lançamento imobiliário. Ele nasce como resposta a um conjunto de transformações que vêm sendo estudadas por economistas, urbanistas, incorporadores e especialistas em comportamento ao redor do mundo.",
+          "Sua localização no Centro de Santa Maria dialoga com o movimento de reocupação das regiões centrais observado em diversas cidades brasileiras. Seu conceito de apartamentos inteligentes responde às mudanças demográficas identificadas pelo IBGE. Sua infraestrutura acompanha aquilo que estudos da PwC, da McKinsey e do World Economic Forum apontam como atributos desejáveis para os empreendimentos das próximas décadas. Mais do que acompanhar uma tendência, o projeto procura antecipá-la.",
+        ],
+      },
+      {
+        heading: "Não existe garantia — existe direção",
+        paragraphs: [
+          "Naturalmente, nenhum investimento oferece garantias absolutas de valorização. A economia não funciona dessa maneira. Taxas de juros, crescimento econômico, renda das famílias, oferta de crédito e diversos outros fatores continuarão influenciando o comportamento do mercado imobiliário. Entretanto, existe uma variável sobre a qual costumo dedicar atenção especial. A direção para a qual a sociedade caminha. Porque, no longo prazo, os ativos que mais preservam valor costumam ser aqueles que permanecem úteis, desejados e alinhados às necessidades das pessoas.",
+        ],
+      },
+      {
+        heading: "Comprar um imóvel ou investir em um ativo",
+        paragraphs: [
+          "Essa talvez seja a principal diferença entre comprar um imóvel e investir em um ativo imobiliário. Quem compra apenas um imóvel normalmente observa preço, acabamento e condições de pagamento. Quem investe procura compreender tendências. Procura identificar movimentos estruturais. Procura enxergar o futuro antes que ele se torne consenso. Foi exatamente isso que os grandes investidores fizeram nos diferentes ciclos econômicos da história. Não apostaram no presente. Investiram no futuro.",
+        ],
+      },
+      {
+        heading: "A pergunta que produz melhores decisões",
+        paragraphs: [
+          "Ao longo deste artigo, procurei demonstrar que o mercado imobiliário brasileiro está passando por uma transformação silenciosa, porém profunda. Famílias menores, cidades mais inteligentes, consumidores mais exigentes, tecnologia integrada ao cotidiano e novos modelos de viver estão redefinindo aquilo que efetivamente gera valor em um empreendimento.",
+          'Nesse cenário, acredito que a pergunta mais importante deixou de ser "qual imóvel comprar?". A pergunta que tende a produzir melhores decisões é outra: "Quais imóveis continuarão fazendo sentido para as pessoas daqui a vinte anos?". É justamente na resposta a essa pergunta que, muitas vezes, nasce um grande investimento.',
+        ],
+      },
+      {
+        heading: "Referências",
+        isReferences: true,
+        paragraphs: [
+          "Instituto Brasileiro de Geografia e Estatística (IBGE). Censo Demográfico 2022 – Características dos Domicílios e População.",
+          "Instituto Brasileiro de Geografia e Estatística (IBGE). Características Urbanísticas do Entorno dos Domicílios.",
+          "Câmara Brasileira da Indústria da Construção (CBIC). Mercado Imobiliário Brasileiro – Relatórios e Indicadores.",
+          "Associação Brasileira de Incorporadoras Imobiliárias (ABRAINC). Indicadores do Mercado Imobiliário.",
+          "Fundação Getulio Vargas (FGV IBRE). Sondagens da Construção Civil e Indicadores Econômicos.",
+          "Instituto de Pesquisa Econômica Aplicada (IPEA). Estudos sobre Urbanização e Desenvolvimento Regional.",
+          "ONU-Habitat. World Cities Report.",
+          "World Economic Forum. Future of Cities e Smart Cities Framework.",
+          "PwC & Urban Land Institute. Emerging Trends in Real Estate.",
+          "McKinsey & Company. The Future of Cities e estudos sobre comportamento do consumidor e desenvolvimento urbano.",
+        ],
+      },
+    ],
+  },
   {
     slug: "imovel-do-futuro-mais-inteligente-parte-2",
     title:
