@@ -1,50 +1,11 @@
 import { motion } from "framer-motion";
-import { useCountUp } from "@/hooks/useCountUp";
-import { useInView } from "@/hooks/useInView";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import backgroundImg from "@/assets/imagem-fundo.jpg";
 import gabrielBgImg from "@/assets/gabriel-fundo.jpg";
 //define assinatura de curva
 const PREMIUM_EASE = [0.16, 1, 0.3, 1];
 
-interface CounterCardProps {
-  target: number;
-  prefix?: string;
-  suffix?: string;
-  label: string;
-  inView: boolean;
-}
-
-function CounterCard({
-  target,
-  prefix = "",
-  suffix = "",
-  label,
-  inView,
-}: CounterCardProps) {
-  const count = useCountUp(target, 1800, inView);
-
-  return (
-    <motion.div
-      whileHover={{ y: -4, scale: 1.01 }}
-      whileTap={{ scale: 0.99 }}
-      transition={{ duration: 0.3, ease: PREMIUM_EASE }}
-      className="rounded-2xl border border-[#E5E5E5] bg-white p-4 text-left dark:border-white/10 dark:bg-white/[0.04]"
-    >
-      <p className="text-2xl font-semibold leading-tight text-[#041A2A] dark:text-white">
-        {prefix}
-        {count}
-        <span className="text-[var(--accent)]">{suffix}</span>
-      </p>
-      <p className="mt-1 text-xs leading-tight text-[var(--text-muted)]">
-        {label}
-      </p>
-    </motion.div>
-  );
-}
-
 export default function Hero() {
-  const [countersRef, countersInView] = useInView({ threshold: 0.25 });
   return (
     <section id="inicio" className="relative overflow-hidden pt-20">
       {/* Background Image with Gradient Overlay */}
@@ -73,7 +34,7 @@ export default function Hero() {
       <div className="absolute left-[8%] top-28 h-56 w-56 rounded-full bg-[var(--accent)]/15 blur-3xl" />
       <div className="absolute right-[10%] top-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
 
-      <div className="section-container relative z-10 grid min-h-[calc(100vh-5rem)] items-center gap-10 py-14 lg:grid-cols-[minmax(0,520px)_360px] lg:justify-start">
+      <div className="section-container relative z-10 grid min-h-[calc(100vh-5rem)] items-center py-14 lg:grid-cols-[minmax(0,560px)] lg:justify-start">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 16 }}
@@ -117,41 +78,6 @@ export default function Hero() {
             />
           </motion.div>
         </div>
-
-        <motion.div
-          ref={countersRef}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: PREMIUM_EASE, delay: 0.15 }}
-          className="surface-card p-6"
-        >
-          <div className="grid grid-cols-1 gap-4">
-            <CounterCard
-              prefix="R$ +"
-              target={100}
-              suffix="M"
-              label="em negócios desenvolvidos"
-              inView={countersInView}
-            />
-            <CounterCard
-              prefix="+"
-              target={5}
-              label="anos de atuação"
-              inView={countersInView}
-            />
-            <CounterCard
-              prefix=" +"
-              target={100}
-              label="investimentos financeiros alternativos"
-              inView={countersInView}
-            />
-          </div>
-
-          <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
-            Trabalhamos com estrutura, explicação e acompanhamento. A proposta é
-            ampliar horizontes, andando lado a lado.
-          </p>
-        </motion.div>
       </div>
     </section>
   );
