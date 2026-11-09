@@ -20,11 +20,11 @@ export default function Hero() {
           src={gabrielBgImg}
           alt=""
           aria-hidden="true"
-          className="absolute inset-y-0 right-0 hidden h-full w-[40%] object-cover object-top opacity-100 xl:block"
+          className="absolute inset-y-0 right-0 hidden h-full w-[54%] object-cover object-top opacity-100 xl:block"
           style={{
-            maskImage: "linear-gradient(to left, black 55%, transparent 92%)",
+            maskImage: "linear-gradient(to left, black 50%, transparent 90%)",
             WebkitMaskImage:
-              "linear-gradient(to left, black 55%, transparent 82%)",
+              "linear-gradient(to left, black 50%, transparent 90%)",
           }}
         />
         {/* Soft theme-aware gradient overlay to ensure text readability and theme blending */}
