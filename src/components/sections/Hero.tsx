@@ -20,11 +20,11 @@ export default function Hero() {
           src={gabrielBgImg}
           alt=""
           aria-hidden="true"
-          className="absolute inset-y-0 right-0 hidden h-full w-[54%] object-cover object-top opacity-100 xl:block"
+          className="absolute inset-y-0 right-0 hidden h-full w-[56%] object-cover object-top opacity-100 xl:block"
           style={{
-            maskImage: "linear-gradient(to left, black 50%, transparent 90%)",
+            maskImage: "linear-gradient(to left, black 40%, transparent 100%)",
             WebkitMaskImage:
-              "linear-gradient(to left, black 50%, transparent 90%)",
+              "linear-gradient(to left, black 40%, transparent 100%)",
           }}
         />
         {/* Soft theme-aware gradient overlay to ensure text readability and theme blending */}
@@ -49,9 +49,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }} //reduzido de 24 para 20 para movimento mais sofisticado
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: PREMIUM_EASE, delay: 0.05 }}
-            className="mt-4 max-w-4xl text-5xl font-semibold leading-[0.96] text-[#041A2A] dark:text-white sm:text-5xl lg:text-5xl"
+            className="mt-4 text-5xl font-semibold leading-[1.02] text-[#041A2A] dark:text-white sm:text-5xl lg:text-5xl xl:whitespace-nowrap xl:text-[3.25rem] 2xl:text-6xl"
           >
-            Entregamos a investidores oportunidades criteriosamente criadas.
+            Entregamos a investidores
+            <br className="hidden xl:block" /> oportunidades criteriosamente
+            criadas.
           </motion.h1>
 
           <motion.p
